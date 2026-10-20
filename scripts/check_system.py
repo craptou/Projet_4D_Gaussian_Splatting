@@ -13,7 +13,10 @@ def command(args):
         return "NOT FOUND"
     try:
         p = subprocess.run(args, capture_output=True, timeout=30)
-        output = (p.stdout + p.stderr).decode("utf-8", errors="replace").replace("\x00", "")
+        def decode(raw):
+            return raw.decode("utf-16-le" if b"\x00" in raw else "utf-8", errors="replace")
+        output = decode(p.stdout) + decode(p.stderr)
+        output = "\n".join(line.rstrip() for line in output.splitlines())
         return f"exit={p.returncode}\n{output.strip()}"
     except (OSError, subprocess.TimeoutExpired) as exc:
         return str(exc)
@@ -36,7 +39,7 @@ if __name__ == "__main__":
             "FFprobe": ["ffprobe", "-version"]}
     if platform.system() == "Windows":
         cmds["CPU / RAM / OS"] = ["powershell", "-NoProfile", "-Command",
-             "Get-CimInstance Win32_Processor | Select-Object Name; Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,TotalVisibleMemorySize"]
+             "@{CPU=(Get-CimInstance Win32_Processor).Name; OS=(Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,TotalVisibleMemorySize)} | ConvertTo-Json -Depth 3"]
         cmds["WSL distributions"] = ["wsl", "--list", "--verbose"]
     cmds["PyTorch"] = [sys.executable, "-c", "import torch; print(torch.__version__, torch.version.cuda); print('GPU available:', torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'No CUDA GPU'); print(torch.cuda.get_arch_list())"]
     sections = ["# System report", "Audit date: 2026-10-19 (America/Bogota). Re-run to refresh; reports describe the invoking Python environment.",
@@ -45,5 +48,6 @@ if __name__ == "__main__":
     for label, cmd in cmds.items():
         sections.append(f"## {label}\nCommand: `{ ' '.join(cmd) }`\n\n```text\n{command(cmd)}\n```")
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text("\n\n".join(sections)+"\n", encoding="utf-8")
+    with args.output.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write("\n\n".join(sections)+"\n")
     print(args.output)
