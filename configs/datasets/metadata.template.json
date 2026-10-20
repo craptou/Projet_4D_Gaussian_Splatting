@@ -1,0 +1,11 @@
+{
+  "source": "True Skate",
+  "trick": null,
+  "fps": null,
+  "resolution": null,
+  "replay_id": null,
+  "camera_mode": null,
+  "camera_motion": null,
+  "holdout_camera": "cam_holdout",
+  "notes": "Fill unknown fields from your actual capture; camera_motion is fixed or moving."
+}
