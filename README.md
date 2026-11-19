@@ -1,129 +1,86 @@
 # skate-trick-4dgs
 
-**Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting**
+### Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-A university Computer Graphics / Computación Visual Interactiva project studying one deterministic skate trick replay captured from several True Skate viewpoints.
+[English](README.md) · [Español](README.es.md) · **Progress checkpoint: 18 November 2026**
 
-**Research question:** Can a skate trick recorded from multiple replay-camera viewpoints be reconstructed as a dynamic 3D representation that supports novel-view rendering using 4D Gaussian Splatting?
+Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
-Replay capture provides a controlled way to study synchronization, camera calibration, dynamic scene representations and image-based evaluation. The goal is a measurable held-out-view experiment as well as free-viewpoint replay.
+This university computer graphics project studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). **Current stage: capture preparation and sampled camera-pose estimation. Dynamic reconstruction has not been trained yet.**
+
+## Start here — project review
+
+| Material | English | Español |
+|---|---|---|
+| Progress report: methods, results, limitations | [Read](docs/progress/report.en.md) | [Leer](docs/progress/report.es.md) |
+| Presentation — 12 slides | [PDF](presentations/progress.en.pdf) · [PowerPoint](presentations/progress.en.pptx) | [PDF](presentations/progress.es.pdf) · [PowerPoint](presentations/progress.es.pptx) |
+| Presentation outline and speaker notes | [Read](presentations/progress.en.md) | [Leer](presentations/progress.es.md) |
+| Dated work log and evidence | [Read](docs/progress/work-log.en.md) | [Leer](docs/progress/work-log.es.md) |
+| Milestones, risks and next acceptance criteria | [Read](docs/progress/roadmap.en.md) | [Leer](docs/progress/roadmap.es.md) |
+
+The work log uses actual commits and observed results. No work is inferred for the interval between recorded checkpoints. Course-specific grading criteria and deadlines have not been supplied; these documents do not invent them.
+
+## What has been demonstrated
+
+| Evidence | Verified result | Interpretation |
+|---|---|---|
+| Source recording | 118.63 s; 720 × 1280; 30 FPS | One saved replay recorded at successive viewpoints |
+| Automatic cutting | 26 candidate passages; 109 frames per clip | Does not establish 26 unique angles |
+| Common score event | Detected in 26/26 views; spread ≤1 frame | Event alignment, not full replay synchronization |
+| Sparse camera-pose pilot | **175/175 images**, 25 passages, one model | Seven frames per passage; cam07 excluded |
+| Background geometry | **8,767 points**, 8,377 shared across passages | Sparse static background, not the moving skateboard |
+| Mean reprojection error | **0.473 px** | Fit to retained observations, not novel-view quality |
+| Helper verification | **19 tests passed** | Includes real FFmpeg extraction and holdout exclusion |
+
+[Machine-readable checkpoint](docs/evidence/checkpoint-2026-11-18.json) · [Detailed pose experiment](docs/pose-pilot-2026-11-18.md)
+
+![Sparse background and sampled camera trajectories; arbitrary scale, not a 4D reconstruction](docs/assets/geometry-and-trajectories.png)
+
+*Sparse background and recovered camera-center travel. The scale is arbitrary. This is an SfM diagnostic, not a rendered novel view.*
+
+## Pipeline and present boundary
 
 ```mermaid
 flowchart LR
- A[True Skate] --> B[Saved replay]
- B --> C[Multi-view capture]
- C --> D[Frame extraction]
- D --> E[Pose estimation]
- E --> F[4D Gaussian Splatting]
- F --> G[Novel-view rendering]
- G --> H[Held-out-view evaluation]
+ A[Saved True Skate replay] --> B[26 candidate passages]
+ B --> C[Crop and synchronization checks]
+ C --> D[Masked background SfM: sampled poses]
+ D -. next .-> E[Full per-frame poses and loader validation]
+ E -.-> F[4D Gaussian optimization]
+ F -.-> G[Novel view at a chosen time]
+ G -.-> H[Held-out cam07 evaluation]
 ```
 
-## Current status
+The capture camera **moves during each replay**. Upstream MultipleView reuses one pose for every frame of a camera sequence; using it unchanged would be an invalid camera model. The current CPU SfM experiment estimates a separate pose for each sampled image. A validated per-frame adapter is still required. See the [source-code analysis](docs/moving-camera-plan.md).
 
-Official dependency and all nested submodules initialized; Windows capture helpers installed in `.venv`; extraction, validation, contact sheets and holdout-safe staging implemented with unit/FFmpeg smoke tests. A real replay recording has been batch-cut into 26 candidate passages. A [CPU moving-camera pose pilot](docs/pose-pilot-2026-11-18.md) registered **175/175 sampled images** from 25 passages, with 8767 sparse background points and 0.473 px mean reprojection error; cam07 is reserved. Nineteen helper tests pass.
+![Six viewpoints at two common sampled times](docs/assets/replay-comparison.jpg)
 
-Fixed-camera COLMAP/training/render wrappers remain **not integration-tested**. No CUDA extension build, official 4DGS reproduction, training, renderer or held-out metrics completed: WSL distro, toolkit, compiler environment, Conda and PyTorch are missing. PyCOLMAP CPU sparse reconstruction now works; the COLMAP CLI and CUDA dense stereo remain absent. The original system report is a dated initial audit. Portable GitHub CLI was unauthenticated at setup; no remote was created.
+*Capture evidence supplied by the project owner: six views at frames 73 and 109. These small gameplay illustrations explain the method; they are not reconstructed images.*
 
-**Camera requirement:** upstream MultipleView needs a fixed pose per camera and matched constant intrinsics. Follow/Orbit/Custom capture may move. Moving footage may be stored/inspected but is rejected by our fixed preprocessing. See [source analysis and moving-camera plan](docs/moving-camera-plan.md).
+## What remains unproven
 
-## Repository structure
+- Only seven of 109 frames per training passage have poses; cam07 has not been localized.
+- Intrinsics, arbitrary world scale and fast-motion frames need further checks.
+- Official 4DGS reproduction, CUDA extension compilation, dynamic training and rendering have not run.
+- Held-out PSNR, SSIM and LPIPS have not been measured.
 
-| Path | Purpose |
-|---|---|
-| `docs/` | Architecture, audit, capture/camera assumptions and experiments |
-| `environment/` | Upstream version specification and WSL setup strategy |
-| `configs/datasets/` | Blank capture metadata template |
-| `configs/experiments/` | Bounded smoke configurations |
-| `data/{raw,frames,processed,sample}/` | Ignored capture/reconstruction artifacts |
-| `src/skate4d/`, `scripts/`, `tests/` | CPU capture helpers, wrappers and tests |
-| `notebooks/` | Future analysis |
-| `outputs/` | Ignored logs, controlled preprocessing workspaces and models |
-| `third_party/4DGaussians/` | Unmodified official Git submodule |
+This project wraps upstream research code; it does not introduce a new 4DGS algorithm. Its contributions so far are capture preparation, safeguards, experiment scripts and documented evidence. AI-assisted coding and documentation were used; Git history records the resulting artifacts, not a claim that every line was manually authored.
 
-## Installation
+## Reproduce and inspect
 
 ```powershell
 git submodule update --init --recursive
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
-.\.venv\Scripts\python.exe scripts/check_system.py
+.\.venv\Scripts\python.exe -m pip install -e ".[sfm]"
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Python 3.11+ and FFmpeg/FFprobe are required for Windows capture helpers. Training uses a separate upstream Python 3.7 / PyTorch 1.13.1 / CUDA 11.6 environment; follow [environment setup](environment/README.md). Driver CUDA capability is not the toolkit version. No modern compatibility environment is claimed or required without an observed failure.
+Raw footage, models and databases stay outside Git; tests use generated media. Small figures and a sanitized metrics snapshot are tracked for review without the original recording. Repeating the real-data experiment additionally requires the owner's recording, identified by SHA-256 in the checkpoint.
 
-## Dataset and fixed-camera workflow
+[Development guide](docs/development.en.md) · [Pose-pilot commands](docs/pose-pilot-2026-11-18.md) · [Environment](environment/README.md) · [Documentation maintenance](docs/progress/README.md)
 
-For a single recording containing successive replay angles, the new [batch-cut helper and capture review](docs/capture-review-2026-11-18.md) describe how to produce candidate clips using the visible game timeline. The supplied recording has 26 candidate passages; moving-camera pose recovery remains necessary.
+## Dependency and references
 
-```text
-data/raw/kickflip_test/
-    metadata.json
-    cam01.mp4
-    cam02.mp4
-    ...
-    cam_holdout.mp4
-```
+Official submodule: `third_party/4DGaussians`, pinned at `843d5ac636c37e4b611242287754f3d4ed150144` on 19 October 2026. The upstream root license is Apache-2.0; individual source and dependency notices remain applicable.
 
-Copy `configs/datasets/metadata.template.json` into that directory and fill actual values, especially `replay_id`, `camera_mode`, `camera_motion`, and `holdout_camera`. `cam07` is also a valid declared holdout. All videos must show the same replay interval with matching constant FPS, count and resolution; [capture protocol](docs/capture-protocol.md) and [dataset specification](docs/dataset-spec.md) explain the checks.
-
-From repository root (Windows venv Python or the documented WSL environment):
-
-```bash
-python scripts/extract_frames.py --input data/raw/kickflip_test --output data/frames/kickflip_test
-python scripts/validate_multiview.py data/frames/kickflip_test
-python scripts/inspect_frames.py data/frames/kickflip_test --output outputs/kickflip-contact.jpg
-```
-
-An optional `--interval N` selects the same source frames in every view without independently resampling. Extracted names are `cam01/frame_00001.jpg` onward; the manifest retains source indexes and FPS. Inspect replay state visually before proceeding.
-
-After official-scene reproduction succeeds, in the WSL training environment:
-
-```bash
-bash scripts/preprocess_fixed_cameras.sh kickflip_test
-bash scripts/train_4dgs.sh kickflip_test
-bash scripts/render_4dgs.sh kickflip_test
-```
-
-Preprocessing retains unique logs/workspaces, never calls destructive `multipleviewprogress.sh`, excludes the holdout and writes `sparse_`, `points3D_multipleview.ply`, `poses_bounds_multipleview.npy` under `data/processed/<name>`. It requires dense CUDA COLMAP and matching centered shared intrinsics. Training is bounded to 2 coarse + 10 fine iterations. Rendering tests execution on upstream test samples; **it is not held-out evaluation**. Existing destinations are not overwritten. Wrappers accept simple dataset names and resolve project paths themselves; do not pass arbitrary paths as dataset names.
-
-## Upstream dependency and reproduction
-
-- Official source: [hustvl/4DGaussians](https://github.com/hustvl/4DGaussians).
-- Pinned commit: `843d5ac636c37e4b611242287754f3d4ed150144`, pinned 2026-10-19.
-- Upstream root license: Apache-2.0 (`LICENSE.md`). Preserve individual source/dependency notices; this wrapper's LICENSE does not replace them.
-- Wu et al., **4D Gaussian Splatting for Real-Time Dynamic Scene Rendering**, CVPR 2024, pp. 20310–20320. [Paper](https://arxiv.org/abs/2310.08528), [project](https://guanjunwu.github.io/4dgs/index.html).
-
-Reproduce the official D-NeRF `bouncingballs` example first. Its official combined download is 257793177 bytes (~246 MiB); it was not downloaded. [Experiments](docs/experiments.md) gives exact bounded training/render commands and independent pass gates. Preserve failures and exact versions before changing dependencies. No True Skate training is scientifically interpretable until this reproduction works.
-
-## Experiment plan and limitations
-
-1. Reproduce official data; verify CUDA extension imports and short train/render.
-2. Verify deterministic replay synchronization and true fixed-camera feasibility.
-3. Calibrate and smoke-train training views; inspect pose and point-cloud quality.
-4. Implement explicit held-out camera rendering and PSNR/SSIM/LPIPS comparisons.
-
-The stock MultipleView loader repeats a pose across time, assumes shared intrinsics, and samples its own training cameras for tests. Its first-frame calibration can be biased by the dynamic board/fingers. Per-frame camera estimation, real holdout rendering and metrics remain planned work. 6 GB VRAM may constrain resolution/model size; game motion blur, image compression, rolling screen capture artifacts and replay-state drift can limit quality. No game camera export has been verified.
-
-Read [architecture](docs/architecture.md), [camera models](docs/camera-models.md), [moving-camera recommendation](docs/moving-camera-plan.md), [system report](docs/system-report.md), and [decisions](docs/decision-log.md).
-
-## GitHub
-
-Local branch is `main`. Portable CLI is `.tools/gh/bin/gh.exe` (ignored). From PowerShell at this repository root, authenticate and create the private repository:
-
-```powershell
-.\.tools\gh\bin\gh.exe auth login
-.\.tools\gh\bin\gh.exe repo create skate-trick-4dgs --private --source . --remote origin --push
-```
-
-## Citation
-
-```bibtex
-@InProceedings{Wu_2024_CVPR,
-  author = {Wu, Guanjun and Yi, Taoran and Fang, Jiemin and Xie, Lingxi and Zhang, Xiaopeng and Wei, Wei and Liu, Wenyu and Tian, Qi and Wang, Xinggang},
-  title = {4D Gaussian Splatting for Real-Time Dynamic Scene Rendering},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year = {2024}, month = {June}, pages = {20310-20320}
-}
-```
+Wu et al., **4D Gaussian Splatting for Real-Time Dynamic Scene Rendering**, CVPR 2024, pp. 20310–20320. [Paper](https://arxiv.org/abs/2310.08528) · [Official repository](https://github.com/hustvl/4DGaussians) · [COLMAP / PyCOLMAP](https://colmap.github.io/pycolmap/index.html). The development guide includes the full citation.

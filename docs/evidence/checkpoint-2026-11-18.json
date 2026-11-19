@@ -1,0 +1,117 @@
+{
+  "checkpoint_date": "2026-11-18",
+  "timezone": "America/Bogota",
+  "implementation_commit": "64a3fc1",
+  "upstream_commit": "843d5ac636c37e4b611242287754f3d4ed150144",
+  "source_recording_sha256": "1025a9393415e6c2e830f725a62ab5d90f302c96ec7d181cfe40ac1ea1f9f95c",
+  "capture": {
+    "duration_seconds": 118.633333,
+    "fps": 30,
+    "resolution": [
+      720,
+      1280
+    ],
+    "candidate_passages": 26,
+    "clip_frames": 109
+  },
+  "synchronization": {
+    "event": "persistent green trick-score appearance",
+    "detected_views": 26,
+    "total_views": 26,
+    "spread_frames": 1,
+    "full_replay_synchronization_verified": false
+  },
+  "sparse_pilot": {
+    "image_count": 42,
+    "model": {
+      "model_id": 0,
+      "registered_images": 33,
+      "points3D": 1651,
+      "mean_reprojection_error": 0.4025434796040128,
+      "mean_track_length": 4.884312537855845,
+      "registered_by_passage": {
+        "cam01": 7,
+        "cam03": 7,
+        "cam05": 7,
+        "cam09": 7,
+        "cam11": 4,
+        "cam13": 1
+      }
+    }
+  },
+  "sparse_expanded": {
+    "image_count": 175,
+    "model": {
+      "model_id": 0,
+      "registered_images": 175,
+      "points3D": 8767,
+      "mean_reprojection_error": 0.47298501952484695,
+      "mean_track_length": 6.590509866544998,
+      "registered_by_passage": {
+        "cam01": 7,
+        "cam02": 7,
+        "cam03": 7,
+        "cam04": 7,
+        "cam05": 7,
+        "cam06": 7,
+        "cam08": 7,
+        "cam09": 7,
+        "cam10": 7,
+        "cam11": 7,
+        "cam12": 7,
+        "cam13": 7,
+        "cam14": 7,
+        "cam15": 7,
+        "cam16": 7,
+        "cam17": 7,
+        "cam18": 7,
+        "cam19": 7,
+        "cam20": 7,
+        "cam21": 7,
+        "cam22": 7,
+        "cam23": 7,
+        "cam24": 7,
+        "cam25": 7,
+        "cam26": 7
+      }
+    },
+    "elapsed_seconds": 101.46799999999348,
+    "cross_passage_points": 8377,
+    "sample_indices": [
+      0,
+      18,
+      36,
+      54,
+      72,
+      90,
+      108
+    ],
+    "holdout": "cam07",
+    "holdout_used_for_sfm": false,
+    "crop_xywh": [
+      64,
+      100,
+      592,
+      820
+    ],
+    "pycolmap": "4.2.1",
+    "cuda_available": false
+  },
+  "limitations": [
+    "Sparse static background, not dynamic reconstruction",
+    "Seven poses per training passage only",
+    "Scale and original principal point unverified",
+    "No official 4DGS reproduction, CUDA extension build, training or novel-view metrics"
+  ],
+  "evidence_origin": [
+    "outputs/replay-pose-pilot/report.json",
+    "outputs/replay-pose-expanded/report.json",
+    "outputs/replay-pose-expanded/geometry-checks.json",
+    "outputs/capture-inspection/score-sync-check.json"
+  ],
+  "helper_validation": {
+    "passed_tests": 19,
+    "verified_on": "2026-11-18",
+    "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v"
+  }
+}
