@@ -6,19 +6,20 @@
 
 ¿Puede una única repetición guardada de un truco de skate, grabada desde varios puntos de vista móviles, convertirse en una representación 3D dinámica que permita generar vistas nuevas?
 
-Este proyecto universitario de gráficos por computador estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). **Etapa actual: preparación de las capturas y estimación de poses en imágenes muestreadas. Todavía no se ha entrenado la reconstrucción dinámica.**
+Este es el **proyecto final de Computer Vision — CVI 26-2**. Estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). La tarea de visión estima cámaras y estructura a partir de imágenes; generar vistas nuevas es la etapa directa de síntesis. **Etapa actual: preparación de las capturas y estimación de poses muestreadas. Todavía no se ha entrenado la reconstrucción dinámica.**
 
 ## Para revisar el proyecto
 
 | Material | English | Español |
 |---|---|---|
+| Relación con el curso y páginas del PDF aportado | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
 | Informe de avance: métodos, resultados y limitaciones | [Read](docs/progress/report.en.md) | [Leer](docs/progress/report.es.md) |
 | Presentación — 12 diapositivas | [PDF](presentations/progress.en.pdf) · [PowerPoint](presentations/progress.en.pptx) | [PDF](presentations/progress.es.pdf) · [PowerPoint](presentations/progress.es.pptx) |
 | Guion y notas para la presentación | [Read](presentations/progress.en.md) | [Leer](presentations/progress.es.md) |
 | Bitácora fechada y evidencias | [Read](docs/progress/work-log.en.md) | [Leer](docs/progress/work-log.es.md) |
 | Hitos, riesgos y próximos criterios de aceptación | [Read](docs/progress/roadmap.en.md) | [Leer](docs/progress/roadmap.es.md) |
 
-La bitácora utiliza commits reales y resultados observados. No se atribuye trabajo al intervalo entre los cortes registrados. No se han proporcionado la rúbrica ni las fechas de entrega del curso; estos documentos no las inventan.
+La bitácora utiliza commits reales y resultados observados. Los apuntes **CVI 26-2 Prompts** se vinculan con cámaras/proyección, muestreo, renderizado y trayectorias. El responsable indica que el seguimiento se califica. En el PDF no se encontró rúbrica del proyecto final, pesos de nota ni fecha de entrega; la hoja de ruta distingue propuestas de validación y requisitos oficiales.
 
 ## Resultados demostrados
 

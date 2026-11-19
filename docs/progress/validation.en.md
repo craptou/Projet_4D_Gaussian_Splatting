@@ -10,6 +10,7 @@
 - Slide figures come from observed game captures and the retained sparse model. The Spanish scientific figure redraws the same points and trajectories with translated labels.
 - Evidence records 175/175 sampled image registrations, 8767 points, 8377 cross-passage points and a one-frame score-event spread. No 4DGS training or held-out score is implied.
 - Documentation dependencies pass `pip check`; Python scripts compile; Git whitespace checks pass.
+- After the owner supplied the course notes, both decks were rebuilt as the final project for Computer Vision — CVI 26-2. A page-referenced bilingual course map was added. The original PDF fingerprint and 46-page count are checked when that local file is available; it is not required to clone or view the review package.
 - Videos, models, databases and full-resolution extracted datasets remain excluded from normal Git. The review package includes only small figures, structured evidence, text and presentation exports.
 
 Recheck with `python scripts/validate_review_docs.py` after changing links or rebuilding slides. Re-run helper tests only when implementation changes require it. Repository publication is separate: GitHub authentication was unavailable during preparation.

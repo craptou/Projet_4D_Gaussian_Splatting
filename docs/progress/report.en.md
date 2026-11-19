@@ -2,6 +2,8 @@
 
 **Checkpoint:** 18 November 2026 · **Project:** skate-trick-4dgs · [Versión española](report.es.md)
 
+**Course:** Computer Vision — CVI 26-2 · **Assignment:** final course project. The supplied 46-page *CVI 26-2 Prompts* notes are linked to the project in the [page-referenced course map](course-alignment.en.md). They establish topic context, not a final-project grading rubric.
+
 ## 1. Research objective
 
 The objective is to reconstruct one deterministic skate replay as a time-dependent 3D representation and render it from cameras not used for optimization. The research question is whether repeated game-camera observations provide sufficient synchronization, geometry and appearance information for 4D Gaussian Splatting. The current experiment addresses data preparation and camera estimation, not final image synthesis.
@@ -9,6 +11,8 @@ The objective is to reconstruct one deterministic skate replay as a time-depende
 In static 3D Gaussian Splatting, anisotropic Gaussian primitives encode scene geometry and appearance. The selected dynamic implementation adds a time-conditioned deformation representation. That model still needs valid camera parameters for each observed image; it cannot compensate for incorrectly treating a moving camera as fixed.
 
 ## 2. Scope and contribution
+
+This inverse camera/scene estimation problem is followed by forward image synthesis. It connects the notes' linear algebra and Viewing sections (PDF pp. 3–4, 12–15), raster and signal sampling (pp. 5–6, 18–27), graphics pipeline (pp. 15–18) and curves (pp. 40–44). The course map distinguishes demonstrated applications from proposed learning demonstrations.
 
 The official hustvl/4DGaussians repository is pinned as an unchanged Git submodule. The project contributes capture tools, validation, controlled preprocessing, a moving-camera SfM pilot and reproducibility documentation. It does not claim a new Gaussian optimization method. AI assistance was used for coding and documentation. Recorded results and limitations, rather than the amount of generated material, are the basis for assessing technical progress.
 

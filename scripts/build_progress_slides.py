@@ -138,7 +138,7 @@ def make_page(page,spec,lang,index,total):
         else:
             bullets(page,item['bullets'],52,157,850,23,19)
     page.rect(52,510,856,1,'D7E1E4')
-    page.text('skate-trick-4dgs  /  '+('Progress checkpoint' if lang=='en' else 'Seguimiento del proyecto'),52,520,790,9,MUTED)
+    page.text('skate-trick-4dgs  /  CVI 26-2  /  '+('Final project progress' if lang=='en' else 'Seguimiento del proyecto final'),52,520,790,9,MUTED)
     page.text(f'{index:02d} / {total:02d}',854,520,70,9,MUTED)
 
 
@@ -146,11 +146,11 @@ def build(language):
     data=json.loads((ROOT/'presentations/deck.json').read_text(encoding='utf-8'))
     output=ROOT/'presentations';output.mkdir(exist_ok=True)
     pdf=canvas.Canvas(str(output/f'progress.{language}.pdf'),pagesize=(W,H),invariant=1)
-    pdf.setTitle('skate-trick-4dgs | '+('Progress review' if language=='en' else 'Informe de avance'))
+    pdf.setTitle('Computer Vision | CVI 26-2 | '+('Final project progress' if language=='en' else 'Avance del proyecto final'))
     pdf.setAuthor('skate-trick-4dgs project')
     prs=Presentation();prs.slide_width=Pt(W);prs.slide_height=Pt(H)
     prs.core_properties.title='skate-trick-4dgs — '+('Progress review' if language=='en' else 'Seguimiento')
-    prs.core_properties.subject='Checkpoint 2026-11-18: sparse moving-camera pose estimation'
+    prs.core_properties.subject='Computer Vision CVI 26-2 final project; checkpoint 2026-11-18'
     prs.core_properties.author='skate-trick-4dgs project'
     outline=['# '+('Progress presentation — English' if language=='en' else 'Presentación de avance — Español'),
         f'Checkpoint: {data["checkpoint"]} · [PDF](progress.{language}.pdf) · [PowerPoint](progress.{language}.pptx)',

@@ -8,27 +8,27 @@ Source / Fuente: [deck.json](deck.json).
 
 - Repetición con punto de vista libre mediante 4D Gaussian Splatting
 
-- Seguimiento · 18 de noviembre de 2026
+- Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026
 
 - Resultado actual: poses muestreadas y geometría dispersa del fondo.
 
 ### Notas para exponer
 
-El objetivo final es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Hoy se separa el trabajo completado de captura y estimación de cámaras de la reconstrucción dinámica aún no entrenada. Se presenta un avance, no una demostración final de punto de vista libre.
+Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable. Los apuntes CVI 26-2 Prompts aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre.
 
-## 02. El flujo tiene un límite explícito
+## 02. Los temas del curso orientan el proyecto final
 
-- Replay guardado → observaciones desde varias cámaras
+- Viewing (pp. 3–4, 12–15): matrices de cámara y proyección
 
-- Cortes comunes → recorte y controles temporales
+- Muestreo (pp. 5–6, 18–27): píxeles, tiempo y alineación
 
-- SfM del fondo estático → poses muestreadas
+- Curvas (pp. 40–44): trayectorias y continuidad
 
-- Siguiente: poses completas → 4DGS → vista reservada
+- Pipeline (pp. 15–18): futura síntesis con Gaussianas
 
 ### Notas para exponer
 
-Las tres primeras etapas tienen herramientas ejecutables y evidencias. La última sigue pendiente. 3D Gaussian Splatting representa una escena principalmente estática; esta implementación 4DGS añade deformación condicionada por el tiempo. Ambas necesitan cámaras correctas. Estimar las cámaras es un requisito previo, no un resultado automático del entrenamiento.
+Las páginas se refieren al PDF CVI 26-2 Prompts, de 46 páginas, atribuido a Pablo Figueroa. Las matrices conectan con Viewing; la extracción y sincronización, con muestreo; las trayectorias, con curvas. Solo hay siete muestras medidas por trayectoria y no se afirma implementar splines. La rasterización de Gaussianas es futura y se compara conceptualmente con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica explícita del proyecto final. La arquitectura completa está en el informe del repositorio.
 
 ## 03. Una repetición guardada, varias capturas
 

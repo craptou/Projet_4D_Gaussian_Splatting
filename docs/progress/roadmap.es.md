@@ -2,6 +2,8 @@
 
 [English](roadmap.en.md) · Base: 18 de noviembre de 2026 · Sin fecha de entrega facilitada.
 
+**Proyecto final: Computer Vision — CVI 26-2.** El [mapa del curso](course-alignment.es.md) relaciona etapas y apuntes. La tabla siguiente es el plan de validación propuesto por el proyecto, no la rúbrica oficial del profesor.
+
 | ID | Hito | Estado | Evidencia de aceptación |
 |---|---|---|---|
 | M1 | Proyecto auditado, versionado y dependencia fijada | Completado localmente | Historial, auditoría y submódulos recursivos |
@@ -13,6 +15,8 @@
 | M7 | Reconstrucción dinámica y evaluación reservada | Pendiente; depende de M5/M6 | Modelo congelado, cam07 localizada, render sincronizado y PSNR/SSIM/LPIPS documentados |
 
 M4 y la preparación del entorno pueden avanzar por separado. M5 debe aprobarse antes del entrenamiento dinámico propio; SfM muestreado no cumple el requisito de reproducción.
+
+Para la revisión final, preparar además un ejemplo mundo-cámara-imagen (Viewing, PDF pp. 12–15), justificar muestreo espacial/temporal (pp. 5–6, 18–27) y distinguir trayectorias muestreadas (pp. 40–44) de poses interpoladas o medidas a frecuencia completa. Comparar la futura rasterización de Gaussianas con el pipeline del curso (pp. 15–18). Son demostraciones propuestas; el enunciado final puede añadir o cambiar exigencias.
 
 | Riesgo | Evidencia actual | Respuesta / control |
 |---|---|---|

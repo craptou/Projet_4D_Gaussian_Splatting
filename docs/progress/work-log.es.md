@@ -15,6 +15,7 @@ Estas entradas se basan en Git y en artefactos experimentales conservados. Docum
 | 2026-11-18 | Añadir vistas intermedias sin relajar umbrales de reconstrucción | `c73a1f9`, `64a3fc1`; [JSON del corte](../evidence/checkpoint-2026-11-18.json) | 175/175 imágenes, 8767 puntos, 0,473 px; 19 pruebas |
 | 2026-11-18 | Comprobar aparición del marcador y reservar cam07 | `c73a1f9`; documentación del experimento | Diferencia de una imagen; evaluación reservada pendiente |
 | 2026-11-18 | Preparar documentación bilingüe, evidencias y presentaciones | Commits actuales; `git log -- presentations docs/progress` | Publicar un corte revisable y continuar el registro fechado |
+| 2026-11-18 | Aclarar que es proyecto final y recibir CVI 26-2 Prompts | [Mapa del curso](course-alignment.es.md), [huella del PDF](../evidence/course-context.json) | Enmarcar como proyecto final de Computer Vision y enlazar temas sin inventar una rúbrica |
 
 ## Decisiones respaldadas por el historial
 

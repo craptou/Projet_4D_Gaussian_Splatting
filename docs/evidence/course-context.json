@@ -1,0 +1,83 @@
+{
+  "course_name_from_owner": "Computer Vision",
+  "course_identifier": "CVI 26-2",
+  "assignment_role_from_owner": "final course project",
+  "source_title": "CVI 26-2 Prompts",
+  "credited_author_on_page_1": "Pablo Figueroa",
+  "local_filename": "CVI 26-2 Prompts (3).pdf",
+  "pdf_page_count": 46,
+  "page_numbering": "one-based PDF pages, including title page",
+  "sha256": "35fc4733d9bbc770a04d9a90411cca081a31688404d1a0fd95a1a96129dd9585",
+  "source_type": "weekly topic prompts and summaries; not a supplied final-project grading rubric",
+  "original_pdf_tracked": false,
+  "review_date": "2026-11-18",
+  "follow_up_graded_source": "owner statement in conversation; not found as a grading rule in the supplied PDF",
+  "formal_final_project_brief_found": false,
+  "grade_weights_found": false,
+  "deadline_found": false,
+  "topics": [
+    {
+      "topic": "Linear algebra and projective geometry",
+      "pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "topic": "Raster images and color",
+      "pages": [
+        5,
+        6
+      ]
+    },
+    {
+      "topic": "Viewing and camera/projection transforms",
+      "pages": [
+        12,
+        15
+      ]
+    },
+    {
+      "topic": "Graphics pipeline",
+      "pages": [
+        15,
+        18
+      ]
+    },
+    {
+      "topic": "Signal processing and sampling",
+      "pages": [
+        18,
+        27
+      ]
+    },
+    {
+      "topic": "Texture mapping",
+      "pages": [
+        27,
+        32
+      ]
+    },
+    {
+      "topic": "Data structures for graphics",
+      "pages": [
+        32,
+        35
+      ]
+    },
+    {
+      "topic": "Physical light transport",
+      "pages": [
+        35,
+        40
+      ]
+    },
+    {
+      "topic": "Curves and continuity",
+      "pages": [
+        40,
+        44
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 **Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting**
 
-A university Computer Graphics / Computación Visual Interactiva project studying one deterministic skate trick replay captured from several True Skate viewpoints.
+The final project for Computer Vision — CVI 26-2, studying one deterministic skate replay captured from several True Skate viewpoints. See the [course-topic mapping](progress/course-alignment.en.md). This page retains the technical setup instructions.
 
 **Research question:** Can a skate trick recorded from multiple replay-camera viewpoints be reconstructed as a dynamic 3D representation that supports novel-view rendering using 4D Gaussian Splatting?
 

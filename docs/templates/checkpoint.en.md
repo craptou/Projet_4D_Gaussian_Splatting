@@ -1,6 +1,7 @@
 # Checkpoint — YYYY-MM-DD
 
 - Research question or milestone:
+- Course concept, supplied-note page and final-project demonstration:
 - Work actually performed since the previous entry:
 - Commit(s), commands, configuration and environment:
 - Dataset provenance and train/holdout split:

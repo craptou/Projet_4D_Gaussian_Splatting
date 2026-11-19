@@ -8,27 +8,27 @@ Source / Fuente: [deck.json](deck.json).
 
 - Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-- Progress review · 18 November 2026
+- Computer Vision · CVI 26-2 · Final project · 18 November 2026
 
 - Current result: sampled camera poses and sparse background geometry.
 
 ### Speaker notes
 
-The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish the completed capture and camera-estimation work from the dynamic reconstruction that has not yet been trained. This is a progress review, not a final demonstration of free-viewpoint rendering.
+This is the final project for Computer Vision, CVI 26-2, as specified by the project owner. The supplied CVI 26-2 Prompts notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration.
 
-## 02. The pipeline has a clear boundary
+## 02. Course concepts guide the final project
 
-- Saved replay → repeated camera observations
+- Viewing (pp. 3–4, 12–15): camera matrices and projection
 
-- Common cuts → crop and synchronization checks
+- Sampling (pp. 5–6, 18–27): pixels, frames and alignment
 
-- Static-background SfM → sampled image poses
+- Curves (pp. 40–44): sampled trajectories and continuity
 
-- Next: full poses → 4DGS → held-out rendering
+- Pipeline (pp. 15–18): future Gaussian image synthesis
 
 ### Speaker notes
 
-The first three stages have executable tools and retained evidence. The last stage remains future work. Static 3D Gaussian Splatting represents a mostly static scene; this 4DGS implementation adds time-conditioned deformation. Both need correct capture cameras. Camera estimation is therefore a prerequisite rather than a side effect of Gaussian training.
+Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link directly to Viewing; frame extraction and synchronization connect to sampling; estimated camera paths connect to curves. Current paths have seven measured samples and are not claimed to be a spline implementation. Gaussian rasterization is future work and is compared conceptually with the traditional graphics pipeline. The notes supply topics, not an explicit final-project rubric. The full architecture remains in the repository report.
 
 ## 03. One saved replay, recorded repeatedly
 

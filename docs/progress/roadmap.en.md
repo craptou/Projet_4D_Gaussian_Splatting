@@ -2,6 +2,8 @@
 
 [Español](roadmap.es.md) · Baseline: 18 November 2026 · No course deadline supplied.
 
+**Final project: Computer Vision — CVI 26-2.** The [course map](course-alignment.en.md) links each technical stage to supplied notes. The table below is the project's proposed validation plan, not the professor's official rubric.
+
 | ID | Milestone | Status | Acceptance evidence |
 |---|---|---|---|
 | M1 | Audited, versioned project and pinned upstream | Done locally | Git history, audit, recursive submodules |
@@ -13,6 +15,8 @@
 | M7 | Dynamic reconstruction and held-out evaluation | Pending; depends on M5/M6 | Frozen model; cam07 localized; matched-time render; documented PSNR/SSIM/LPIPS |
 
 M4 and environment provisioning may proceed independently. M5 must pass before custom dynamic training; sampled SfM preparation does not satisfy the reproduction gate.
+
+For the final review, also prepare a world/camera/image projection example (Viewing, PDF pp. 12–15), explain pixel/time sampling choices (pp. 5–6, 18–27), and distinguish sampled trajectory checks (pp. 40–44) from interpolated or measured full-rate poses. Present future Gaussian rasterization against the course pipeline (pp. 15–18). These are proposed learning demonstrations; the final-project brief may add or change requirements.
 
 | Risk | Present evidence | Response / check |
 |---|---|---|

@@ -2,6 +2,8 @@
 
 **Corte:** 18 de noviembre de 2026 · **Proyecto:** skate-trick-4dgs · [English version](report.en.md)
 
+**Curso:** Computer Vision — CVI 26-2 · **Actividad:** proyecto final. Los apuntes *CVI 26-2 Prompts*, de 46 páginas, se relacionan con el proyecto en el [mapa del curso con páginas de referencia](course-alignment.es.md). Aportan contexto temático, no una rúbrica del proyecto final.
+
 ## 1. Objetivo de investigación
 
 El objetivo es reconstruir una repetición determinista de skate como una representación 3D que depende del tiempo y renderizarla desde cámaras no utilizadas en la optimización. La pregunta es si las observaciones repetidas desde las cámaras del juego aportan suficiente sincronización, geometría y apariencia para 4D Gaussian Splatting. El experimento actual estudia la preparación de datos y la estimación de cámaras, no la síntesis final de imágenes.
@@ -9,6 +11,8 @@ El objetivo es reconstruir una repetición determinista de skate como una repres
 En 3D Gaussian Splatting estático, primitivas gaussianas anisotrópicas representan la geometría y la apariencia. La implementación dinámica elegida añade una representación de deformación condicionada por el tiempo. El modelo sigue necesitando parámetros de cámara correctos para cada imagen; no puede compensar la suposición errónea de que una cámara móvil es fija.
 
 ## 2. Alcance y contribución
+
+La estimación inversa de cámaras/escena se conecta con la síntesis directa. Se aplica álgebra y Viewing (PDF pp. 3–4, 12–15), imágenes ráster y muestreo (pp. 5–6, 18–27), pipeline gráfico (pp. 15–18) y curvas (pp. 40–44). El mapa distingue aplicaciones demostradas y demostraciones de aprendizaje propuestas.
 
 El repositorio oficial hustvl/4DGaussians está fijado como submódulo de Git sin modificaciones. El proyecto aporta herramientas de captura, validación, preprocesamiento controlado, una prueba de SfM con cámaras móviles y documentación reproducible. No propone un nuevo método de optimización de Gaussianas. Se utilizó asistencia de IA para programación y documentación. El avance técnico debe valorarse mediante los resultados y sus límites, no por la cantidad de material generado.
 

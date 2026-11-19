@@ -1,6 +1,7 @@
 # Corte de seguimiento — AAAA-MM-DD
 
 - Pregunta o hito:
+- Concepto del curso, página de los apuntes y demostración del proyecto final:
 - Trabajo realmente realizado desde la entrada anterior:
 - Commits, comandos, configuración y entorno:
 - Procedencia de datos y separación entrenamiento/prueba:

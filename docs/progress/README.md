@@ -2,9 +2,9 @@
 
 ## English
 
-Start with the [report](report.en.md), [work log](work-log.en.md), [roadmap](roadmap.en.md) and [presentation](../../presentations/progress.en.pdf). These are reviewer entry points; technical detail remains in the linked experiment documents.
+Start with the [course map](course-alignment.en.md), [report](report.en.md), [work log](work-log.en.md), [roadmap](roadmap.en.md) and [presentation](../../presentations/progress.en.pdf). This is the final project for Computer Vision — CVI 26-2; technical detail remains in the linked experiment documents.
 
-For each meaningful experiment, add a dated [checkpoint](../templates/checkpoint.en.md) with the question, actual work, exact commands/commit, measured result, failure, limitation and next acceptance test. Preserve old measurements. Update both languages together; do not turn planned work into completed work. The initial history contains recorded sessions on 19 October and 18 November 2026, not a fabricated weekly diary. The course rubric, author display name and deadline were not provided.
+For each meaningful experiment, add a dated [checkpoint](../templates/checkpoint.en.md) with the question, actual work, exact commands/commit, measured result, failure, limitation and next acceptance test. Preserve old measurements. Update both languages together; do not turn planned work into completed work. The initial history contains recorded sessions on 19 October and 18 November 2026, not a fabricated weekly diary. Course notes have now been supplied and mapped by PDF page; an explicit final-project rubric, author display name and deadline remain unprovided.
 
 The tracked [evidence snapshot](../evidence/checkpoint-2026-11-18.json) is a compact extraction of local run reports. It includes the recording SHA-256 and implementation commit, with no personal filesystem paths. Figures are small review exports. Full datasets, trained models and databases remain ignored. The supplied gameplay figures have their own game provenance; the project code license does not assert ownership of game assets.
 
@@ -33,9 +33,9 @@ Use `gh` instead of the project-local path on another machine. The portable CLI 
 
 ## Español
 
-Empezar por el [informe](report.es.md), la [bitácora](work-log.es.md), la [hoja de ruta](roadmap.es.md) y las [diapositivas](../../presentations/progress.es.pdf). Los detalles técnicos permanecen en los experimentos enlazados.
+Empezar por el [mapa del curso](course-alignment.es.md), el [informe](report.es.md), la [bitácora](work-log.es.md), la [hoja de ruta](roadmap.es.md) y las [diapositivas](../../presentations/progress.es.pdf). Es el proyecto final de Computer Vision — CVI 26-2. Los detalles técnicos permanecen en los experimentos enlazados.
 
-Tras cada experimento significativo, añadir un [corte fechado](../templates/checkpoint.es.md) con pregunta, trabajo realizado, comandos/commit, resultados, fallos, límites y siguiente criterio de aceptación. Conservar las mediciones antiguas y actualizar ambos idiomas. No transformar planes en logros ni inventar actividad semanal. No se facilitaron rúbrica, nombre para la portada ni fecha de entrega.
+Tras cada experimento significativo, añadir un [corte fechado](../templates/checkpoint.es.md) con pregunta, trabajo realizado, comandos/commit, resultados, fallos, límites y siguiente criterio de aceptación. Conservar las mediciones antiguas y actualizar ambos idiomas. No transformar planes en logros ni inventar actividad semanal. Ya se aportaron apuntes y se referenciaron sus páginas; siguen pendientes rúbrica específica del proyecto final, nombre para la portada y fecha de entrega.
 
 `presentations/deck.json` es la fuente común del contenido bilingüe. Los comandos anteriores generan PowerPoint editable, PDF y guion con notas. Se revisó el PDF renderizado y se verificaron estructuralmente límites, textos, número de diapositivas y notas del PPTX; no se comprobó una renderización independiente en PowerPoint. Los tipos de letra disponibles pueden cambiar los saltos de línea.
 

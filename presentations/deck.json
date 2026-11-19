@@ -1,6 +1,12 @@
 {
   "checkpoint": "2026-11-18",
   "project": "skate-trick-4dgs",
+  "course": {
+    "name": "Computer Vision",
+    "identifier": "CVI 26-2",
+    "assignment": "final course project",
+    "context_source": "docs/evidence/course-context.json"
+  },
   "slides": [
     {
       "id": "question",
@@ -10,46 +16,46 @@
         "section": "Research question",
         "bullets": [
           "Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting",
-          "Progress review · 18 November 2026",
+          "Computer Vision · CVI 26-2 · Final project · 18 November 2026",
           "Current result: sampled camera poses and sparse background geometry."
         ],
-        "notes": "The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish the completed capture and camera-estimation work from the dynamic reconstruction that has not yet been trained. This is a progress review, not a final demonstration of free-viewpoint rendering."
+        "notes": "This is the final project for Computer Vision, CVI 26-2, as specified by the project owner. The supplied CVI 26-2 Prompts notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration."
       },
       "es": {
         "title": "Un truco de skate.\nMuchas vistas.\n¿Una escena dinámica?",
         "section": "Pregunta de investigación",
         "bullets": [
           "Repetición con punto de vista libre mediante 4D Gaussian Splatting",
-          "Seguimiento · 18 de noviembre de 2026",
+          "Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026",
           "Resultado actual: poses muestreadas y geometría dispersa del fondo."
         ],
-        "notes": "El objetivo final es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Hoy se separa el trabajo completado de captura y estimación de cámaras de la reconstrucción dinámica aún no entrenada. Se presenta un avance, no una demostración final de punto de vista libre."
+        "notes": "Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable. Los apuntes CVI 26-2 Prompts aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre."
       }
     },
     {
-      "id": "pipeline",
+      "id": "course-alignment",
       "kind": "pipeline",
       "en": {
-        "title": "The pipeline has a clear boundary",
-        "section": "Architecture",
+        "title": "Course concepts guide the final project",
+        "section": "Computer Vision · CVI 26-2",
         "bullets": [
-          "Saved replay → repeated camera observations",
-          "Common cuts → crop and synchronization checks",
-          "Static-background SfM → sampled image poses",
-          "Next: full poses → 4DGS → held-out rendering"
+          "Viewing (pp. 3–4, 12–15): camera matrices and projection",
+          "Sampling (pp. 5–6, 18–27): pixels, frames and alignment",
+          "Curves (pp. 40–44): sampled trajectories and continuity",
+          "Pipeline (pp. 15–18): future Gaussian image synthesis"
         ],
-        "notes": "The first three stages have executable tools and retained evidence. The last stage remains future work. Static 3D Gaussian Splatting represents a mostly static scene; this 4DGS implementation adds time-conditioned deformation. Both need correct capture cameras. Camera estimation is therefore a prerequisite rather than a side effect of Gaussian training."
+        "notes": "Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link directly to Viewing; frame extraction and synchronization connect to sampling; estimated camera paths connect to curves. Current paths have seven measured samples and are not claimed to be a spline implementation. Gaussian rasterization is future work and is compared conceptually with the traditional graphics pipeline. The notes supply topics, not an explicit final-project rubric. The full architecture remains in the repository report."
       },
       "es": {
-        "title": "El flujo tiene un límite explícito",
-        "section": "Arquitectura",
+        "title": "Los temas del curso orientan el proyecto final",
+        "section": "Computer Vision · CVI 26-2",
         "bullets": [
-          "Replay guardado → observaciones desde varias cámaras",
-          "Cortes comunes → recorte y controles temporales",
-          "SfM del fondo estático → poses muestreadas",
-          "Siguiente: poses completas → 4DGS → vista reservada"
+          "Viewing (pp. 3–4, 12–15): matrices de cámara y proyección",
+          "Muestreo (pp. 5–6, 18–27): píxeles, tiempo y alineación",
+          "Curvas (pp. 40–44): trayectorias y continuidad",
+          "Pipeline (pp. 15–18): futura síntesis con Gaussianas"
         ],
-        "notes": "Las tres primeras etapas tienen herramientas ejecutables y evidencias. La última sigue pendiente. 3D Gaussian Splatting representa una escena principalmente estática; esta implementación 4DGS añade deformación condicionada por el tiempo. Ambas necesitan cámaras correctas. Estimar las cámaras es un requisito previo, no un resultado automático del entrenamiento."
+        "notes": "Las páginas se refieren al PDF CVI 26-2 Prompts, de 46 páginas, atribuido a Pablo Figueroa. Las matrices conectan con Viewing; la extracción y sincronización, con muestreo; las trayectorias, con curvas. Solo hay siete muestras medidas por trayectoria y no se afirma implementar splines. La rasterización de Gaussianas es futura y se compara conceptualmente con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica explícita del proyecto final. La arquitectura completa está en el informe del repositorio."
       }
     },
     {
