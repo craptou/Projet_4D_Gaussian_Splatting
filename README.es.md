@@ -4,6 +4,8 @@
 
 [English](README.md) · [Español](README.es.md) · **Corte de seguimiento: 18 de noviembre de 2026**
 
+**Repositorio:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Publicado el 19 de noviembre de 2026 · Rama `main`.
+
 ¿Puede una única repetición guardada de un truco de skate, grabada desde varios puntos de vista móviles, convertirse en una representación 3D dinámica que permita generar vistas nuevas?
 
 Este es el **proyecto final de Computer Vision — CVI 26-2**. Estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). La tarea de visión estima cámaras y estructura a partir de imágenes; generar vistas nuevas es la etapa directa de síntesis. **Etapa actual: poses estimadas para las 2725 imágenes de entrenamiento. Todavía no se ha entrenado la reconstrucción dinámica.**

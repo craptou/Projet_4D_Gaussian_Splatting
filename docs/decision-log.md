@@ -1,5 +1,7 @@
 # Decision log — 2026-10-19
 
+Publication update — 2026-11-19: the owner supplied `https://github.com/craptou/Projet_4D_Gaussian_Splatting.git`. Its empty remote was attached as `origin` and the existing `main` history pushed normally. Repository metadata reports public visibility; no visibility change was performed. This supersedes the initial proposed remote name/private-creation plan below. Project/package name remains `skate-trick-4dgs`; historical initial audit decisions are retained.
+
 - Use the current workspace root (`projet`) as the repository root, as requested; project/package/GitHub name is `skate-trick-4dgs`. No extra nested project folder.
 - Pin official hustvl/4DGaussians at `843d5ac636c37e4b611242287754f3d4ed150144`; initialize rasterizer, simple-knn and GLM recursively without edits. Upstream root LICENSE.md is Apache-2.0; nested source notices/dependency licenses still apply. Project wrapper files use Apache-2.0 (LICENSE).
 - Direct source inspection confirms fixed extrinsics, first-frame-only calibration, shared single-focal intrinsics and train/test camera overlap. Reject moving captures at staging; no algorithm/loader modification during initial setup.

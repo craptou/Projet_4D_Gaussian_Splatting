@@ -4,6 +4,8 @@
 
 [English](README.md) · [Español](README.es.md) · **Progress checkpoint: 18 November 2026**
 
+**Repository:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Published 19 November 2026 · Branch `main`.
+
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
 This is the **final project for Computer Vision — CVI 26-2**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. Dynamic reconstruction has not been trained yet.**

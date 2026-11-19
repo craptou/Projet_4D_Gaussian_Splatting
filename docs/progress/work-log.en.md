@@ -17,6 +17,7 @@ Entries below are reconstructed from Git history and retained run artifacts. The
 | 2026-11-18 | Prepare bilingual review documents, evidence and presentations | Current documentation commits; inspect `git log -- presentations docs/progress` | Publish reviewable checkpoint; continue dated updates |
 | 2026-11-18 | Owner clarifies final-project role and supplies CVI 26-2 Prompts | [Course map](course-alignment.en.md), [PDF fingerprint](../evidence/course-context.json) | Reframe as Computer Vision final project; link topics by page without inventing a rubric |
 | 2026-11-18 | Localize the remaining 2550 training images; investigate 31 initial failures | `50b2fc3`; [full-rate experiment](fullrate.en.md), [evidence](../evidence/fullrate-2026-11-18.json) | 2725/2725 accepted with original anchors/map unchanged; 132 lower-support cases retained for review; 25 tests |
+| 2026-11-19 | Owner supplies remote; inspect and publish existing history | [GitHub repository](https://github.com/craptou/Projet_4D_Gaussian_Splatting); `git push -u origin main` | Empty remote, successful normal push; public visibility and default `main` verified |
 
 ## Decisions supported by this history
 
@@ -29,7 +30,7 @@ Entries below are reconstructed from Git history and retained run artifacts. The
 
 ## Failures and unresolved blockers
 
-The first sparse run missed nine images. Adding intermediate views solved registration in the expanded sample; it does not prove full-rate pose estimation. Audio alignment was inconclusive. A CUDA training environment and official sample reproduction remain absent. GitHub CLI is installed but unauthenticated at this checkpoint, so publication is pending. No failed command is counted as a completed milestone.
+The first sparse run missed nine images. Intermediate views resolved that registration issue; the later full-rate experiment is documented separately. Audio alignment was inconclusive. A CUDA training environment and official sample reproduction remain absent. Publication was pending on 18 November but succeeded on 19 November through Git, despite the optional GitHub CLI remaining unauthenticated. No failed command is counted as a completed milestone.
 
 ## How to continue the log
 

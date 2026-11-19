@@ -26,6 +26,6 @@ Para la revisión final, preparar además un ejemplo mundo-cámara-imagen (Viewi
 | Contaminación por primer plano dinámico | Máscaras rectangulares conservadoras | Revisar cobertura; conservar el skate para entrenamiento futuro |
 | Confundir ajuste disperso con calidad final | Solo hay error de reproyección | Medir vistas nuevas únicamente tras evaluación real reservada |
 | Recursos de cálculo limitados | RTX 4050 Laptop de 6 GB; entorno pendiente | Prueba oficial breve antes de trabajos largos |
-| Falta de acceso del profesor | GitHub sin autenticar | Crear y subir repositorio privado; conceder acceso al profesor por separado |
+| Acceso del profesor y publicación | Repositorio público publicado el 19 de noviembre; `main` enviado | Compartir el enlace y mantener enlaces/documentación actualizados |
 
 No se asignan fechas, estimaciones de carga ni pesos de nota sin las restricciones del curso. Actualizar el seguimiento después de cada experimento, no solo antes de exponer.

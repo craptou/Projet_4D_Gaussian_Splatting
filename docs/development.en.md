@@ -112,11 +112,10 @@ Read [architecture](architecture.md), [camera models](camera-models.md), [moving
 
 ## GitHub
 
-Local branch is `main`. Portable CLI is `.tools/gh/bin/gh.exe` (ignored). From PowerShell at this repository root, authenticate and create the private repository:
+The owner-supplied remote is [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting), published on 19 November 2026. The research project/package name remains `skate-trick-4dgs`. Branch `main` tracks `origin/main`; Git authentication permits pushing independently of the optional GitHub CLI session. Clone with:
 
 ```powershell
-.\.tools\gh\bin\gh.exe auth login
-.\.tools\gh\bin\gh.exe repo create skate-trick-4dgs --private --source . --remote origin --push
+git clone --recurse-submodules https://github.com/craptou/Projet_4D_Gaussian_Splatting.git
 ```
 
 ## Citation

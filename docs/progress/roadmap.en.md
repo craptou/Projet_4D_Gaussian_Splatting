@@ -26,6 +26,6 @@ For the final review, also prepare a world/camera/image projection example (View
 | Dynamic foreground contamination | Conservative rectangular feature masks | Review coverage; keep board visible in future training images |
 | Sparse success mistaken for final quality | Low reprojection error only | Report novel-view metrics only after true held-out rendering |
 | Limited compute | RTX 4050 Laptop, 6 GB; training stack missing | Bounded official smoke run before longer jobs |
-| Professor cannot access repository | No authenticated GitHub session | Create/push private repository, then grant the professor access separately |
+| Professor access and publication | Published public repository on 19 November; `main` pushed | Share the repository URL; keep review links and commits current |
 
 No milestone dates, workload estimates or grade weights are asserted without course constraints. Review after each experiment, not only before the presentation.

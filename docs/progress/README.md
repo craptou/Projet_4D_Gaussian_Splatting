@@ -24,14 +24,13 @@ Tracked images are sufficient to rebuild slides after a clone. Rebuilding the Sp
 
 ### Publish for the professor
 
-There was no remote or authenticated GitHub session at this checkpoint. From repository root:
+Published on **19 November 2026** to the owner-supplied [repository](https://github.com/craptou/Projet_4D_Gaussian_Splatting). The remote was empty; local `main` and its existing history were pushed without force. For a fresh checkout:
 
 ```powershell
-.\.tools\gh\bin\gh.exe auth login
-.\.tools\gh\bin\gh.exe repo create skate-trick-4dgs --private --source . --remote origin --push
+git clone --recurse-submodules https://github.com/craptou/Projet_4D_Gaussian_Splatting.git
 ```
 
-Use `gh` instead of the project-local path on another machine. The portable CLI itself is ignored. A private repository requires explicitly granting the professor access; no professor account or email was supplied, and no invitation was sent. After publication, open the repository in a browser and verify both README language links and PDF downloads with an authorized account. If an existing remote is supplied later, use that instead of creating a duplicate. No GitHub Pages site is needed for the repository README or PDF previews.
+Git push authentication works even though the optional `gh` CLI is not logged in. Unauthenticated GitHub repository metadata reports **public** visibility and default branch `main`, so the professor can read the repository without an invitation. No visibility setting was changed and no invitation was sent. For later updates, commit the changes and run `git push origin main`. No GitHub Pages deployment is needed for the repository README or PDF previews. The technical checkpoint remains 18 November; publication is a separate dated work-log event.
 
 ## Español
 
@@ -45,4 +44,4 @@ Tras cada experimento significativo, añadir un [corte fechado](../templates/che
 
 Las figuras y el resumen JSON se versionan para permitir revisión sin vídeos. Las grabaciones, bases de datos y modelos completos siguen excluidos. El SHA-256 identifica la grabación requerida para repetir el experimento real. El gráfico español se vuelve a dibujar con los mismos puntos y trayectorias, sin cambiar el modelo.
 
-Para publicar, autenticar GitHub y ejecutar los comandos indicados. Un repositorio privado requiere conceder acceso al profesor. No se facilitó su cuenta ni se envió invitación. Verificar posteriormente los enlaces de ambos idiomas y las descargas PDF desde una cuenta autorizada. Un README no requiere desplegar GitHub Pages.
+Publicado el **19 de noviembre de 2026** en el [repositorio indicado por el responsable](https://github.com/craptou/Projet_4D_Gaussian_Splatting). El remoto estaba vacío y se subió `main` sin forzar ni reemplazar historial. Git puede enviar cambios aunque `gh` no tenga sesión iniciada. Los metadatos públicos de GitHub indican visibilidad **pública** y rama predeterminada `main`; el profesor puede consultarlo sin invitación. No se cambió la visibilidad ni se enviaron invitaciones. Para clonar, usar el comando anterior; para futuras actualizaciones, `git push origin main`. No hace falta GitHub Pages. El corte técnico del 18 de noviembre se distingue de la publicación del día 19.

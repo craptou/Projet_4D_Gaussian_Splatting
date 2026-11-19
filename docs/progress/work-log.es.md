@@ -17,6 +17,7 @@ Estas entradas se basan en Git y en artefactos experimentales conservados. Docum
 | 2026-11-18 | Preparar documentación bilingüe, evidencias y presentaciones | Commits actuales; `git log -- presentations docs/progress` | Publicar un corte revisable y continuar el registro fechado |
 | 2026-11-18 | Aclarar que es proyecto final y recibir CVI 26-2 Prompts | [Mapa del curso](course-alignment.es.md), [huella del PDF](../evidence/course-context.json) | Enmarcar como proyecto final de Computer Vision y enlazar temas sin inventar una rúbrica |
 | 2026-11-18 | Localizar las otras 2550 imágenes e investigar 31 fallos iniciales | `50b2fc3`; [experimento completo](fullrate.es.md), [evidencia](../evidence/fullrate-2026-11-18.json) | 2725/2725 aceptadas sin cambiar mapa/referencias; 132 casos de soporte menor para revisar; 25 pruebas |
+| 2026-11-19 | Recibir remoto, inspeccionar y publicar el historial existente | [Repositorio GitHub](https://github.com/craptou/Projet_4D_Gaussian_Splatting); `git push -u origin main` | Remoto vacío, envío normal correcto; visibilidad pública y rama `main` verificadas |
 
 ## Decisiones respaldadas por el historial
 
@@ -29,7 +30,7 @@ Estas entradas se basan en Git y en artefactos experimentales conservados. Docum
 
 ## Fallos y bloqueos pendientes
 
-La primera prueba no registró nueve imágenes. Las vistas intermedias resolvieron ese problema en la muestra ampliada; no demuestran poses correctas a frecuencia completa. El audio no permitió alinear con confianza. Faltan el entorno CUDA y la reproducción oficial. GitHub CLI está instalado, pero no autenticado en este corte; la publicación sigue pendiente. Ningún comando fallido se cuenta como hito completado.
+La primera prueba no registró nueve imágenes. Las vistas intermedias resolvieron ese problema; el experimento completo posterior se documenta por separado. El audio no permitió alinear con confianza. Faltan el entorno CUDA y la reproducción oficial. La publicación pendiente del 18 de noviembre se realizó el día 19 mediante Git, aunque la herramienta opcional GitHub CLI sigue sin sesión. Ningún comando fallido se cuenta como hito completado.
 
 ## Cómo continuar
 
