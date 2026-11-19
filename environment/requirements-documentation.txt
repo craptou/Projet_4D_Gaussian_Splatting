@@ -1,0 +1,5 @@
+# Local artifact authoring/validation; separate from the upstream CUDA environment.
+python-pptx==1.0.2
+reportlab==5.1.0
+pypdfium2==5.15.2
+Pillow==11.3.0

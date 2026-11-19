@@ -1,0 +1,368 @@
+{
+  "checkpoint": "2026-11-18",
+  "project": "skate-trick-4dgs",
+  "slides": [
+    {
+      "id": "question",
+      "kind": "cover",
+      "en": {
+        "title": "A skate replay.\nMany viewpoints.\nOne dynamic scene?",
+        "section": "Research question",
+        "bullets": [
+          "Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting",
+          "Progress review · 18 November 2026",
+          "Current result: sampled camera poses and sparse background geometry."
+        ],
+        "notes": "The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish the completed capture and camera-estimation work from the dynamic reconstruction that has not yet been trained. This is a progress review, not a final demonstration of free-viewpoint rendering."
+      },
+      "es": {
+        "title": "Un truco de skate.\nMuchas vistas.\n¿Una escena dinámica?",
+        "section": "Pregunta de investigación",
+        "bullets": [
+          "Repetición con punto de vista libre mediante 4D Gaussian Splatting",
+          "Seguimiento · 18 de noviembre de 2026",
+          "Resultado actual: poses muestreadas y geometría dispersa del fondo."
+        ],
+        "notes": "El objetivo final es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Hoy se separa el trabajo completado de captura y estimación de cámaras de la reconstrucción dinámica aún no entrenada. Se presenta un avance, no una demostración final de punto de vista libre."
+      }
+    },
+    {
+      "id": "pipeline",
+      "kind": "pipeline",
+      "en": {
+        "title": "The pipeline has a clear boundary",
+        "section": "Architecture",
+        "bullets": [
+          "Saved replay → repeated camera observations",
+          "Common cuts → crop and synchronization checks",
+          "Static-background SfM → sampled image poses",
+          "Next: full poses → 4DGS → held-out rendering"
+        ],
+        "notes": "The first three stages have executable tools and retained evidence. The last stage remains future work. Static 3D Gaussian Splatting represents a mostly static scene; this 4DGS implementation adds time-conditioned deformation. Both need correct capture cameras. Camera estimation is therefore a prerequisite rather than a side effect of Gaussian training."
+      },
+      "es": {
+        "title": "El flujo tiene un límite explícito",
+        "section": "Arquitectura",
+        "bullets": [
+          "Replay guardado → observaciones desde varias cámaras",
+          "Cortes comunes → recorte y controles temporales",
+          "SfM del fondo estático → poses muestreadas",
+          "Siguiente: poses completas → 4DGS → vista reservada"
+        ],
+        "notes": "Las tres primeras etapas tienen herramientas ejecutables y evidencias. La última sigue pendiente. 3D Gaussian Splatting representa una escena principalmente estática; esta implementación 4DGS añade deformación condicionada por el tiempo. Ambas necesitan cámaras correctas. Estimar las cámaras es un requisito previo, no un resultado automático del entrenamiento."
+      }
+    },
+    {
+      "id": "capture",
+      "kind": "image",
+      "image": "docs/assets/replay-comparison.jpg",
+      "en": {
+        "title": "One saved replay, recorded repeatedly",
+        "section": "Capture evidence",
+        "bullets": [
+          "Original recording: 118.63 s, 720 × 1280, 30 FPS.",
+          "26 candidate passages; 109 frames per exported clip.",
+          "The cursor-based cutter replaces slow, unequal manual cuts.",
+          "Passage order is known; exact angles and uniqueness are not."
+        ],
+        "caption": "Observed gameplay at two sampled times; not reconstructed images.",
+        "notes": "The owner initially supplied eight manually cut views and the complete recording. The tool detects timeline resets and selects a common cursor interval. It preserves original media and writes a source-frame manifest. Twenty-six passages must not be described as twenty-six calibrated camera azimuths. These game images are supplied capture evidence."
+      },
+      "es": {
+        "title": "Una repetición guardada, varias capturas",
+        "section": "Evidencia de captura",
+        "bullets": [
+          "Grabación: 118,63 s, 720 × 1280, 30 FPS.",
+          "26 pasajes candidatos; 109 imágenes por clip.",
+          "El corte basado en el cursor sustituye el trabajo manual lento y desigual.",
+          "Se conoce el orden; no los ángulos exactos ni su unicidad."
+        ],
+        "caption": "Juego observado en dos instantes; no son imágenes reconstruidas.",
+        "notes": "Se aportaron ocho cortes manuales y la grabación completa. La herramienta detecta reinicios de la línea temporal y selecciona un intervalo común. Conserva los originales y guarda índices de origen. Veintiséis pasajes no equivalen a veintiséis azimuts calibrados. Las imágenes del juego son evidencia de captura aportada al proyecto."
+      }
+    },
+    {
+      "id": "camera",
+      "kind": "body",
+      "en": {
+        "title": "A moving camera needs a pose per image",
+        "section": "Key technical decision",
+        "bullets": [
+          "Fixed capture: R[c], T[c] are shared across a sequence.",
+          "Moving capture: R[c,t], T[c,t] vary with replay time.",
+          "Upstream MultipleView calibrates from the first frame and repeats its pose.",
+          "Decision: estimate background poses per sampled image; keep the fixed-loader path blocked."
+        ],
+        "notes": "This limitation was established by inspecting extractimages.py and multipleview_dataset.py in the pinned official repository. Following the board changes the extrinsics during the trick. Merely naming clips cam01 and cam02 does not make them fixed-camera data. The current experiment uses per-image SfM without modifying the 4DGS algorithm."
+      },
+      "es": {
+        "title": "Una cámara móvil necesita poses por imagen",
+        "section": "Decisión técnica principal",
+        "bullets": [
+          "Captura fija: R[c], T[c] se comparten en una secuencia.",
+          "Captura móvil: R[c,t], T[c,t] cambian con el tiempo.",
+          "MultipleView calibra con la primera imagen y repite su pose.",
+          "Decisión: estimar poses del fondo por imagen y bloquear el cargador fijo."
+        ],
+        "notes": "La limitación se comprobó en extractimages.py y multipleview_dataset.py del repositorio oficial fijado. Seguir al skate cambia los parámetros extrínsecos. Llamar a los clips cam01 y cam02 no los convierte en cámaras fijas. La prueba actual usa SfM por imagen sin modificar el algoritmo 4DGS."
+      }
+    },
+    {
+      "id": "preparation",
+      "kind": "body",
+      "en": {
+        "title": "Make camera estimation about the background",
+        "section": "Method",
+        "bullets": [
+          "Decode directly from the original recording and retain source indexes.",
+          "Apply one 592 × 820 crop; adjust the principal point after cropping.",
+          "Exclude the board, approximate shadow and score band from SIFT features.",
+          "Use CPU PyCOLMAP with shared intrinsics, independent image poses and a reserved view."
+        ],
+        "notes": "The crop is x64, y100, width592, height820, with no resize. The assumed original principal point becomes 296,540 after cropping. The shared SIMPLE_PINHOLE model refines focal length; centered projection and fixed FOV are assumptions, not exported game matrices. Masks suppress calibration features only: the skateboard must remain visible for future dynamic training."
+      },
+      "es": {
+        "title": "Estimar las cámaras a partir del fondo",
+        "section": "Método",
+        "bullets": [
+          "Decodificar el original y conservar los índices de origen.",
+          "Aplicar un recorte común de 592 × 820 y ajustar el punto principal.",
+          "Excluir skate, sombra aproximada y marcador de las características SIFT.",
+          "Usar PyCOLMAP en CPU: intrínsecos compartidos, poses independientes y una vista reservada."
+        ],
+        "notes": "El recorte es x64, y100, ancho592, alto820, sin redimensionar. El punto principal supuesto pasa a 296,540. SIMPLE_PINHOLE ajusta la focal; el campo visual constante y la proyección centrada son hipótesis, no matrices obtenidas del juego. Las máscaras solo suprimen características de calibración: el skate debe conservarse para el entrenamiento dinámico."
+      }
+    },
+    {
+      "id": "sync",
+      "kind": "metrics",
+      "metrics": [
+        {
+          "value": "26/26",
+          "en": "score events detected",
+          "es": "eventos detectados"
+        },
+        {
+          "value": "≤1",
+          "en": "frame of onset spread",
+          "es": "imagen de diferencia"
+        },
+        {
+          "value": "~33 ms",
+          "en": "at 30 FPS",
+          "es": "a 30 FPS"
+        }
+      ],
+      "en": {
+        "title": "Synchronization has evidence — and limits",
+        "section": "Temporal validation",
+        "bullets": [
+          "The persistent green score appears at clip index 97 or 98.",
+          "Visual board-state comparisons support the timeline alignment.",
+          "One UI event does not prove synchronization over every frame.",
+          "Audio was inconclusive; no audio correction or time warp was applied."
+        ],
+        "notes": "The score detector is specific to this capture and its overlay colors. The one-frame difference can reflect screen sampling and onset detection, so it should not be converted into a claim of exact simulation synchronization. No clip was silently shifted. The next temporal check should inspect fast rotational events as well as landing."
+      },
+      "es": {
+        "title": "La sincronización tiene evidencias y límites",
+        "section": "Validación temporal",
+        "bullets": [
+          "La puntuación verde persistente aparece en el índice 97 o 98.",
+          "La comparación visual del skate respalda la alineación temporal.",
+          "Un evento de interfaz no prueba sincronización en cada imagen.",
+          "El audio no fue concluyente; no se corrigió ni deformó el tiempo."
+        ],
+        "notes": "El detector depende de esta captura y del color de su marcador. La diferencia de una imagen puede reflejar el muestreo de pantalla y la detección del inicio; no implica sincronización exacta de simulación. No se desplazó ningún clip silenciosamente. El siguiente control debe examinar rotaciones rápidas además de la recepción."
+      }
+    },
+    {
+      "id": "experiment",
+      "kind": "table",
+      "en": {
+        "title": "More overlap resolved partial registration",
+        "section": "Experiment comparison",
+        "headers": [
+          "Run",
+          "Registered images",
+          "3D points",
+          "Mean error"
+        ],
+        "rows": [
+          [
+            "Initial: 6 passages",
+            "33 / 42",
+            "1,651",
+            "0.403 px"
+          ],
+          [
+            "Expanded: 25 passages",
+            "175 / 175",
+            "8,767",
+            "0.473 px"
+          ]
+        ],
+        "bullets": [
+          "Added intermediate viewpoints; mapper thresholds were not relaxed.",
+          "Seven samples per passage; one reconstruction; cam07 excluded.",
+          "A larger observation set changes the error: this is not a quality ranking."
+        ],
+        "notes": "The initial run did not register nine images. The expanded experiment added available intermediate viewpoints and registered all 175 samples in approximately 101.5 seconds. The mean residual rose slightly because coverage and observations changed. Neither residual is a held-out image metric. The complete configuration and implementation commit are recorded in the repository."
+      },
+      "es": {
+        "title": "Más solapamiento resolvió el registro parcial",
+        "section": "Comparación experimental",
+        "headers": [
+          "Ejecución",
+          "Imágenes registradas",
+          "Puntos 3D",
+          "Error medio"
+        ],
+        "rows": [
+          [
+            "Inicial: 6 pasajes",
+            "33 / 42",
+            "1651",
+            "0,403 px"
+          ],
+          [
+            "Ampliada: 25 pasajes",
+            "175 / 175",
+            "8767",
+            "0,473 px"
+          ]
+        ],
+        "bullets": [
+          "Se añadieron vistas intermedias sin relajar los umbrales.",
+          "Siete muestras por pasaje; un modelo; cam07 excluida.",
+          "Cambian las observaciones: el error no clasifica la calidad final."
+        ],
+        "notes": "La prueba inicial dejó nueve imágenes sin registrar. Al añadir vistas intermedias, la ejecución ampliada registró las 175 muestras en unos 101,5 segundos. El residuo aumentó ligeramente porque cambiaron las observaciones. Ningún residuo es una métrica de imagen reservada. El repositorio guarda la configuración y el commit de implementación."
+      }
+    },
+    {
+      "id": "geometry",
+      "kind": "figure",
+      "image": "docs/assets/geometry-and-trajectories.png",
+      "en": {
+        "title": "A shared background model, not yet a 4D replay",
+        "section": "Result evidence",
+        "bullets": [],
+        "caption": "8,377 points span multiple passages. World scale is arbitrary; camera trajectories are sampled.",
+        "notes": "The point cloud describes the static background. Most points have observations in more than one passage, so the reconstruction is linked across views. All sampled camera-center paths move. Seven poses per passage do not supply full-rate trajectories. Low reprojection error does not establish ground-truth geometry, dynamic skateboard reconstruction or novel-view quality."
+      },
+      "es": {
+        "title": "Un fondo compartido, todavía no un replay 4D",
+        "section": "Evidencia del resultado",
+        "bullets": [],
+        "caption": "8377 puntos unen varios pasajes. Escala arbitraria; las trayectorias de cámara están muestreadas.",
+        "notes": "La nube representa el fondo estático. La mayoría de los puntos se observa en varios pasajes, por lo que las vistas comparten reconstrucción. Todos los centros de cámara muestreados se desplazan. Siete poses no dan una trayectoria a frecuencia completa. El bajo error no demuestra geometría real, reconstrucción dinámica del skate ni calidad de vistas nuevas.",
+        "image": "docs/assets/geometry-and-trajectories.es.png"
+      }
+    },
+    {
+      "id": "holdout",
+      "kind": "body",
+      "en": {
+        "title": "Reserve a real camera for a measurable test",
+        "section": "Evaluation design",
+        "bullets": [
+          "Training geometry uses 25 passages; cam07 is excluded.",
+          "Later, localize cam07 against the fixed training reconstruction.",
+          "Render its viewpoint at matched replay timestamps.",
+          "Compare game frames and rendered frames with PSNR, SSIM and LPIPS."
+        ],
+        "notes": "cam07 was inspected for timing but contributed no SfM features, matches or geometry. Its localization and rendering have not been performed. The unmodified MultipleView test split samples training cameras and is not a held-out-camera experiment. Future metrics must specify color space, resolution, crop, masks and implementation versions, with the model frozen before scoring."
+      },
+      "es": {
+        "title": "Reservar una cámara para una prueba medible",
+        "section": "Diseño de evaluación",
+        "bullets": [
+          "La geometría utiliza 25 pasajes; cam07 queda fuera.",
+          "Después, localizar cam07 contra la reconstrucción de entrenamiento.",
+          "Renderizar su punto de vista en instantes coincidentes.",
+          "Comparar juego y render mediante PSNR, SSIM y LPIPS."
+        ],
+        "notes": "Se inspeccionó el tiempo de cam07, pero no aportó características, correspondencias ni geometría. Aún no se ha localizado ni renderizado. El test original de MultipleView muestrea cámaras de entrenamiento; no es una prueba con cámara reservada. Las métricas deberán especificar color, resolución, recorte, máscaras y versiones, con el modelo congelado antes de evaluar."
+      }
+    },
+    {
+      "id": "tracking",
+      "kind": "body",
+      "en": {
+        "title": "Progress is traceable to dated artifacts",
+        "section": "Project tracking",
+        "bullets": [
+          "19 Oct: audit, pinned dependency, helpers and camera-source analysis.",
+          "18 Nov: automatic cutting, event checks and sparse camera-pose experiments.",
+          "19 helper tests pass; manifests, configs and environment pins are retained.",
+          "Bilingual reports, figures and these slides link to commits and limitations."
+        ],
+        "notes": "The work log records actual repository checkpoints. It does not imply continuous work between the two dates. Small evidence snapshots are versioned; raw videos and models are excluded. The course rubric and deadline have not been supplied, so the roadmap uses explicit acceptance gates rather than invented grade weights. AI assistance is acknowledged in the project documentation."
+      },
+      "es": {
+        "title": "El avance se vincula a artefactos fechados",
+        "section": "Seguimiento del proyecto",
+        "bullets": [
+          "19 oct.: auditoría, dependencia fijada, herramientas y análisis de cámaras.",
+          "18 nov.: cortes automáticos, controles temporales y pruebas de poses.",
+          "19 pruebas superadas; manifiestos, configuraciones y versiones conservados.",
+          "Informes, figuras y diapositivas bilingües enlazados con commits y límites."
+        ],
+        "notes": "La bitácora registra cortes reales del repositorio, sin atribuir actividad continua entre ambas fechas. Se versionan evidencias pequeñas y se excluyen vídeos y modelos. Al no disponer de rúbrica ni fecha de entrega, la hoja de ruta usa criterios de aceptación y no pesos inventados. La documentación reconoce la asistencia de IA."
+      }
+    },
+    {
+      "id": "limits",
+      "kind": "body",
+      "en": {
+        "title": "The remaining risks are explicit",
+        "section": "Limits and blockers",
+        "bullets": [
+          "Only seven of 109 frames per training passage have poses.",
+          "Shared intrinsics, mask coverage and synchronization still need validation.",
+          "Windows CPU SfM works; CUDA training and official 4DGS reproduction have not run.",
+          "No dynamic model, novel-view render or held-out score is claimed."
+        ],
+        "notes": "The machine has an RTX 4050 Laptop GPU with 6 GB, but no working WSL training environment has been established. A proposed version file is not a validated environment. The official CUDA stack should be tested before changing dependencies or launching custom training. The static background result is encouraging, but does not remove the moving-camera loader requirement."
+      },
+      "es": {
+        "title": "Los riesgos pendientes son explícitos",
+        "section": "Límites y bloqueos",
+        "bullets": [
+          "Solo siete de 109 imágenes por pasaje tienen pose.",
+          "Falta validar intrínsecos, cobertura de máscaras y sincronización.",
+          "SfM en CPU funciona; CUDA y reproducción oficial 4DGS siguen pendientes.",
+          "No se afirma disponer de modelo dinámico, vista nueva ni métrica reservada."
+        ],
+        "notes": "El equipo tiene una RTX 4050 Laptop de 6 GB, pero aún no se ha establecido el entorno de entrenamiento WSL. Un archivo de versiones propuesto no equivale a un entorno validado. Hay que probar la pila oficial antes de cambiar dependencias o entrenar datos propios. El resultado del fondo es prometedor, pero sigue haciendo falta un cargador para cámaras móviles."
+      }
+    },
+    {
+      "id": "next",
+      "kind": "body",
+      "en": {
+        "title": "Next review: prove each gate before training",
+        "section": "Next experiments",
+        "bullets": [
+          "Reproduce the official scene: CUDA imports, short training and rendering.",
+          "Estimate and validate full-rate poses; verify a per-frame loader.",
+          "Train a first dynamic model and evaluate the reserved game camera.",
+          "Reference: Wu et al., CVPR 2024 · official hustvl/4DGaussians · COLMAP."
+        ],
+        "notes": "Acceptance requires retained commands and real outputs, not just installation instructions. The proposed smoke configuration uses two coarse and ten fine iterations. Full-rate camera validation and environment provisioning can proceed separately, but official reproduction must precede custom dynamic training. Paper: arxiv.org/abs/2310.08528. Upstream pin: 843d5ac636c37e4b611242287754f3d4ed150144. See the repository roadmap for complete criteria."
+      },
+      "es": {
+        "title": "Próxima revisión: validar antes de entrenar",
+        "section": "Siguientes experimentos",
+        "bullets": [
+          "Reproducir la escena oficial: CUDA, entrenamiento y render breves.",
+          "Estimar todas las poses y validar un cargador por imagen.",
+          "Entrenar un primer modelo dinámico y evaluar la cámara reservada.",
+          "Referencia: Wu et al., CVPR 2024 · hustvl/4DGaussians oficial · COLMAP."
+        ],
+        "notes": "Cada criterio exige comandos y resultados reales, no solo instrucciones. La prueba propuesta usa dos iteraciones gruesas y diez finas. Las poses completas y el entorno pueden prepararse por separado, pero la reproducción oficial debe preceder al entrenamiento propio. Artículo: arxiv.org/abs/2310.08528. Commit original: 843d5ac636c37e4b611242287754f3d4ed150144. La hoja de ruta contiene los criterios completos."
+      }
+    }
+  ]
+}
