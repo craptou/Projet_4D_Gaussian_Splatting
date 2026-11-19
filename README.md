@@ -53,6 +53,8 @@ Python 3.11+ and FFmpeg/FFprobe are required for Windows capture helpers. Traini
 
 ## Dataset and fixed-camera workflow
 
+For a single recording containing successive replay angles, the new [batch-cut helper and capture review](docs/capture-review-2026-11-18.md) describe how to produce candidate clips using the visible game timeline. The supplied recording has 26 candidate passages; moving-camera pose recovery remains necessary.
+
 ```text
 data/raw/kickflip_test/
     metadata.json

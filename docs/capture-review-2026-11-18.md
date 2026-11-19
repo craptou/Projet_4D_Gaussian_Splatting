@@ -1,0 +1,19 @@
+# Capture review — 2026-11-18
+
+The supplied `data/raw/Projet_Computeur_vision.mp4` contains 3559 video frames at 30 FPS (118.633 seconds), 720x1280. The game UI shows CAMERA: CUSTOM; the user describes a tracked camera, and the background moves during replay. Treat this capture as MOVING_CAMERA. The eight manually cut `data/raw/cam01.mp4` through `cam08.mp4` have matching dimensions and nominal FPS but 121–135 frames each. They are not yet a synchronized dataset.
+
+To avoid further manual cutting, `scripts/split_replays.py` detects the bright timeline knob against its local background. The ROI `[140,1138,414,16]` was measured on this exact capture; do not assume it matches another recording. Large backward knob jumps identify replay restarts. Robust linear fits of cursor position versus decoded frame index provide candidate clip starts at the same slider coordinate. Stationary head/tail pauses and isolated missing detections are excluded from the fit. Each fit needs enough inliers and coverage of the requested slider interval; inconsistent playback speed blocks batch export.
+
+For this recording: **26 candidate replay passages**, none rejected by the fit checks. This is a count of playback passages, not a verified count of distinct camera angles. Do not infer azimuth or a complete 360-degree orbit from filenames. The selected common slider window is 195–525 pixels, producing **109 frames per clip**, 3.633 seconds at 30 FPS. This covers a common subinterval of the original replay, not every original frame. P95 cursor-fit residuals correspond to roughly 0.22–0.43 recorded frames, which measures UI fit quality only; it does not prove simulation-state alignment, unique views or absence of dropped game frames.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/split_replays.py data/raw/Projet_Computeur_vision.mp4 --output data/raw/replay_auto --execute
+```
+
+Output: `data/raw/replay_auto/cam01.mp4` through `cam26.mp4` and `cuts.json`, which records source frame ranges, detected playback speed, residuals, crop settings and export status. Source recordings and the eight manual clips remain unchanged. Existing output directories are refused. Omitting `--execute` writes proposals without exporting videos. Candidates are re-encoded at source resolution (H.264 CRF 18) using accurate decoded seeks, rather than copying approximate keyframe-aligned cuts. Audio is omitted. Two workers with two encoding threads each limit CPU contention. Each output is decoded again to verify its frame count.
+
+Review artifacts are under ignored `outputs/capture-inspection/`: the original recording overview, the eight manual views, and comparison sheets for the automatic clips. Inspect the same board-motion event across views, especially takeoff/landing. HUD and black borders remain present; choose a consistent image crop or masks before camera estimation. Any crop changes camera intrinsics and must be recorded. Camera trajectories still need per-frame pose estimation; automated cutting does not solve the moving-camera limitation.
+
+Export completed: all 26 clips were decoded and confirmed to have 109 frames. Inspection of `auto-frame-076.jpg` shows the airborne board across the candidates; `auto-frame-103.jpg` shows the post-landing state. This is a coarse visual check, not a frame-perfect synchronization certificate. Some views are similar and may be repeated. Sixteen helper tests pass, including four new slider-detection, reset, robust-fit and incomplete-coverage tests. The input decoded timestamps are checked for constant spacing before fitting.
+
+No final dataset metadata or holdout choice has been fabricated. After reviewing duplicate views, choose a real replay identifier and held-out camera, create metadata from the template, and use the existing extraction/validation helpers. Keep `cuts.json` as provenance. Do not feed the candidate set into upstream MultipleView.
