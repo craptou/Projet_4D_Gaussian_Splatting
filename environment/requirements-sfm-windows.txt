@@ -1,0 +1,14 @@
+# Captured 2026-11-18, Windows x64, CPython 3.11.9.
+# Separate CPU camera-preparation environment; do not install into upstream Python 3.7.
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.68.0
+kiwisolver==1.5.1
+matplotlib==3.11.2
+numpy==2.4.6
+packaging==26.3
+pillow==11.3.0
+pycolmap==4.2.1
+pyparsing==3.3.3
+python-dateutil==4.0.0
+tzdata==2026.6

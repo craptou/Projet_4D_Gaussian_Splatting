@@ -1,5 +1,7 @@
 # Moving-camera recommendation
 
+Update 2026-11-18: a [CPU sparse pose pilot on the real moving-camera recording](pose-pilot-2026-11-18.md) registered 175/175 sampled images in one model using background masks. This supports the feasibility of option 1 below. Full-rate poses, holdout localization, per-frame loading and 4DGS reproduction remain pending; no MultipleView bypass or moving-camera training adapter has been implemented.
+
 ## Source evidence at the pinned upstream commit
 
 [`scripts/extractimages.py`, line 16](https://github.com/hustvl/4DGaussians/blob/843d5ac636c37e4b611242287754f3d4ed150144/scripts/extractimages.py#L16): `if file_name.startswith("frame_00001")` copies only the first image from each camera into `colmap_tmp/images/imageN.jpg`. It cannot estimate a trajectory.

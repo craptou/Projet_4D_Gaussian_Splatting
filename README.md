@@ -21,7 +21,9 @@ flowchart LR
 
 ## Current status
 
-Official dependency and all nested submodules initialized; Windows capture helpers installed in `.venv`; extraction, validation, contact sheets and holdout-safe staging implemented with unit/FFmpeg smoke tests. System audited. Fixed-camera COLMAP/training/render wrappers prepared, **not integration-tested**. No replay dataset captured. No CUDA extension build, official dataset reproduction, training, renderer or held-out metrics completed: WSL distro, toolkit, compiler environment, Conda, PyTorch and COLMAP are missing. Portable GitHub CLI exists but is unauthenticated; no remote has been created.
+Official dependency and all nested submodules initialized; Windows capture helpers installed in `.venv`; extraction, validation, contact sheets and holdout-safe staging implemented with unit/FFmpeg smoke tests. A real replay recording has been batch-cut into 26 candidate passages. A [CPU moving-camera pose pilot](docs/pose-pilot-2026-11-18.md) registered **175/175 sampled images** from 25 passages, with 8767 sparse background points and 0.473 px mean reprojection error; cam07 is reserved. Nineteen helper tests pass.
+
+Fixed-camera COLMAP/training/render wrappers remain **not integration-tested**. No CUDA extension build, official 4DGS reproduction, training, renderer or held-out metrics completed: WSL distro, toolkit, compiler environment, Conda and PyTorch are missing. PyCOLMAP CPU sparse reconstruction now works; the COLMAP CLI and CUDA dense stereo remain absent. The original system report is a dated initial audit. Portable GitHub CLI was unauthenticated at setup; no remote was created.
 
 **Camera requirement:** upstream MultipleView needs a fixed pose per camera and matched constant intrinsics. Follow/Orbit/Custom capture may move. Moving footage may be stored/inspected but is rejected by our fixed preprocessing. See [source analysis and moving-camera plan](docs/moving-camera-plan.md).
 
