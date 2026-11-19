@@ -16,6 +16,7 @@ Estas entradas se basan en Git y en artefactos experimentales conservados. Docum
 | 2026-11-18 | Comprobar aparición del marcador y reservar cam07 | `c73a1f9`; documentación del experimento | Diferencia de una imagen; evaluación reservada pendiente |
 | 2026-11-18 | Preparar documentación bilingüe, evidencias y presentaciones | Commits actuales; `git log -- presentations docs/progress` | Publicar un corte revisable y continuar el registro fechado |
 | 2026-11-18 | Aclarar que es proyecto final y recibir CVI 26-2 Prompts | [Mapa del curso](course-alignment.es.md), [huella del PDF](../evidence/course-context.json) | Enmarcar como proyecto final de Computer Vision y enlazar temas sin inventar una rúbrica |
+| 2026-11-18 | Localizar las otras 2550 imágenes e investigar 31 fallos iniciales | `50b2fc3`; [experimento completo](fullrate.es.md), [evidencia](../evidence/fullrate-2026-11-18.json) | 2725/2725 aceptadas sin cambiar mapa/referencias; 132 casos de soporte menor para revisar; 25 pruebas |
 
 ## Decisiones respaldadas por el historial
 

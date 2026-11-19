@@ -2,6 +2,8 @@
 
 [English](validation.en.md) · Verificado el 18 de noviembre de 2026
 
+Último avance: **25 pruebas superadas**, incluida recuperación de pose conocida con outliers. Se auditaron 2725 poses, las 175 referencias intactas, huellas del mapa/cámaras, convenciones y cambios entre imágenes. No hay sustituciones interpoladas; 132 poses de soporte menor requieren revisión. La lista anterior de 19 pruebas se conserva como evidencia del corte previo.
+
 - La batería existente superó **19 pruebas**, incluida extracción de vídeo sintético y exclusión de la vista reservada.
 - Se generaron **12 diapositivas inglesas y 12 españolas** desde la misma fuente bilingüe, con notas, PDF y PPTX editable.
 - Se decodificaron y renderizaron todas las páginas PDF. Se inspeccionaron mosaicos y páginas individuales para comprobar legibilidad y recortes.

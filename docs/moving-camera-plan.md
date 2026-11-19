@@ -1,5 +1,7 @@
 # Moving-camera recommendation
 
+Latest follow-up: [full-rate fixed-map localization](progress/fullrate.en.md) now covers all 2725 training frames, retaining the 175 original anchors. The remaining gates are pose/intrinsics review, held-out localization, official 4DGS reproduction and per-frame loader validation. Earlier sampled-pilot statements below describe the preceding checkpoint.
+
 Update 2026-11-18: a [CPU sparse pose pilot on the real moving-camera recording](pose-pilot-2026-11-18.md) registered 175/175 sampled images in one model using background masks. This supports the feasibility of option 1 below. Full-rate poses, holdout localization, per-frame loading and 4DGS reproduction remain pending; no MultipleView bypass or moving-camera training adapter has been implemented.
 
 ## Source evidence at the pinned upstream commit

@@ -10,7 +10,7 @@ Source / Fuente: [deck.json](deck.json).
 
 - Computer Vision · CVI 26-2 · Final project · 18 November 2026
 
-- Current result: sampled camera poses and sparse background geometry.
+- Current result: poses for all 2725 training frames; dynamic training still pending.
 
 ### Speaker notes
 
@@ -28,7 +28,7 @@ This is the final project for Computer Vision, CVI 26-2, as specified by the pro
 
 ### Speaker notes
 
-Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link directly to Viewing; frame extraction and synchronization connect to sampling; estimated camera paths connect to curves. Current paths have seven measured samples and are not claimed to be a spline implementation. Gaussian rasterization is future work and is compared conceptually with the traditional graphics pipeline. The notes supply topics, not an explicit final-project rubric. The full architecture remains in the repository report.
+Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric.
 
 ## 03. One saved replay, recorded repeatedly
 
@@ -111,13 +111,13 @@ The score detector is specific to this capture and its overlay colors. The one-f
 
 The initial run did not register nine images. The expanded experiment added available intermediate viewpoints and registered all 175 samples in approximately 101.5 seconds. The mean residual rose slightly because coverage and observations changed. Neither residual is a held-out image metric. The complete configuration and implementation commit are recorded in the repository.
 
-## 08. A shared background model, not yet a 4D replay
+## 08. All 2725 training images now have poses
 
-![8,377 points span multiple passages. World scale is arbitrary; camera trajectories are sampled.](../docs/assets/geometry-and-trajectories.png)
+![175 anchors + 2550 PnP estimates. Mean per-frame error: 0.592 px. No interpolation; cam07 excluded.](../docs/assets/fullrate-quality.en.png)
 
 ### Speaker notes
 
-The point cloud describes the static background. Most points have observations in more than one passage, so the reconstruction is linked across views. All sampled camera-center paths move. Seven poses per passage do not supply full-rate trajectories. Low reprojection error does not establish ground-truth geometry, dynamic skateboard reconstruction or novel-view quality.
+The sparse background map is frozen. The first full-rate pass accepted 2694 of 2725 frames. Thirty-one failures near a dim ramp were recovered using reviewed masks and broader references; the last used matched inlier tracks from adjacent localized images, followed by its own PnP solve. Thresholds were unchanged. All 175 anchors are exact copies. No jump exceeds the review thresholds. There are 132 estimates with fewer than 50 inliers, so complete coverage is not ground-truth validation. This is not a trained dynamic model.
 
 ## 09. Reserve a real camera for a measurable test
 
@@ -139,7 +139,7 @@ cam07 was inspected for timing but contributed no SfM features, matches or geome
 
 - 18 Nov: automatic cutting, event checks and sparse camera-pose experiments.
 
-- 19 helper tests pass; manifests, configs and environment pins are retained.
+- 25 helper tests pass; manifests, configs and environment pins are retained.
 
 - Bilingual reports, figures and these slides link to commits and limitations.
 
@@ -149,7 +149,7 @@ The work log records actual repository checkpoints. It does not imply continuous
 
 ## 11. The remaining risks are explicit
 
-- Only seven of 109 frames per training passage have poses.
+- All training frames have estimates; 132 lower-support poses need closer review.
 
 - Shared intrinsics, mask coverage and synchronization still need validation.
 
@@ -165,7 +165,7 @@ The machine has an RTX 4050 Laptop GPU with 6 GB, but no working WSL training en
 
 - Reproduce the official scene: CUDA imports, short training and rendering.
 
-- Estimate and validate full-rate poses; verify a per-frame loader.
+- Review full-rate poses and intrinsics; verify a per-frame loader.
 
 - Train a first dynamic model and evaluate the reserved game camera.
 

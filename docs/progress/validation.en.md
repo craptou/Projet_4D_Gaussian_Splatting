@@ -2,6 +2,8 @@
 
 [Español](validation.es.md) · Verified 18 November 2026
 
+Latest full-rate follow-up: **25 helper tests pass**, including known-pose PnP recovery with outliers. The full-rate export was audited for all 2725 frames, exact preservation of 175 anchors, unchanged map/camera fingerprints, rotation/center conventions and adjacent-frame changes. No image is filled by interpolation; 132 lower-support poses remain explicitly marked for review. The earlier 19-test list below records the preceding review package.
+
 - The existing helper suite passed: **19 tests**, including generated-video extraction and held-out exclusion.
 - Both presentations were generated from the same bilingual source: **12 English and 12 Spanish slides**, each with speaker notes, PDF and editable PPTX.
 - Every PDF page was decoded/rendered. Overview contact sheets and selected full-size slides were inspected for clipping and readable content.

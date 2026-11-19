@@ -9,7 +9,7 @@
 | M1 | Proyecto auditado, versionado y dependencia fijada | Completado localmente | Historial, auditoría y submódulos recursivos |
 | M2 | Preparación automática del replay | Demostrada | 26 cortes candidatos, diagnóstico temporal y pruebas |
 | M3 | Calibración móvil muestreada | Demostrada en la muestra | 175/175 imágenes en un modelo; recorte y máscaras explícitos |
-| M4 | Poses de todas las imágenes y validación | Pendiente | Registro de imágenes necesarias, revisión de movimiento rápido, sensibilidad intrínseca y proyecciones de poses conocidas |
+| M4 | Poses completas y validación | Cobertura demostrada; validación parcial | 2725/2725 aceptadas, referencias intactas y sin saltos marcados; falta revisar soporte menor e intrínsecos |
 | M5 | Reproducción oficial de 4DGS | Bloqueada por el entorno | Importar extensiones CUDA; cargar escena oficial; 2 iteraciones gruesas + 10 finas; generar imágenes de prueba |
 | M6 | Cargador con poses por imagen | Pendiente; depende de M4/M5 | Poses y tiempos sintéticos conocidos, regresión fija y vistas disjuntas |
 | M7 | Reconstrucción dinámica y evaluación reservada | Pendiente; depende de M5/M6 | Modelo congelado, cam07 localizada, render sincronizado y PSNR/SSIM/LPIPS documentados |

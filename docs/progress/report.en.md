@@ -4,6 +4,8 @@
 
 **Course:** Computer Vision — CVI 26-2 · **Assignment:** final course project. The supplied 46-page *CVI 26-2 Prompts* notes are linked to the project in the [page-referenced course map](course-alignment.en.md). They establish topic context, not a final-project grading rubric.
 
+**Latest follow-up:** [full-rate localization](fullrate.en.md) now supplies **2725/2725 accepted poses**: 175 original anchors and 2550 new estimates, without interpolation. Thirty-one initial failures were recovered in documented retries. Mean per-frame PnP reprojection error is 0.592 px; 132 estimates have fewer than 50 inliers and require targeted review. The sparse-pilot comparison below is retained as the preceding experiment, not the current coverage limit. The helper suite now passes 25 tests.
+
 ## 1. Research objective
 
 The objective is to reconstruct one deterministic skate replay as a time-dependent 3D representation and render it from cameras not used for optimization. The research question is whether repeated game-camera observations provide sufficient synchronization, geometry and appearance information for 4D Gaussian Splatting. The current experiment addresses data preparation and camera estimation, not final image synthesis.
@@ -49,7 +51,7 @@ The [checkpoint JSON](../evidence/checkpoint-2026-11-18.json) records metrics, t
 
 ## 6. Limitations and evaluation boundary
 
-There are poses for seven samples per training passage, not all 109 images. Scale is arbitrary; a low residual does not prove ground-truth geometry. Conservative masks may remove useful background, while missed dynamic pixels can still bias SfM. Synchronization is checked at a limited set of events. Only sparse background reconstruction is demonstrated.
+The original seven-pose coverage limit has been resolved: all 109 images in each training passage now have accepted estimates. Pose ground truth and metric scale remain unavailable. Low residuals do not prove geometric truth; 132 lower-support estimates need closer review. Conservative masks can remove background, while missed dynamic pixels can bias estimates. Synchronization is checked at limited events. Only sparse static geometry and camera localization are demonstrated, not dynamic reconstruction.
 
 `cam07` is reserved and absent from feature extraction, matching and mapping. It was included in synchronization inspection, which does not optimize the scene geometry. Future evaluation will localize it against the training reconstruction, render at matched times, and compare with the real game images using documented PSNR, SSIM and LPIPS conventions. No held-out metric has been computed.
 
@@ -58,7 +60,7 @@ Official 4DGS reproduction, CUDA extension builds, dynamic training and renderin
 ## 7. Next review gates
 
 1. Establish the CUDA environment and complete bounded training/rendering on an official scene.
-2. Estimate and validate poses across the full replay, especially fast motion and possible FOV changes.
+2. Validate the full-rate estimates, especially lower-support images, fast motion and possible FOV changes.
 3. Validate a per-frame loader or converter using known camera matrices and explicit view splits.
 4. Train a first dynamic model, localize cam07 and report reproducible held-out results.
 

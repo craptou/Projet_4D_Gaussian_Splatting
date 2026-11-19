@@ -47,7 +47,7 @@ def validate():
                 if min(shape.left,shape.top)<0 or shape.left+shape.width>prs.slide_width+100 or shape.top+shape.height>prs.slide_height+100:
                     raise ValueError(f'{lang} slide {i}: shape outside page')
         combined=' '.join(all_text)
-        for token in ['175 / 175','33 / 42','26/26','cam07','Computer Vision','CVI 26-2']:
+        for token in ['175 / 175','33 / 42','26/26','2725','cam07','Computer Vision','CVI 26-2']:
             if token not in combined:
                 raise ValueError(f'{lang}: expected evidence absent: {token}')
         # Render every page so validation exercises actual PDF decoding.
@@ -58,6 +58,11 @@ def validate():
     evidence=json.loads((ROOT/'docs/evidence/checkpoint-2026-11-18.json').read_text())
     if evidence['sparse_expanded']['holdout_used_for_sfm'] or evidence['sparse_expanded']['model']['registered_images']!=175:
         raise ValueError('Unexpected checkpoint split or registration result')
+    fullrate=json.loads((ROOT/'docs/evidence/fullrate-2026-11-18.json').read_text())
+    if fullrate['final_report']['localized_frames']!=2725 or fullrate['final_report']['holdout_used']:
+        raise ValueError('Unexpected full-rate coverage or holdout use')
+    if not fullrate['quality']['reference_map_unchanged'] or fullrate['quality']['anchor_max_matrix_difference']!=0:
+        raise ValueError('Frozen-map/anchor guarantee changed')
     context=json.loads((ROOT/'docs/evidence/course-context.json').read_text(encoding='utf-8'))
     if context['course_name_from_owner']!='Computer Vision' or context['assignment_role_from_owner']!='final course project':
         raise ValueError('Course/final-project context differs from owner clarification')

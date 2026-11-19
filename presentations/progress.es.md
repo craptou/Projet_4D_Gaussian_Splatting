@@ -10,7 +10,7 @@ Source / Fuente: [deck.json](deck.json).
 
 - Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026
 
-- Resultado actual: poses muestreadas y geometría dispersa del fondo.
+- Resultado actual: poses de las 2725 imágenes; entrenamiento dinámico pendiente.
 
 ### Notas para exponer
 
@@ -28,7 +28,7 @@ Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable.
 
 ### Notas para exponer
 
-Las páginas se refieren al PDF CVI 26-2 Prompts, de 46 páginas, atribuido a Pablo Figueroa. Las matrices conectan con Viewing; la extracción y sincronización, con muestreo; las trayectorias, con curvas. Solo hay siete muestras medidas por trayectoria y no se afirma implementar splines. La rasterización de Gaussianas es futura y se compara conceptualmente con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica explícita del proyecto final. La arquitectura completa está en el informe del repositorio.
+Las páginas corresponden a CVI 26-2 Prompts, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final.
 
 ## 03. Una repetición guardada, varias capturas
 
@@ -111,13 +111,13 @@ El detector depende de esta captura y del color de su marcador. La diferencia de
 
 La prueba inicial dejó nueve imágenes sin registrar. Al añadir vistas intermedias, la ejecución ampliada registró las 175 muestras en unos 101,5 segundos. El residuo aumentó ligeramente porque cambiaron las observaciones. Ningún residuo es una métrica de imagen reservada. El repositorio guarda la configuración y el commit de implementación.
 
-## 08. Un fondo compartido, todavía no un replay 4D
+## 08. Las 2725 imágenes ya tienen poses estimadas
 
-![8377 puntos unen varios pasajes. Escala arbitraria; las trayectorias de cámara están muestreadas.](../docs/assets/geometry-and-trajectories.es.png)
+![175 referencias + 2550 poses PnP. Error medio por imagen: 0,592 px. Sin interpolación; cam07 excluida.](../docs/assets/fullrate-quality.es.png)
 
 ### Notas para exponer
 
-La nube representa el fondo estático. La mayoría de los puntos se observa en varios pasajes, por lo que las vistas comparten reconstrucción. Todos los centros de cámara muestreados se desplazan. Siete poses no dan una trayectoria a frecuencia completa. El bajo error no demuestra geometría real, reconstrucción dinámica del skate ni calidad de vistas nuevas.
+El mapa disperso permanece fijo. La primera pasada aceptó 2694 de 2725 imágenes. Los 31 fallos próximos a una rampa oscura se recuperaron revisando máscaras y referencias; el último usó correspondencias validadas de imágenes adyacentes y un PnP propio. No se relajaron umbrales y las 175 referencias se conservan exactamente. No hay saltos sobre los umbrales. Hay 132 estimaciones con menos de 50 inliers: cobertura completa no implica exactitud real. No es un modelo dinámico entrenado.
 
 ## 09. Reservar una cámara para una prueba medible
 
@@ -139,7 +139,7 @@ Se inspeccionó el tiempo de cam07, pero no aportó características, correspond
 
 - 18 nov.: cortes automáticos, controles temporales y pruebas de poses.
 
-- 19 pruebas superadas; manifiestos, configuraciones y versiones conservados.
+- 25 pruebas superadas; manifiestos, configuraciones y versiones conservados.
 
 - Informes, figuras y diapositivas bilingües enlazados con commits y límites.
 
@@ -149,7 +149,7 @@ La bitácora registra cortes reales del repositorio, sin atribuir actividad cont
 
 ## 11. Los riesgos pendientes son explícitos
 
-- Solo siete de 109 imágenes por pasaje tienen pose.
+- Hay poses para todas las imágenes; 132 de soporte menor requieren revisión.
 
 - Falta validar intrínsecos, cobertura de máscaras y sincronización.
 
@@ -165,7 +165,7 @@ El equipo tiene una RTX 4050 Laptop de 6 GB, pero aún no se ha establecido el e
 
 - Reproducir la escena oficial: CUDA, entrenamiento y render breves.
 
-- Estimar todas las poses y validar un cargador por imagen.
+- Revisar poses completas e intrínsecos; validar un cargador por imagen.
 
 - Entrenar un primer modelo dinámico y evaluar la cámara reservada.
 

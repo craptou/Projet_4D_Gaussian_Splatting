@@ -17,7 +17,7 @@
         "bullets": [
           "Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting",
           "Computer Vision · CVI 26-2 · Final project · 18 November 2026",
-          "Current result: sampled camera poses and sparse background geometry."
+          "Current result: poses for all 2725 training frames; dynamic training still pending."
         ],
         "notes": "This is the final project for Computer Vision, CVI 26-2, as specified by the project owner. The supplied CVI 26-2 Prompts notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration."
       },
@@ -27,7 +27,7 @@
         "bullets": [
           "Repetición con punto de vista libre mediante 4D Gaussian Splatting",
           "Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026",
-          "Resultado actual: poses muestreadas y geometría dispersa del fondo."
+          "Resultado actual: poses de las 2725 imágenes; entrenamiento dinámico pendiente."
         ],
         "notes": "Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable. Los apuntes CVI 26-2 Prompts aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre."
       }
@@ -44,7 +44,7 @@
           "Curves (pp. 40–44): sampled trajectories and continuity",
           "Pipeline (pp. 15–18): future Gaussian image synthesis"
         ],
-        "notes": "Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link directly to Viewing; frame extraction and synchronization connect to sampling; estimated camera paths connect to curves. Current paths have seven measured samples and are not claimed to be a spline implementation. Gaussian rasterization is future work and is compared conceptually with the traditional graphics pipeline. The notes supply topics, not an explicit final-project rubric. The full architecture remains in the repository report."
+        "notes": "Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric."
       },
       "es": {
         "title": "Los temas del curso orientan el proyecto final",
@@ -55,7 +55,7 @@
           "Curvas (pp. 40–44): trayectorias y continuidad",
           "Pipeline (pp. 15–18): futura síntesis con Gaussianas"
         ],
-        "notes": "Las páginas se refieren al PDF CVI 26-2 Prompts, de 46 páginas, atribuido a Pablo Figueroa. Las matrices conectan con Viewing; la extracción y sincronización, con muestreo; las trayectorias, con curvas. Solo hay siete muestras medidas por trayectoria y no se afirma implementar splines. La rasterización de Gaussianas es futura y se compara conceptualmente con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica explícita del proyecto final. La arquitectura completa está en el informe del repositorio."
+        "notes": "Las páginas corresponden a CVI 26-2 Prompts, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final."
       }
     },
     {
@@ -249,21 +249,21 @@
     {
       "id": "geometry",
       "kind": "figure",
-      "image": "docs/assets/geometry-and-trajectories.png",
+      "image": "docs/assets/fullrate-quality.en.png",
       "en": {
-        "title": "A shared background model, not yet a 4D replay",
+        "title": "All 2725 training images now have poses",
         "section": "Result evidence",
         "bullets": [],
-        "caption": "8,377 points span multiple passages. World scale is arbitrary; camera trajectories are sampled.",
-        "notes": "The point cloud describes the static background. Most points have observations in more than one passage, so the reconstruction is linked across views. All sampled camera-center paths move. Seven poses per passage do not supply full-rate trajectories. Low reprojection error does not establish ground-truth geometry, dynamic skateboard reconstruction or novel-view quality."
+        "caption": "175 anchors + 2550 PnP estimates. Mean per-frame error: 0.592 px. No interpolation; cam07 excluded.",
+        "notes": "The sparse background map is frozen. The first full-rate pass accepted 2694 of 2725 frames. Thirty-one failures near a dim ramp were recovered using reviewed masks and broader references; the last used matched inlier tracks from adjacent localized images, followed by its own PnP solve. Thresholds were unchanged. All 175 anchors are exact copies. No jump exceeds the review thresholds. There are 132 estimates with fewer than 50 inliers, so complete coverage is not ground-truth validation. This is not a trained dynamic model."
       },
       "es": {
-        "title": "Un fondo compartido, todavía no un replay 4D",
+        "title": "Las 2725 imágenes ya tienen poses estimadas",
         "section": "Evidencia del resultado",
         "bullets": [],
-        "caption": "8377 puntos unen varios pasajes. Escala arbitraria; las trayectorias de cámara están muestreadas.",
-        "notes": "La nube representa el fondo estático. La mayoría de los puntos se observa en varios pasajes, por lo que las vistas comparten reconstrucción. Todos los centros de cámara muestreados se desplazan. Siete poses no dan una trayectoria a frecuencia completa. El bajo error no demuestra geometría real, reconstrucción dinámica del skate ni calidad de vistas nuevas.",
-        "image": "docs/assets/geometry-and-trajectories.es.png"
+        "caption": "175 referencias + 2550 poses PnP. Error medio por imagen: 0,592 px. Sin interpolación; cam07 excluida.",
+        "notes": "El mapa disperso permanece fijo. La primera pasada aceptó 2694 de 2725 imágenes. Los 31 fallos próximos a una rampa oscura se recuperaron revisando máscaras y referencias; el último usó correspondencias validadas de imágenes adyacentes y un PnP propio. No se relajaron umbrales y las 175 referencias se conservan exactamente. No hay saltos sobre los umbrales. Hay 132 estimaciones con menos de 50 inliers: cobertura completa no implica exactitud real. No es un modelo dinámico entrenado.",
+        "image": "docs/assets/fullrate-quality.es.png"
       }
     },
     {
@@ -301,7 +301,7 @@
         "bullets": [
           "19 Oct: audit, pinned dependency, helpers and camera-source analysis.",
           "18 Nov: automatic cutting, event checks and sparse camera-pose experiments.",
-          "19 helper tests pass; manifests, configs and environment pins are retained.",
+          "25 helper tests pass; manifests, configs and environment pins are retained.",
           "Bilingual reports, figures and these slides link to commits and limitations."
         ],
         "notes": "The work log records actual repository checkpoints. It does not imply continuous work between the two dates. Small evidence snapshots are versioned; raw videos and models are excluded. The course rubric and deadline have not been supplied, so the roadmap uses explicit acceptance gates rather than invented grade weights. AI assistance is acknowledged in the project documentation."
@@ -312,7 +312,7 @@
         "bullets": [
           "19 oct.: auditoría, dependencia fijada, herramientas y análisis de cámaras.",
           "18 nov.: cortes automáticos, controles temporales y pruebas de poses.",
-          "19 pruebas superadas; manifiestos, configuraciones y versiones conservados.",
+          "25 pruebas superadas; manifiestos, configuraciones y versiones conservados.",
           "Informes, figuras y diapositivas bilingües enlazados con commits y límites."
         ],
         "notes": "La bitácora registra cortes reales del repositorio, sin atribuir actividad continua entre ambas fechas. Se versionan evidencias pequeñas y se excluyen vídeos y modelos. Al no disponer de rúbrica ni fecha de entrega, la hoja de ruta usa criterios de aceptación y no pesos inventados. La documentación reconoce la asistencia de IA."
@@ -325,7 +325,7 @@
         "title": "The remaining risks are explicit",
         "section": "Limits and blockers",
         "bullets": [
-          "Only seven of 109 frames per training passage have poses.",
+          "All training frames have estimates; 132 lower-support poses need closer review.",
           "Shared intrinsics, mask coverage and synchronization still need validation.",
           "Windows CPU SfM works; CUDA training and official 4DGS reproduction have not run.",
           "No dynamic model, novel-view render or held-out score is claimed."
@@ -336,7 +336,7 @@
         "title": "Los riesgos pendientes son explícitos",
         "section": "Límites y bloqueos",
         "bullets": [
-          "Solo siete de 109 imágenes por pasaje tienen pose.",
+          "Hay poses para todas las imágenes; 132 de soporte menor requieren revisión.",
           "Falta validar intrínsecos, cobertura de máscaras y sincronización.",
           "SfM en CPU funciona; CUDA y reproducción oficial 4DGS siguen pendientes.",
           "No se afirma disponer de modelo dinámico, vista nueva ni métrica reservada."
@@ -352,7 +352,7 @@
         "section": "Next experiments",
         "bullets": [
           "Reproduce the official scene: CUDA imports, short training and rendering.",
-          "Estimate and validate full-rate poses; verify a per-frame loader.",
+          "Review full-rate poses and intrinsics; verify a per-frame loader.",
           "Train a first dynamic model and evaluate the reserved game camera.",
           "Reference: Wu et al., CVPR 2024 · official hustvl/4DGaussians · COLMAP."
         ],
@@ -363,7 +363,7 @@
         "section": "Siguientes experimentos",
         "bullets": [
           "Reproducir la escena oficial: CUDA, entrenamiento y render breves.",
-          "Estimar todas las poses y validar un cargador por imagen.",
+          "Revisar poses completas e intrínsecos; validar un cargador por imagen.",
           "Entrenar un primer modelo dinámico y evaluar la cámara reservada.",
           "Referencia: Wu et al., CVPR 2024 · hustvl/4DGaussians oficial · COLMAP."
         ],

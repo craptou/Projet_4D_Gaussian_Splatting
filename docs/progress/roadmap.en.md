@@ -9,7 +9,7 @@
 | M1 | Audited, versioned project and pinned upstream | Done locally | Git history, audit, recursive submodules |
 | M2 | Automated replay preparation | Demonstrated | 26 candidate cuts, timing diagnostic, tests |
 | M3 | Sampled moving-camera calibration | Demonstrated on sample | 175/175 images in one model; explicit crop and masks |
-| M4 | Full-rate poses and camera validation | Pending | All required training images registered, fast-motion checks, intrinsics sensitivity and known-pose projection checks |
+| M4 | Full-rate poses and camera validation | Coverage demonstrated; validation partial | 2725/2725 accepted, frozen anchors, no flagged jumps; lower-support review and intrinsics sensitivity still needed |
 | M5 | Official 4DGS reproduction | Blocked by environment | CUDA modules import; official scene loads; 2 coarse + 10 fine iterations; test renderer produces images |
 | M6 | Per-frame dataset loading | Pending; depends on M4/M5 | Synthetic known poses/time; fixed-camera regression; disjoint view IDs |
 | M7 | Dynamic reconstruction and held-out evaluation | Pending; depends on M5/M6 | Frozen model; cam07 localized; matched-time render; documented PSNR/SSIM/LPIPS |

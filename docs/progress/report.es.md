@@ -4,6 +4,8 @@
 
 **Curso:** Computer Vision — CVI 26-2 · **Actividad:** proyecto final. Los apuntes *CVI 26-2 Prompts*, de 46 páginas, se relacionan con el proyecto en el [mapa del curso con páginas de referencia](course-alignment.es.md). Aportan contexto temático, no una rúbrica del proyecto final.
 
+**Último avance:** la [localización completa](fullrate.es.md) aporta **2725/2725 poses aceptadas**: 175 referencias y 2550 estimaciones nuevas, sin interpolación. Se recuperaron 31 fallos iniciales mediante reintentos documentados. El error medio por imagen de PnP es 0,592 px; 132 poses tienen menos de 50 inliers y requieren revisión específica. La comparación dispersa siguiente conserva el experimento anterior, no el límite actual de cobertura. La batería actual supera 25 pruebas.
+
 ## 1. Objetivo de investigación
 
 El objetivo es reconstruir una repetición determinista de skate como una representación 3D que depende del tiempo y renderizarla desde cámaras no utilizadas en la optimización. La pregunta es si las observaciones repetidas desde las cámaras del juego aportan suficiente sincronización, geometría y apariencia para 4D Gaussian Splatting. El experimento actual estudia la preparación de datos y la estimación de cámaras, no la síntesis final de imágenes.
@@ -49,7 +51,7 @@ El [JSON del corte](../evidence/checkpoint-2026-11-18.json) guarda métricas, co
 
 ## 6. Limitaciones y alcance de la evaluación
 
-Hay poses para siete muestras por pasaje de entrenamiento, no para sus 109 imágenes. La escala es arbitraria y un residuo bajo no demuestra geometría real correcta. Las máscaras pueden ocultar fondo útil; los píxeles dinámicos no excluidos pueden sesgar SfM. La sincronización se ha comprobado en pocos eventos. Solo se ha demostrado la reconstrucción dispersa del fondo.
+Se resolvió el límite de siete poses: las 109 imágenes de cada pasaje de entrenamiento tienen estimaciones aceptadas. No hay poses reales conocidas ni escala métrica. Un residuo bajo no demuestra exactitud; 132 estimaciones de soporte menor necesitan revisión. Las máscaras pueden ocultar fondo útil o dejar contaminación dinámica. La sincronización solo se comprobó en ciertos eventos. Se demuestran geometría estática dispersa y localización, no reconstrucción dinámica.
 
 `cam07` está reservada y no participa en extracción de características, correspondencias ni reconstrucción. Sí se inspeccionó su sincronización, sin optimizar con ella la geometría. Se prevé localizarla contra el modelo de entrenamiento, renderizar en instantes coincidentes y comparar con el juego mediante convenciones documentadas de PSNR, SSIM y LPIPS. No se ha calculado ninguna métrica de prueba.
 
@@ -58,7 +60,7 @@ Siguen pendientes la reproducción oficial de 4DGS, la compilación CUDA, el ent
 ## 7. Próximos criterios de revisión
 
 1. Preparar CUDA y completar entrenamiento y renderizado breves sobre una escena oficial.
-2. Estimar y validar las poses de toda la repetición, especialmente con movimiento rápido y posibles cambios de campo visual.
+2. Validar las poses completas, especialmente imágenes de soporte menor, movimiento rápido y posibles cambios de campo visual.
 3. Validar un cargador o conversor por imagen con matrices conocidas y separación explícita de vistas.
 4. Entrenar un primer modelo dinámico, localizar cam07 y documentar la evaluación reservada.
 

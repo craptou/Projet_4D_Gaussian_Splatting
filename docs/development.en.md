@@ -1,5 +1,7 @@
 # skate-trick-4dgs
 
+Latest result: [2725/2725 training-frame camera poses](progress/fullrate.en.md). The setup and sampled-pilot status below are retained as technical/historical context; the current repository overview is [README](../README.md).
+
 **Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting**
 
 The final project for Computer Vision — CVI 26-2, studying one deterministic skate replay captured from several True Skate viewpoints. See the [course-topic mapping](progress/course-alignment.en.md). This page retains the technical setup instructions.
