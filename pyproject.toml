@@ -9,5 +9,8 @@ description = "Reproducible multi-view skate replay preparation for 4DGaussians"
 requires-python = ">=3.11"
 dependencies = ["Pillow==11.3.0"]
 
+[project.optional-dependencies]
+sfm = ["numpy==2.4.6", "pycolmap==4.2.1", "matplotlib==3.11.2"]
+
 [tool.setuptools.packages.find]
 where = ["src"]

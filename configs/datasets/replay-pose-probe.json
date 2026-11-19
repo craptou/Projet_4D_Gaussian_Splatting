@@ -1,0 +1,11 @@
+{
+  "source": "data/raw/Projet_Computeur_vision.mp4",
+  "cuts": "data/raw/replay_auto/cuts.json",
+  "camera_motion": "moving",
+  "training_passages": ["cam01", "cam03", "cam05", "cam09", "cam11", "cam13"],
+  "reserved_holdout": "cam07",
+  "sample_indices_zero_based": [0, 18, 36, 54, 72, 90, 108],
+  "crop_xywh": [64, 100, 592, 820],
+  "mask_rectangles_original_xyxy": [[200, 440, 590, 860], [64, 180, 656, 350]],
+  "notes": "Pilot sparse reconstruction only. Crop removes black side borders and top/bottom controls. Conservative masks exclude board/shadow and trick-score overlay; masks require visual review. No held-out image used. Synchronization is still approximate."
+}
