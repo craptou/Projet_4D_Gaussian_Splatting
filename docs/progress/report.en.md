@@ -2,7 +2,7 @@
 
 **Checkpoint:** 18 November 2026 · **Project:** skate-trick-4dgs · [Versión española](report.es.md)
 
-**Course:** Computer Vision — CVI 26-2 · **Assignment:** final course project. The supplied 46-page *CVI 26-2 Prompts* notes are linked to the project in the [page-referenced course map](course-alignment.en.md). They establish topic context, not a final-project grading rubric.
+**Course:** Computer Vision · **Assignment:** final course project. The supplied 46-page *course notes* notes are linked to the project in the [page-referenced course map](course-alignment.en.md). They establish topic context, not a final-project grading rubric.
 
 **Latest follow-up:** [full-rate localization](fullrate.en.md) now supplies **2725/2725 accepted poses**: 175 original anchors and 2550 new estimates, without interpolation. Thirty-one initial failures were recovered in documented retries. Mean per-frame PnP reprojection error is 0.592 px; 132 estimates have fewer than 50 inliers and require targeted review. The sparse-pilot comparison below is retained as the preceding experiment, not the current coverage limit. The helper suite now passes 25 tests.
 

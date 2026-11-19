@@ -15,7 +15,7 @@ Entries below are reconstructed from Git history and retained run artifacts. The
 | 2026-11-18 | Add intermediate viewpoints and rerun without relaxed mapper thresholds | `c73a1f9`, `64a3fc1`; [checkpoint JSON](../evidence/checkpoint-2026-11-18.json) | 175/175 images, 8767 points, 0.473 px; 19 tests |
 | 2026-11-18 | Check score onset and reserve cam07 | `c73a1f9`; same run documentation | Event spread one frame; no held-out scene evaluation yet |
 | 2026-11-18 | Prepare bilingual review documents, evidence and presentations | Current documentation commits; inspect `git log -- presentations docs/progress` | Publish reviewable checkpoint; continue dated updates |
-| 2026-11-18 | Owner clarifies final-project role and supplies CVI 26-2 Prompts | [Course map](course-alignment.en.md), [PDF fingerprint](../evidence/course-context.json) | Reframe as Computer Vision final project; link topics by page without inventing a rubric |
+| 2026-11-18 | Owner clarifies final-project role and supplies course notes | [Course map](course-alignment.en.md), [PDF fingerprint](../evidence/course-context.json) | Reframe as Computer Vision final project; link topics by page without inventing a rubric |
 | 2026-11-18 | Localize the remaining 2550 training images; investigate 31 initial failures | `50b2fc3`; [full-rate experiment](fullrate.en.md), [evidence](../evidence/fullrate-2026-11-18.json) | 2725/2725 accepted with original anchors/map unchanged; 132 lower-support cases retained for review; 25 tests |
 | 2026-11-19 | Owner supplies remote; inspect and publish existing history | [GitHub repository](https://github.com/craptou/Projet_4D_Gaussian_Splatting); `git push -u origin main` | Empty remote, successful normal push; public visibility and default `main` verified |
 

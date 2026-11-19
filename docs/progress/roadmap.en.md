@@ -2,7 +2,7 @@
 
 [Español](roadmap.es.md) · Baseline: 18 November 2026 · No course deadline supplied.
 
-**Final project: Computer Vision — CVI 26-2.** The [course map](course-alignment.en.md) links each technical stage to supplied notes. The table below is the project's proposed validation plan, not the professor's official rubric.
+**Final project: Computer Vision.** The [course map](course-alignment.en.md) links each technical stage to supplied notes. The table below is the project's proposed validation plan, not the professor's official rubric.
 
 | ID | Milestone | Status | Acceptance evidence |
 |---|---|---|---|

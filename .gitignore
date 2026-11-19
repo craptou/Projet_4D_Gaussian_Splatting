@@ -21,4 +21,4 @@ colmap_tmp/
 wandb/
 .env
 environment/*lock.local*
-/CVI 26-2 Prompts*.pdf
+/*.pdf

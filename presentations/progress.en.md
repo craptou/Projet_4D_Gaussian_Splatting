@@ -8,13 +8,13 @@ Source / Fuente: [deck.json](deck.json).
 
 - Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-- Computer Vision · CVI 26-2 · Final project · 18 November 2026
+- Computer Vision · Final project · 18 November 2026
 
 - Current result: poses for all 2725 training frames; dynamic training still pending.
 
 ### Speaker notes
 
-This is the final project for Computer Vision, CVI 26-2, as specified by the project owner. The supplied CVI 26-2 Prompts notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration.
+This is the final project for Computer Vision, as specified by the project owner. The supplied course notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration.
 
 ## 02. Course concepts guide the final project
 
@@ -28,7 +28,7 @@ This is the final project for Computer Vision, CVI 26-2, as specified by the pro
 
 ### Speaker notes
 
-Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric.
+Page numbers refer to the supplied 46-page course notes PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric.
 
 ## 03. One saved replay, recorded repeatedly
 

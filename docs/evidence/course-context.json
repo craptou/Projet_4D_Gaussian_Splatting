@@ -1,10 +1,7 @@
 {
   "course_name_from_owner": "Computer Vision",
-  "course_identifier": "CVI 26-2",
   "assignment_role_from_owner": "final course project",
-  "source_title": "CVI 26-2 Prompts",
   "credited_author_on_page_1": "Pablo Figueroa",
-  "local_filename": "CVI 26-2 Prompts (3).pdf",
   "pdf_page_count": 46,
   "page_numbering": "one-based PDF pages, including title page",
   "sha256": "35fc4733d9bbc770a04d9a90411cca081a31688404d1a0fd95a1a96129dd9585",
@@ -79,5 +76,7 @@
         44
       ]
     }
-  ]
+  ],
+  "source_label": "Course topic notes",
+  "local_source_lookup": "Match root-level PDF by recorded SHA-256; filename not published"
 }

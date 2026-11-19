@@ -2,7 +2,7 @@
 
 ## English
 
-Start with the [course map](course-alignment.en.md), [report](report.en.md), [work log](work-log.en.md), [roadmap](roadmap.en.md) and [presentation](../../presentations/progress.en.pdf). This is the final project for Computer Vision — CVI 26-2; technical detail remains in the linked experiment documents.
+Start with the [course map](course-alignment.en.md), [report](report.en.md), [work log](work-log.en.md), [roadmap](roadmap.en.md) and [presentation](../../presentations/progress.en.pdf). This is the final project for Computer Vision; technical detail remains in the linked experiment documents.
 
 Latest experimental checkpoint: [full-rate poses](fullrate.en.md), with [structured evidence](../evidence/fullrate-2026-11-18.json). The earlier 175-image snapshot remains archived as the sampled-map baseline.
 
@@ -34,7 +34,7 @@ Git push authentication works even though the optional `gh` CLI is not logged in
 
 ## Español
 
-Empezar por el [mapa del curso](course-alignment.es.md), el [informe](report.es.md), la [bitácora](work-log.es.md), la [hoja de ruta](roadmap.es.md) y las [diapositivas](../../presentations/progress.es.pdf). Es el proyecto final de Computer Vision — CVI 26-2. Los detalles técnicos permanecen en los experimentos enlazados.
+Empezar por el [mapa del curso](course-alignment.es.md), el [informe](report.es.md), la [bitácora](work-log.es.md), la [hoja de ruta](roadmap.es.md) y las [diapositivas](../../presentations/progress.es.pdf). Es el proyecto final de Computer Vision. Los detalles técnicos permanecen en los experimentos enlazados.
 
 Último corte: [poses completas](fullrate.es.md) y [evidencias](../evidence/fullrate-2026-11-18.json). El corte de 175 imágenes se conserva como referencia histórica del mapa muestreado.
 

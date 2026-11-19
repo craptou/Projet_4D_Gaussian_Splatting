@@ -8,13 +8,13 @@ Source / Fuente: [deck.json](deck.json).
 
 - Repetición con punto de vista libre mediante 4D Gaussian Splatting
 
-- Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026
+- Computer Vision · Proyecto final · 18 de noviembre de 2026
 
 - Resultado actual: poses de las 2725 imágenes; entrenamiento dinámico pendiente.
 
 ### Notas para exponer
 
-Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable. Los apuntes CVI 26-2 Prompts aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre.
+Es el proyecto final de Computer Vision, según indica el responsable. Los apuntes del curso aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre.
 
 ## 02. Los temas del curso orientan el proyecto final
 
@@ -28,7 +28,7 @@ Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable.
 
 ### Notas para exponer
 
-Las páginas corresponden a CVI 26-2 Prompts, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final.
+Las páginas corresponden a apuntes del curso, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final.
 
 ## 03. Una repetición guardada, varias capturas
 

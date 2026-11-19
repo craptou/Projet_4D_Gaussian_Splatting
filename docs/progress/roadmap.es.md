@@ -2,7 +2,7 @@
 
 [English](roadmap.en.md) · Base: 18 de noviembre de 2026 · Sin fecha de entrega facilitada.
 
-**Proyecto final: Computer Vision — CVI 26-2.** El [mapa del curso](course-alignment.es.md) relaciona etapas y apuntes. La tabla siguiente es el plan de validación propuesto por el proyecto, no la rúbrica oficial del profesor.
+**Proyecto final: Computer Vision.** El [mapa del curso](course-alignment.es.md) relaciona etapas y apuntes. La tabla siguiente es el plan de validación propuesto por el proyecto, no la rúbrica oficial del profesor.
 
 | ID | Hito | Estado | Evidencia de aceptación |
 |---|---|---|---|

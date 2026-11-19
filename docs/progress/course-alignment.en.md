@@ -1,10 +1,10 @@
 # Course alignment — final project
 
-**Course designation supplied by the owner:** Computer Vision, CVI 26-2. This repository documents its **final course project**, not an independent graphics exercise. [Español](course-alignment.es.md)
+**Course designation supplied by the owner:** Computer Vision. This repository documents its **final course project**, not an independent graphics exercise. [Español](course-alignment.es.md)
 
 ## Source and scope
 
-Reference supplied locally: **CVI 26-2 Prompts**, credited to **Pablo Figueroa** on PDF page 1; local filename `CVI 26-2 Prompts (3).pdf`, 46 pages. Page references below are **one-based PDF page numbers**, including the title page. The [source fingerprint and topic index](../evidence/course-context.json) identify the exact reviewed copy. The original course PDF remains local; the repository tracks this page-referenced interpretation rather than redistributing the complete teaching document.
+Reference supplied locally: **course topic notes**, credited to **Pablo Figueroa** on PDF page 1, 46 pages. Page references below are **one-based PDF page numbers**, including the title page. The [source fingerprint and topic index](../evidence/course-context.json) identify the exact reviewed copy without publishing its filename. The original PDF remains local; the repository tracks this page-referenced interpretation rather than redistributing the complete teaching document.
 
 The supplied material describes itself as weekly topic summaries and contains substantial graphics, imaging and mathematical content. The owner's course name is retained as Computer Vision; the notes' graphics topics are linked explicitly rather than treating computer vision and graphics as identical. No final-project assignment, marking weights, delivery date or mandatory presentation format was found in this copy. The owner separately stated that project follow-up is graded; that requirement is a user-provided constraint, not a quotation from the PDF.
 

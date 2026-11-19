@@ -1,6 +1,6 @@
 # Full-rate training-camera localization
 
-[Español](fullrate.es.md) · Computer Vision — CVI 26-2 final project · 18 November 2026
+[Español](fullrate.es.md) · Computer Vision final project · 18 November 2026
 
 ## Measured result
 

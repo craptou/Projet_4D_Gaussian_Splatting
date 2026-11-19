@@ -3,7 +3,6 @@
   "project": "skate-trick-4dgs",
   "course": {
     "name": "Computer Vision",
-    "identifier": "CVI 26-2",
     "assignment": "final course project",
     "context_source": "docs/evidence/course-context.json"
   },
@@ -16,20 +15,20 @@
         "section": "Research question",
         "bullets": [
           "Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting",
-          "Computer Vision · CVI 26-2 · Final project · 18 November 2026",
+          "Computer Vision · Final project · 18 November 2026",
           "Current result: poses for all 2725 training frames; dynamic training still pending."
         ],
-        "notes": "This is the final project for Computer Vision, CVI 26-2, as specified by the project owner. The supplied CVI 26-2 Prompts notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration."
+        "notes": "This is the final project for Computer Vision, as specified by the project owner. The supplied course notes provide the course-topic context. The long-term goal is a time-dependent 3D replay rendered from new cameras. Today I distinguish completed capture and camera estimation from dynamic reconstruction that has not yet been trained. This is a progress review, not a final free-viewpoint demonstration."
       },
       "es": {
         "title": "Un truco de skate.\nMuchas vistas.\n¿Una escena dinámica?",
         "section": "Pregunta de investigación",
         "bullets": [
           "Repetición con punto de vista libre mediante 4D Gaussian Splatting",
-          "Computer Vision · CVI 26-2 · Proyecto final · 18 de noviembre de 2026",
+          "Computer Vision · Proyecto final · 18 de noviembre de 2026",
           "Resultado actual: poses de las 2725 imágenes; entrenamiento dinámico pendiente."
         ],
-        "notes": "Es el proyecto final de Computer Vision, CVI 26-2, según indica el responsable. Los apuntes CVI 26-2 Prompts aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre."
+        "notes": "Es el proyecto final de Computer Vision, según indica el responsable. Los apuntes del curso aportan el contexto temático. El objetivo es una repetición 3D dependiente del tiempo, renderizada desde cámaras nuevas. Se separa la captura y estimación de cámaras ya realizadas de la reconstrucción dinámica pendiente. Es un avance, no una demostración final de punto de vista libre."
       }
     },
     {
@@ -37,25 +36,25 @@
       "kind": "pipeline",
       "en": {
         "title": "Course concepts guide the final project",
-        "section": "Computer Vision · CVI 26-2",
+        "section": "Computer Vision",
         "bullets": [
           "Viewing (pp. 3–4, 12–15): camera matrices and projection",
           "Sampling (pp. 5–6, 18–27): pixels, frames and alignment",
           "Curves (pp. 40–44): sampled trajectories and continuity",
           "Pipeline (pp. 15–18): future Gaussian image synthesis"
         ],
-        "notes": "Page numbers refer to the supplied 46-page CVI 26-2 Prompts PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric."
+        "notes": "Page numbers refer to the supplied 46-page course notes PDF, credited to Pablo Figueroa. Camera matrices link to Viewing, frame synchronization to sampling, and estimated paths to curves. Each training path now has 109 image-based pose estimates, with no interpolated replacements. Gaussian rasterization remains future work and is compared with the traditional pipeline. The notes supply topics, not a final-project rubric."
       },
       "es": {
         "title": "Los temas del curso orientan el proyecto final",
-        "section": "Computer Vision · CVI 26-2",
+        "section": "Computer Vision",
         "bullets": [
           "Viewing (pp. 3–4, 12–15): matrices de cámara y proyección",
           "Muestreo (pp. 5–6, 18–27): píxeles, tiempo y alineación",
           "Curvas (pp. 40–44): trayectorias y continuidad",
           "Pipeline (pp. 15–18): futura síntesis con Gaussianas"
         ],
-        "notes": "Las páginas corresponden a CVI 26-2 Prompts, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final."
+        "notes": "Las páginas corresponden a apuntes del curso, 46 páginas, atribuido a Pablo Figueroa. Matrices, sincronización y trayectorias se relacionan con Viewing, muestreo y curvas. Ahora hay 109 poses estimadas por trayectoria de entrenamiento, sin sustituciones interpoladas. La rasterización de Gaussianas sigue pendiente y se compara con el pipeline tradicional. Los apuntes aportan temas, no una rúbrica final."
       }
     },
     {

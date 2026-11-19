@@ -1,6 +1,6 @@
 # Localización de cámaras a frecuencia completa
 
-[English](fullrate.en.md) · Proyecto final de Computer Vision — CVI 26-2 · 18 de noviembre de 2026
+[English](fullrate.en.md) · Proyecto final de Computer Vision · 18 de noviembre de 2026
 
 ## Resultado medido
 

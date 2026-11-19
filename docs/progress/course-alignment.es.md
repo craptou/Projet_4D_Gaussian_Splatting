@@ -1,10 +1,10 @@
 # Vinculación con el curso — proyecto final
 
-**Denominación facilitada por el responsable:** Computer Vision, CVI 26-2. Este repositorio documenta el **proyecto final del curso**, no un ejercicio independiente de gráficos. [English](course-alignment.en.md)
+**Denominación facilitada por el responsable:** Computer Vision. Este repositorio documenta el **proyecto final del curso**, no un ejercicio independiente de gráficos. [English](course-alignment.en.md)
 
 ## Fuente y alcance
 
-Documento aportado localmente: **CVI 26-2 Prompts**, atribuido a **Pablo Figueroa** en la página 1; archivo `CVI 26-2 Prompts (3).pdf`, 46 páginas. Las referencias utilizan la **numeración del PDF desde 1**, incluida la portada. La [huella de la fuente y el índice](../evidence/course-context.json) identifican la copia revisada. El PDF completo se conserva localmente; Git versiona esta interpretación con páginas de referencia, sin redistribuir todo el material docente.
+Documento aportado localmente: **apuntes temáticos del curso**, con crédito a **Pablo Figueroa** en la página 1, 46 páginas. Las referencias utilizan la **numeración del PDF desde 1**, incluida la portada. La [huella de la fuente y el índice](../evidence/course-context.json) identifican la copia sin publicar su nombre de archivo. El PDF completo se conserva localmente; Git versiona esta interpretación con páginas de referencia, sin redistribuir todo el material docente.
 
 El documento se presenta como una síntesis semanal de temas e incluye contenidos matemáticos, de imagen y de gráficos. Se mantiene el nombre Computer Vision indicado por el responsable y se explicitan las conexiones con los temas gráficos, sin equiparar ambos campos. En esta copia no se encontró un enunciado del proyecto final, pesos de evaluación, fecha de entrega ni formato obligatorio de exposición. El responsable indicó por separado que el seguimiento se califica; es una restricción comunicada por él, no una cita del PDF.
 

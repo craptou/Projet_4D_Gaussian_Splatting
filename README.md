@@ -8,7 +8,7 @@
 
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
-This is the **final project for Computer Vision — CVI 26-2**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. Dynamic reconstruction has not been trained yet.**
+This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. Dynamic reconstruction has not been trained yet.**
 
 ## Start here — project review
 
@@ -22,7 +22,7 @@ This is the **final project for Computer Vision — CVI 26-2**. It studies that 
 | Dated work log and evidence | [Read](docs/progress/work-log.en.md) | [Leer](docs/progress/work-log.es.md) |
 | Milestones, risks and next acceptance criteria | [Read](docs/progress/roadmap.en.md) | [Leer](docs/progress/roadmap.es.md) |
 
-The work log uses actual commits and observed results. The supplied **CVI 26-2 Prompts** notes are mapped to camera/projection geometry, raster sampling, rendering and trajectories. The owner states that project follow-up is graded. No final-project rubric, grade weights or deadline were found in that PDF; the roadmap distinguishes proposed acceptance tests from official course requirements.
+The work log uses actual commits and observed results. The supplied **course notes** notes are mapped to camera/projection geometry, raster sampling, rendering and trajectories. The owner states that project follow-up is graded. No final-project rubric, grade weights or deadline were found in that PDF; the roadmap distinguishes proposed acceptance tests from official course requirements.
 
 ## What has been demonstrated
 

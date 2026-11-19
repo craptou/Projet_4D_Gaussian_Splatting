@@ -2,7 +2,7 @@
 
 **Corte:** 18 de noviembre de 2026 · **Proyecto:** skate-trick-4dgs · [English version](report.en.md)
 
-**Curso:** Computer Vision — CVI 26-2 · **Actividad:** proyecto final. Los apuntes *CVI 26-2 Prompts*, de 46 páginas, se relacionan con el proyecto en el [mapa del curso con páginas de referencia](course-alignment.es.md). Aportan contexto temático, no una rúbrica del proyecto final.
+**Curso:** Computer Vision · **Actividad:** proyecto final. Los apuntes *apuntes del curso*, de 46 páginas, se relacionan con el proyecto en el [mapa del curso con páginas de referencia](course-alignment.es.md). Aportan contexto temático, no una rúbrica del proyecto final.
 
 **Último avance:** la [localización completa](fullrate.es.md) aporta **2725/2725 poses aceptadas**: 175 referencias y 2550 estimaciones nuevas, sin interpolación. Se recuperaron 31 fallos iniciales mediante reintentos documentados. El error medio por imagen de PnP es 0,592 px; 132 poses tienen menos de 50 inliers y requieren revisión específica. La comparación dispersa siguiente conserva el experimento anterior, no el límite actual de cobertura. La batería actual supera 25 pruebas.
 

@@ -2,7 +2,7 @@
 
 Checkpoint / corte: **2026-11-18** · **12 slides per language / 12 diapositivas por idioma**
 
-**Computer Vision — CVI 26-2 · Final course project / Proyecto final del curso.** Slide 2 maps the supplied course topics to the project, with PDF page references. / La diapositiva 2 vincula los temas del curso con el proyecto e indica páginas del PDF.
+**Computer Vision · Final course project / Proyecto final del curso.** Slide 2 maps the supplied course topics to the project, with PDF page references. / La diapositiva 2 vincula los temas del curso con el proyecto e indica páginas del PDF.
 
 | Language / idioma | View / ver | Edit / editar | Outline and notes / guion y notas |
 |---|---|---|---|
