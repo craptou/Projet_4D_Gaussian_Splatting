@@ -1,5 +1,7 @@
 # Hitos y registro de riesgos
 
+**Actualización del 20 de noviembre:** priorizar la [referencia DyNeRF](dynerf.es.md) en Colab. Inspección de datos/calibración, mapa disperso sin la cámara reservada y prueba PnP de un fotograma completados en CPU. Instalación GPU, optimización y renderizado pendientes. Con las 5–10 horas indicadas, primero explicar separación de vistas/proyección/geometría y ejecutar el cuaderno limitado; no prometer una reconstrucción True Skate terminada para la siguiente revisión. Después probar captura fija; mantener cámaras móviles como extensión separada.
+
 [English](roadmap.en.md) · Base: 18 de noviembre de 2026 · Sin fecha de entrega facilitada.
 
 **Proyecto final: Computer Vision.** El [mapa del curso](course-alignment.es.md) relaciona etapas y apuntes. La tabla siguiente es el plan de validación propuesto por el proyecto, no la rúbrica oficial del profesor.

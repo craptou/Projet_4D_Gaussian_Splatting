@@ -1,5 +1,7 @@
 # Environment strategy
 
+**20 November 2026:** Colab is now the selected target for the first DyNeRF execution experiment, avoiding WSL installation on the host. The [notebook](../notebooks/dynerf_reference.ipynb) proposes an isolated [Colab environment](environment-colab.yml) with Python 3.10, PyTorch 2.1.2-cu121 and CUDA toolkit 12.1. This compatibility port is unexecuted/unvalidated; it does not replace the exact upstream environment documented below. Windows helper geometry preparation succeeded separately. See the [reference checkpoint](../docs/progress/dynerf.en.md).
+
 Two interpreters serve different purposes. Windows Python 3.11 `.venv` runs capture helpers (Pillow 11.3.0); the upstream research environment uses Python 3.7 and its older dependencies. Do not install the project package, which requires Python >=3.11, into the upstream environment. The scripts themselves use Python-3.7-compatible syntax and bootstrap `src/` directly; training preparation uses that environment's Pillow 9.5.
 
 ## Exact upstream reproduction environment

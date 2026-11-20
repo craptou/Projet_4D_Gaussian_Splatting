@@ -1,0 +1,325 @@
+{
+  "date": "2026-11-20",
+  "download": {
+    "asset_name": "cut_roasted_beef.zip",
+    "source": "https://github.com/facebookresearch/Neural_3D_Video/releases/download/v1.0/cut_roasted_beef.zip",
+    "expected_bytes": 1143395383,
+    "actual_bytes": 1143395383,
+    "sha256": "2f9d3bd8782b96425e8adb506fa4cbdfaab4ab753a8fdaf44b9b2468000b8c4f",
+    "publisher_digest": null,
+    "release_tag": "v1.0"
+  },
+  "inspection": {
+    "dataset": "Neural 3D Video / DyNeRF",
+    "scene": "cut_roasted_beef",
+    "source": "https://github.com/facebookresearch/Neural_3D_Video/releases/tag/v1.0",
+    "license": "CC-BY-NC-4.0",
+    "calibration_sha256": "2095f5efb598ddbc019dbac1386b4670b68a90da2ea57c2868b97b3a593da7f9",
+    "cameras": [
+      {
+        "camera": "cam00",
+        "calibration_row": 0,
+        "split": "test",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam01",
+        "calibration_row": 1,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam02",
+        "calibration_row": 2,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam03",
+        "calibration_row": 3,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam05",
+        "calibration_row": 4,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam06",
+        "calibration_row": 5,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam07",
+        "calibration_row": 6,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam08",
+        "calibration_row": 7,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam09",
+        "calibration_row": 8,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam10",
+        "calibration_row": 9,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam11",
+        "calibration_row": 10,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam12",
+        "calibration_row": 11,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam13",
+        "calibration_row": 12,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam14",
+        "calibration_row": 13,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam15",
+        "calibration_row": 14,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam16",
+        "calibration_row": 15,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam17",
+        "calibration_row": 16,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam18",
+        "calibration_row": 17,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam19",
+        "calibration_row": 18,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      },
+      {
+        "camera": "cam20",
+        "calibration_row": 19,
+        "split": "train",
+        "width": 2704,
+        "height": 2028,
+        "frames": 300,
+        "fps": "30/1",
+        "focal_pixels": 1462.7383255729974
+      }
+    ],
+    "train_cameras": 19,
+    "test_cameras": 1,
+    "upstream_frame_limit": 300,
+    "upstream_resolution": [
+      1352,
+      1014
+    ],
+    "upstream_time_rule": "frame_index / 300; last frame is 299/300, not 1",
+    "max_basis_orthogonality_error": 4.440892098500626e-16,
+    "basis_determinant_range": [
+      0.9999999999999997,
+      1.0000000000000002
+    ],
+    "status": "File/calibration consistency passed; no GPU training or novel-view evaluation",
+    "synchronization": "Provided by dataset authors; metadata and preview checks do not independently verify it",
+    "calibration": "Author-provided COLMAP estimates, not exact ground-truth camera poses"
+  },
+  "triangulation": {
+    "scene": "cut_roasted_beef",
+    "pycolmap_version": "4.2.1",
+    "device": "CPU",
+    "source_frame": 0,
+    "image_resolution": [
+      1352,
+      1014
+    ],
+    "training_cameras": [
+      "cam01.png",
+      "cam02.png",
+      "cam03.png",
+      "cam05.png",
+      "cam06.png",
+      "cam07.png",
+      "cam08.png",
+      "cam09.png",
+      "cam10.png",
+      "cam11.png",
+      "cam12.png",
+      "cam13.png",
+      "cam14.png",
+      "cam15.png",
+      "cam16.png",
+      "cam17.png",
+      "cam18.png",
+      "cam19.png",
+      "cam20.png"
+    ],
+    "excluded_camera": "cam00",
+    "registered_images": 19,
+    "points3D": 3390,
+    "mean_reprojection_error_pixels": 0.7096737114938495,
+    "mean_track_length": 5.3498525073746315,
+    "max_pose_change": 3.3306690738754696e-16,
+    "elapsed_seconds": 16.54700000002049,
+    "initialization": "Sparse SIFT triangulation at supplied fixed poses; no dense stereo or downsampling",
+    "calibration_provenance": "Author-provided full-rig calibration; cam00 pixels excluded from this triangulation",
+    "status": "Geometry preparation only; no dynamic training/rendering or quality metrics"
+  },
+  "localization": {
+    "query": "cam00/frame0",
+    "method": "SIFT + frozen-map PnP/RANSAC; shared existing helpers",
+    "quality": {
+      "correspondences": 1038,
+      "inliers": 961,
+      "inlier_ratio": 0.9258188824662813,
+      "median_error_px": 0.5739007511385908,
+      "mean_error_px": 0.8064049951831083,
+      "p95_error_px": 2.3403235851616433,
+      "positive_depth_ratio": 1.0
+    },
+    "rotation_difference_degrees": 0.010939065542092532,
+    "center_difference_scene_units": 0.0028769278514035276,
+    "center_difference_over_median_camera_baseline": 0.0007255679527724005,
+    "estimated_world_to_camera": [
+      [
+        0.9991415961483657,
+        0.025382232642617658,
+        -0.032738556965327126,
+        -0.4157172383455474
+      ],
+      [
+        -0.02859055268761458,
+        0.9944167316340342,
+        -0.10157728162981064,
+        1.3005387133847643
+      ],
+      [
+        0.0299775106223427,
+        0.10242610073785474,
+        0.9942888125411681,
+        0.32157729973195615
+      ]
+    ],
+    "limitations": "Single scene/frame; supplied calibration is estimated, not ground truth; no independent training of the calibration rig",
+    "split": "cam00 pixels used only for this localization diagnostic, not map construction or dynamic optimization"
+  },
+  "gpu_training": "NOT RUN",
+  "colab_notebook": "Prepared; not executed in Colab",
+  "artifact_license": "CC-BY-NC-4.0; derived from Neural 3D Video Synthesis (Li et al., CVPR 2022)",
+  "compact_initialization_sha256": "3f09aa62fac092c8a9e4c2ae6db0811afa65bea1ea9ad09c01e3da381c99dd07",
+  "verification": {
+    "existing_helper_tests": 25,
+    "new_scientific_checks": "Actual scene inspection, fixed-pose triangulation and held-out localization executed on CPU",
+    "notebook": "All code cells and embedded programs parsed; no Colab execution"
+  }
+}

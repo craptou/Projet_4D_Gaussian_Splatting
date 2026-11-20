@@ -1,0 +1,18 @@
+# Proposed Colab compatibility environment, NOT a validated solver lock.
+# Isolated Python avoids depending on Colab's changing kernel Python/PyTorch.
+# This differs from the upstream Python 3.7 / torch 1.13.1 / CUDA 11.6 stack.
+name: skate4d-colab
+channels:
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip=24.0
+  - setuptools=69.5.1
+  - wheel
+  - cuda-toolkit=12.1
+  - gcc_linux-64=11
+  - gxx_linux-64=11
+  - tk
+  - ninja
+  - cmake

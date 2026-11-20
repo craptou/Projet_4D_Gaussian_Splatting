@@ -1,5 +1,7 @@
 # Experiments and reproduction gate
 
+**20 November 2026 decision:** the next execution gate now uses real DyNeRF `cut_roasted_beef`, before returning to True Skate. See the [measured CPU preparation and proposed Colab protocol](progress/dynerf.en.md) and [notebook](../notebooks/dynerf_reference.ipynb). Its sparse initialization and compatibility environment are explicit departures from upstream. The earlier D-NeRF smoke below is retained as an alternative historical plan, not the currently selected dataset. No GPU gate has passed yet.
+
 ## M0: official-scene smoke reproduction (required before True Skate training)
 
 Use D-NeRF `bouncingballs`, the synthetic example explicitly documented by upstream, with its existing configuration. No COLMAP is needed for that dataset. The [official D-NeRF repository](https://github.com/albertpumarola/D-NeRF) supplies a combined archive, not a verified tiny per-scene download. A HEAD request to its official Dropbox link (`https://www.dropbox.com/s/0bf6fl0ye2vz3vr/data.zip?dl=1`) on 2026-10-19 returned HTTP 200, `Content-Length: 257793177` (**245.85 MiB**). We have not established which scene has the smallest compressed size. No dataset body was downloaded: the archive is substantial and this machine cannot currently run the training environment. Obtain this archive only after reviewing its size, then extract only `bouncingballs` into `data/sample/bouncingballs`. Do not substitute an unverified mirror or call generated helper videos an upstream reproduction.

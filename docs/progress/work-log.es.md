@@ -32,6 +32,10 @@ Estas entradas se basan en Git y en artefactos experimentales conservados. Docum
 
 La primera prueba no registró nueve imágenes. Las vistas intermedias resolvieron ese problema; el experimento completo posterior se documenta por separado. El audio no permitió alinear con confianza. Faltan el entorno CUDA y la reproducción oficial. La publicación pendiente del 18 de noviembre se realizó el día 19 mediante Git, aunque la herramienta opcional GitHub CLI sigue sin sesión. Ningún comando fallido se cuenta como hito completado.
 
+### 20 de noviembre de 2026 — preparación de referencia real
+
+Se eligieron DyNeRF `cut_roasted_beef` y Colab para la siguiente prueba de ejecución. Descarga/inspección de 20 vídeos sincronizados por los autores; cam00 reservada. Triangulación CPU con calibración fija: 3.390 puntos y error medio 0,710 px. Localización SIFT/PnP del fotograma 0 reservado: 961 inliers y diferencia angular 0,01094° respecto a calibración suministrada. Cuaderno Colab limitado preparado, sin ejecutar, artefacto compacto con licencia y protocolo bilingüe. Esto comprueba preparación geométrica, no entrenamiento dinámico ni calidad. [Comandos, evidencias, límites y objetivos de comprensión](dynerf.es.md).
+
 ## Cómo continuar
 
 Usar la [plantilla de seguimiento](../templates/checkpoint.es.md). Cada resultado relevante debe tener fecha, comandos o commit, evidencia anterior y posterior, límites y siguiente criterio de aceptación. No atribuir trabajo no realizado ni cambiar mediciones anteriores sin explicar el motivo.

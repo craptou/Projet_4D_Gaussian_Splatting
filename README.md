@@ -12,8 +12,11 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 ## Start here — project review
 
+**20 November update:** [DyNeRF reference preparation](docs/progress/dynerf.en.md) now checks real calibrated videos and a held-out camera localization. [Open the Colab notebook](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) for the next GPU execution gate. CPU geometry checks passed; Colab training and rendering remain **not run**. The earlier slides/report are the 18 November checkpoint.
+
 | Material | English | Español |
 |---|---|---|
+| DyNeRF reference: measured CPU results and proposed Colab execution | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Connection to the supplied course topics, with PDF page references | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
 | Latest experiment: full-rate poses, retries and quality checks | [Read](docs/progress/fullrate.en.md) | [Leer](docs/progress/fullrate.es.md) |
 | Progress report: methods, results, limitations | [Read](docs/progress/report.en.md) | [Leer](docs/progress/report.es.md) |

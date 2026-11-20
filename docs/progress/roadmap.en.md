@@ -1,5 +1,7 @@
 # Milestones and risk register
 
+**20 November update:** prioritize the [DyNeRF reference gate](dynerf.en.md) on Colab. Data/calibration inspection, training-only sparse initialization and a single-frame held-out PnP check passed on CPU. GPU installation, optimization and rendering remain pending. With the owner's stated 5–10 hours, first explain the split/projection/geometry evidence, then run the bounded notebook; do not promise a completed True Skate reconstruction at the next review. After the reference gate, test fixed capture; retain moving-camera estimation as a separate extension.
+
 [Español](roadmap.es.md) · Baseline: 18 November 2026 · No course deadline supplied.
 
 **Final project: Computer Vision.** The [course map](course-alignment.en.md) links each technical stage to supplied notes. The table below is the project's proposed validation plan, not the professor's official rubric.

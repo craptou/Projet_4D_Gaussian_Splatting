@@ -12,8 +12,11 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
+**Actualización del 20 de noviembre:** [Preparación de referencia DyNeRF](docs/progress/dynerf.es.md): vídeos reales calibrados y localización de una cámara reservada. [Abrir el cuaderno Colab](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) para la siguiente prueba GPU. Geometría CPU comprobada; entrenamiento/renderizado Colab **sin ejecutar**. Las diapositivas/informe anteriores corresponden al corte del 18 de noviembre.
+
 | Material | English | Español |
 |---|---|---|
+| Referencia DyNeRF: resultados CPU y ejecución Colab propuesta | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Relación con el curso y páginas del PDF aportado | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
 | Último experimento: poses completas, reintentos y controles | [Read](docs/progress/fullrate.en.md) | [Leer](docs/progress/fullrate.es.md) |
 | Informe de avance: métodos, resultados y limitaciones | [Read](docs/progress/report.en.md) | [Leer](docs/progress/report.es.md) |

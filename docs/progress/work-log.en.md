@@ -32,6 +32,10 @@ Entries below are reconstructed from Git history and retained run artifacts. The
 
 The first sparse run missed nine images. Intermediate views resolved that registration issue; the later full-rate experiment is documented separately. Audio alignment was inconclusive. A CUDA training environment and official sample reproduction remain absent. Publication was pending on 18 November but succeeded on 19 November through Git, despite the optional GitHub CLI remaining unauthenticated. No failed command is counted as a completed milestone.
 
+### 20 November 2026 — real-data reference preparation
+
+Selected DyNeRF `cut_roasted_beef` and Colab for the next execution gate. Downloaded/inspected 20 synchronized-by-author camera videos; reserved cam00. Fixed-calibration CPU triangulation produced 3,390 points (0.710 px mean reprojection error). SIFT/PnP localized held-out frame 0 with 961 inliers and 0.01094° difference from supplied calibration. Added an unexecuted bounded Colab notebook, a compact licensed initialization artifact and bilingual protocol. These results check geometry preparation, not dynamic training or reconstruction quality. [Commands, measured evidence, limitations and learning objectives](dynerf.en.md).
+
 ## How to continue the log
 
 Use the [checkpoint template](../templates/checkpoint.en.md). Record one dated entry per meaningful result, with exact commands or commit, before/after evidence, limitations and the next acceptance test. Never backfill unperformed work or revise old measurements without recording why.
