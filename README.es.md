@@ -12,6 +12,8 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
+**GPU local:** Colab se sustituye por un [lanzador Windows/WSL con seguimiento](docs/progress/local-gpu.es.md). Ubuntu/kernel CUDA nativo funcionan en la RTX 4050 y PyTorch detecta la GPU. Configuración restante y primera ejecución de entrenamiento/renderizado **sin completar**. Instrucciones y seguimiento en el documento.
+
 **Actualización del 20 de noviembre:** [Preparación de referencia DyNeRF](docs/progress/dynerf.es.md): vídeos reales calibrados y localización de una cámara reservada. [Abrir el cuaderno Colab](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) para la siguiente prueba GPU. Geometría CPU comprobada; entrenamiento/renderizado Colab **sin ejecutar**. Las diapositivas/informe anteriores corresponden al corte del 18 de noviembre.
 
 | Material | English | Español |

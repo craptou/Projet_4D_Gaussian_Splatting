@@ -12,6 +12,8 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 ## Start here — project review
 
+**Local GPU update:** Colab was replaced by a [foreground Windows/WSL launcher](docs/progress/local-gpu.en.md). Ubuntu and a native CUDA kernel work on the RTX 4050; PyTorch detects the GPU. Remaining setup and the first 4DGaussians training/render run have **not yet completed**. Launch instructions and live progress are provided in that checkpoint.
+
 **20 November update:** [DyNeRF reference preparation](docs/progress/dynerf.en.md) now checks real calibrated videos and a held-out camera localization. [Open the Colab notebook](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) for the next GPU execution gate. CPU geometry checks passed; Colab training and rendering remain **not run**. The earlier slides/report are the 18 November checkpoint.
 
 | Material | English | Español |
