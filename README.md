@@ -12,12 +12,15 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 ## Start here — project review
 
+**Latest result — 20 November:** [bounded DyNeRF quality pilot](docs/progress/quality-pilot.en.md), 200 coarse + 3000 fine steps in **5 min 25 s**. On 30 held-out validation images, PSNR/SSIM improve from **14.96 dB / 0.687** to **24.98 dB / 0.879**, using consistent checkpoint color settings. Scene recognizable, residual color/blur errors; roughly 255 MiB of run artifacts and 16 GiB disk still free. True Skate training and physical tracking remain pending.
+
 **Local GPU update — 20 November:** the [bounded DyNeRF execution passed on the RTX 4050](docs/progress/local-gpu.en.md): CUDA extensions, loader, 2 coarse + 10 fine steps, saved model and 30 held-out render/target pairs. Training program: 25.52 s; rendering program: 17.09 s. Images remain very blurred; useful reconstruction quality and True Skate training are still unproven.
 
 **20 November update:** [DyNeRF reference preparation](docs/progress/dynerf.en.md) now checks real calibrated videos and a held-out camera localization. [Open the Colab notebook](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) for the next GPU execution gate. CPU geometry checks passed; Colab training and rendering remain **not run**. The earlier slides/report are the 18 November checkpoint.
 
 | Material | English | Español |
 |---|---|---|
+| DyNeRF quality pilot: before/after images, validation metrics and reload correction | [Read](docs/progress/quality-pilot.en.md) | [Leer](docs/progress/quality-pilot.es.md) |
 | DyNeRF reference: measured CPU results and proposed Colab execution | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Connection to the supplied course topics, with PDF page references | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
 | Latest experiment: full-rate poses, retries and quality checks | [Read](docs/progress/fullrate.en.md) | [Leer](docs/progress/fullrate.es.md) |

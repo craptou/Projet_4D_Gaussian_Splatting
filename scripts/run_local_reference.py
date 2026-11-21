@@ -107,9 +107,19 @@ print('Actual upstream loader: split, dimensions, sample counts and timestamps p
         assert artifact.exists() and artifact.stat().st_size > 0, str(artifact)
     start = time.monotonic()
     for iteration in iterations:
-        logged([sys.executable, "render.py", "--model_path", model, "--configs", config,
-                "--iteration", str(iteration), "--skip_train", "--skip_video"],
+        logged([sys.executable, root / "scripts/render_reference_checkpoint.py",
+                "--model_path", model, "--configs", config,
+                "--iteration", str(iteration), "--coarse-steps", "200" if quality else "2",
+                "--render-output", model],
                 logs / f"rendering-{iteration}.log", cwd=upstream, timeout=600)
+    if quality:
+        baseline = source.parents[2] / "outputs/dynerf-local-20261120-234731Z/model"
+        if baseline.exists():
+            logged([sys.executable, root / "scripts/render_reference_checkpoint.py",
+                    "--model_path", baseline, "--configs", root/"configs/experiments/dynerf-smoke.py",
+                    "--iteration", "10", "--coarse-steps", "2",
+                    "--render-output", output / "consistent-sh/smoke"],
+                    logs / "rendering-baseline.log", cwd=upstream, timeout=600)
     rendering_seconds = time.monotonic() - start
     rendered = model / f"test/ours_{iterations[-1]}"
     from PIL import Image, ImageDraw
@@ -137,7 +147,11 @@ print('Actual upstream loader: split, dimensions, sample counts and timestamps p
         from evaluate_quality_reference import evaluate
         result["validation_metrics"] = evaluate(output, source, iterations)
     (output / "report.json").write_text(json.dumps(result, indent=2) + "\n")
-    print(json.dumps(result, indent=2), flush=True)
+    summary = {key: result[key] for key in ["status", "gpu", "coarse_steps", "fine_steps",
+        "heldout_render_target_pairs", "training_seconds", "rendering_seconds"]}
+    if quality:
+        summary["validation_metrics"] = result["validation_metrics"]
+    print(json.dumps(summary, indent=2), flush=True)
 
 
 if __name__ == "__main__":

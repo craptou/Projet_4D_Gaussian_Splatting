@@ -12,12 +12,15 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
+**Último resultado — 20 de noviembre:** [prueba limitada de calidad DyNeRF](docs/progress/quality-pilot.es.md), 200 pasos coarse + 3000 fine en **5 min 25 s**. En 30 imágenes de validación reservadas: **14,96 dB / 0,687** a **24,98 dB / 0,879** (PSNR/SSIM), con grados de color coherentes al recargar. Escena reconocible, errores de color/desenfoque; unos 255 MiB de resultados y 16 GiB libres. True Skate y seguimiento físico pendientes.
+
 **GPU local — 20 de noviembre:** [prueba DyNeRF superada en la RTX 4050](docs/progress/local-gpu.es.md): extensiones CUDA, cargador, 2 pasos coarse + 10 fine, modelo guardado y 30 pares render/objetivo reservados. Entrenamiento: 25,52 s; renderizado: 17,09 s. Imágenes muy borrosas; calidad útil y entrenamiento True Skate pendientes.
 
 **Actualización del 20 de noviembre:** [Preparación de referencia DyNeRF](docs/progress/dynerf.es.md): vídeos reales calibrados y localización de una cámara reservada. [Abrir el cuaderno Colab](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) para la siguiente prueba GPU. Geometría CPU comprobada; entrenamiento/renderizado Colab **sin ejecutar**. Las diapositivas/informe anteriores corresponden al corte del 18 de noviembre.
 
 | Material | English | Español |
 |---|---|---|
+| Calidad DyNeRF: antes/después, métricas de validación y corrección de recarga | [Read](docs/progress/quality-pilot.en.md) | [Leer](docs/progress/quality-pilot.es.md) |
 | Referencia DyNeRF: resultados CPU y ejecución Colab propuesta | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Relación con el curso y páginas del PDF aportado | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
 | Último experimento: poses completas, reintentos y controles | [Read](docs/progress/fullrate.en.md) | [Leer](docs/progress/fullrate.es.md) |

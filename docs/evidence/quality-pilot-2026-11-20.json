@@ -1,0 +1,632 @@
+{
+  "status": "Bounded quality pilot completed; convergence not established",
+  "torch": "2.1.2+cu121",
+  "torch_cuda": "12.1",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "gpu_memory_bytes": 6438780928,
+  "coarse_steps": 200,
+  "fine_steps": 3000,
+  "heldout_render_target_pairs": 30,
+  "training_seconds": 325.105511658,
+  "rendering_seconds": 31.41828786399998,
+  "preparation": {
+    "source_scene": "cut_roasted_beef",
+    "camera_ids": [
+      "cam00",
+      "cam01",
+      "cam05",
+      "cam12",
+      "cam20"
+    ],
+    "source_calibration_rows": [
+      0,
+      1,
+      4,
+      11,
+      19
+    ],
+    "train_cameras": [
+      "cam01",
+      "cam05",
+      "cam12",
+      "cam20"
+    ],
+    "heldout_camera": "cam00",
+    "source_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "training_images": 120,
+    "test_images": 30,
+    "image_resolution": [
+      1352,
+      1014
+    ],
+    "time_rule": "frame_index / 300, unchanged from the original 300-frame scene",
+    "initialization": "Training-only sparse map: >=3 observations, mean reprojection <=2px",
+    "purpose": "Bounded quality pilot; changed initialization and optimization, not an isolated ablation",
+    "dataset_license": "CC-BY-NC-4.0; Neural 3D Video Synthesis, Li et al., CVPR 2022",
+    "selection": {
+      "original_points": 3390,
+      "retained_points": 3103,
+      "removed_points": 287,
+      "minimum_observations": 3,
+      "maximum_mean_reprojection_error_pixels": 2.0,
+      "original_bounds": [
+        [
+          -22.844088450247863,
+          -19.693272339273637,
+          3.8509878136094096
+        ],
+        [
+          49.37997508940264,
+          14.134240217105285,
+          319.07348585213634
+        ]
+      ],
+      "selected_bounds": [
+        [
+          -22.844087600708008,
+          -9.387104034423828,
+          6.196540832519531
+        ],
+        [
+          15.999162673950195,
+          14.13424015045166,
+          28.177867889404297
+        ]
+      ],
+      "reference_points_sha256": "5b4e009937c80d25e7be53b0bc936385898337967babf43b3d44166bac35f774",
+      "selected_ids_sha256": "b20f44de6b67eb761cc9548f97e9886d303a7d09c399fddeb896d661a98ba0d8"
+    }
+  },
+  "config_sha256": "35516a585935da308eb49bc341ce050f0db36659177776ce065bda940217ef6a",
+  "environment": "Ubuntu 22.04 WSL2; native CUDA 12.1 compiler, PyTorch 2.1.2-cu121; compatibility port",
+  "limitations": "Reduced cameras/time and sparse initialization; no full-scene reproduction, convergence or quality benchmark",
+  "validation_metrics": {
+    "smoke-12-steps": {
+      "mean_psnr_db": 14.95762058529465,
+      "mean_ssim": 0.686989841858546
+    },
+    "fine-1000": {
+      "mean_psnr_db": 24.97103373933152,
+      "mean_ssim": 0.8349405447642009
+    },
+    "fine-3000": {
+      "mean_psnr_db": 24.98279413779602,
+      "mean_ssim": 0.8786151766777038
+    }
+  },
+  "reload_correction": {
+    "detail": "Restore trained SH degree: smoke=0, step1000=1; final step3000=3 unchanged",
+    "additional_render_and_evaluation_seconds": 72.07761338000002,
+    "original_metrics": "metrics-upstream-reload.json",
+    "diagnostic": "sh-reload-diagnostic.json"
+  },
+  "run_id": "dynerf-quality-20261121-002150Z",
+  "date_bogota": "2026-11-20",
+  "training_implementation_commit": "e7b53f0",
+  "saved_gaussian_counts": {
+    "1000": 8213,
+    "3000": 10799
+  },
+  "metric_protocol": {
+    "camera": "cam00",
+    "usage": "Held out from optimization; monitored validation camera, not a fresh independent final test",
+    "protocol": "30 full-frame RGB PNGs, 1352x1014, normalized stored RGB, no masks or linearization",
+    "psnr": "Mean of per-frame PSNR from RGB MSE; a perfect-match frame has null PSNR (infinite)",
+    "ssim": "scikit-image, Gaussian window sigma=1.5, channel_axis=2, data_range=1, sample covariance disabled",
+    "lpips": "Not measured; no pretrained network download"
+  },
+  "metrics_per_frame": {
+    "smoke-12-steps": {
+      "frames": [
+        {
+          "source_frame": 0,
+          "psnr_db": 15.000247863235385,
+          "ssim": 0.6859884262084961
+        },
+        {
+          "source_frame": 1,
+          "psnr_db": 14.997383081463056,
+          "ssim": 0.6866206526756287
+        },
+        {
+          "source_frame": 2,
+          "psnr_db": 14.989940213962976,
+          "ssim": 0.6864924430847168
+        },
+        {
+          "source_frame": 3,
+          "psnr_db": 14.979521010120664,
+          "ssim": 0.687938928604126
+        },
+        {
+          "source_frame": 4,
+          "psnr_db": 14.978013502335802,
+          "ssim": 0.6866881251335144
+        },
+        {
+          "source_frame": 5,
+          "psnr_db": 14.97321749909609,
+          "ssim": 0.6872904300689697
+        },
+        {
+          "source_frame": 6,
+          "psnr_db": 14.967660417157568,
+          "ssim": 0.6869295239448547
+        },
+        {
+          "source_frame": 7,
+          "psnr_db": 14.96712876133682,
+          "ssim": 0.6871223449707031
+        },
+        {
+          "source_frame": 8,
+          "psnr_db": 14.975935618500547,
+          "ssim": 0.6862083077430725
+        },
+        {
+          "source_frame": 9,
+          "psnr_db": 14.977822619223925,
+          "ssim": 0.6873242259025574
+        },
+        {
+          "source_frame": 10,
+          "psnr_db": 14.963082794815545,
+          "ssim": 0.6868937611579895
+        },
+        {
+          "source_frame": 11,
+          "psnr_db": 14.95692617460094,
+          "ssim": 0.6868448257446289
+        },
+        {
+          "source_frame": 12,
+          "psnr_db": 14.954845695023657,
+          "ssim": 0.685899555683136
+        },
+        {
+          "source_frame": 13,
+          "psnr_db": 14.94949511637863,
+          "ssim": 0.686960756778717
+        },
+        {
+          "source_frame": 14,
+          "psnr_db": 14.949031918824014,
+          "ssim": 0.6864404678344727
+        },
+        {
+          "source_frame": 15,
+          "psnr_db": 14.950349329629109,
+          "ssim": 0.6868330836296082
+        },
+        {
+          "source_frame": 16,
+          "psnr_db": 14.956023565686056,
+          "ssim": 0.6861370205879211
+        },
+        {
+          "source_frame": 17,
+          "psnr_db": 14.95919365456843,
+          "ssim": 0.687140941619873
+        },
+        {
+          "source_frame": 18,
+          "psnr_db": 14.963171063443077,
+          "ssim": 0.6881785988807678
+        },
+        {
+          "source_frame": 19,
+          "psnr_db": 14.958964572667192,
+          "ssim": 0.6883522868156433
+        },
+        {
+          "source_frame": 20,
+          "psnr_db": 14.958520127425539,
+          "ssim": 0.6869407296180725
+        },
+        {
+          "source_frame": 21,
+          "psnr_db": 14.950663443179364,
+          "ssim": 0.6879402995109558
+        },
+        {
+          "source_frame": 22,
+          "psnr_db": 14.943890003489809,
+          "ssim": 0.6873875260353088
+        },
+        {
+          "source_frame": 23,
+          "psnr_db": 14.934903880608461,
+          "ssim": 0.6874828934669495
+        },
+        {
+          "source_frame": 24,
+          "psnr_db": 14.931827012444137,
+          "ssim": 0.6864270567893982
+        },
+        {
+          "source_frame": 25,
+          "psnr_db": 14.919226910768558,
+          "ssim": 0.6872175335884094
+        },
+        {
+          "source_frame": 26,
+          "psnr_db": 14.908592531954936,
+          "ssim": 0.6868064403533936
+        },
+        {
+          "source_frame": 27,
+          "psnr_db": 14.932214838738213,
+          "ssim": 0.6872817873954773
+        },
+        {
+          "source_frame": 28,
+          "psnr_db": 14.939723833818551,
+          "ssim": 0.6865609288215637
+        },
+        {
+          "source_frame": 29,
+          "psnr_db": 14.941100504342495,
+          "ssim": 0.6873653531074524
+        }
+      ],
+      "mean_psnr_db": 14.95762058529465,
+      "mean_ssim": 0.686989841858546
+    },
+    "fine-1000": {
+      "frames": [
+        {
+          "source_frame": 0,
+          "psnr_db": 24.964822182248238,
+          "ssim": 0.8324598670005798
+        },
+        {
+          "source_frame": 1,
+          "psnr_db": 24.997601223793882,
+          "ssim": 0.8335215449333191
+        },
+        {
+          "source_frame": 2,
+          "psnr_db": 25.02123856297574,
+          "ssim": 0.8332099914550781
+        },
+        {
+          "source_frame": 3,
+          "psnr_db": 25.01071947235301,
+          "ssim": 0.8354082703590393
+        },
+        {
+          "source_frame": 4,
+          "psnr_db": 24.97823455546275,
+          "ssim": 0.8343434929847717
+        },
+        {
+          "source_frame": 5,
+          "psnr_db": 24.96445870844767,
+          "ssim": 0.834735631942749
+        },
+        {
+          "source_frame": 6,
+          "psnr_db": 24.912913964697285,
+          "ssim": 0.833836555480957
+        },
+        {
+          "source_frame": 7,
+          "psnr_db": 24.916610980641533,
+          "ssim": 0.8346053957939148
+        },
+        {
+          "source_frame": 8,
+          "psnr_db": 24.903486736895267,
+          "ssim": 0.833641529083252
+        },
+        {
+          "source_frame": 9,
+          "psnr_db": 24.86132089727617,
+          "ssim": 0.834195613861084
+        },
+        {
+          "source_frame": 10,
+          "psnr_db": 24.7890600261049,
+          "ssim": 0.8327556252479553
+        },
+        {
+          "source_frame": 11,
+          "psnr_db": 24.856747636658255,
+          "ssim": 0.8343570232391357
+        },
+        {
+          "source_frame": 12,
+          "psnr_db": 24.92886833287969,
+          "ssim": 0.8347597718238831
+        },
+        {
+          "source_frame": 13,
+          "psnr_db": 24.959926405004033,
+          "ssim": 0.8367981910705566
+        },
+        {
+          "source_frame": 14,
+          "psnr_db": 24.943983059747335,
+          "ssim": 0.8363339304924011
+        },
+        {
+          "source_frame": 15,
+          "psnr_db": 24.988659535855394,
+          "ssim": 0.8372278213500977
+        },
+        {
+          "source_frame": 16,
+          "psnr_db": 25.021844950874144,
+          "ssim": 0.836430549621582
+        },
+        {
+          "source_frame": 17,
+          "psnr_db": 25.053915551090785,
+          "ssim": 0.8367702960968018
+        },
+        {
+          "source_frame": 18,
+          "psnr_db": 25.075247275530597,
+          "ssim": 0.8370135426521301
+        },
+        {
+          "source_frame": 19,
+          "psnr_db": 25.10729364704453,
+          "ssim": 0.8373990058898926
+        },
+        {
+          "source_frame": 20,
+          "psnr_db": 25.119239483323746,
+          "ssim": 0.8361387848854065
+        },
+        {
+          "source_frame": 21,
+          "psnr_db": 25.098862058589706,
+          "ssim": 0.8369970917701721
+        },
+        {
+          "source_frame": 22,
+          "psnr_db": 25.103856821794967,
+          "ssim": 0.8357757925987244
+        },
+        {
+          "source_frame": 23,
+          "psnr_db": 25.046621336597607,
+          "ssim": 0.8362584710121155
+        },
+        {
+          "source_frame": 24,
+          "psnr_db": 24.998807819725954,
+          "ssim": 0.835063636302948
+        },
+        {
+          "source_frame": 25,
+          "psnr_db": 24.93189047255874,
+          "ssim": 0.8353059887886047
+        },
+        {
+          "source_frame": 26,
+          "psnr_db": 24.868985569407318,
+          "ssim": 0.8335732817649841
+        },
+        {
+          "source_frame": 27,
+          "psnr_db": 24.891635658190275,
+          "ssim": 0.8335922360420227
+        },
+        {
+          "source_frame": 28,
+          "psnr_db": 24.91675684386071,
+          "ssim": 0.8327479362487793
+        },
+        {
+          "source_frame": 29,
+          "psnr_db": 24.897402410315493,
+          "ssim": 0.8329594731330872
+        }
+      ],
+      "mean_psnr_db": 24.97103373933152,
+      "mean_ssim": 0.8349405447642009
+    },
+    "fine-3000": {
+      "frames": [
+        {
+          "source_frame": 0,
+          "psnr_db": 24.952190771033436,
+          "ssim": 0.8740697503089905
+        },
+        {
+          "source_frame": 1,
+          "psnr_db": 24.94595387110852,
+          "ssim": 0.8753282427787781
+        },
+        {
+          "source_frame": 2,
+          "psnr_db": 24.93916966798428,
+          "ssim": 0.8755936026573181
+        },
+        {
+          "source_frame": 3,
+          "psnr_db": 24.966302716618127,
+          "ssim": 0.8780217170715332
+        },
+        {
+          "source_frame": 4,
+          "psnr_db": 24.982824553788593,
+          "ssim": 0.8778085112571716
+        },
+        {
+          "source_frame": 5,
+          "psnr_db": 25.00402224941961,
+          "ssim": 0.8789291977882385
+        },
+        {
+          "source_frame": 6,
+          "psnr_db": 25.02009446537754,
+          "ssim": 0.8785924911499023
+        },
+        {
+          "source_frame": 7,
+          "psnr_db": 25.013071667363427,
+          "ssim": 0.8792206645011902
+        },
+        {
+          "source_frame": 8,
+          "psnr_db": 25.00441721712138,
+          "ssim": 0.8782060742378235
+        },
+        {
+          "source_frame": 9,
+          "psnr_db": 24.99726886950011,
+          "ssim": 0.8787713646888733
+        },
+        {
+          "source_frame": 10,
+          "psnr_db": 24.973927509755413,
+          "ssim": 0.8774294853210449
+        },
+        {
+          "source_frame": 11,
+          "psnr_db": 24.9627197835813,
+          "ssim": 0.8778848052024841
+        },
+        {
+          "source_frame": 12,
+          "psnr_db": 24.95141126142155,
+          "ssim": 0.8771669268608093
+        },
+        {
+          "source_frame": 13,
+          "psnr_db": 24.94077269807853,
+          "ssim": 0.8784148097038269
+        },
+        {
+          "source_frame": 14,
+          "psnr_db": 24.93542599814258,
+          "ssim": 0.877735435962677
+        },
+        {
+          "source_frame": 15,
+          "psnr_db": 24.946656279578768,
+          "ssim": 0.8786687254905701
+        },
+        {
+          "source_frame": 16,
+          "psnr_db": 24.96709981919166,
+          "ssim": 0.8787687420845032
+        },
+        {
+          "source_frame": 17,
+          "psnr_db": 25.006724366859565,
+          "ssim": 0.8804263472557068
+        },
+        {
+          "source_frame": 18,
+          "psnr_db": 25.03249640160533,
+          "ssim": 0.8817364573478699
+        },
+        {
+          "source_frame": 19,
+          "psnr_db": 25.022810783145072,
+          "ssim": 0.8819417357444763
+        },
+        {
+          "source_frame": 20,
+          "psnr_db": 25.01709701631182,
+          "ssim": 0.8806105256080627
+        },
+        {
+          "source_frame": 21,
+          "psnr_db": 25.017470059343353,
+          "ssim": 0.8810219168663025
+        },
+        {
+          "source_frame": 22,
+          "psnr_db": 25.0046796952663,
+          "ssim": 0.8799306750297546
+        },
+        {
+          "source_frame": 23,
+          "psnr_db": 25.004556456600724,
+          "ssim": 0.880232036113739
+        },
+        {
+          "source_frame": 24,
+          "psnr_db": 25.007245454165755,
+          "ssim": 0.8789655566215515
+        },
+        {
+          "source_frame": 25,
+          "psnr_db": 24.96280886911837,
+          "ssim": 0.8791316151618958
+        },
+        {
+          "source_frame": 26,
+          "psnr_db": 24.94930333345072,
+          "ssim": 0.8779719471931458
+        },
+        {
+          "source_frame": 27,
+          "psnr_db": 24.958251366546968,
+          "ssim": 0.8783426880836487
+        },
+        {
+          "source_frame": 28,
+          "psnr_db": 24.994908288163522,
+          "ssim": 0.8785486221313477
+        },
+        {
+          "source_frame": 29,
+          "psnr_db": 25.00214264423827,
+          "ssim": 0.8789846301078796
+        }
+      ],
+      "mean_psnr_db": 24.98279413779602,
+      "mean_ssim": 0.8786151766777038
+    }
+  },
+  "reload_diagnostic": {
+    "frame": 0,
+    "iteration": 1000,
+    "psnr_float_rgb_by_sh_degree": {
+      "3": 21.00823974609375,
+      "1": 24.96670150756836
+    },
+    "training_active_sh_degree": 1,
+    "upstream_reload_sh_degree": 3
+  },
+  "run_files_bytes": 267471860,
+  "free_disk_gib_after": 16.01971435546875,
+  "visual_review": "Scene recognizable; color shifts and blur remain; no claim of physical motion accuracy"
+}

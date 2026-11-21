@@ -2,6 +2,28 @@
 
 [English](quality-pilot.en.md)
 
+## Resultado verificado
+
+RTX 4050: **200 pasos coarse + 3.000 fine**, programa de entrenamiento **325,11 s**; dos programas de renderizado originales **31,42 s**. Modelos con **8.213 gaussianas en 1000** y **10.799 en 3000**. Carpeta completa, incluidos diagnósticos y renders corregidos: **255,08 MiB**; quedaban aproximadamente **16,02 GiB** libres. Sin descargar datos ni entorno. [Evidencias](../evidence/quality-pilot-2026-11-20.json).
+
+| Modelo guardado con su grado de color entrenado | PSNR medio (dB) | SSIM medio |
+|---|---|---|
+| Prueba previa de 12 pasos, grado 0 | 14,958 | 0,687 |
+| Fine 1000, grado 1 | 24,971 | 0,835 |
+| Fine 3000, grado 3 | 24,983 | 0,879 |
+
+Mismos 30 objetivos completos de cam00. Escena reconocible; persisten diferencias de color, suavidad y errores de movimiento. PSNR cambia poco entre 1000 y 3000, mientras SSIM mejora. Referencia pequeña útil, sin demostrar convergencia, seguimiento físico ni reproducción completa.
+
+![Original, prueba corregida, fine 1000 y fine 3000](../assets/dynerf-quality-progression.jpg)
+
+Imágenes y renders derivados: Neural 3D Video Synthesis (Li et al., CVPR 2022), [fuente](https://github.com/facebookresearch/Neural_3D_Video), CC-BY-NC-4.0. Figura etiquetada y redimensionada.
+
+## Corrección de recarga
+
+El cargador original fuerza el grado máximo de color por armónicos esféricos (3), aunque el entrenamiento lo aumenta cada 1000 pasos. El decodificador de deformación puede producir coeficientes superiores antes de entrenarlos. Con los **mismos pesos de la etapa 1000**, el fotograma 0 dio **21,008 dB con grado 3** frente a **24,967 dB con grado 1**. Esto explica la diferencia entre la primera recarga (media 21,011 dB) y el diagnóstico durante entrenamiento (~25 dB); no se explicaba solo por muestreo de fotogramas.
+
+[render_reference_checkpoint.py](../../scripts/render_reference_checkpoint.py) restaura el grado según la secuencia coarse/fine desde cero y utiliza el renderer oficial. No modifica código original ni pesos. Prueba inicial regenerada con grado 0 y etapa 1000 con grado 1 en `consistent-sh/`; etapa 3000 con grado 3 permanece igual. Se conservan originales y `metrics-upstream-reload.json` / `progression-upstream-reload.jpg`. Corrección y evaluación: **72,08 s** adicionales. La tabla usa renders corregidos; el corte inicial conserva sus medidas históricas. La corrección afecta evaluación, no entrenamiento.
+
 ## Protocolo fijado
 
 Mejorar la [prueba de doce pasos](local-gpu.es.md) con las mismas cuatro cámaras de optimización, cam00 reservada, 30 primeros fotogramas consecutivos y 1352 × 1014. Sin descargar datos ni copiar imágenes. Tiempo `índice / 300`.

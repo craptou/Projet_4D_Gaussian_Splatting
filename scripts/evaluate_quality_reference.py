@@ -8,10 +8,11 @@ from skimage.metrics import structural_similarity
 
 
 def evaluate(output, source, iterations):
-    root = source.parents[2]
-    baseline = root / "outputs/dynerf-local-20261120-234731Z/model/test/ours_10"
-    candidates = [("smoke-12-steps", baseline)] if baseline.exists() else []
-    candidates += [(f"fine-{i}", output / f"model/test/ours_{i}") for i in iterations]
+    corrected_baseline = output / "consistent-sh/smoke/test/ours_10"
+    candidates = [("smoke-12-steps", corrected_baseline)] if corrected_baseline.exists() else []
+    for i in iterations:
+        corrected = output / f"consistent-sh/{i}/test/ours_{i}"
+        candidates.append((f"fine-{i}", corrected if corrected.exists() else output/f"model/test/ours_{i}"))
     reference = candidates[-1][1] / "gt"
     names = [f"{i:05d}.png" for i in range(30)]
     metrics = {}
