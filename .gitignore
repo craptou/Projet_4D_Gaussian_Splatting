@@ -10,6 +10,8 @@ data/sample/*
 outputs/*
 !**/.gitkeep
 *.mp4
+!docs/assets/4d-demo-time.mp4
+!docs/assets/4d-demo-view.mp4
 *.mov
 *.avi
 *.ply

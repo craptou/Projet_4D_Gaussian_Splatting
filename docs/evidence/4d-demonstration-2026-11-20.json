@@ -1,0 +1,71 @@
+{
+  "gaussians": 10799,
+  "source_frames": 30,
+  "learned_duration_seconds": 0.9666666666666667,
+  "model_time_range": [
+    0,
+    0.09666666666666666
+  ],
+  "camera_path": [
+    "cam01",
+    "cam20"
+  ],
+  "camera_centers": [
+    [
+      5.434903998966333,
+      -1.0338706007923235,
+      1.11325774779137
+    ],
+    [
+      -5.2774664063000465,
+      1.3546351771714584,
+      0.9460584132247611
+    ]
+  ],
+  "center_displacement_scene_units": {
+    "median": 0.032173700630664825,
+    "p95": 0.4324272662401201,
+    "maximum": 9.377238273620605
+  },
+  "fixed_camera_time_pixel_mae": 2.705494068287037,
+  "fixed_time_view_pixel_mae": 45.904220015914355,
+  "limitations": "Learned deformations, not verified physical tracks. Front-facing interpolated views; no 360-degree reconstruction.",
+  "clips": {
+    "time": "cam00 fixed, source frames 0..29 at 3x slow motion",
+    "view": "time fixed at source frame 14; camera translation + SLERP between calibrated endpoints"
+  },
+  "date_bogota": "2026-11-20",
+  "live_api_verification": {
+    "status": "Live Windows-to-WSL GPU requests passed",
+    "image_shape": [
+      576,
+      768,
+      3
+    ],
+    "fixed_camera_time_pixel_mae": 3.0341638635706016,
+    "fixed_time_view_pixel_mae": 45.927213692370756,
+    "invalid_time_http_status": 400
+  },
+  "model_run": "dynerf-quality-20261121-002150Z",
+  "model_iteration": 3000,
+  "exports": {
+    "time": {
+      "bytes": 600252,
+      "sha256": "c8300949a99f48f2b17f1ff9753bd6d34d312904841158bd982386033a7fe5bc",
+      "width": 768,
+      "height": 576,
+      "frames": 30,
+      "fps": 10
+    },
+    "view": {
+      "bytes": 1920711,
+      "sha256": "b14c0359c71e36aeef84580e05feba69ac388007ca5dd3050c60e7c41d3659e6",
+      "width": 768,
+      "height": 576,
+      "frames": 60,
+      "fps": 15
+    }
+  },
+  "browser_verification": "Headless Chrome loaded the live-rendered image; screenshot visually inspected",
+  "automatic_browser_open": "Blocked by execution controls; manual URL provided"
+}

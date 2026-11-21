@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explorer la scène 4D</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111720;color:#edf0f5;font:16px system-ui,sans-serif}main{max-width:1200px;margin:36px auto;padding:0 24px}header{margin-bottom:24px}h1{font-size:32px;margin:8px 0}p{color:#aeb9c8;line-height:1.5}.badge{font-size:12px;color:#93dfbb;letter-spacing:.08em}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px}.screen{background:#090d12;border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center}img{width:100%;display:block}aside{background:#1b2431;border:1px solid #303b4c;border-radius:12px;padding:22px}label{display:block;font-weight:600;margin:0 0 12px}input[type=range]{width:100%;accent-color:#93dfbb}output{display:block;color:#b9c6d8;font-size:14px;margin:6px 0 16px}button,select{width:100%;padding:10px;border-radius:7px;border:1px solid #526178;background:#263447;color:#edf0f5;font:inherit;margin-bottom:14px;cursor:pointer}button.active{background:#30614e}hr{border:0;border-top:1px solid #394658;margin:16px 0 24px}.caption{font-size:13px;margin:10px 0}.footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;margin-top:20px}.footer button{width:auto;font-size:13px;background:transparent;color:#aeb9c8}.error{color:#ffb7a8}#status{min-height:24px}@media(max-width:800px){.layout{grid-template-columns:1fr}main{margin-top:20px}aside{padding:18px}}
+</style></head><body><main>
+<header><span class="badge">MODÈLE 4D · RENDU LOCAL EN DIRECT</span><h1>Explorer la scène 4D</h1><p>Le temps et le point de vue se règlent séparément.</p></header>
+<div class="layout"><section><div class="screen"><img id="image" alt="Rendu de la reconstruction 4D"></div><p id="status" class="caption">Chargement du modèle…</p></section>
+<aside><label for="time">1. Temps dans la scène</label><input id="time" type="range" min="0" max="1" step="0.003" value="0.48"><output id="timeText"></output><button id="playTime">Animer le temps · ralenti ×3</button><hr>
+<label for="mode">2. Point de vue</label><select id="mode"><option value="reference">Caméra réservée cam00</option><option value="virtual">Caméra virtuelle</option></select><input id="view" type="range" min="0" max="1" step="0.005" value="0.5" disabled><output id="viewText">Caméra fixe</output><button id="playView">Balayer la caméra · temps figé</button>
+<p class="caption">Extrait appris : 0,97 seconde. Les nouvelles vues restent entre les caméras observées ; la scène n'est pas reconstruite à 360°.</p></aside></div>
+<div class="footer"><p>Ferme les animations pour figer un instant, puis déplace la caméra.</p><button id="stop">Arrêter le visualiseur</button></div>
+</main><script>
+const $=id=>document.getElementById(id), t=$('time'), v=$('view'), mode=$('mode');
+let playTime=false,playView=false,busy=false,dirty=true,stopped=false,last=performance.now(),direction=1,objectURL=null;
+function labels(){ $('timeText').textContent=(Number(t.value)*29/30).toFixed(2)+' s / 0,97 s'; $('viewText').textContent=mode.value==='reference'?'Caméra fixe':'Position '+Math.round(v.value*100)+' %';v.disabled=mode.value==='reference'; }
+function changed(){labels();dirty=true;}
+t.oninput=()=>{playTime=false;$('playTime').classList.remove('active');changed();};
+v.oninput=()=>{playView=false;$('playView').classList.remove('active');changed();};
+mode.onchange=()=>{if(mode.value==='reference'){playView=false;$('playView').classList.remove('active');}changed();};
+$('playTime').onclick=()=>{playTime=!playTime;$('playTime').classList.toggle('active',playTime);};
+$('playView').onclick=()=>{playView=!playView;if(playView){mode.value='virtual';playTime=false;$('playTime').classList.remove('active');}$('playView').classList.toggle('active',playView);changed();};
+async function draw(){if(busy||!dirty||stopped)return;busy=true;dirty=false;const start=performance.now();try{const q=new URLSearchParams({time:t.value,view:v.value,mode:mode.value});const r=await fetch('/render?'+q);if(!r.ok)throw Error(await r.text());const url=URL.createObjectURL(await r.blob());$('image').src=url;if(objectURL)URL.revokeObjectURL(objectURL);objectURL=url;$('status').textContent='Rendu du modèle · '+Math.round(performance.now()-start)+' ms · '+(mode.value==='reference'?'cam00':'vue virtuelle');}catch(e){$('status').textContent='Rendu indisponible : '+e.message;$('status').classList.add('error');playTime=playView=false;}finally{busy=false;}}
+function tick(now){const dt=Math.min((now-last)/1000,.1);last=now;if(!stopped){if(playTime){t.value=(Number(t.value)+dt/3)%1;dirty=true;}if(playView){let x=Number(v.value)+direction*dt/5;if(x>1){x=1;direction=-1;}if(x<0){x=0;direction=1;}v.value=x;dirty=true;}labels();draw();}requestAnimationFrame(tick);}
+$('stop').onclick=async()=>{stopped=true;playTime=playView=false;await fetch('/stop',{method:'POST'});$('status').textContent='Visualiseur arrêté. Tu peux fermer cet onglet.';document.querySelectorAll('button,input,select').forEach(x=>x.disabled=true);};
+labels();requestAnimationFrame(tick);
+</script></body></html>

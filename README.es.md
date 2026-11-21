@@ -12,6 +12,8 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
+**Ver la escena 4D:** [visor local y dos demostraciones](docs/progress/4d-demonstration.es.md). [Animar tiempo con cámara fija](docs/assets/4d-demo-time.mp4) o [congelar tiempo y mover cámara](docs/assets/4d-demo-view.mp4). El visor calcula vistas/tiempos independientes con el modelo GPU. Reconstrucción frontal parcial de aproximadamente un segundo.
+
 **Último resultado — 20 de noviembre:** [prueba limitada de calidad DyNeRF](docs/progress/quality-pilot.es.md), 200 pasos coarse + 3000 fine en **5 min 25 s**. En 30 imágenes de validación reservadas: **14,96 dB / 0,687** a **24,98 dB / 0,879** (PSNR/SSIM), con grados de color coherentes al recargar. Escena reconocible, errores de color/desenfoque; unos 255 MiB de resultados y 16 GiB libres. True Skate y seguimiento físico pendientes.
 
 **GPU local — 20 de noviembre:** [prueba DyNeRF superada en la RTX 4050](docs/progress/local-gpu.es.md): extensiones CUDA, cargador, 2 pasos coarse + 10 fine, modelo guardado y 30 pares render/objetivo reservados. Entrenamiento: 25,52 s; renderizado: 17,09 s. Imágenes muy borrosas; calidad útil y entrenamiento True Skate pendientes.
@@ -20,6 +22,7 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 | Material | English | Español |
 |---|---|---|
+| Demostración 4D: tiempo/vista independientes y clips | [Read](docs/progress/4d-demonstration.en.md) | [Leer](docs/progress/4d-demonstration.es.md) |
 | Calidad DyNeRF: antes/después, métricas de validación y corrección de recarga | [Read](docs/progress/quality-pilot.en.md) | [Leer](docs/progress/quality-pilot.es.md) |
 | Referencia DyNeRF: resultados CPU y ejecución Colab propuesta | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Relación con el curso y páginas del PDF aportado | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |

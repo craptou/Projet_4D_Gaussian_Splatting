@@ -12,6 +12,8 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 ## Start here — project review
 
+**See the 4D scene:** [interactive local viewer and two demonstrations](docs/progress/4d-demonstration.en.md). [Animate time with fixed camera](docs/assets/4d-demo-time.mp4) or [freeze time and move the camera](docs/assets/4d-demo-view.mp4). The live viewer independently controls time/viewpoint using the trained GPU model. This remains a partial frontal reconstruction of approximately one second.
+
 **Latest result — 20 November:** [bounded DyNeRF quality pilot](docs/progress/quality-pilot.en.md), 200 coarse + 3000 fine steps in **5 min 25 s**. On 30 held-out validation images, PSNR/SSIM improve from **14.96 dB / 0.687** to **24.98 dB / 0.879**, using consistent checkpoint color settings. Scene recognizable, residual color/blur errors; roughly 255 MiB of run artifacts and 16 GiB disk still free. True Skate training and physical tracking remain pending.
 
 **Local GPU update — 20 November:** the [bounded DyNeRF execution passed on the RTX 4050](docs/progress/local-gpu.en.md): CUDA extensions, loader, 2 coarse + 10 fine steps, saved model and 30 held-out render/target pairs. Training program: 25.52 s; rendering program: 17.09 s. Images remain very blurred; useful reconstruction quality and True Skate training are still unproven.
@@ -20,6 +22,7 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 | Material | English | Español |
 |---|---|---|
+| 4D demonstration: independent time/view controls and demo clips | [Read](docs/progress/4d-demonstration.en.md) | [Leer](docs/progress/4d-demonstration.es.md) |
 | DyNeRF quality pilot: before/after images, validation metrics and reload correction | [Read](docs/progress/quality-pilot.en.md) | [Leer](docs/progress/quality-pilot.es.md) |
 | DyNeRF reference: measured CPU results and proposed Colab execution | [Read](docs/progress/dynerf.en.md) | [Leer](docs/progress/dynerf.es.md) |
 | Connection to the supplied course topics, with PDF page references | [Read](docs/progress/course-alignment.en.md) | [Leer](docs/progress/course-alignment.es.md) |
