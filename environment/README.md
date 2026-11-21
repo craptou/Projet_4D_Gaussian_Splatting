@@ -1,6 +1,6 @@
 # Environment strategy
 
-**Latest target:** after an unsuccessful Colab attempt, the owner selected local WSL2/RTX 4050. Ubuntu 22.04 and a native CUDA 12.1 kernel now work, and PyTorch detects the GPU. Use the [foreground launcher and current status](../docs/progress/local-gpu.en.md) to complete setup and run the bounded experiment. Earlier environment proposals below remain historical; full GPU training has not passed yet.
+**Latest verified target:** the local Ubuntu 22.04 WSL2 / RTX 4050 / PyTorch 2.1.2-cu121 / CUDA compiler 12.1 compatibility environment passed the bounded DyNeRF training/save/reload/render test. Both extensions compiled and 30 held-out render/target pairs were produced. See the [measured checkpoint and launcher](../docs/progress/local-gpu.en.md). This verifies execution on a reduced scene; full reproduction and useful reconstruction quality remain unproven. Earlier setup proposals below are historical.
 
 **20 November 2026:** Colab is now the selected target for the first DyNeRF execution experiment, avoiding WSL installation on the host. The [notebook](../notebooks/dynerf_reference.ipynb) proposes an isolated [Colab environment](environment-colab.yml) with Python 3.10, PyTorch 2.1.2-cu121 and CUDA toolkit 12.1. This compatibility port is unexecuted/unvalidated; it does not replace the exact upstream environment documented below. Windows helper geometry preparation succeeded separately. See the [reference checkpoint](../docs/progress/dynerf.en.md).
 

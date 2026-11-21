@@ -8,11 +8,11 @@
 
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
-This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. Dynamic reconstruction has not been trained yet.**
+This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. True Skate dynamic reconstruction has not been trained yet; a reduced DyNeRF GPU execution test has passed.**
 
 ## Start here — project review
 
-**Local GPU update:** Colab was replaced by a [foreground Windows/WSL launcher](docs/progress/local-gpu.en.md). Ubuntu and a native CUDA kernel work on the RTX 4050; PyTorch detects the GPU. Remaining setup and the first 4DGaussians training/render run have **not yet completed**. Launch instructions and live progress are provided in that checkpoint.
+**Local GPU update — 20 November:** the [bounded DyNeRF execution passed on the RTX 4050](docs/progress/local-gpu.en.md): CUDA extensions, loader, 2 coarse + 10 fine steps, saved model and 30 held-out render/target pairs. Training program: 25.52 s; rendering program: 17.09 s. Images remain very blurred; useful reconstruction quality and True Skate training are still unproven.
 
 **20 November update:** [DyNeRF reference preparation](docs/progress/dynerf.en.md) now checks real calibrated videos and a held-out camera localization. [Open the Colab notebook](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) for the next GPU execution gate. CPU geometry checks passed; Colab training and rendering remain **not run**. The earlier slides/report are the 18 November checkpoint.
 
@@ -75,7 +75,7 @@ The capture camera **moves during each replay**. Upstream MultipleView reuses on
 
 - Full-rate coverage is demonstrated, but pose ground truth is unavailable; 132 lower-support estimates need targeted review. cam07 has not been localized.
 - Intrinsics, arbitrary world scale and fast-motion frames need further checks.
-- Official 4DGS reproduction, CUDA extension compilation, dynamic training and rendering have not run.
+- A reduced DyNeRF compatibility smoke run now works; full official reproduction, useful reconstruction quality and True Skate training/rendering remain unproven.
 - Held-out PSNR, SSIM and LPIPS have not been measured.
 
 This project wraps upstream research code; it does not introduce a new 4DGS algorithm. Its contributions so far are capture preparation, safeguards, experiment scripts and documented evidence. AI-assisted coding and documentation were used; Git history records the resulting artifacts, not a claim that every line was manually authored.

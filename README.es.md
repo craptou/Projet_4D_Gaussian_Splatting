@@ -12,7 +12,7 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
-**GPU local:** Colab se sustituye por un [lanzador Windows/WSL con seguimiento](docs/progress/local-gpu.es.md). Ubuntu/kernel CUDA nativo funcionan en la RTX 4050 y PyTorch detecta la GPU. Configuración restante y primera ejecución de entrenamiento/renderizado **sin completar**. Instrucciones y seguimiento en el documento.
+**GPU local — 20 de noviembre:** [prueba DyNeRF superada en la RTX 4050](docs/progress/local-gpu.es.md): extensiones CUDA, cargador, 2 pasos coarse + 10 fine, modelo guardado y 30 pares render/objetivo reservados. Entrenamiento: 25,52 s; renderizado: 17,09 s. Imágenes muy borrosas; calidad útil y entrenamiento True Skate pendientes.
 
 **Actualización del 20 de noviembre:** [Preparación de referencia DyNeRF](docs/progress/dynerf.es.md): vídeos reales calibrados y localización de una cámara reservada. [Abrir el cuaderno Colab](https://colab.research.google.com/github/craptou/Projet_4D_Gaussian_Splatting/blob/main/notebooks/dynerf_reference.ipynb) para la siguiente prueba GPU. Geometría CPU comprobada; entrenamiento/renderizado Colab **sin ejecutar**. Las diapositivas/informe anteriores corresponden al corte del 18 de noviembre.
 
@@ -75,7 +75,7 @@ La cámara **se mueve durante cada repetición**. MultipleView reutiliza una sol
 
 - Hay cobertura completa, pero no poses reales conocidas; 132 estimaciones con soporte menor requieren revisión. cam07 aún no está localizada.
 - Los parámetros intrínsecos, la escala arbitraria y las imágenes de movimiento rápido requieren más controles.
-- No se han ejecutado la reproducción oficial de 4DGS, la compilación CUDA, el entrenamiento dinámico ni el renderizado.
+- La prueba reducida de compatibilidad DyNeRF funciona; reproducción oficial completa, calidad útil y entrenamiento/renderizado True Skate pendientes.
 - Todavía no se han medido PSNR, SSIM ni LPIPS en la vista reservada.
 
 El proyecto envuelve código de investigación existente; no propone un algoritmo 4DGS nuevo. Las contribuciones actuales son la preparación de capturas, las comprobaciones, los scripts experimentales y las evidencias documentadas. Se utilizó asistencia de IA para programación y documentación; Git registra los artefactos resultantes, sin atribuir autoría manual a cada línea.

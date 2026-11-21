@@ -1,5 +1,7 @@
 # DyNeRF reference experiment — 20 November 2026
 
+**Later update:** the owner completed the [local RTX 4050 execution gate](local-gpu.en.md): 12 optimization steps, saved/reloaded model and 30 held-out renders. This document preserves the earlier CPU preparation and Colab proposal; Colab itself remains unverified.
+
 [Español](dynerf.es.md) · [Colab notebook](../../notebooks/dynerf_reference.ipynb) · [Evidence](../evidence/dynerf-2026-11-20.json)
 
 ## Question and scope

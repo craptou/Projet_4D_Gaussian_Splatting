@@ -1,5 +1,7 @@
 # Hitos y registro de riesgos
 
+**Última prueba superada:** [DyNeRF GPU local](local-gpu.es.md), con guardado/recarga y 30 renders reservados. Reproducción completa y calidad pendientes. Antes de ampliar iteraciones, revisar puntos lejanos y límites de deformación. La tabla anterior conserva el corte del 18 de noviembre.
+
 **Actualización del 20 de noviembre:** priorizar la [referencia DyNeRF](dynerf.es.md) en Colab. Inspección de datos/calibración, mapa disperso sin la cámara reservada y prueba PnP de un fotograma completados en CPU. Instalación GPU, optimización y renderizado pendientes. Con las 5–10 horas indicadas, primero explicar separación de vistas/proyección/geometría y ejecutar el cuaderno limitado; no prometer una reconstrucción True Skate terminada para la siguiente revisión. Después probar captura fija; mantener cámaras móviles como extensión separada.
 
 [English](roadmap.en.md) · Base: 18 de noviembre de 2026 · Sin fecha de entrega facilitada.

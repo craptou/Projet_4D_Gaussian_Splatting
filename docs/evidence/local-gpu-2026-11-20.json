@@ -1,0 +1,107 @@
+{
+  "status": "GPU execution gate passed; not a converged reconstruction",
+  "torch": "2.1.2+cu121",
+  "torch_cuda": "12.1",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "gpu_memory_bytes": 6438780928,
+  "coarse_steps": 2,
+  "fine_steps": 10,
+  "heldout_render_target_pairs": 30,
+  "training_seconds": 25.518570332999957,
+  "rendering_seconds": 17.090258149999954,
+  "preparation": {
+    "source_scene": "cut_roasted_beef",
+    "camera_ids": [
+      "cam00",
+      "cam01",
+      "cam05",
+      "cam12",
+      "cam20"
+    ],
+    "source_calibration_rows": [
+      0,
+      1,
+      4,
+      11,
+      19
+    ],
+    "train_cameras": [
+      "cam01",
+      "cam05",
+      "cam12",
+      "cam20"
+    ],
+    "heldout_camera": "cam00",
+    "source_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "training_images": 120,
+    "test_images": 30,
+    "image_resolution": [
+      1352,
+      1014
+    ],
+    "time_rule": "frame_index / 300, unchanged from the original 300-frame scene",
+    "initialization": "3390 sparse points from frame 0 of all 19 original training cameras; cam00 excluded",
+    "purpose": "Reduced execution test, not full DyNeRF reproduction or quality benchmark",
+    "dataset_license": "CC-BY-NC-4.0; Neural 3D Video Synthesis, Li et al., CVPR 2022"
+  },
+  "config_sha256": "8cdfa0d88491c8de06927eaab87ec34af100c70fa490e7c5200f79901bb2e3b0",
+  "environment": "Ubuntu 22.04 WSL2; native CUDA 12.1 compiler, PyTorch 2.1.2-cu121; compatibility port",
+  "limitations": "Reduced cameras/time and sparse initialization; no full-scene reproduction, convergence or quality benchmark",
+  "run_id": "dynerf-local-20261120-234731Z",
+  "date_bogota": "2026-11-20",
+  "loader": {
+    "train_samples": 120,
+    "test_samples": 30,
+    "last_time": 0.09666666666666666,
+    "split": "cam00 excluded from training"
+  },
+  "visual_review": "Three sampled render/target pairs inspected: renders very blurred; no claim of useful reconstruction quality",
+  "initialization_review": {
+    "z_99th_percentile": 20.706513919830325,
+    "z_max": 319.073486328125,
+    "next_check": "Review distant sparse points and deformation bounds before longer training; no points removed"
+  },
+  "artifact_sizes_bytes": {
+    "deformation.pth": 9865621,
+    "deformation_accum.pth": 41820,
+    "deformation_table.pth": 4508,
+    "point_cloud.ply": 842249
+  },
+  "log_sha256": {
+    "setup.log": "8e8632184506b8bc3bc02670e9162262119d7f0de1663e6445cd04756fbeebef",
+    "logs/training.log": "4e1f1d92511ee03b23e9ed2c58443678032ee675fe0554496cf8e05f392b67ec",
+    "logs/rendering.log": "6b9720a52b8ad2115f8e169fa02be98d0664efb14b5131a4d2f28284d3d3fda7",
+    "logs/extensions.log": "34f329cfa55b03aaf30a744983210dc908fc61b10859c02968325cf8f48bd937"
+  }
+}

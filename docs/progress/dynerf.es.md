@@ -1,5 +1,7 @@
 # Experimento de referencia DyNeRF — 20 de noviembre de 2026
 
+**Actualización posterior:** el responsable completó la [prueba local RTX 4050](local-gpu.es.md): 12 pasos, modelo guardado/recargado y 30 renders reservados. Se conserva aquí la preparación CPU/propuesta Colab anterior; Colab sigue sin verificar.
+
 [English](dynerf.en.md) · [Cuaderno Colab](../../notebooks/dynerf_reference.ipynb) · [Evidencias](../evidence/dynerf-2026-11-20.json)
 
 ## Pregunta y alcance
