@@ -2,7 +2,7 @@
 
 ### Repetición de trucos de skate desde puntos de vista libres mediante 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Corte de seguimiento: 18 de noviembre de 2026**
+[English](README.md) · [Español](README.es.md) · **Último corte: 20 de noviembre de 2026** · Diapositivas/informe archivados: 18 de noviembre.
 
 **Repositorio:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Publicado el 19 de noviembre de 2026 · Rama `main`.
 
@@ -13,6 +13,12 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 ## Para revisar el proyecto
 
 **Ver la escena 4D:** [visor local y dos demostraciones](docs/progress/4d-demonstration.es.md). [Animar tiempo con cámara fija](docs/assets/4d-demo-time.mp4) o [congelar tiempo y mover cámara](docs/assets/4d-demo-view.mp4). El visor calcula vistas/tiempos independientes con el modelo GPU. Reconstrucción frontal parcial de aproximadamente un segundo.
+
+| Cámara fija, tiempo avanza | Tiempo congelado, cámara se mueve |
+|---|---|
+| ![Movimiento con cámara fija](docs/assets/4d-demo-time.gif) | ![Cambio de vista con tiempo fijo](docs/assets/4d-demo-view.gif) |
+
+Animaciones visibles directamente en GitHub: renders grabados del modelo, reducidos para mostrarlos. La evaluación numérica usa los PNG originales. El **código del visor en directo está en este repositorio**, pero GitHub no ejecuta su servidor Python/CUDA. La interacción requiere modelo y GPU locales; [instrucciones](docs/progress/4d-demonstration.es.md#visor-local).
 
 **Último resultado — 20 de noviembre:** [prueba limitada de calidad DyNeRF](docs/progress/quality-pilot.es.md), 200 pasos coarse + 3000 fine en **5 min 25 s**. En 30 imágenes de validación reservadas: **14,96 dB / 0,687** a **24,98 dB / 0,879** (PSNR/SSIM), con grados de color coherentes al recargar. Escena reconocible, errores de color/desenfoque; unos 255 MiB de resultados y 16 GiB libres. True Skate y seguimiento físico pendientes.
 

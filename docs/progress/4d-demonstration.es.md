@@ -29,6 +29,8 @@ Reconstrucción frontal parcial, no escaneo a 360°. Fotogramas aprendidos 0–2
 
 768 × 576, calculados con el modelo congelado. Unos **2,4 MiB** entre ambos; derivados pequeños permitidos explícitamente, no vídeos originales. Reproducir en el entorno GPU: `scripts/view_4d_reference.py --model MODEL --export OUTPUT`.
 
+El README incluye vistas previas GIF de **360 × 270, 10 FPS**, convertidas de estos clips. Muestran cambios de tiempo/vista directamente en GitHub sin instalar GPU. Son grabaciones; GitHub no aloja la aplicación interactiva Python/CUDA. Reducción de resolución/paleta solo para presentación, fuera de la evaluación numérica.
+
 ## Comprobaciones
 
 Acceso Windows a WSL mediante localhost. Peticiones reales devolvieron JPEG 768 × 576; variar tiempo con cámara fija y variar cámara con tiempo fijo cambiaron los píxeles. Tiempo no finito rechazado con HTTP 400. Interfaz cargada en Chrome sin interfaz y revisada visualmente. [Diagnósticos](../evidence/4d-demonstration-2026-11-20.json). Movimiento aprendido o diferencias de imagen no demuestran por sí solos exactitud de geometría dinámica.

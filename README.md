@@ -2,7 +2,7 @@
 
 ### Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Progress checkpoint: 18 November 2026**
+[English](README.md) · [Español](README.es.md) · **Latest checkpoint: 20 November 2026** · Slides/report archive: 18 November.
 
 **Repository:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Published 19 November 2026 · Branch `main`.
 
@@ -13,6 +13,12 @@ This is the **final project for Computer Vision**. It studies that question usin
 ## Start here — project review
 
 **See the 4D scene:** [interactive local viewer and two demonstrations](docs/progress/4d-demonstration.en.md). [Animate time with fixed camera](docs/assets/4d-demo-time.mp4) or [freeze time and move the camera](docs/assets/4d-demo-view.mp4). The live viewer independently controls time/viewpoint using the trained GPU model. This remains a partial frontal reconstruction of approximately one second.
+
+| Fixed camera, time advances | Frozen time, camera moves |
+|---|---|
+| ![Scene motion with fixed camera](docs/assets/4d-demo-time.gif) | ![Viewpoint sweep at fixed scene time](docs/assets/4d-demo-view.gif) |
+
+These small animations can be viewed directly in GitHub. They are recorded model renders, reduced for display; numerical evaluation uses the original PNGs. The **live viewer's source code is in this repository**, but GitHub does not run its Python/CUDA server. Live interaction requires the local trained model and GPU; [launch instructions](docs/progress/4d-demonstration.en.md#local-interactive-rendering) are provided separately.
 
 **Latest result — 20 November:** [bounded DyNeRF quality pilot](docs/progress/quality-pilot.en.md), 200 coarse + 3000 fine steps in **5 min 25 s**. On 30 held-out validation images, PSNR/SSIM improve from **14.96 dB / 0.687** to **24.98 dB / 0.879**, using consistent checkpoint color settings. Scene recognizable, residual color/blur errors; roughly 255 MiB of run artifacts and 16 GiB disk still free. True Skate training and physical tracking remain pending.
 

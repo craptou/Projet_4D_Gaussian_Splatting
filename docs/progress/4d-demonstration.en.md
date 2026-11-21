@@ -29,6 +29,8 @@ The viewer is a partial frontal reconstruction, not a 360-degree scan. The train
 
 Both clips are **768 × 576**, generated directly from the frozen model. Combined size is about **2.4 MiB**; they are explicitly allowed small derived assets, not raw-video uploads. `scripts/view_4d_reference.py --model MODEL --export OUTPUT` reproduces the exports inside the GPU environment.
 
+The repository README also includes animated GIF previews at **360 × 270, 10 FPS**, transcoded from these clips. They show time and viewpoint changes directly on GitHub without a GPU installation. They are prerecorded previews; the live interactive Python/CUDA application is not hosted by GitHub. GIF palette/resolution changes are only for presentation and do not enter the quantitative evaluation.
+
 ## Verification
 
 The service was reached from Windows through WSL localhost. Actual render requests returned 768 × 576 JPEGs; changing time with fixed camera changed pixels, and changing camera at fixed time changed pixels. Invalid nonfinite time returned HTTP 400. The interface loaded its rendered image in headless Chrome and was visually inspected. Live API checks and model/export diagnostics are captured in the [evidence snapshot](../evidence/4d-demonstration-2026-11-20.json). Nonzero learned motion or image differences alone do not prove accurate dynamic geometry.
