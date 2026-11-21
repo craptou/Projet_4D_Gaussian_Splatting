@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import shutil
 import sys
 import time
 from live_process import live_run
@@ -23,7 +24,7 @@ def logged(command, destination, cwd=None, timeout=1200):
     live_run(command, destination, labels.get(destination.stem, destination.stem), cwd, timeout)
 
 
-def windows(root, source, output):
+def windows(root, source, output, quality=False):
     if not source.exists():
         subprocess.run([sys.executable, root / "scripts/prepare_local_reference.py",
                         "--output", source], check=True, cwd=root)
@@ -41,10 +42,12 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
     command = ["wsl", "-d", "Ubuntu-22.04", "-u", "root", "--exec", "/opt/skate4d/venv/bin/python",
         "/root/skate4d/project/scripts/run_local_reference.py", "--source", linux_path(source),
         "--output", linux_path(output)]
+    if quality:
+        command.append("--quality")
     subprocess.run(command, check=True)
 
 
-def linux(root, source, output):
+def linux(root, source, output, quality=False):
     upstream = root / "third_party/4DGaussians"
     model = output / "model"
     if model.exists():
@@ -84,20 +87,31 @@ print('Actual upstream loader: split, dimensions, sample counts and timestamps p
 """
     logged([sys.executable, "-c", loader_probe, source, output / "loader.json"],
            logs / "loader.log", cwd=upstream)
-    config = root / "configs/experiments/dynerf-smoke.py"
+    config = root / ("configs/experiments/dynerf-quality.py" if quality else "configs/experiments/dynerf-smoke.py")
+    iterations = [1000, 3000] if quality else [10]
     start = time.monotonic()
-    logged([sys.executable, "train.py", "-s", source, "--model_path", model, "--expname", "dynerf-local-smoke",
-            "--configs", config, "--save_iterations", "10", "--test_iterations", "10", "--ip", "127.0.0.1"],
-           logs / "training.log", cwd=upstream, timeout=600)
+    command = [sys.executable, "train.py", "-s", source, "--model_path", model, "--expname", "dynerf-local-reference",
+            "--configs", config, "--save_iterations"] + [str(i) for i in iterations]
+    command += ["--test_iterations"] + [str(i) for i in iterations] + ["--ip", "127.0.0.1"]
+    if quality:
+        if shutil.disk_usage(output).free < 6 * 2**30:
+            raise OSError("Il faut au moins 6 Gio libres avant cet essai")
+        live_run(command, logs / "training.log",
+            "ENTRAINEMENT GPU : 200 coarse + 3000 fine; estimation initiale 15-35 min",
+            cwd=upstream, timeout=5400, min_free_bytes=5 * 2**30)
+    else:
+        logged(command, logs / "training.log", cwd=upstream, timeout=600)
     training_seconds = time.monotonic() - start
     for name in ["point_cloud.ply", "deformation.pth"]:
-        artifact = model / "point_cloud/iteration_10" / name
+        artifact = model / f"point_cloud/iteration_{iterations[-1]}" / name
         assert artifact.exists() and artifact.stat().st_size > 0, str(artifact)
     start = time.monotonic()
-    logged([sys.executable, "render.py", "--model_path", model, "--configs", config,
-            "--iteration", "10", "--skip_train", "--skip_video"], logs / "rendering.log", cwd=upstream, timeout=600)
+    for iteration in iterations:
+        logged([sys.executable, "render.py", "--model_path", model, "--configs", config,
+                "--iteration", str(iteration), "--skip_train", "--skip_video"],
+                logs / f"rendering-{iteration}.log", cwd=upstream, timeout=600)
     rendering_seconds = time.monotonic() - start
-    rendered = model / "test/ours_10"
+    rendered = model / f"test/ours_{iterations[-1]}"
     from PIL import Image, ImageDraw
     assert len(list((rendered / "renders").glob("*.png"))) == 30
     assert len(list((rendered / "gt").glob("*.png"))) == 30
@@ -111,14 +125,17 @@ print('Actual upstream loader: split, dimensions, sample counts and timestamps p
             draw.text((column * 500 + 5, row * 402 + 7), f"cam00 frame {index} | {kind}", fill="black")
     sheet.save(output / "comparison.jpg", quality=90)
     preparation = json.loads((source / "preparation.json").read_text())
-    result = dict(status="GPU execution gate passed; not a converged reconstruction",
+    result = dict(status=("Bounded quality pilot completed; convergence not established" if quality else "GPU execution gate passed; not a converged reconstruction"),
         torch=torch.__version__, torch_cuda=torch.version.cuda, gpu=torch.cuda.get_device_name(),
         gpu_memory_bytes=torch.cuda.get_device_properties(0).total_memory,
-        coarse_steps=2, fine_steps=10, heldout_render_target_pairs=30,
+        coarse_steps=200 if quality else 2, fine_steps=iterations[-1], heldout_render_target_pairs=30,
         training_seconds=training_seconds, rendering_seconds=rendering_seconds,
         preparation=preparation, config_sha256=hashlib.sha256(config.read_bytes()).hexdigest(),
         environment="Ubuntu 22.04 WSL2; native CUDA 12.1 compiler, PyTorch 2.1.2-cu121; compatibility port",
         limitations="Reduced cameras/time and sparse initialization; no full-scene reproduction, convergence or quality benchmark")
+    if quality:
+        from evaluate_quality_reference import evaluate
+        result["validation_metrics"] = evaluate(output, source, iterations)
     (output / "report.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result, indent=2), flush=True)
 
@@ -128,9 +145,10 @@ if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
     parser.add_argument("--source", type=Path, default=root / "data/processed/dynerf-local-smoke")
     parser.add_argument("--output", type=Path, default=root / "outputs/dynerf-local-smoke")
+    parser.add_argument("--quality", action="store_true")
     args = parser.parse_args()
     source, output = args.source.resolve(), args.output.resolve()
     if os.name == "nt":
-        windows(root, source, output)
+        windows(root, source, output, args.quality)
     else:
-        linux(root, source, output)
+        linux(root, source, output, args.quality)

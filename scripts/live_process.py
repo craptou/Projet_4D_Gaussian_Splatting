@@ -1,12 +1,13 @@
 """Stream a subprocess to the terminal and a log, with elapsed-time updates."""
 from pathlib import Path
 import queue
+import shutil
 import subprocess
 import threading
 import time
 
 
-def live_run(command, log_path, label, cwd=None, timeout=1200, heartbeat=15):
+def live_run(command, log_path, label, cwd=None, timeout=1200, heartbeat=15, min_free_bytes=0):
     log_path = Path(log_path)
     log_path.parent.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
@@ -43,6 +44,8 @@ def live_run(command, log_path, label, cwd=None, timeout=1200, heartbeat=15):
                     log.write(line)
                     log.flush()
                 if now >= next_update:
+                    if min_free_bytes and shutil.disk_usage(log_path.parent).free < min_free_bytes:
+                        raise OSError("Espace disque trop faible : arret pour conserver la reserve configuree")
                     elapsed = int(now - started)
                     print(f"[{elapsed // 60:02d}:{elapsed % 60:02d}] {label} : toujours en cours", flush=True)
                     next_update = now + heartbeat

@@ -1,4 +1,4 @@
-param([switch]$CheckOnly)
+param([switch]$CheckOnly, [switch]$Quality)
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
 $env:PYTHONIOENCODING = 'utf-8'
@@ -14,8 +14,10 @@ try {
     if (-not $acquired) { throw 'Un lancement est deja actif dans un autre terminal.' }
     Write-Host 'DyNeRF sur votre RTX 4050 - installation, entrainement court et rendu' -ForegroundColor Cyan
     $launcher = Join-Path $PSScriptRoot 'local_gpu_terminal.py'
-    if ($CheckOnly) { & $python -u $launcher --check-only }
-    else { & $python -u $launcher }
+    $launcherArgs = @()
+    if ($CheckOnly) { $launcherArgs += '--check-only' }
+    if ($Quality) { $launcherArgs += '--quality' }
+    & $python -u $launcher @launcherArgs
     $runExit = $LASTEXITCODE
 }
 finally {

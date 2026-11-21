@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import os
 from pathlib import Path
 import subprocess
+import shutil
 import sys
 
 from live_process import live_run
@@ -13,6 +14,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument("--quality", action="store_true")
     args = parser.parse_args()
     assert os.name == "nt", "Lancer ce script depuis le terminal Windows du projet."
     base = ["wsl", "-d", "Ubuntu-22.04", "-u", "root", "--exec"]
@@ -28,9 +30,26 @@ def main():
     if active.stdout.strip():
         raise RuntimeError("Une installation Python est deja active. Attendre sa fin avant de relancer.")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%SZ")
-    output = root / "outputs" / ("dynerf-local-" + stamp)
+    output = root / "outputs" / (("dynerf-quality-" if args.quality else "dynerf-local-") + stamp)
     output.mkdir(parents=True)
     setup = subprocess.check_output(base + ["wslpath", "-a", "-u", str(root / "scripts/setup_local_gpu.sh")], encoding="utf-8").strip()
+    if args.quality:
+        if shutil.disk_usage(root).free < 6*2**30:
+            raise RuntimeError("Il faut au moins 6 Gio libres avant le lancement")
+        source = root / "data/processed/dynerf-local-quality"
+        if not source.exists():
+            live_run([sys.executable, "-u", root/"scripts/prepare_quality_reference.py"],
+                     output/"geometry.log", "Selection de la geometrie d'initialisation", cwd=root)
+        print("\nESSAI QUALITE : memes 4 vues d'entrainement, cam00 reservee, 30 instants.")
+        print("200 etapes coarse + 3000 fine; quatre densifications; sauvegardes a 1000 et 3000.")
+        print("Duree initiale indicative : 15-35 min, puis rendus et comparaison.")
+        print("Pas de telechargement ni reinstallation; reserve disque surveillee pendant l'entrainement.", flush=True)
+        command = [sys.executable, "-u", root/"scripts/run_local_reference.py", "--source", source,
+                   "--output", output, "--quality"]
+        live_run(command, output/"execution.log", "Entrainement et evaluation de l'essai qualite", cwd=root, timeout=7200)
+        print(f"\nTERMINE. Progression : {output/'progression.jpg'}")
+        print(f"Metriques : {output/'metrics.json'}")
+        return
     print("\nTEST COURT : 4 vues d'entrainement, cam00 reservee, 30 instants.")
     print("Installation/reprise : estimation 5-20 min; un nouveau telechargement peut prendre davantage.")
     print("Compilation initiale : estimation 2-15 min. Entrainement + rendus : estimation 2-10 min.")
