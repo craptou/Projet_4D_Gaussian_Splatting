@@ -22,6 +22,16 @@ The viewer is a partial frontal reconstruction, not a 360-degree scan. The train
 
 ## Shareable demonstrations
 
+### Owner-supplied screen recording
+
+[Watch/download the 27-second viewer walkthrough](../assets/4d-viewer-recording.mp4).
+
+[![Viewer interface and visible controls](../assets/4d-viewer-recording.jpg)](../assets/4d-viewer-recording.mp4)
+
+The owner supplied a 27.167-second, 1920 × 1080, 60 FPS MKV recording. It shows time playback active while the virtual-viewpoint slider is changed manually. The published full-length MP4 keeps the 1080p interface readable, uses H.264 at 30 FPS, copies the AAC audio without re-encoding, and places playback metadata at the start for browser compatibility. Its size is **3.70 MB**, versus **9.08 MB** for the source. The original recording is preserved locally and excluded from Git. [File hashes and conversion evidence](../evidence/viewer-recording-2026-11-20.json).
+
+This captures operation of the actual interactive viewer; the two clips below isolate time and viewpoint separately. It is a recorded demonstration, not an online GPU service or a new training/evaluation run.
+
 | Clip | What is held fixed | What changes |
 |---|---|---|
 | [Time animation](../assets/4d-demo-time.mp4) | cam00 pose | Model time 0 → 29/300; 30 renders displayed over 3 seconds |

@@ -22,6 +22,16 @@ Reconstrucción frontal parcial, no escaneo a 360°. Fotogramas aprendidos 0–2
 
 ## Clips compartibles
 
+### Grabación aportada por el responsable
+
+[Ver/descargar el recorrido de 27 segundos](../assets/4d-viewer-recording.mp4).
+
+[![Interfaz del visor con controles visibles](../assets/4d-viewer-recording.jpg)](../assets/4d-viewer-recording.mp4)
+
+Grabación original MKV: 27,167 segundos, 1920 × 1080, 60 FPS. Muestra reproducción temporal activa mientras se cambia manualmente el punto de vista virtual. El MP4 publicado conserva toda la duración y resolución 1080p, H.264 a 30 FPS y audio AAC copiado sin recodificar; metadatos de reproducción al principio para compatibilidad del navegador. **3,70 MB**, frente a **9,08 MB** del original. Original conservado localmente y excluido de Git. [Hashes y conversión](../evidence/viewer-recording-2026-11-20.json).
+
+Documenta uso del visor real; los dos clips siguientes aíslan tiempo y cámara por separado. Es una demostración grabada, no un servicio GPU en línea ni un nuevo entrenamiento/evaluación.
+
 | Clip | Fijo | Variable |
 |---|---|---|
 | [Tiempo](../assets/4d-demo-time.mp4) | Cámara cam00 | Tiempo 0 → 29/300; 30 renders en 3 segundos |

@@ -12,6 +12,8 @@ outputs/*
 *.mp4
 !docs/assets/4d-demo-time.mp4
 !docs/assets/4d-demo-view.mp4
+!docs/assets/4d-viewer-recording.mp4
+*.mkv
 *.mov
 *.avi
 *.ply

@@ -14,6 +14,10 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 **Ver la escena 4D:** [visor local y dos demostraciones](docs/progress/4d-demonstration.es.md). [Animar tiempo con cámara fija](docs/assets/4d-demo-time.mp4) o [congelar tiempo y mover cámara](docs/assets/4d-demo-view.mp4). El visor calcula vistas/tiempos independientes con el modelo GPU. Reconstrucción frontal parcial de aproximadamente un segundo.
 
+**Recorrido grabado aportado por el responsable — 27 segundos:** [ver/descargar el MP4](docs/assets/4d-viewer-recording.mp4). Se ven la interfaz, el tiempo animado y los cambios manuales del punto de vista virtual. Puede consultarse sin instalar el entorno GPU.
+
+[![Grabación del visor 4D interactivo; pulsar para ver/descargar](docs/assets/4d-viewer-recording.jpg)](docs/assets/4d-viewer-recording.mp4)
+
 | Cámara fija, tiempo avanza | Tiempo congelado, cámara se mueve |
 |---|---|
 | ![Movimiento con cámara fija](docs/assets/4d-demo-time.gif) | ![Cambio de vista con tiempo fijo](docs/assets/4d-demo-view.gif) |

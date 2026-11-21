@@ -14,6 +14,10 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 **See the 4D scene:** [interactive local viewer and two demonstrations](docs/progress/4d-demonstration.en.md). [Animate time with fixed camera](docs/assets/4d-demo-time.mp4) or [freeze time and move the camera](docs/assets/4d-demo-view.mp4). The live viewer independently controls time/viewpoint using the trained GPU model. This remains a partial frontal reconstruction of approximately one second.
 
+**Recorded walkthrough supplied by the project owner — 27 seconds:** [watch/download the MP4](docs/assets/4d-viewer-recording.mp4). The recording shows the viewer interface, animated time and manual changes to the virtual viewpoint. It can be viewed without installing the GPU environment.
+
+[![Screen recording of the interactive 4D viewer; click to watch/download](docs/assets/4d-viewer-recording.jpg)](docs/assets/4d-viewer-recording.mp4)
+
 | Fixed camera, time advances | Frozen time, camera moves |
 |---|---|
 | ![Scene motion with fixed camera](docs/assets/4d-demo-time.gif) | ![Viewpoint sweep at fixed scene time](docs/assets/4d-demo-view.gif) |

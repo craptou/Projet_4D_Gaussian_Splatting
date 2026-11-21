@@ -1,0 +1,59 @@
+{
+  "date_bogota": "2026-11-20",
+  "source": {
+    "filename": "2026-11-20 20-07-39.mkv",
+    "duration_seconds": 27.167,
+    "bytes": 9080209,
+    "sha256": "123fb3a4be0d4a6f3fdd89b36a54a308b365184edf38ea5717934f16ea3d71f1",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "60/1",
+        "sample_rate": null,
+        "channels": null
+      },
+      {
+        "codec_type": "audio",
+        "codec_name": "aac",
+        "width": null,
+        "height": null,
+        "avg_frame_rate": "0/0",
+        "sample_rate": "48000",
+        "channels": 2
+      }
+    ]
+  },
+  "published": {
+    "path": "docs/assets/4d-viewer-recording.mp4",
+    "duration_seconds": 27.166667,
+    "bytes": 3699165,
+    "sha256": "ffd0b5b64fe577ffbda25439b96c68d4c0331ed081b2951d937345d67c148d95",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "sample_rate": null,
+        "channels": null
+      },
+      {
+        "codec_type": "audio",
+        "codec_name": "aac",
+        "width": null,
+        "height": null,
+        "avg_frame_rate": "0/0",
+        "sample_rate": "48000",
+        "channels": 2
+      }
+    ]
+  },
+  "transformation": "Full-length H.264 MP4, 1920x1080, 30FPS, x264 CRF22, AAC stream copied, faststart, container metadata removed",
+  "visual_review": "Sampled at 0,4,8,12,16,20,24 seconds: viewer controls visible; time playback active while the virtual-viewpoint slider is changed manually",
+  "interpretation": "Screen recording supplied by project owner; complements independent time-only/view-only rendered clips; not a new training or metric experiment",
+  "original_preserved": true
+}
