@@ -36,13 +36,17 @@ def probe(source, output, config):
     scene,gaussians,_,_ = load(source,output,config)
     manifest = json.loads((source/"manifest.json").read_text())
     train,test = scene.getTrainCameras(),scene.getTestCameras()
-    assert len(train)==104 and len(test)==13
-    assert {r["camera_id"] for r in manifest["frames"] if r["split"]=="train"}.isdisjoint({"cam13"})
+    train_records=[r for r in manifest["frames"] if r["split"]=="train"]
+    test_records=[r for r in manifest["frames"] if r["split"]=="test"]
+    assert len(train)==len(train_records) and len(test)==len(test_records)
+    assert {r["camera_id"] for r in train_records}.isdisjoint({manifest["heldout_camera"]})
     max_error = 0
     points = gaussians.get_xyz.detach().cpu().numpy()
-    for i in range(0,len(train),13):
+    seen=set()
+    for i,record in enumerate(train_records):
+        if record["camera_id"] in seen:continue
+        seen.add(record["camera_id"])
         camera = train[i]
-        record = [r for r in manifest["frames"] if r["split"]=="train"][i]
         pose = np.array(record["world_to_camera"])
         cp = points@pose[:,:3].T+pose[:,3]
         valid = cp[:,2]>.1
@@ -56,8 +60,9 @@ def probe(source, output, config):
         assert inside.sum()>=10
         max_error = max(max_error,float(np.max(np.abs(viewport[inside]-expected[inside]))))
     assert max_error<.001
-    assert train[0].original_image.shape == (3,400,563)
-    assert test[0].time==0 and test[12].time==1
+    width,height=manifest["image_resolution"]
+    assert train[0].original_image.shape == (3,height,width)
+    assert test[0].time==0 and test[len(test)-1].time==1
     expected_points=manifest["initialization_points"]
     assert gaussians.get_xyz.shape[0]==expected_points
     result=dict(training_samples=len(train),test_samples=len(test),initial_points=expected_points,
@@ -79,8 +84,9 @@ def render(source, output, config, iteration):
     manifest=json.loads((source/"manifest.json").read_text())
     train_records=[r for r in manifest["frames"] if r["split"]=="train"]
     train=scene.getTrainCameras()
-    groups={"test-cam13":list(scene.getTestCameras()),
-        "train-cam08":[train[i] for i,r in enumerate(train_records) if r["camera_id"]=="cam08"]}
+    training_view=manifest.get("evaluation_training_camera","cam08")
+    groups={"test-"+manifest["heldout_camera"]:list(scene.getTestCameras()),
+        "train-"+training_view:[train[i] for i,r in enumerate(train_records) if r["camera_id"]==training_view]}
     background=torch.tensor([0,0,0],dtype=torch.float32,device="cuda")
     result={}
     with torch.no_grad():
@@ -115,15 +121,17 @@ def render(source, output, config, iteration):
                 temporal_change_region_pixels=int(change.sum()),total_pixels=int(change.numel()),
                 target_interframe_mae=float((target[1:]-target[:-1]).abs().mean()),
                 render_interframe_mae=float((pred[1:]-pred[:-1]).abs().mean()))
-            sheet=Image.new("RGB",(563*2,425*3),"white");draw=ImageDraw.Draw(sheet)
-            for row,index in enumerate([0,6,12]):
+            width,height=manifest["image_resolution"]
+            preview_height=round(height*400/width)
+            sheet=Image.new("RGB",(800,(preview_height+25)*3),"white");draw=ImageDraw.Draw(sheet)
+            for row,index in enumerate([0,len(cameras)//2,len(cameras)-1]):
                 for col,sub in enumerate(["gt","renders"]):
-                    with Image.open(folder/sub/f"{index:03d}.png") as image: sheet.paste(image,(col*563,row*425+25))
-                    draw.text((col*563+5,row*425+5),f"{name} / frame {index} / {sub}",fill="black")
+                    with Image.open(folder/sub/f"{index:03d}.png") as image: sheet.paste(image.resize((400,preview_height)),(col*400,row*(preview_height+25)+25))
+                    draw.text((col*400+5,row*(preview_height+25)+5),f"{name} / frame {index} / {sub}",fill="black")
             sheet.save(folder/"comparison.jpg",quality=92)
     report=dict(iteration=iteration,active_sh_degree=gaussians.active_sh_degree,
         gaussian_count=int(gaussians.get_xyz.shape[0]),metrics=result,
-        caution="Short execution/quality pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. cam13 is held out from optimization but closely overlaps cam01.")
+        caution="Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately.")
     (output/f"evaluation-{iteration}.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(report,indent=2),flush=True)
 

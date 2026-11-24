@@ -43,6 +43,6 @@ class DurationComparisonTests(unittest.TestCase):
                 folder=root/f"renders-{iteration}/test-cam13/gt"
                 folder.mkdir(parents=True)
                 Image.new("RGB",(2,2),(color,0,0)).save(folder/"000.png")
-                (root/f"evaluation-{iteration}.json").write_text(json.dumps({"metrics":{}}))
+                (root/f"evaluation-{iteration}.json").write_text(json.dumps({"metrics":{"test-cam13":{},"train-cam08":{}}}))
             with self.assertRaisesRegex(ValueError,"Targets differ"):
                 compare(root,root/"comparison")

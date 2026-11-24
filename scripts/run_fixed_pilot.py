@@ -12,7 +12,8 @@ import time
 from live_process import live_run
 
 
-def run(root,source,output,long=False):
+def run(root,source,output,long=False,custom_config=None,checkpoints=None):
+    if long and custom_config:raise ValueError("Choose either the duration control or a custom experiment")
     if os.name=="nt":
         def linux(path):
             return subprocess.check_output(["wsl","-d","Ubuntu-22.04","-u","root","--exec","wslpath","-a","-u",str(path)],encoding="utf-8").strip()
@@ -26,6 +27,8 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
         command=["wsl","-d","Ubuntu-22.04","-u","root","--exec","/opt/skate4d/venv/bin/python",
             "/root/skate4d/project/scripts/run_fixed_pilot.py","--source",linux(source),"--output",linux(output)]
         if long:command.append("--long")
+        if custom_config:command += ["--configs",linux(custom_config)]
+        if checkpoints:command += ["--checkpoints",*[str(i) for i in checkpoints]]
         subprocess.run(command,check=True)
         return
     if (output/"model").exists():
@@ -37,8 +40,12 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
     os.environ["PATH"]="/usr/local/cuda-12.1/bin:"+os.environ["PATH"]
     import torch, diff_gaussian_rasterization, simple_knn._C
     assert torch.cuda.is_available()
-    config=root/("configs/experiments/true-skate-fixed-duration.py" if long else "configs/experiments/true-skate-fixed-pilot.py")
-    iterations=[2000,5000,10000] if long else [2000]
+    config=custom_config or root/("configs/experiments/true-skate-fixed-duration.py" if long else "configs/experiments/true-skate-fixed-pilot.py")
+    iterations=checkpoints or ([2000,5000,10000] if long else [2000])
+    if sorted(set(iterations))!=iterations or iterations[0]<=0:raise ValueError("Invalid checkpoint order")
+    import mmcv
+    effective=mmcv.Config.fromfile(str(config)).to_dict()
+    if effective["OptimizationParams"]["iterations"]!=iterations[-1]:raise ValueError("Final checkpoint differs from configured training budget")
     if long:
         import mmcv
         original=mmcv.Config.fromfile(str(root/"configs/experiments/true-skate-fixed-pilot.py")).to_dict()
@@ -51,13 +58,13 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
     shared=["--source",source,"--output",output,"--configs",config]
     times={}
     phases=[("probe","1/3 Verification du chargeur, des cameras et des projections",300,[]),
-        ("train",f"2/3 Entrainement True Skate : 200 coarse + {iterations[-1]} fine",3600 if long else 1200,
-            ["--save-iterations",*[str(i) for i in ([2000,5000,10000] if long else [500,2000])],
+        ("train",f"2/3 Entrainement True Skate : 200 coarse + {iterations[-1]} fine",3600 if long or custom_config else 1200,
+            ["--save-iterations",*[str(i) for i in (iterations if long or checkpoints else [500,2000])],
              "--test-iterations",*[str(i) for i in iterations]])]
     phases += [("render",f"3/3 Rendu et evaluation du checkpoint {i}",600,["--iteration",str(i)]) for i in iterations]
     for phase,label,limit,extra in phases:
         started=time.monotonic()
-        key=f"render-{extra[-1]}" if phase=="render" and long else phase
+        key=f"render-{extra[-1]}" if phase=="render" and (long or checkpoints) else phase
         live_run(command+[phase]+shared+extra,output/"logs"/(key+".log"),label,
             cwd=root/"third_party/4DGaussians",timeout=limit,min_free_bytes=5*2**30)
         times[key]=time.monotonic()-started
@@ -66,7 +73,7 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
         config_sha256=hashlib.sha256(config.read_bytes()).hexdigest(),
         loader=json.loads((output/"loader.json").read_text()),
         evaluation=json.loads((output/f"evaluation-{iterations[-1]}.json").read_text()))
-    if long:
+    if long or custom_config:
         result.update(checkpoints=iterations,effective_configuration=effective,
             evaluations={str(i):json.loads((output/f"evaluation-{i}.json").read_text()) for i in iterations})
     (output/"report.json").write_text(json.dumps(result,indent=2)+"\n")
@@ -78,5 +85,8 @@ if __name__=="__main__":
     parser.add_argument("--source",type=Path,default=Path("data/processed/true-skate-fixed-pilot-v2"))
     parser.add_argument("--output",type=Path,default=Path("outputs/true-skate-fixed-pilot"))
     parser.add_argument("--long",action="store_true",help="Original settings, 10000 fine steps and evaluations at 2000/5000/10000")
+    parser.add_argument("--configs",type=Path)
+    parser.add_argument("--checkpoints",type=int,nargs="+")
     args=parser.parse_args()
-    run(Path(__file__).resolve().parents[1],args.source.resolve(),args.output.resolve(),args.long)
+    run(Path(__file__).resolve().parents[1],args.source.resolve(),args.output.resolve(),args.long,
+        args.configs.resolve() if args.configs else None,args.checkpoints)

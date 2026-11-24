@@ -2,6 +2,8 @@
 
 [English](clean-capture.en.md) · [Evidencia medida](../evidence/clean-capture-2026-11-24.json)
 
+**Experimento posterior:** esta página documenta la recuperación. La nueva captura ya se sincronizó, calibró y entrenó; véase la [prueba completada y el análisis del fallo del primer plano](clean-pilot.es.md).
+
 El responsable aportó una grabación nueva sin editar de **567,67 segundos**, indicando que ocultaba el menú del replay en cada toma. Se recuperaron automáticamente **20 pasajes**, conservando el encuadre original. Diecinueve son compatibles con cámara fija en tres imágenes muestreadas; view05 se mueve y view18/view19 parecen repetir un punto de vista. Quedan **18 vistas fijas candidatas distintas**, pendientes de sincronización y calibración.
 
 **Actualización de selección:** el responsable indicó que view18 muestra el mismo encuadre sin la tabla. La lista activa contiene ahora **18 clips**, incluyendo view19. view05 se archiva en `excluded/`; view18 se conserva en `background/` como referencia del fondo, no como otra vista de entrenamiento dinámico. [Evidencia de selección e integridad](../evidence/clean-capture-roles-2026-11-24.json).

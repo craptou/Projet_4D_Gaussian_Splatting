@@ -2,6 +2,8 @@
 
 [Español](clean-capture.es.md) · [Measured evidence](../evidence/clean-capture-2026-11-24.json)
 
+**Subsequent experiment:** this page records the recovery stage. The new capture has since been synchronized, calibrated and trained; see the [completed trial and foreground failure analysis](clean-pilot.en.md).
+
 The owner supplied a new unedited **567.67-second** phone recording and indicated that the replay menu was hidden for each take. Automatic processing recovered **20 passages**, retaining the original image framing. Nineteen are consistent with a fixed camera in three sampled images; view05 moves, and view18/view19 are a likely repeated viewpoint. This leaves **18 distinct fixed-view candidates**, pending synchronization and calibration.
 
 **Role selection update:** the owner identified view18 as the same framing without the skateboard. The active replay list now contains **18 clips**, including view19. view05 is archived under `excluded/`; view18 is retained under `background/` as a background reference, not another dynamic training view. [Selection and integrity evidence](../evidence/clean-capture-roles-2026-11-24.json).

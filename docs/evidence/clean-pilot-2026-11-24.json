@@ -1,0 +1,668 @@
+{
+  "date": "2026-11-24",
+  "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+  "geometry": {
+    "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+    "training_views": [
+      "view01",
+      "view02",
+      "view03",
+      "view04",
+      "view06",
+      "view07",
+      "view08",
+      "view09",
+      "view10",
+      "view11",
+      "view12",
+      "view13",
+      "view14",
+      "view15",
+      "view16",
+      "view17",
+      "view19"
+    ],
+    "heldout_view": "view20",
+    "image_size": [
+      1126,
+      2436
+    ],
+    "models": [
+      {
+        "model_id": 0,
+        "images": [
+          "view01.png",
+          "view02.png",
+          "view03.png",
+          "view04.png",
+          "view06.png",
+          "view07.png",
+          "view08.png",
+          "view09.png",
+          "view10.png",
+          "view11.png",
+          "view12.png",
+          "view13.png",
+          "view14.png",
+          "view15.png",
+          "view16.png",
+          "view17.png",
+          "view19.png"
+        ],
+        "registered": 17,
+        "points": 2823,
+        "mean_error": 0.4699222338761041,
+        "focal": 844.153300064991
+      }
+    ],
+    "selected_model": 0,
+    "preparations": [
+      {
+        "id": "view01",
+        "source_frames": [
+          3,
+          88,
+          174,
+          259,
+          344
+        ],
+        "excluded_changing_fraction": 0.009557641884462488,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view02",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.010412200649231335,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view03",
+        "source_frames": [
+          3,
+          99,
+          194,
+          290,
+          386
+        ],
+        "excluded_changing_fraction": 0.0221671231118772,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view04",
+        "source_frames": [
+          3,
+          90,
+          176,
+          263,
+          350
+        ],
+        "excluded_changing_fraction": 0.05386892001854947,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view06",
+        "source_frames": [
+          3,
+          90,
+          176,
+          263,
+          350
+        ],
+        "excluded_changing_fraction": 0.024492368761064785,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view07",
+        "source_frames": [
+          3,
+          92,
+          182,
+          272,
+          361
+        ],
+        "excluded_changing_fraction": 0.013871997013419197,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view08",
+        "source_frames": [
+          3,
+          90,
+          176,
+          263,
+          350
+        ],
+        "excluded_changing_fraction": 0.011901116176243266,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view09",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.011350611169928864,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view10",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.009223693152155208,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view11",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.010912394601988526,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view12",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.010330900903265697,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view13",
+        "source_frames": [
+          3,
+          102,
+          200,
+          298,
+          397
+        ],
+        "excluded_changing_fraction": 0.007576188434582506,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view14",
+        "source_frames": [
+          3,
+          98,
+          194,
+          290,
+          385
+        ],
+        "excluded_changing_fraction": 0.00822366981949269,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view15",
+        "source_frames": [
+          3,
+          97,
+          191,
+          285,
+          379
+        ],
+        "excluded_changing_fraction": 0.009413271035124408,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view16",
+        "source_frames": [
+          3,
+          99,
+          194,
+          290,
+          386
+        ],
+        "excluded_changing_fraction": 0.011158845849848484,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view17",
+        "source_frames": [
+          3,
+          80,
+          158,
+          236,
+          313
+        ],
+        "excluded_changing_fraction": 0.01188434582505753,
+        "background": "five-frame temporal median"
+      },
+      {
+        "id": "view19",
+        "source_frames": [
+          3,
+          88,
+          173,
+          258,
+          343
+        ],
+        "excluded_changing_fraction": 0.013201547538841592,
+        "background": "view18 empty reference"
+      },
+      {
+        "id": "view20",
+        "source_frames": [
+          3,
+          88,
+          173,
+          258,
+          343
+        ],
+        "excluded_changing_fraction": 0.022336284915142023,
+        "background": "five-frame temporal median"
+      }
+    ],
+    "elapsed_geometry_seconds": 44.375,
+    "method": "Full-resolution background medians and temporal-change masks; shared SIMPLE_PINHOLE with fixed image-center principal point; training views only",
+    "caution": "Sparse geometry, not dense stereo. Masks are temporal diagnostics, not semantic segmentation. Focal plausibility filtering does not independently validate calibration."
+  },
+  "heldout_localization": {
+    "camera_id": "view20",
+    "world_to_camera": [
+      [
+        0.9048665977747237,
+        -0.0009544157938083846,
+        0.4256941734650464,
+        -1.3060708075455576
+      ],
+      [
+        -0.005932854505566061,
+        0.9998720901218711,
+        0.0148527651545686,
+        0.068686043457515
+      ],
+      [
+        -0.42565389868884357,
+        -0.015965352667996778,
+        0.9047451939884369,
+        0.46612343787437355
+      ]
+    ],
+    "intrinsics": [
+      844.153300064991,
+      563.0,
+      1218.0
+    ],
+    "quality": {
+      "correspondences": 620,
+      "inliers": 572,
+      "inlier_ratio": 0.9225806451612903,
+      "median_error_px": 0.5850053503661417,
+      "mean_error_px": 0.75681804764952,
+      "p95_error_px": 2.1132141297850495,
+      "positive_depth_ratio": 1.0
+    },
+    "accepted": true,
+    "map_sha256": {
+      "cameras.bin": "bf5a067decf540ff2388799d559c11dbeb9d7b369185d1d03422ed66bb121fbf",
+      "frames.bin": "1c10a672839d967af4d768d198f31ddfca34400f2813d97c40cb15f616d006ee",
+      "images.bin": "e0ddc138158eb551e2bde43bb41c82f08fb9179faaf013a7da9240e474f8e790",
+      "points3D.bin": "906880f9fac67c041946dd63f91eff8d7e3f499a0b4ed92e270e09ec927088a0",
+      "rigs.bin": "73e4d5f0da0a84a5711b46ae716a149f1532832f95bb09b4b01e73cf2c5afbe9"
+    },
+    "split": "Query pixels used only for localization against frozen training map, not map/4D optimization",
+    "limitations": "Shared estimated intrinsics; no independent ground-truth camera calibration. Viewpoint independence needs separate review."
+  },
+  "preparation": {
+    "training_cameras": [
+      "view01",
+      "view02",
+      "view03",
+      "view04",
+      "view06",
+      "view07",
+      "view08",
+      "view09",
+      "view10",
+      "view11",
+      "view12",
+      "view13",
+      "view14",
+      "view15",
+      "view16",
+      "view17",
+      "view19"
+    ],
+    "heldout_camera": "view20",
+    "evaluation_training_camera": "view19",
+    "image_resolution": [
+      563,
+      1218
+    ],
+    "intrinsics": [
+      422.0766500324955,
+      281.5,
+      609.0
+    ],
+    "crop_xywh": [
+      0,
+      0,
+      1126,
+      2436
+    ],
+    "source_fps": 60,
+    "sample_fps": 20,
+    "physical_time_span_seconds": 0.6,
+    "normalized_time_rule": "sample index / 12; 0.6 seconds, from -1.0 to -0.4 seconds before the detected score event",
+    "event_onsets_frames": {
+      "view01": 231,
+      "view02": 277,
+      "view03": 274,
+      "view04": 241,
+      "view06": 240,
+      "view07": 246,
+      "view08": 240,
+      "view09": 277,
+      "view10": 273,
+      "view11": 276,
+      "view12": 276,
+      "view13": 282,
+      "view14": 275,
+      "view15": 272,
+      "view16": 275,
+      "view17": 202,
+      "view19": 235,
+      "view20": 235
+    },
+    "initialization_points": 2337,
+    "initialization": "Observed training-background sparse points with >=3 tracks and error <=2 pixels; no interpolation or board-specific seeds",
+    "world_normalization": {
+      "origin": [
+        0.19116581300440308,
+        -0.023497055825224503,
+        0.026472932062513006
+      ],
+      "scale": 7.4888424187489875
+    },
+    "background_reference": "background/view19.png from empty view18, for diagnostics; no foreground loss weighting",
+    "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+    "limitations": "One UI event alignment, not proven frame-perfect sync. Shared estimated intrinsics. New capture/preparation differs from earlier pilots, not a data-only ablation."
+  },
+  "synchronization_method": "First persistent bright-green score event, visually checked as HARD FLIP Score 71 in all 18 views; 13 samples from -1.0 to -0.4 seconds before event; 60fps source exports, stride3.",
+  "run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 19.656473529999992,
+      "train": 442.34229982899996,
+      "render-2000": 70.30002099300003,
+      "render-5000": 49.56120802999999
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 5000,
+    "config_sha256": "869f46554bfd641b3997239d45616cff28e8d150dff874d6591840fad61d5936",
+    "loader": {
+      "training_samples": 221,
+      "test_samples": 13,
+      "initial_points": 2337,
+      "image_resolution": [
+        563,
+        1218
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 9.433446410511692e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "evaluation": {
+      "iteration": 5000,
+      "active_sh_degree": 3,
+      "gaussian_count": 4871,
+      "metrics": {
+        "test-view20": {
+          "render": {
+            "mean_psnr_db": 27.04524803161621,
+            "mean_ssim": 0.9057250481385452,
+            "temporal_change_region_mean_psnr_db": 20.354595184326172,
+            "temporal_change_region_mae": 0.06829150021076202
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 26.90656280517578,
+            "mean_ssim": 0.904120880823869,
+            "temporal_change_region_mean_psnr_db": 20.363853454589844,
+            "temporal_change_region_mae": 0.06806859374046326
+          },
+          "temporal_change_region_pixels": 17113,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.0010396683355793357,
+          "render_interframe_mae": 0.0019859278108924627
+        },
+        "train-view19": {
+          "render": {
+            "mean_psnr_db": 28.204936981201172,
+            "mean_ssim": 0.9024109015097985,
+            "temporal_change_region_mean_psnr_db": 19.313356399536133,
+            "temporal_change_region_mae": 0.06285381317138672
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 28.073793411254883,
+            "mean_ssim": 0.9005535795138433,
+            "temporal_change_region_mean_psnr_db": 19.30649185180664,
+            "temporal_change_region_mae": 0.06341804563999176
+          },
+          "temporal_change_region_pixels": 11621,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.0007899136980995536,
+          "render_interframe_mae": 0.0025748044718056917
+        }
+      },
+      "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+    },
+    "checkpoints": [
+      2000,
+      5000
+    ],
+    "effective_configuration": {
+      "ModelParams": {
+        "white_background": false,
+        "eval": true,
+        "add_points": false
+      },
+      "OptimizationParams": {
+        "iterations": 5000,
+        "coarse_iterations": 200,
+        "batch_size": 1,
+        "dataloader": false,
+        "densify_from_iter": 200,
+        "densify_until_iter": 1300,
+        "densification_interval": 300,
+        "opacity_reset_interval": 60000,
+        "add_point": false
+      },
+      "ModelHiddenParams": {
+        "net_width": 64,
+        "multires": [
+          1,
+          2
+        ],
+        "defor_depth": 0,
+        "kplanes_config": {
+          "grid_dimensions": 2,
+          "input_coordinate_dim": 4,
+          "output_coordinate_dim": 16,
+          "resolution": [
+            32,
+            32,
+            32,
+            13
+          ]
+        },
+        "no_do": false,
+        "no_dshs": false,
+        "no_ds": false,
+        "plane_tv_weight": 0.0002,
+        "time_smoothness_weight": 0.001,
+        "l1_time_planes": 0.0001
+      }
+    },
+    "evaluations": {
+      "2000": {
+        "iteration": 2000,
+        "active_sh_degree": 2,
+        "gaussian_count": 4871,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 22.533029556274414,
+              "mean_ssim": 0.87216533605869,
+              "temporal_change_region_mean_psnr_db": 20.004405975341797,
+              "temporal_change_region_mae": 0.07232708483934402
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 22.58595085144043,
+              "mean_ssim": 0.8746145596871009,
+              "temporal_change_region_mean_psnr_db": 20.014183044433594,
+              "temporal_change_region_mae": 0.07249008119106293
+            },
+            "temporal_change_region_pixels": 17113,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0010396683355793357,
+            "render_interframe_mae": 0.0035658979322761297
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 21.957378387451172,
+              "mean_ssim": 0.8678817107127264,
+              "temporal_change_region_mean_psnr_db": 18.19659423828125,
+              "temporal_change_region_mae": 0.09254992753267288
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 22.52292823791504,
+              "mean_ssim": 0.8759665076549237,
+              "temporal_change_region_mean_psnr_db": 18.34490966796875,
+              "temporal_change_region_mae": 0.08918996900320053
+            },
+            "temporal_change_region_pixels": 11621,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0007899136980995536,
+            "render_interframe_mae": 0.007265043444931507
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      },
+      "5000": {
+        "iteration": 5000,
+        "active_sh_degree": 3,
+        "gaussian_count": 4871,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 27.04524803161621,
+              "mean_ssim": 0.9057250481385452,
+              "temporal_change_region_mean_psnr_db": 20.354595184326172,
+              "temporal_change_region_mae": 0.06829150021076202
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 26.90656280517578,
+              "mean_ssim": 0.904120880823869,
+              "temporal_change_region_mean_psnr_db": 20.363853454589844,
+              "temporal_change_region_mae": 0.06806859374046326
+            },
+            "temporal_change_region_pixels": 17113,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0010396683355793357,
+            "render_interframe_mae": 0.0019859278108924627
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 28.204936981201172,
+              "mean_ssim": 0.9024109015097985,
+              "temporal_change_region_mean_psnr_db": 19.313356399536133,
+              "temporal_change_region_mae": 0.06285381317138672
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 28.073793411254883,
+              "mean_ssim": 0.9005535795138433,
+              "temporal_change_region_mean_psnr_db": 19.30649185180664,
+              "temporal_change_region_mae": 0.06341804563999176
+            },
+            "temporal_change_region_pixels": 11621,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0007899136980995536,
+            "render_interframe_mae": 0.0025748044718056917
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      }
+    }
+  },
+  "foreground_diagnostic": {
+    "background_plate_baseline": {
+      "mean_psnr_db": 11.56322942240247,
+      "mean_absolute_error": 0.25137561559677124
+    },
+    "checkpoints": {
+      "2000": {
+        "renders": {
+          "mean_psnr_db": 12.437252237135407,
+          "mean_absolute_error": 0.20929500460624695
+        },
+        "frozen-time": {
+          "mean_psnr_db": 12.171337586522286,
+          "mean_absolute_error": 0.219191774725914
+        }
+      },
+      "5000": {
+        "renders": {
+          "mean_psnr_db": 11.794976276581927,
+          "mean_absolute_error": 0.24459561705589294
+        },
+        "frozen-time": {
+          "mean_psnr_db": 11.861054767455503,
+          "mean_absolute_error": 0.24305549263954163
+        }
+      }
+    },
+    "mask_pixels_per_frame": [
+      2032,
+      2032,
+      1988,
+      1832,
+      382,
+      757,
+      1231,
+      2755,
+      3361,
+      1651,
+      1553,
+      3621,
+      3027
+    ],
+    "method": "abs RGB target-empty-background max>40/255 AND target temporal range>45/255, view19 only; per-frame mask",
+    "caution": "Reference-derived candidate foreground, may include shadows/appearance effects. Not semantic labels or independent object geometry validation. Masks not used in this training."
+  },
+  "foreground_candidate_mean_pixel_fraction": 0.0029414859450995912,
+  "verification": {
+    "registered_training_views": 17,
+    "heldout_excluded_from_mapping_and_optimization": true,
+    "train_images": 221,
+    "validation_images": 13,
+    "identical_evaluation_targets_across_checkpoints": 26,
+    "decoded_render_target_control_pngs": 156,
+    "helper_tests_passed": 31
+  },
+  "verdict": "New capture/preparation supports geometry and a recognizable background, but the skateboard is not recognizable in inspected model renders. Candidate-foreground PSNR at 5000 is near the empty-background baseline.",
+  "limitations": "Dataset, action, resolution/crop, view count and initialization differ from the earlier pilot; no data-only causal comparison. Single UI event does not establish frame-perfect simulation synchronization. Foreground masks are reference-derived diagnostics, not semantic ground truth. No foreground weighting or object seeds were used."
+}

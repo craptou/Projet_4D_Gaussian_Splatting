@@ -11,21 +11,23 @@ import _bootstrap
 from skate4d.localization import accepted, pose_quality, unique_correspondences
 
 
-def localize(reference, output):
+def localize(reference, output, query_id="cam13", model_id=1, mask_path=None):
     if output.exists():
         raise ValueError("Output exists")
-    files = sorted((reference/"sparse/1").glob("*.bin"))
+    model_path=reference/"sparse"/str(model_id)
+    files = sorted(model_path.glob("*.bin"))
     fingerprints = {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
-    model = pycolmap.Reconstruction(reference/"sparse/1")
-    assert all(image.name != "cam13.png" for image in model.images.values())
-    options = pycolmap.FeatureExtractionOptions(num_threads=4, max_image_size=1700)
-    options.sift.max_num_features = 4096
+    model = pycolmap.Reconstruction(model_path)
+    assert all(image.name != query_id+".png" for image in model.images.values())
+    native_height=next(iter(model.cameras.values())).height
+    options = pycolmap.FeatureExtractionOptions(num_threads=4, max_image_size=2500 if native_height>1700 else 1700)
+    options.sift.max_num_features = 8192 if native_height>1700 else 4096
     extractor = pycolmap.FeatureExtractor.create(options, pycolmap.Device.cpu)
     matcher = pycolmap.FeatureMatcher.create(pycolmap.FeatureMatchingOptions(num_threads=4), pycolmap.Device.cpu)
-    with Image.open(reference/"images/cam13.png") as image:
+    with Image.open(reference/"images"/(query_id+".png")) as image:
         keypoints, descriptors = extractor.extract_from_uint8_array(np.asarray(image.convert("L")))
     xy = np.array([[p.x,p.y] for p in keypoints])
-    mask = np.asarray(Image.open(reference/"background-mask.png"))
+    mask = np.asarray(Image.open(mask_path or reference/"background-mask.png"))
     keep = np.array([i for i,(x,y) in enumerate(xy) if 0 <= x < mask.shape[1] and 0 <= y < mask.shape[0] and mask[int(y),int(x)] > 0])
     xy = xy[keep]
     query = pycolmap.FeatureDescriptors(descriptors.type, descriptors.data[keep])
@@ -52,10 +54,10 @@ def localize(reference, output):
         raise ValueError("PnP failed")
     matrix = result["cam_from_world"].matrix()
     quality = pose_quality(pixels, points, matrix, result["inlier_mask"], camera.params)
-    report = dict(camera_id="cam13", world_to_camera=matrix.tolist(), intrinsics=camera.params.tolist(),
+    report = dict(camera_id=query_id, world_to_camera=matrix.tolist(), intrinsics=camera.params.tolist(),
         quality=quality, accepted=accepted(quality), map_sha256=fingerprints,
         split="Query pixels used only for localization against frozen training map, not map/4D optimization",
-        limitations="Shared estimated intrinsics; no independent ground-truth camera calibration. Query overlaps closely with cam01.")
+        limitations="Shared estimated intrinsics; no independent ground-truth camera calibration. Viewpoint independence needs separate review.")
     assert fingerprints == {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2)+"\n")
@@ -68,5 +70,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reference", type=Path, default=Path("outputs/fixed-geometry-2026-11-24"))
     parser.add_argument("--output", type=Path, default=Path("outputs/fixed-dynamic-preparation/holdout.json"))
+    parser.add_argument("--query-id",default="cam13")
+    parser.add_argument("--model-id",type=int,default=1)
+    parser.add_argument("--mask",type=Path)
     args = parser.parse_args()
-    localize(args.reference, args.output)
+    localize(args.reference, args.output,args.query_id,args.model_id,args.mask)
