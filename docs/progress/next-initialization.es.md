@@ -2,7 +2,7 @@
 
 [English](next-initialization.en.md) · [Resultado de referencia](fixed-dynamic-pilot.es.md) · [Validación del lanzador](../evidence/next-initialization-validation.json)
 
-El lanzador Windows está preparado para que lo ejecute el responsable. **El asistente no ha ejecutado el entrenamiento con la inicialización remuestreada.** Las comprobaciones de preparación y carga no son un resultado de optimización.
+**Actualización de ejecución:** el responsable ya ejecutó este experimento. Los [resultados medidos y el análisis del fallo](resampling-result.es.md) sustituyen su estado pendiente anterior. Las instrucciones y la validación siguientes describen la preparación del experimento.
 
 Desde PowerShell en el repositorio:
 
@@ -18,4 +18,4 @@ Cuatro fases muestran progreso: comprobar GPU; preparar entradas y verificar im�
 
 Cada ejecución crea `outputs/fixed-next-<fecha UTC>/`, con `input/`, `run/`, registros por fase y `comparison/`. El archivo final `test-cam13-comparison.jpg` muestra entrada / referencia / nuevo resultado; `summary.json` conserva las diferencias métricas. El comparador verifica píxeles idénticos en todas las imágenes objetivo evaluadas antes de comparar. Una mejora global no demuestra reconstrucción de la tabla: revisar imágenes y control de tiempo fijo. Se conservan datos originales y referencia. No se reanuda automáticamente una optimización interrumpida desde su estado del optimizador; los archivos parciales quedan disponibles.
 
-Validación: `-CheckOnly` pasó con el entorno RTX 4050 existente; la preparación conservó 117 imágenes idénticas; pasaron 27 pruebas auxiliares, incluyendo conservación de geometría/color planos y rechazo de objetivos de evaluación modificados. Antes de entrenar también se comprueba la carga GPU con el número de puntos remuestreado. La calidad del experimento queda pendiente de la ejecución del responsable.
+Validación del lanzador: `-CheckOnly` pasó con el entorno RTX 4050 existente; la preparación conservó 117 imágenes idénticas; pasaron 27 pruebas auxiliares, incluyendo conservación de geometría/color planos y rechazo de objetivos de evaluación modificados. Antes de entrenar también se comprueba la carga GPU con el número de puntos remuestreado. La evidencia de validación enlazada es anterior al entrenamiento completado por el responsable y no representa su resultado de calidad.

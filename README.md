@@ -12,7 +12,7 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 **24 November — first True Skate dynamic attempt:** [results, failure analysis and reproduction](docs/progress/fixed-dynamic-pilot.en.md): 8 training views, one reserved view, 13 instants spanning 0.4 seconds. Training: 200 coarse + 2000 fine steps in 85.92 s. Background blurred, moving board not recovered; the frozen-time control is slightly better on full reserved images. [Input/model animation](docs/assets/fixed-pilot-comparison.gif).
 
-**Next experiment ready to launch:** [PowerShell launcher with live progress and baseline comparison](docs/progress/next-initialization.en.md). Tests an initialization resampling variant with unchanged images/cameras and training budget; optimization results are pending the owner's execution.
+**24 November — owner-executed initialization experiment:** [results and temporal diagnostic](docs/progress/resampling-result.en.md). Resampling 1,115 points to 8,920 did not recover the skateboard. Reserved-view PSNR changes by +0.172 dB, while SSIM and changing-region PSNR worsen. The render also varies in target-stable background regions. [Three-way animation](docs/assets/resampling-comparison.gif). Next proposed gate: single-timestamp static fitting before more dynamic optimization. [Terminal launcher](docs/progress/next-initialization.en.md).
 
 **24 November - fixed-view geometry pilot:** [12/12 training cameras registered](docs/progress/fixed-geometry.en.md), 1,355 sparse points, mean reprojection error 0.562 px; cam13 reserved before mapping. Static-background feasibility only; board reconstruction and True Skate dynamic training remain pending.
 

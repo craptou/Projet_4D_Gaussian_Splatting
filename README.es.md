@@ -12,7 +12,7 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 **24 de noviembre — primer intento dinámico de True Skate:** [resultados, análisis del fallo y reproducción](docs/progress/fixed-dynamic-pilot.es.md): 8 vistas de entrenamiento, una reservada y 13 instantes en 0,4 segundos. Entrenamiento: 200 pasos coarse + 2000 fine en 85,92 s. Fondo borroso y tabla no recuperada; el control con tiempo fijo es ligeramente mejor en imágenes completas de la vista reservada. [Animación de entrada/modelo](docs/assets/fixed-pilot-comparison.gif).
 
-**Próximo experimento listo para ejecutar:** [lanzador PowerShell con progreso y comparación](docs/progress/next-initialization.es.md). Prueba una inicialización remuestreada conservando imágenes, cámaras y presupuesto de entrenamiento; resultados de optimización pendientes de la ejecución del responsable.
+**24 de noviembre — experimento de inicialización ejecutado por el responsable:** [resultados y diagnóstico temporal](docs/progress/resampling-result.es.md). Remuestrear 1.115 puntos hasta 8.920 no recuperó la tabla. El PSNR reservado cambia +0,172 dB, pero empeoran SSIM y PSNR de la región cambiante. El render también varía en zonas estables del objetivo. [Animación de tres columnas](docs/assets/resampling-comparison.gif). Siguiente comprobación propuesta: ajuste estático de un instante antes de más optimización dinámica. [Lanzador de terminal](docs/progress/next-initialization.es.md).
 
 **24 de noviembre — prueba de geometría fija:** [12/12 vistas de entrenamiento registradas](docs/progress/fixed-geometry.es.md), 1.355 puntos dispersos, error medio de 0,562 px; cam13 reservada antes de la reconstrucción. Prueba del fondo estático; falta reconstruir la tabla y entrenar True Skate.
 

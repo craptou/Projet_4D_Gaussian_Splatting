@@ -1,0 +1,191 @@
+{
+  "date": "2026-11-24",
+  "owner_executed": true,
+  "experiment_directory": "fixed-next-20261124-204217-457579Z",
+  "method": "Initialization variant: retain 1115 measured training-background points and interpolate to 8920 samples; same 104 training images, 13 reserved images, poses, timestamps, crop and model settings; 200 coarse + 2000 fine steps.",
+  "verification": {
+    "config_sha256": "45b98cc34a8f651a92a4a5218446b853a38949273114254bf8136b2dbab210cd",
+    "frames_poses_and_timestamps_identical": true,
+    "input_image_files_verified_identical": 117,
+    "evaluation_targets_verified_identical": 26,
+    "original_initialization_cloud_sha256_verified": true
+  },
+  "run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 9.777721972000002,
+      "train": 85.360279981,
+      "render": 24.96682282000002
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 2000,
+    "config_sha256": "45b98cc34a8f651a92a4a5218446b853a38949273114254bf8136b2dbab210cd",
+    "loader": {
+      "training_samples": 104,
+      "test_samples": 13,
+      "initial_points": 8920,
+      "image_resolution": [
+        563,
+        400
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 2.658497263641202e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "evaluation": {
+      "iteration": 2000,
+      "active_sh_degree": 2,
+      "gaussian_count": 11487,
+      "metrics": {
+        "test-cam13": {
+          "render": {
+            "mean_psnr_db": 15.229049682617188,
+            "mean_ssim": 0.6229254236588111,
+            "temporal_change_region_mean_psnr_db": 10.367124557495117,
+            "temporal_change_region_mae": 0.24411961436271667
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 15.215865135192871,
+            "mean_ssim": 0.6224397466732905,
+            "temporal_change_region_mean_psnr_db": 10.349234580993652,
+            "temporal_change_region_mae": 0.2442382127046585
+          },
+          "temporal_change_region_pixels": 3652,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001568652456626296,
+          "render_interframe_mae": 0.004965847358107567
+        },
+        "train-cam08": {
+          "render": {
+            "mean_psnr_db": 18.01952362060547,
+            "mean_ssim": 0.7153979402322036,
+            "temporal_change_region_mean_psnr_db": 13.035345077514648,
+            "temporal_change_region_mae": 0.16854089498519897
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 18.06681251525879,
+            "mean_ssim": 0.7166250256391672,
+            "temporal_change_region_mean_psnr_db": 13.021780014038086,
+            "temporal_change_region_mae": 0.16931577026844025
+          },
+          "temporal_change_region_pixels": 4989,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001224880339577794,
+          "render_interframe_mae": 0.004019252490252256
+        }
+      },
+      "caution": "Short execution/quality pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. cam13 is held out from optimization but closely overlaps cam01."
+    }
+  },
+  "comparison": {
+    "cameras": {
+      "test-cam13": {
+        "baseline": {
+          "mean_psnr_db": 15.056581497192383,
+          "mean_ssim": 0.6347202108456538,
+          "temporal_change_region_mean_psnr_db": 10.807306289672852,
+          "temporal_change_region_mae": 0.23551620543003082
+        },
+        "candidate": {
+          "mean_psnr_db": 15.229049682617188,
+          "mean_ssim": 0.6229254236588111,
+          "temporal_change_region_mean_psnr_db": 10.367124557495117,
+          "temporal_change_region_mae": 0.24411961436271667
+        },
+        "delta": {
+          "mean_psnr_db": 0.1724681854248047,
+          "mean_ssim": -0.011794787186842681,
+          "temporal_change_region_mean_psnr_db": -0.4401817321777344,
+          "temporal_change_region_mae": 0.008603408932685852
+        },
+        "candidate_frozen_time": {
+          "mean_psnr_db": 15.215865135192871,
+          "mean_ssim": 0.6224397466732905,
+          "temporal_change_region_mean_psnr_db": 10.349234580993652,
+          "temporal_change_region_mae": 0.2442382127046585
+        }
+      },
+      "train-cam08": {
+        "baseline": {
+          "mean_psnr_db": 18.869003295898438,
+          "mean_ssim": 0.7406565638688895,
+          "temporal_change_region_mean_psnr_db": 14.70299243927002,
+          "temporal_change_region_mae": 0.1400831788778305
+        },
+        "candidate": {
+          "mean_psnr_db": 18.01952362060547,
+          "mean_ssim": 0.7153979402322036,
+          "temporal_change_region_mean_psnr_db": 13.035345077514648,
+          "temporal_change_region_mae": 0.16854089498519897
+        },
+        "delta": {
+          "mean_psnr_db": -0.8494796752929688,
+          "mean_ssim": -0.02525862363668585,
+          "temporal_change_region_mean_psnr_db": -1.667647361755371,
+          "temporal_change_region_mae": 0.02845771610736847
+        },
+        "candidate_frozen_time": {
+          "mean_psnr_db": 18.06681251525879,
+          "mean_ssim": 0.7166250256391672,
+          "temporal_change_region_mean_psnr_db": 13.021780014038086,
+          "temporal_change_region_mae": 0.16931577026844025
+        }
+      }
+    },
+    "interpretation": "Changes in full-image metrics do not validate the board. Inspect the board in the comparisons and compare the dynamic result with its frozen-time control. Temporal-change regions are not board segmentation."
+  },
+  "motion": {
+    "method": "13 decoded RGB PNGs; stable-target mask: per-pixel max-channel range <=8/255 over time. Change mask >45/255. MAE of consecutive frames, in 0-255 RGB intensity units. Masks derived from targets, not semantic segmentation.",
+    "cameras": {
+      "test-cam13": {
+        "stable_target_region_pixels": 221179,
+        "stable_target_region_fraction": 0.9821447602131439,
+        "moving_target_region_pixels": 3652,
+        "interframe_mae_255": {
+          "gt": {
+            "whole_image": 0.4000064432621002,
+            "stable_target_region": 0.005791814532130957,
+            "changing_target_region": 24.14258575439453
+          },
+          "renders": {
+            "whole_image": 1.2661185264587402,
+            "stable_target_region": 1.2573292255401611,
+            "changing_target_region": 1.763827919960022
+          },
+          "frozen-time": {
+            "whole_image": 0.0,
+            "stable_target_region": 0.0,
+            "changing_target_region": 0.0
+          }
+        }
+      },
+      "train-cam08": {
+        "stable_target_region_pixels": 219432,
+        "stable_target_region_fraction": 0.9743872113676731,
+        "moving_target_region_pixels": 4989,
+        "interframe_mae_255": {
+          "gt": {
+            "whole_image": 0.312344491481781,
+            "stable_target_region": 0.0044134147465229034,
+            "changing_target_region": 13.483614921569824
+          },
+          "renders": {
+            "whole_image": 1.0245935916900635,
+            "stable_target_region": 1.0043351650238037,
+            "changing_target_region": 1.8447585105895996
+          },
+          "frozen-time": {
+            "whole_image": 0.0,
+            "stable_target_region": 0.0,
+            "changing_target_region": 0.0
+          }
+        }
+      }
+    }
+  },
+  "verdict": "No usable improvement in skateboard reconstruction. Small full-image heldout PSNR gain accompanies worse SSIM and temporal-change-region PSNR. Spurious temporal variation in target-stable background remains.",
+  "limitations": "One initialization variant and one training seed/budget. Resampling changes point count and position/color distribution, not measured geometric information. Does not rule out other initialization methods or convergence effects. Pixel-change masks are not board ground truth.",
+  "next_gate": "Check static reconstruction at one timestamp before another dynamic run; then isolate board observations and test foreground-specific initialization/loss separately."
+}

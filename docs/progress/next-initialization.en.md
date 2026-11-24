@@ -2,7 +2,7 @@
 
 [Español](next-initialization.es.md) · [Baseline result](fixed-dynamic-pilot.en.md) · [Launcher validation](../evidence/next-initialization-validation.json)
 
-The Windows launcher is ready for the owner to execute. **The resampled-initialization training has not been run by the assistant.** Preparation and loader checks are separate from an optimization result.
+**Execution update:** the owner has now run this experiment. [Measured results and failure analysis](resampling-result.en.md) supersede its earlier pending status. The instructions and launcher validation below describe how the experiment was prepared.
 
 From repository PowerShell:
 
@@ -18,4 +18,4 @@ Four phases report progress: GPU checks; input preparation with image identity c
 
 Each execution creates a fresh `outputs/fixed-next-<UTC timestamp>/` directory. It contains `input/`, `run/`, per-phase logs and `comparison/`. The final `test-cam13-comparison.jpg` shows input / baseline / new result, and `summary.json` records metric differences. The comparator verifies that all reported target images have identical pixels before comparing metrics. A global score increase does not establish board reconstruction; inspect the images and frozen-time control. Existing source data and the baseline are preserved. Interrupted optimization is not automatically resumed from optimizer state; partial files remain available for inspection.
 
-Validation: launcher `-CheckOnly` passed using the existing RTX 4050 environment; actual preparation retained 117 identical images; 27 helper tests passed, including planar geometry/color preservation and rejection of changed evaluation targets. The GPU loader is also checked against the resampled point count before training. The experiment's quality result remains pending the owner's execution.
+Launcher validation: `-CheckOnly` passed using the existing RTX 4050 environment; actual preparation retained 117 identical images; 27 helper tests passed, including planar geometry/color preservation and rejection of changed evaluation targets. The GPU loader is also checked against the resampled point count before training. The linked validation snapshot predates the owner's completed training and is not its quality result.
