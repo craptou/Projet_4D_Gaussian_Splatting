@@ -4,6 +4,8 @@
 
 El responsable aportó una grabación nueva sin editar de **567,67 segundos**, indicando que ocultaba el menú del replay en cada toma. Se recuperaron automáticamente **20 pasajes**, conservando el encuadre original. Diecinueve son compatibles con cámara fija en tres imágenes muestreadas; view05 se mueve y view18/view19 parecen repetir un punto de vista. Quedan **18 vistas fijas candidatas distintas**, pendientes de sincronización y calibración.
 
+**Actualización de selección:** el responsable indicó que view18 muestra el mismo encuadre sin la tabla. La lista activa contiene ahora **18 clips**, incluyendo view19. view05 se archiva en `excluded/`; view18 se conserva en `background/` como referencia del fondo, no como otra vista de entrenamiento dinámico. [Evidencia de selección e integridad](../evidence/clean-capture-roles-2026-11-24.json).
+
 ![Imágenes del punto medio de los 20 pasajes exportados](../assets/clean-capture-views.jpg)
 
 Cada miniatura corresponde al punto medio de su pasaje, no necesariamente al mismo instante del replay. Los identificadores siguen el orden de grabación y son independientes de conjuntos anteriores. No representan separaciones angulares regulares. Las imágenes fueron capturadas por el responsable en True Skate; los recursos del juego pertenecen a sus respectivos titulares.
@@ -20,12 +22,16 @@ Las comprobaciones SIFT del fondo en tres instantes usan los criterios anteriore
 
 ![Etiquetas de modo de cámara en los menús anteriores a cada toma](../assets/clean-capture-modes.jpg)
 
-- **view05**, segundos 158,15–162,15 del original (aproximadamente 2 min 38 s), falla la comprobación de cámara fija. El menú anterior indica **CAMERA: AUTO**. Los demás indican FIXED. Se recomienda excluir view05 de un experimento de cámaras fijas; se conserva el archivo.
-- **view18 y view19** parecen compartir punto de vista. Se conservan ambas. Para la próxima revisión, preferir view19 por su mayor duración (5,78 frente a 3,48 segundos), pendiente de comprobar visibilidad de la acción común y sincronización.
+- **view05**, segundos 158,15–162,15 del original (aproximadamente 2 min 38 s), falla la comprobación de cámara fija. El menú anterior indica **CAMERA: AUTO**. Los demás indican FIXED. Se retiró de la lista activa y se conserva en `excluded/view05.mp4`.
+- **view18 y view19** tienen un encuadre del fondo muy parecido, con contenido distinto. El responsable aclaró que view18 no tiene tabla. Cuatro muestras visuales a los 0,1, 1,0, 2,0 y 3,3 segundos respaldan conservarla como referencia del fondo. view19 sigue siendo el replay activo de ese punto de vista.
+
+![Recortes inferiores de la escena: fondo sin tabla en view18 y replay con tabla en view19](../assets/clean-background-reference.jpg)
+
+Se extrajo un PNG del fondo a resolución completa en el segundo uno de view18. Puede ayudar a comprobar diferencias con view19, pero estas también incluyen sombras, cambios locales de apariencia y compresión; no es una máscara semántica verificada de la tabla. No se entrenó mediante sustracción ni se ejecutó otra optimización durante esta selección.
 
 ## Archivos locales y siguiente comprobación
 
-Clips: `data/raw/true-skate-clean-2026-11-24/view01.mp4` hasta `view20.mp4`. `cuts.json` conserva tiempos, comprobaciones, incidencias y una selección preliminar. La grabación original, los clips y las trazas quedan locales, excluidos de Git. Se publican el script, las miniaturas y la evidencia compacta. No se sobrescribieron clips/modelos anteriores ni se inició entrenamiento.
+El directorio `data/raw/true-skate-clean-2026-11-24/` contiene 18 archivos activos `view*.mp4`, conservando los identificadores originales salvo view05/view18. Los otros pasajes quedan en `excluded/view05.mp4` y `background/view18.mp4`; `background/reference-for-view19.png` contiene el fondo a resolución completa. `cuts.json` separa replays activos, exclusiones y referencias de fondo. El manifiesto anterior se conserva como `cuts.before-role-selection.json`; los vídeos movidos se verificaron idénticos byte a byte. La grabación original, los clips y las trazas quedan locales, excluidos de Git. Se publican el script, las miniaturas y la evidencia compacta. No se sobrescribieron clips/modelos anteriores ni se inició entrenamiento.
 
 Reproducción con el entorno auxiliar Windows y FFmpeg existentes:
 

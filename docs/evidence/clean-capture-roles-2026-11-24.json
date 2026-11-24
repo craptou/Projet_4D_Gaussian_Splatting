@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-24",
+  "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+  "active_replay_ids": [
+    "view01",
+    "view02",
+    "view03",
+    "view04",
+    "view06",
+    "view07",
+    "view08",
+    "view09",
+    "view10",
+    "view11",
+    "view12",
+    "view13",
+    "view14",
+    "view15",
+    "view16",
+    "view17",
+    "view19",
+    "view20"
+  ],
+  "active_replay_count": 18,
+  "excluded": {
+    "id": "view05",
+    "file_path": "excluded/view05.mp4",
+    "sha256": "98e233ae3bd685dabac7ad75d9723477a24e195ac3749680e0b2239c03b249a0"
+  },
+  "background": {
+    "id": "view18",
+    "file_path": "background/view18.mp4",
+    "sha256": "5338649d0d81d1d3e95b8f1a8312a98143a3e002b83403b026d23eb8697375f1",
+    "paired_replay": "view19",
+    "reference_image_sha256": "9fdad1f75461388345f83b74965224afe846623c2a0325f20fb76c0d42904be1",
+    "reference_image_size": [
+      1126,
+      2436
+    ],
+    "visual_samples_seconds": [
+      0.1,
+      1,
+      2,
+      3.3
+    ]
+  },
+  "metadata_backup": "cuts.before-role-selection.json",
+  "moved_files_verified_byte_identical": true,
+  "interpretation": "view18 provides a sampled empty-background reference for view19 rather than a second dynamic viewpoint. Difference images can include shadows, local appearance changes and compression; this is not a verified semantic skateboard mask.",
+  "training_executed": false
+}
