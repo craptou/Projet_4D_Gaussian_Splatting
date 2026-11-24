@@ -12,7 +12,7 @@ import time
 from live_process import live_run
 
 
-def run(root,source,output):
+def run(root,source,output,long=False):
     if os.name=="nt":
         def linux(path):
             return subprocess.check_output(["wsl","-d","Ubuntu-22.04","-u","root","--exec","wslpath","-a","-u",str(path)],encoding="utf-8").strip()
@@ -23,8 +23,10 @@ mkdir -p "$dest"
 tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.pyc' -cf - configs scripts src pyproject.toml third_party/4DGaussians | tar -C "$dest" -xf -
 '''
         subprocess.run(["wsl","-d","Ubuntu-22.04","-u","root","--exec","/bin/bash","-s","--",linux(root)],input=copy.encode(),check=True)
-        subprocess.run(["wsl","-d","Ubuntu-22.04","-u","root","--exec","/opt/skate4d/venv/bin/python",
-            "/root/skate4d/project/scripts/run_fixed_pilot.py","--source",linux(source),"--output",linux(output)],check=True)
+        command=["wsl","-d","Ubuntu-22.04","-u","root","--exec","/opt/skate4d/venv/bin/python",
+            "/root/skate4d/project/scripts/run_fixed_pilot.py","--source",linux(source),"--output",linux(output)]
+        if long:command.append("--long")
+        subprocess.run(command,check=True)
         return
     if (output/"model").exists():
         raise ValueError("Model already exists; choose a fresh output")
@@ -35,22 +37,38 @@ tar -C "$src" --exclude=.git --exclude=__pycache__ --exclude=build --exclude='*.
     os.environ["PATH"]="/usr/local/cuda-12.1/bin:"+os.environ["PATH"]
     import torch, diff_gaussian_rasterization, simple_knn._C
     assert torch.cuda.is_available()
-    config=root/"configs/experiments/true-skate-fixed-pilot.py"
+    config=root/("configs/experiments/true-skate-fixed-duration.py" if long else "configs/experiments/true-skate-fixed-pilot.py")
+    iterations=[2000,5000,10000] if long else [2000]
+    if long:
+        import mmcv
+        original=mmcv.Config.fromfile(str(root/"configs/experiments/true-skate-fixed-pilot.py")).to_dict()
+        effective=mmcv.Config.fromfile(str(config)).to_dict()
+        expected=json.loads(json.dumps(original))
+        expected["OptimizationParams"]["iterations"]=10000
+        if effective!=expected:
+            raise ValueError("Duration control must change only OptimizationParams.iterations")
     command=[sys.executable,root/"scripts/fixed_pilot_engine.py"]
     shared=["--source",source,"--output",output,"--configs",config]
     times={}
-    for phase,label,limit in [("probe","1/3 Verification du chargeur, des cameras et des projections",300),
-        ("train","2/3 Entrainement True Skate : 200 coarse + 2000 fine (estimation 2-10 min)",1200),
-        ("render","3/3 Rendu et evaluation de la camera reservee et de cam08",300)]:
+    phases=[("probe","1/3 Verification du chargeur, des cameras et des projections",300,[]),
+        ("train",f"2/3 Entrainement True Skate : 200 coarse + {iterations[-1]} fine",3600 if long else 1200,
+            ["--save-iterations",*[str(i) for i in ([2000,5000,10000] if long else [500,2000])],
+             "--test-iterations",*[str(i) for i in iterations]])]
+    phases += [("render",f"3/3 Rendu et evaluation du checkpoint {i}",600,["--iteration",str(i)]) for i in iterations]
+    for phase,label,limit,extra in phases:
         started=time.monotonic()
-        live_run(command+[phase]+shared,output/"logs"/(phase+".log"),label,
+        key=f"render-{extra[-1]}" if phase=="render" and long else phase
+        live_run(command+[phase]+shared+extra,output/"logs"/(key+".log"),label,
             cwd=root/"third_party/4DGaussians",timeout=limit,min_free_bytes=5*2**30)
-        times[phase]=time.monotonic()-started
+        times[key]=time.monotonic()-started
     result=dict(status="Bounded True Skate pilot completed; inspect board quality separately",timing_seconds=times,
-        gpu=torch.cuda.get_device_name(),coarse_steps=200,fine_steps=2000,
+        gpu=torch.cuda.get_device_name(),coarse_steps=200,fine_steps=iterations[-1],
         config_sha256=hashlib.sha256(config.read_bytes()).hexdigest(),
         loader=json.loads((output/"loader.json").read_text()),
-        evaluation=json.loads((output/"evaluation-2000.json").read_text()))
+        evaluation=json.loads((output/f"evaluation-{iterations[-1]}.json").read_text()))
+    if long:
+        result.update(checkpoints=iterations,effective_configuration=effective,
+            evaluations={str(i):json.loads((output/f"evaluation-{i}.json").read_text()) for i in iterations})
     (output/"report.json").write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps(result,indent=2),flush=True)
 
@@ -59,5 +77,6 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source",type=Path,default=Path("data/processed/true-skate-fixed-pilot-v2"))
     parser.add_argument("--output",type=Path,default=Path("outputs/true-skate-fixed-pilot"))
+    parser.add_argument("--long",action="store_true",help="Original settings, 10000 fine steps and evaluations at 2000/5000/10000")
     args=parser.parse_args()
-    run(Path(__file__).resolve().parents[1],args.source.resolve(),args.output.resolve())
+    run(Path(__file__).resolve().parents[1],args.source.resolve(),args.output.resolve(),args.long)

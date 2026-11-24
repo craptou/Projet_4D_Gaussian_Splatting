@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-24",
+  "training_executed": false,
+  "check_only_passed": true,
+  "helper_tests_passed": 31,
+  "actual_gpu_loader": {
+    "training_samples": 104,
+    "test_samples": 13,
+    "initial_points": 1115,
+    "image_resolution": [
+      563,
+      400
+    ],
+    "last_normalized_time": 1.0,
+    "renderer_projection_max_error_pixels": 2.650795153913421e-05,
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "status": "Actual runtime loader and renderer projection checks passed"
+  },
+  "effective_configuration": {
+    "ModelParams": {
+      "white_background": false,
+      "eval": true,
+      "add_points": false
+    },
+    "OptimizationParams": {
+      "iterations": 10000,
+      "coarse_iterations": 200,
+      "batch_size": 1,
+      "dataloader": false,
+      "densify_from_iter": 200,
+      "densify_until_iter": 1300,
+      "densification_interval": 300,
+      "opacity_reset_interval": 60000,
+      "add_point": false
+    },
+    "ModelHiddenParams": {
+      "net_width": 64,
+      "multires": [
+        1,
+        2
+      ],
+      "defor_depth": 0,
+      "kplanes_config": {
+        "grid_dimensions": 2,
+        "input_coordinate_dim": 4,
+        "output_coordinate_dim": 16,
+        "resolution": [
+          32,
+          32,
+          32,
+          13
+        ]
+      },
+      "no_do": false,
+      "no_dshs": false,
+      "no_ds": false,
+      "plane_tv_weight": 0.0002,
+      "time_smoothness_weight": 0.001,
+      "l1_time_planes": 0.0001
+    }
+  },
+  "effective_configuration_diff": "OptimizationParams.iterations: 2000 -> 10000 only",
+  "checkpoints": [
+    2000,
+    5000,
+    10000
+  ],
+  "original_initialization_points": 1115,
+  "long_config_sha256": "1089e5ce203273dbf4a7fa3bf77eddd29911e80b9ffb4527a2c9cc3e051a5de4",
+  "comparison_validation": "Baseline images reused in fixture directories to exercise comparison/plotting and target checks. No 5000/10000-step performance results were generated.",
+  "status": "Ready for owner execution; long optimization not run"
+}

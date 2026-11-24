@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM = ROOT/"third_party/4DGaussians"
 sys.path.insert(0, str(UPSTREAM))
 from fixed_dataset_adapter import install
+from fixed_training_schedule import training_arguments
 install()
 
 
@@ -134,11 +135,11 @@ if __name__=="__main__":
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--configs",type=Path,required=True)
     parser.add_argument("--iteration",type=int,default=2000)
+    parser.add_argument("--save-iterations",type=int,nargs="+",default=[500,2000])
+    parser.add_argument("--test-iterations",type=int,nargs="+",default=[2000])
     args=parser.parse_args()
     if args.phase=="probe": probe(args.source,args.output,args.configs)
     elif args.phase=="render": render(args.source,args.output,args.configs,args.iteration)
     else:
-        sys.argv=[str(UPSTREAM/"train.py"),"-s",str(args.source),"--model_path",str(args.output/"model"),
-            "--configs",str(args.configs),"--expname","true-skate-fixed-pilot",
-            "--save_iterations","500","2000","--test_iterations","2000","--ip","127.0.0.1","--port","6010"]
+        sys.argv=training_arguments(UPSTREAM,args.source,args.output,args.configs,args.save_iterations,args.test_iterations)
         runpy.run_path(str(UPSTREAM/"train.py"),run_name="__main__")
