@@ -12,6 +12,8 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 **24 de noviembre — primer intento dinámico de True Skate:** [resultados, análisis del fallo y reproducción](docs/progress/fixed-dynamic-pilot.es.md): 8 vistas de entrenamiento, una reservada y 13 instantes en 0,4 segundos. Entrenamiento: 200 pasos coarse + 2000 fine en 85,92 s. Fondo borroso y tabla no recuperada; el control con tiempo fijo es ligeramente mejor en imágenes completas de la vista reservada. [Animación de entrada/modelo](docs/assets/fixed-pilot-comparison.gif).
 
+**Próximo experimento listo para ejecutar:** [lanzador PowerShell con progreso y comparación](docs/progress/next-initialization.es.md). Prueba una inicialización remuestreada conservando imágenes, cámaras y presupuesto de entrenamiento; resultados de optimización pendientes de la ejecución del responsable.
+
 **24 de noviembre — prueba de geometría fija:** [12/12 vistas de entrenamiento registradas](docs/progress/fixed-geometry.es.md), 1.355 puntos dispersos, error medio de 0,562 px; cam13 reservada antes de la reconstrucción. Prueba del fondo estático; falta reconstruir la tabla y entrenar True Skate.
 
 **23 de noviembre — nueva captura con cámaras fijas:** [recuperación automática y comprobaciones](docs/progress/fixed-capture.es.md): 14 clips × 10,65 s, 13 vistas candidatas distintas tras una probable repetición. Todos los archivos se decodificaron correctamente. Falta comprobar visibilidad de la tabla, sincronización de la acción y calibración. Es un conjunto distinto de la grabación anterior con cámaras móviles.

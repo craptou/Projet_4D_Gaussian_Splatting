@@ -57,8 +57,9 @@ def probe(source, output, config):
     assert max_error<.001
     assert train[0].original_image.shape == (3,400,563)
     assert test[0].time==0 and test[12].time==1
-    assert gaussians.get_xyz.shape[0]==1115
-    result=dict(training_samples=len(train),test_samples=len(test),initial_points=1115,
+    expected_points=manifest["initialization_points"]
+    assert gaussians.get_xyz.shape[0]==expected_points
+    result=dict(training_samples=len(train),test_samples=len(test),initial_points=expected_points,
         image_resolution=manifest["image_resolution"],last_normalized_time=test[12].time,
         renderer_projection_max_error_pixels=max_error,gpu=torch.cuda.get_device_name(),
         status="Actual runtime loader and renderer projection checks passed")

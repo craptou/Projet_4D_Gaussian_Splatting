@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-24",
+  "training_executed": false,
+  "launcher_check_only_passed": true,
+  "helper_tests_passed": 27,
+  "preparation": {
+    "method": "Original points retained plus color/position interpolation along six-nearest-neighbor segments",
+    "original_points": 1115,
+    "resampled_points": 8920,
+    "factor": 8,
+    "seed": 24,
+    "source_manifest_sha256": "b9931c183d00703b84523e2118540fa58f0289c259043edac7d7f33e0e6b4c03",
+    "source_cloud_sha256": "8887e67785b2c95d8ed6fa0684e6fdfd2eff9eefacb9903d72230a1fbee3b64d",
+    "images_verified_identical": 117,
+    "images_copied_instead_of_linked": 0,
+    "heldout_pixels_used_for_point_generation": false,
+    "caution": "Synthetic initialization samples, not new triangulated observations. Segments can cross surface/depth discontinuities. This changes point count and spatial/color distribution, not only count."
+  },
+  "actual_gpu_loader": {
+    "training_samples": 104,
+    "test_samples": 13,
+    "initial_points": 8920,
+    "image_resolution": [
+      563,
+      400
+    ],
+    "last_normalized_time": 1.0,
+    "renderer_projection_max_error_pixels": 2.658497263641202e-05,
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "status": "Actual runtime loader and renderer projection checks passed"
+  },
+  "comparison_self_check": "Baseline compared to itself: all reported deltas zero",
+  "negative_control": "Changed target pixels rejected by a unit test",
+  "status": "Launcher and preparation validated; resampled-initialization optimization not run"
+}

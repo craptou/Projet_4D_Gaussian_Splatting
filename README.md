@@ -12,6 +12,8 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 **24 November — first True Skate dynamic attempt:** [results, failure analysis and reproduction](docs/progress/fixed-dynamic-pilot.en.md): 8 training views, one reserved view, 13 instants spanning 0.4 seconds. Training: 200 coarse + 2000 fine steps in 85.92 s. Background blurred, moving board not recovered; the frozen-time control is slightly better on full reserved images. [Input/model animation](docs/assets/fixed-pilot-comparison.gif).
 
+**Next experiment ready to launch:** [PowerShell launcher with live progress and baseline comparison](docs/progress/next-initialization.en.md). Tests an initialization resampling variant with unchanged images/cameras and training budget; optimization results are pending the owner's execution.
+
 **24 November - fixed-view geometry pilot:** [12/12 training cameras registered](docs/progress/fixed-geometry.en.md), 1,355 sparse points, mean reprojection error 0.562 px; cam13 reserved before mapping. Static-background feasibility only; board reconstruction and True Skate dynamic training remain pending.
 
 **23 November — new fixed-camera capture:** [automatic recovery and checks](docs/progress/fixed-capture.en.md): 14 clips × 10.65 s, 13 distinct candidate viewpoints after one likely duplicate. All exports decoded successfully. Board visibility, action synchronization and calibration remain to be checked. This is a separate dataset from the earlier moving-camera recording.
