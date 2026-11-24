@@ -1,0 +1,89 @@
+{
+  "source_sha256": "cb97b69ec195640dd187fc74c42853a077b71062a7f75e25b51756acfeae6e30",
+  "training_views": [
+    "cam01",
+    "cam02",
+    "cam03",
+    "cam04",
+    "cam05",
+    "cam06",
+    "cam07",
+    "cam08",
+    "cam09",
+    "cam10",
+    "cam11",
+    "cam12"
+  ],
+  "reserved_holdout": "cam13",
+  "holdout_used_in_mapping": false,
+  "models": [
+    {
+      "model_id": 0,
+      "registered_images": 5,
+      "names": [
+        "cam03.png",
+        "cam04.png",
+        "cam08.png",
+        "cam09.png",
+        "cam10.png"
+      ],
+      "points3D": 682,
+      "mean_reprojection_error": 0.6557648749640486,
+      "mean_track_length": 2.777126099706745,
+      "cameras": {
+        "1": [
+          38927.40067160604,
+          563.0,
+          1218.0
+        ]
+      }
+    },
+    {
+      "model_id": 1,
+      "registered_images": 12,
+      "names": [
+        "cam01.png",
+        "cam02.png",
+        "cam03.png",
+        "cam04.png",
+        "cam05.png",
+        "cam06.png",
+        "cam07.png",
+        "cam08.png",
+        "cam09.png",
+        "cam10.png",
+        "cam11.png",
+        "cam12.png"
+      ],
+      "points3D": 1355,
+      "mean_reprojection_error": 0.5622737927421014,
+      "mean_track_length": 3.7977859778597787,
+      "cameras": {
+        "1": [
+          846.6007370700011,
+          563.0,
+          1218.0
+        ]
+      }
+    }
+  ],
+  "elapsed_seconds": 11.359000000025844,
+  "assumptions": "Shared SIMPLE_PINHOLE; focal initialized at 2040 and optimized; original principal point fixed at (563,1218); top-left crop 1126x1700; HUD mask only, no explicit board mask.",
+  "limitations": "Sparse static-background feasibility only. No temporal synchronization validation, held-out rendering, metric scale, board reconstruction or 4D training.",
+  "diagnostics": {
+    "selected_model": 1,
+    "selection": "Most registered training views; exploratory selection, not independent validation",
+    "point_reprojection_error_p50_p90_p95": [
+      0.37448113442304964,
+      1.2870960442162065,
+      1.6707749234307625
+    ],
+    "maximum_triangulation_angle_per_point_p10_p50_p90_degrees": [
+      4.404357834025078,
+      23.19234367356524,
+      41.53200235826765
+    ],
+    "caution": "Other mapper hypotheses and solver warnings must be reviewed; low image residual does not establish physical accuracy. World coordinates have arbitrary scale/orientation."
+  },
+  "date": "2026-11-24"
+}

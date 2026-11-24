@@ -2,13 +2,15 @@
 
 ### Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Latest checkpoint: 23 November 2026** · Slides/report archive: 18 November.
+[English](README.md) · [Español](README.es.md) · **Latest checkpoint: 24 November 2026** · Slides/report archive: 18 November.
 
 **Repository:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Published 19 November 2026 · Branch `main`.
 
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
 This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. True Skate dynamic reconstruction has not been trained yet; a reduced DyNeRF GPU execution test has passed.**
+
+**24 November - fixed-view geometry pilot:** [12/12 training cameras registered](docs/progress/fixed-geometry.en.md), 1,355 sparse points, mean reprojection error 0.562 px; cam13 reserved before mapping. Static-background feasibility only; board reconstruction and True Skate dynamic training remain pending.
 
 **23 November — new fixed-camera capture:** [automatic recovery and checks](docs/progress/fixed-capture.en.md): 14 clips × 10.65 s, 13 distinct candidate viewpoints after one likely duplicate. All exports decoded successfully. Board visibility, action synchronization and calibration remain to be checked. This is a separate dataset from the earlier moving-camera recording.
 
