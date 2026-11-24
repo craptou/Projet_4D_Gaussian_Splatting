@@ -2,13 +2,15 @@
 
 ### Repetición de trucos de skate desde puntos de vista libres mediante 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Último corte: 20 de noviembre de 2026** · Diapositivas/informe archivados: 18 de noviembre.
+[English](README.md) · [Español](README.es.md) · **Último corte: 23 de noviembre de 2026** · Diapositivas/informe archivados: 18 de noviembre.
 
 **Repositorio:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Publicado el 19 de noviembre de 2026 · Rama `main`.
 
 ¿Puede una única repetición guardada de un truco de skate, grabada desde varios puntos de vista móviles, convertirse en una representación 3D dinámica que permita generar vistas nuevas?
 
 Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). La tarea de visión estima cámaras y estructura a partir de imágenes; generar vistas nuevas es la etapa directa de síntesis. **Etapa actual: poses estimadas para las 2725 imágenes de entrenamiento. Todavía no se ha entrenado la reconstrucción dinámica.**
+
+**23 de noviembre — nueva captura con cámaras fijas:** [recuperación automática y comprobaciones](docs/progress/fixed-capture.es.md): 14 clips × 10,65 s, 13 vistas candidatas distintas tras una probable repetición. Todos los archivos se decodificaron correctamente. Falta comprobar visibilidad de la tabla, sincronización de la acción y calibración. Es un conjunto distinto de la grabación anterior con cámaras móviles.
 
 ## Para revisar el proyecto
 

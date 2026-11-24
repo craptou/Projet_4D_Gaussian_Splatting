@@ -1,0 +1,452 @@
+{
+  "source": "ScreenRecording_11-23-2026 19-51-20_1.mp4",
+  "source_sha256": "cb97b69ec195640dd187fc74c42853a077b71062a7f75e25b51756acfeae6e30",
+  "common_cursor_window_source_x": [
+    164,
+    904
+  ],
+  "export_fps": 60,
+  "frames_per_clip": 639,
+  "duration_seconds": 10.65,
+  "cursor_speed_ratio": 1.0037436180725918,
+  "distinct_sampled_fixed_views": [
+    "cam01",
+    "cam02",
+    "cam03",
+    "cam04",
+    "cam05",
+    "cam06",
+    "cam07",
+    "cam08",
+    "cam09",
+    "cam10",
+    "cam11",
+    "cam12",
+    "cam13"
+  ],
+  "caution": "Candidate alignment from UI only, not frame-perfect simulation sync. Sampled fixed-camera checks do not establish calibration or full-sequence stability. Board visibility needs review.",
+  "date": "2026-11-23",
+  "source_duration_seconds": 479.512018,
+  "source_dimensions": [
+    1126,
+    2436
+  ],
+  "source_timing": "VFR",
+  "source_preserved": true,
+  "candidate_count": 14,
+  "exports": {
+    "all_decoded": true,
+    "expected_frames_per_clip": 639,
+    "clips": [
+      {
+        "id": "cam01",
+        "decoded_frames": 639,
+        "bytes": 1732641,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam02",
+        "decoded_frames": 639,
+        "bytes": 1406937,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam03",
+        "decoded_frames": 639,
+        "bytes": 1521286,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam04",
+        "decoded_frames": 639,
+        "bytes": 1519916,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam05",
+        "decoded_frames": 639,
+        "bytes": 1481464,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam06",
+        "decoded_frames": 639,
+        "bytes": 1647561,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam07",
+        "decoded_frames": 639,
+        "bytes": 1346980,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam08",
+        "decoded_frames": 639,
+        "bytes": 1485804,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam09",
+        "decoded_frames": 639,
+        "bytes": 1452208,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam10",
+        "decoded_frames": 639,
+        "bytes": 1527261,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam11",
+        "decoded_frames": 639,
+        "bytes": 1497079,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam12",
+        "decoded_frames": 639,
+        "bytes": 1414317,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam13",
+        "decoded_frames": 639,
+        "bytes": 1567273,
+        "decode_errors": ""
+      },
+      {
+        "id": "cam14",
+        "decoded_frames": 639,
+        "bytes": 1423204,
+        "decode_errors": ""
+      }
+    ],
+    "total_clip_bytes": 21023931
+  },
+  "candidates": [
+    {
+      "id": "cam01",
+      "source_start_seconds": 2.04030724457699,
+      "source_end_seconds": 12.707050284792867,
+      "cursor_max_residual_source_pixels": 0.6666689791500175,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 886,
+            "median_displacement_pixels": 0.09715578185591478,
+            "p90_displacement_pixels": 0.3928687587371935
+          },
+          {
+            "matches": 868,
+            "median_displacement_pixels": 0.09403285458045697,
+            "p90_displacement_pixels": 0.39732026510845103
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam02",
+      "source_start_seconds": 35.38954241188156,
+      "source_end_seconds": 46.04703941407031,
+      "cursor_max_residual_source_pixels": 0.46142486365079094,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 794,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.023198357827822726
+          },
+          {
+            "matches": 782,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.02626186122671175
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam03",
+      "source_start_seconds": 70.5990519376633,
+      "source_end_seconds": 81.26011957470575,
+      "cursor_max_residual_source_pixels": 0.8718936990171642,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 771,
+            "median_displacement_pixels": 0.06530960115645656,
+            "p90_displacement_pixels": 0.3409070584975333
+          },
+          {
+            "matches": 701,
+            "median_displacement_pixels": 0.06496165175559229,
+            "p90_displacement_pixels": 0.38006596582858704
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam04",
+      "source_start_seconds": 97.1384774045325,
+      "source_end_seconds": 107.82819261207464,
+      "cursor_max_residual_source_pixels": 0.5000023075135687,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 810,
+            "median_displacement_pixels": 0.019033237832189014,
+            "p90_displacement_pixels": 0.2240931905626836
+          },
+          {
+            "matches": 750,
+            "median_displacement_pixels": 0.0647798911894614,
+            "p90_displacement_pixels": 0.36574035563986507
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam05",
+      "source_start_seconds": 120.8363199410201,
+      "source_end_seconds": 131.53371454159483,
+      "cursor_max_residual_source_pixels": 2.3058564693201333e-06,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 632,
+            "median_displacement_pixels": 0.07423054748934918,
+            "p90_displacement_pixels": 0.3491541826170218
+          },
+          {
+            "matches": 681,
+            "median_displacement_pixels": 0.0055379104707540825,
+            "p90_displacement_pixels": 0.20077193478394095
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam06",
+      "source_start_seconds": 192.68449919306505,
+      "source_end_seconds": 203.36695330292528,
+      "cursor_max_residual_source_pixels": 0.3333335642419115,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 1119,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.0444190296744407
+          },
+          {
+            "matches": 1110,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.030524592507889563
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam07",
+      "source_start_seconds": 226.61306474381684,
+      "source_end_seconds": 237.30100975320593,
+      "cursor_max_residual_source_pixels": 0.20513167869285098,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 643,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.06636629146801654
+          },
+          {
+            "matches": 656,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.04689072625999263
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam08",
+      "source_start_seconds": 250.96815386759405,
+      "source_end_seconds": 261.6484313374815,
+      "cursor_max_residual_source_pixels": 0.03849239570990903,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 819,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.05503749664107965
+          },
+          {
+            "matches": 821,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.033502634332373465
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam09",
+      "source_start_seconds": 275.18491979148484,
+      "source_end_seconds": 285.8728630953412,
+      "cursor_max_residual_source_pixels": 0.46153521262749564,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 898,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.06309957277248486
+          },
+          {
+            "matches": 873,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.10227848319142249
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam10",
+      "source_start_seconds": 297.0971643261943,
+      "source_end_seconds": 307.75644604155684,
+      "cursor_max_residual_source_pixels": 0.8333326391039009,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 1057,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.03924339072280109
+          },
+          {
+            "matches": 1046,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.04525909449857073
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam11",
+      "source_start_seconds": 345.64437633097356,
+      "source_end_seconds": 356.3111193709363,
+      "cursor_max_residual_source_pixels": 0.9999976875187713,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 1141,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.00019301011109426145
+          },
+          {
+            "matches": 1143,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.0001243201043072758
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam12",
+      "source_start_seconds": 379.4374808373203,
+      "source_end_seconds": 390.10245452923436,
+      "cursor_max_residual_source_pixels": 0.9614521380754013,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 864,
+            "median_displacement_pixels": 0.0004082766188384644,
+            "p90_displacement_pixels": 0.10109639285654232
+          },
+          {
+            "matches": 859,
+            "median_displacement_pixels": 0.00097703922079969,
+            "p90_displacement_pixels": 0.09484388946288279
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam13",
+      "source_start_seconds": 400.69549762817945,
+      "source_end_seconds": 411.3547793863735,
+      "cursor_max_residual_source_pixels": 0.8333331019239267,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 836,
+            "median_displacement_pixels": 0.078211995631212,
+            "p90_displacement_pixels": 0.36846289120533127
+          },
+          {
+            "matches": 816,
+            "median_displacement_pixels": 0.0746794568702863,
+            "p90_displacement_pixels": 0.35900272910773334
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": null
+    },
+    {
+      "id": "cam14",
+      "source_start_seconds": 464.0243688614838,
+      "source_end_seconds": 474.6963566552674,
+      "cursor_max_residual_source_pixels": 0.7814420943795994,
+      "sampled_camera_stability": {
+        "consistent_with_fixed": true,
+        "checks": [
+          {
+            "matches": 726,
+            "median_displacement_pixels": 0.0,
+            "p90_displacement_pixels": 0.1298657940383105
+          },
+          {
+            "matches": 713,
+            "median_displacement_pixels": 6.103515625e-05,
+            "p90_displacement_pixels": 0.16910637926095362
+          }
+        ],
+        "units": "pixels in 480px-wide scene samples; 3 sampled instants only"
+      },
+      "duplicate_of": "cam10"
+    }
+  ]
+}
