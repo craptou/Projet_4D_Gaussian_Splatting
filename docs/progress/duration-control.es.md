@@ -2,7 +2,7 @@
 
 [English](duration-control.en.md) · [Evidencia de validación](../evidence/duration-launcher-validation.json) · [Experimento anterior de inicialización](resampling-result.es.md)
 
-El responsable propuso comprobar si 2.000 pasos eran insuficientes. **El experimento de mayor duración está preparado, pero el asistente no lo ha ejecutado.** El resultado anterior de inicialización no responde a esa pregunta.
+**Ejecución del responsable completada:** [progresión medida y resultados visuales](duration-result.es.md). Las instrucciones y validación siguientes describen el control preparado; la evidencia de validación enlazada es anterior a la optimización. El responsable propuso este experimento porque el ensayo de inicialización no respondía a si 2.000 pasos eran suficientes.
 
 Desde PowerShell en el repositorio:
 

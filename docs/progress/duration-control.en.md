@@ -2,7 +2,7 @@
 
 [Español](duration-control.es.md) · [Validation evidence](../evidence/duration-launcher-validation.json) · [Previous initialization experiment](resampling-result.en.md)
 
-The owner proposed testing whether the earlier 2,000-step budget was insufficient. **The longer-training experiment is prepared but has not been executed by the assistant.** Earlier initialization results do not answer the duration question.
+**Owner execution completed:** [measured progression and visual results](duration-result.en.md). The instructions and validation below describe the prepared duration control; the linked validation snapshot predates optimization. The owner proposed this experiment because the initialization trial did not answer whether 2,000 steps were sufficient.
 
 From repository PowerShell:
 

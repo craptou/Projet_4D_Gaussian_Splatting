@@ -14,7 +14,7 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 **24 November — owner-executed initialization experiment:** [results and temporal diagnostic](docs/progress/resampling-result.en.md). Resampling 1,115 points to 8,920 did not recover the skateboard. Reserved-view PSNR changes by +0.172 dB, while SSIM and changing-region PSNR worsen. The render also varies in target-stable background regions. [Three-way animation](docs/assets/resampling-comparison.gif). [Initialization launcher](docs/progress/next-initialization.en.md).
 
-**Next control requested by the owner:** [longer-training launcher](docs/progress/duration-control.en.md), using the original initialization and checkpoints at 2,000 / 5,000 / 10,000 steps. Input, GPU and configuration checks passed; the longer optimization and its quality results are pending the owner's execution.
+**24 November — longer training completed by the owner:** [progression and comparisons](docs/progress/duration-result.en.md). On inspected training cam08, PSNR rises 18.80 → 24.01 → 25.86 dB at 2,000 / 5,000 / 10,000 steps. Reserved cam13 peaks at 5,000 (16.43 dB) then declines (15.73 dB); the board remains unrecognizable. [Curves](docs/assets/duration-progression.png) · [Four-column animation](docs/assets/duration-comparison.gif) · [Launcher](docs/progress/duration-control.en.md). More optimization helps training appearance, while generalization and board motion remain unresolved.
 
 **24 November - fixed-view geometry pilot:** [12/12 training cameras registered](docs/progress/fixed-geometry.en.md), 1,355 sparse points, mean reprojection error 0.562 px; cam13 reserved before mapping. Static-background feasibility only; board reconstruction and True Skate dynamic training remain pending.
 

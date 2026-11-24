@@ -1,0 +1,375 @@
+{
+  "date": "2026-11-24",
+  "owner_executed": true,
+  "experiment_directory": "fixed-duration-20261124-212021-057866Z",
+  "protocol": {
+    "status": "completed_pending_visual_review",
+    "source": "C:\\Users\\Rapha\u00ebl Landry\\Desktop\\Computer_vision\\projet\\data\\processed\\true-skate-fixed-pilot-v2",
+    "original_points": 1115,
+    "coarse_steps": 200,
+    "fine_steps": 10000,
+    "checkpoints": [
+      2000,
+      5000,
+      10000
+    ],
+    "original_config_sha256": "45b98cc34a8f651a92a4a5218446b853a38949273114254bf8136b2dbab210cd",
+    "duration_config_sha256": "1089e5ce203273dbf4a7fa3bf77eddd29911e80b9ffb4527a2c9cc3e051a5de4",
+    "source_manifest_sha256": "b9931c183d00703b84523e2118540fa58f0289c259043edac7d7f33e0e6b4c03",
+    "source_cloud_sha256": "8887e67785b2c95d8ed6fa0684e6fdfd2eff9eefacb9903d72230a1fbee3b64d"
+  },
+  "run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 16.199800792999998,
+      "train": 350.711735429,
+      "render-2000": 24.283648585000037,
+      "render-5000": 23.448761051999952,
+      "render-10000": 25.33824444800001
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 10000,
+    "loader": {
+      "training_samples": 104,
+      "test_samples": 13,
+      "initial_points": 1115,
+      "image_resolution": [
+        563,
+        400
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 2.650795153913421e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "effective_configuration": {
+      "ModelParams": {
+        "white_background": false,
+        "eval": true,
+        "add_points": false
+      },
+      "OptimizationParams": {
+        "iterations": 10000,
+        "coarse_iterations": 200,
+        "batch_size": 1,
+        "dataloader": false,
+        "densify_from_iter": 200,
+        "densify_until_iter": 1300,
+        "densification_interval": 300,
+        "opacity_reset_interval": 60000,
+        "add_point": false
+      },
+      "ModelHiddenParams": {
+        "net_width": 64,
+        "multires": [
+          1,
+          2
+        ],
+        "defor_depth": 0,
+        "kplanes_config": {
+          "grid_dimensions": 2,
+          "input_coordinate_dim": 4,
+          "output_coordinate_dim": 16,
+          "resolution": [
+            32,
+            32,
+            32,
+            13
+          ]
+        },
+        "no_do": false,
+        "no_dshs": false,
+        "no_ds": false,
+        "plane_tv_weight": 0.0002,
+        "time_smoothness_weight": 0.001,
+        "l1_time_planes": 0.0001
+      }
+    },
+    "checkpoints": [
+      2000,
+      5000,
+      10000
+    ]
+  },
+  "results": {
+    "checkpoints": [
+      2000,
+      5000,
+      10000
+    ],
+    "cameras": {
+      "test-cam13": {
+        "2000": {
+          "render": {
+            "mean_psnr_db": 15.557000160217285,
+            "mean_ssim": 0.6585820729915912,
+            "temporal_change_region_mean_psnr_db": 10.525806427001953,
+            "temporal_change_region_mae": 0.24594257771968842
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 15.47431755065918,
+            "mean_ssim": 0.6579231528135446,
+            "temporal_change_region_mean_psnr_db": 10.46190357208252,
+            "temporal_change_region_mae": 0.24796438217163086
+          },
+          "temporal_change_region_pixels": 3652,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001568652456626296,
+          "render_interframe_mae": 0.0036318027414381504
+        },
+        "5000": {
+          "render": {
+            "mean_psnr_db": 16.42864418029785,
+            "mean_ssim": 0.6654375883249136,
+            "temporal_change_region_mean_psnr_db": 11.141956329345703,
+            "temporal_change_region_mae": 0.2361796349287033
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 16.452423095703125,
+            "mean_ssim": 0.6648104924422044,
+            "temporal_change_region_mean_psnr_db": 11.02890682220459,
+            "temporal_change_region_mae": 0.2395045906305313
+          },
+          "temporal_change_region_pixels": 3652,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001568652456626296,
+          "render_interframe_mae": 0.003083315910771489
+        },
+        "10000": {
+          "render": {
+            "mean_psnr_db": 15.727248191833496,
+            "mean_ssim": 0.6344988850446848,
+            "temporal_change_region_mean_psnr_db": 10.893627166748047,
+            "temporal_change_region_mae": 0.24673916399478912
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 15.490986824035645,
+            "mean_ssim": 0.637513674222506,
+            "temporal_change_region_mean_psnr_db": 10.855170249938965,
+            "temporal_change_region_mae": 0.24765843152999878
+          },
+          "temporal_change_region_pixels": 3652,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001568652456626296,
+          "render_interframe_mae": 0.0069763315841555595
+        }
+      },
+      "train-cam08": {
+        "2000": {
+          "render": {
+            "mean_psnr_db": 18.79991912841797,
+            "mean_ssim": 0.7289444712492136,
+            "temporal_change_region_mean_psnr_db": 13.322505950927734,
+            "temporal_change_region_mae": 0.16431395709514618
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 18.843311309814453,
+            "mean_ssim": 0.7293221125235925,
+            "temporal_change_region_mean_psnr_db": 13.305721282958984,
+            "temporal_change_region_mae": 0.16450738906860352
+          },
+          "temporal_change_region_pixels": 4989,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001224880339577794,
+          "render_interframe_mae": 0.0038557779043912888
+        },
+        "5000": {
+          "render": {
+            "mean_psnr_db": 24.00614356994629,
+            "mean_ssim": 0.7735007359431341,
+            "temporal_change_region_mean_psnr_db": 15.9200439453125,
+            "temporal_change_region_mae": 0.11420202255249023
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 23.990007400512695,
+            "mean_ssim": 0.7735253618313715,
+            "temporal_change_region_mean_psnr_db": 15.760149002075195,
+            "temporal_change_region_mae": 0.11560571193695068
+          },
+          "temporal_change_region_pixels": 4989,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001224880339577794,
+          "render_interframe_mae": 0.004351267125457525
+        },
+        "10000": {
+          "render": {
+            "mean_psnr_db": 25.861574172973633,
+            "mean_ssim": 0.7937753062981826,
+            "temporal_change_region_mean_psnr_db": 17.710487365722656,
+            "temporal_change_region_mae": 0.08908519148826599
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 25.861164093017578,
+            "mean_ssim": 0.7943814396858215,
+            "temporal_change_region_mean_psnr_db": 17.4488468170166,
+            "temporal_change_region_mae": 0.09087497740983963
+          },
+          "temporal_change_region_pixels": 4989,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001224880339577794,
+          "render_interframe_mae": 0.003554663388058543
+        }
+      }
+    },
+    "caution": "Same-run checkpoints; target temporal-change region is not a board segmentation. Inspect the board and frozen-time control alongside image-wide metrics."
+  },
+  "motion": {
+    "2000": {
+      "method": "13 decoded RGB PNGs; stable-target mask: per-pixel max-channel range <=8/255 over time. Change mask >45/255. MAE of consecutive frames, in 0-255 RGB intensity units. Masks derived from targets, not semantic segmentation.",
+      "cameras": {
+        "test-cam13": {
+          "stable_target_region_pixels": 221179,
+          "stable_target_region_fraction": 0.9821447602131439,
+          "moving_target_region_pixels": 3652,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.4000064432621002,
+              "stable_target_region": 0.005791814532130957,
+              "changing_target_region": 24.14258575439453
+            },
+            "renders": {
+              "whole_image": 0.9261840581893921,
+              "stable_target_region": 0.9174405336380005,
+              "changing_target_region": 1.4066038131713867
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        },
+        "train-cam08": {
+          "stable_target_region_pixels": 219432,
+          "stable_target_region_fraction": 0.9743872113676731,
+          "moving_target_region_pixels": 4989,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.312344491481781,
+              "stable_target_region": 0.0044134147465229034,
+              "changing_target_region": 13.483614921569824
+            },
+            "renders": {
+              "whole_image": 0.9834495782852173,
+              "stable_target_region": 0.9773720502853394,
+              "changing_target_region": 1.2084474563598633
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        }
+      }
+    },
+    "5000": {
+      "method": "13 decoded RGB PNGs; stable-target mask: per-pixel max-channel range <=8/255 over time. Change mask >45/255. MAE of consecutive frames, in 0-255 RGB intensity units. Masks derived from targets, not semantic segmentation.",
+      "cameras": {
+        "test-cam13": {
+          "stable_target_region_pixels": 221179,
+          "stable_target_region_fraction": 0.9821447602131439,
+          "moving_target_region_pixels": 3652,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.4000064432621002,
+              "stable_target_region": 0.005791814532130957,
+              "changing_target_region": 24.14258575439453
+            },
+            "renders": {
+              "whole_image": 0.7861840128898621,
+              "stable_target_region": 0.7660307884216309,
+              "changing_target_region": 1.9029223918914795
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        },
+        "train-cam08": {
+          "stable_target_region_pixels": 219432,
+          "stable_target_region_fraction": 0.9743872113676731,
+          "moving_target_region_pixels": 4989,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.312344491481781,
+              "stable_target_region": 0.0044134147465229034,
+              "changing_target_region": 13.483614921569824
+            },
+            "renders": {
+              "whole_image": 1.1094224452972412,
+              "stable_target_region": 1.077868103981018,
+              "changing_target_region": 2.3145532608032227
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        }
+      }
+    },
+    "10000": {
+      "method": "13 decoded RGB PNGs; stable-target mask: per-pixel max-channel range <=8/255 over time. Change mask >45/255. MAE of consecutive frames, in 0-255 RGB intensity units. Masks derived from targets, not semantic segmentation.",
+      "cameras": {
+        "test-cam13": {
+          "stable_target_region_pixels": 221179,
+          "stable_target_region_fraction": 0.9821447602131439,
+          "moving_target_region_pixels": 3652,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.4000064432621002,
+              "stable_target_region": 0.005791814532130957,
+              "changing_target_region": 24.14258575439453
+            },
+            "renders": {
+              "whole_image": 1.7787578105926514,
+              "stable_target_region": 1.7685215473175049,
+              "changing_target_region": 2.364009141921997
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        },
+        "train-cam08": {
+          "stable_target_region_pixels": 219432,
+          "stable_target_region_fraction": 0.9743872113676731,
+          "moving_target_region_pixels": 4989,
+          "interframe_mae_255": {
+            "gt": {
+              "whole_image": 0.312344491481781,
+              "stable_target_region": 0.0044134147465229034,
+              "changing_target_region": 13.483614921569824
+            },
+            "renders": {
+              "whole_image": 0.9063595533370972,
+              "stable_target_region": 0.8810614347457886,
+              "changing_target_region": 1.8724249601364136
+            },
+            "frozen-time": {
+              "whole_image": 0.0,
+              "stable_target_region": 0.0,
+              "changing_target_region": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "verification": {
+    "effective_configuration_changes_only_fine_iterations": true,
+    "input_hashes_match_recorded_experiment": true,
+    "identical_target_images_checked_across_three_checkpoints": 26,
+    "decoded_target_render_control_pngs": 234
+  },
+  "selected_validation_checkpoint": 5000,
+  "conclusion": "Longer optimization improves inspected training-view appearance. Reserved cam13 improves at 5000 but degrades by 10000; the skateboard is still not recognizable. Findings suggest limited generalization rather than a duration-only solution.",
+  "limitations": "One trajectory, three checkpoints, one reserved view that closely overlaps cam01. cam13 now serves as validation for checkpoint selection, not an untouched final test. Temporal pixel masks are not semantic board ground truth. No isolated cause of the train/validation gap established."
+}
