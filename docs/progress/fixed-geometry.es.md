@@ -2,6 +2,8 @@
 
 [English](fixed-geometry.en.md) · [Evidencia](../evidence/fixed-geometry-2026-11-24.json) · [Preparación de la captura](fixed-capture.es.md)
 
+**Revisión posterior de la acción:** [visibilidad de la tabla entre 8,3 y 9,2 segundos](board-visibility.es.md), con intervalo candidato y selección preliminar de vistas para el siguiente experimento dinámico.
+
 La nueva grabación con cámaras fijas permite una primera reconstrucción del fondo estático. De las 13 vistas candidatas distintas, cam13 se reservó antes de extraer y emparejar características. Las **12 vistas de entrenamiento** se registraron en un mismo modelo disperso: **1.355 puntos**, error medio de reproyección de **0,562 píxeles** y longitud media de trayectoria de **3,80 observaciones**. La extracción, el emparejamiento y la reconstrucción tardaron 11,36 segundos en CPU, sin contar la preparación de imágenes.
 
 ![Fondo disperso y centros de cámara estimados; escala y orientación arbitrarias](../assets/fixed-geometry.png)

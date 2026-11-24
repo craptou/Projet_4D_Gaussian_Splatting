@@ -2,6 +2,8 @@
 
 [Español](fixed-geometry.es.md) · [Evidence](../evidence/fixed-geometry-2026-11-24.json) · [Capture preparation](fixed-capture.en.md)
 
+**Later action review:** [board visibility at 8.3–9.2 seconds](board-visibility.en.md) provides a candidate interval and preliminary view selection for the next dynamic experiment.
+
 The new fixed-camera recording supports an initial static-background reconstruction. Of 13 distinct candidate views, cam13 was reserved before feature extraction/matching. All **12 training views** registered in one sparse model: **1,355 points**, mean reprojection error **0.562 pixels**, mean track length **3.80 observations**. Feature extraction, matching and mapping took 11.36 seconds on CPU, excluding frame preparation.
 
 ![Sparse background and estimated camera centers; arbitrary scale and orientation](../assets/fixed-geometry.png)
