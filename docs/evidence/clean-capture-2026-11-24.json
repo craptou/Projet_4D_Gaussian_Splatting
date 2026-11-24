@@ -1,0 +1,670 @@
+{
+  "source": "ScreenRecording_11-24-2026 16-58-35_1.mp4",
+  "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+  "source_resolution": [
+    1126,
+    2436
+  ],
+  "export_fps": 60,
+  "boundary_method": "Replay-menu disappearance at 10 analysis samples/sec; editor-toolbar screening; 0.35-second margins",
+  "caution": "Variable-duration passages, not synchronized training clips. Three-frame stability/dedup checks only; no camera calibration. Lower-menu absence does not guarantee absence of score overlays or editor objects.",
+  "visual_review": "Preceding camera-mode contact sheet reviewed for all 20 clips; view05 AUTO, all others FIXED. Labels refer to preceding visible menu, not camera calibration.",
+  "preferred_distinct_passages_for_review": [
+    "view01",
+    "view02",
+    "view03",
+    "view04",
+    "view06",
+    "view07",
+    "view08",
+    "view09",
+    "view10",
+    "view11",
+    "view12",
+    "view13",
+    "view14",
+    "view15",
+    "view16",
+    "view17",
+    "view19",
+    "view20"
+  ],
+  "selection_caution": "Preferred list only avoids the moving view and chooses the longer repeated passage; it is not a synchronized training split.",
+  "date": "2026-11-24",
+  "source_duration_seconds": 567.673039,
+  "source_preserved": true,
+  "original_media_bytes": 986704986,
+  "candidate_passages": 20,
+  "sampled_fixed_passages": 19,
+  "distinct_sampled_fixed_view_count": 18,
+  "validation": {
+    "clips": [
+      {
+        "id": "view01",
+        "decoded_frames": 348,
+        "expected_frames": 348,
+        "replay_menu_like_frames": 0,
+        "bytes": 867376
+      },
+      {
+        "id": "view02",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 833760
+      },
+      {
+        "id": "view03",
+        "decoded_frames": 390,
+        "expected_frames": 390,
+        "replay_menu_like_frames": 0,
+        "bytes": 1000795
+      },
+      {
+        "id": "view04",
+        "decoded_frames": 354,
+        "expected_frames": 354,
+        "replay_menu_like_frames": 0,
+        "bytes": 1263130
+      },
+      {
+        "id": "view05",
+        "decoded_frames": 240,
+        "expected_frames": 240,
+        "replay_menu_like_frames": 0,
+        "bytes": 1695607
+      },
+      {
+        "id": "view06",
+        "decoded_frames": 354,
+        "expected_frames": 354,
+        "replay_menu_like_frames": 0,
+        "bytes": 916630
+      },
+      {
+        "id": "view07",
+        "decoded_frames": 365,
+        "expected_frames": 365,
+        "replay_menu_like_frames": 0,
+        "bytes": 857514
+      },
+      {
+        "id": "view08",
+        "decoded_frames": 354,
+        "expected_frames": 354,
+        "replay_menu_like_frames": 0,
+        "bytes": 906340
+      },
+      {
+        "id": "view09",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 899685
+      },
+      {
+        "id": "view10",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 850576
+      },
+      {
+        "id": "view11",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 850698
+      },
+      {
+        "id": "view12",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 782331
+      },
+      {
+        "id": "view13",
+        "decoded_frames": 401,
+        "expected_frames": 401,
+        "replay_menu_like_frames": 0,
+        "bytes": 736860
+      },
+      {
+        "id": "view14",
+        "decoded_frames": 389,
+        "expected_frames": 389,
+        "replay_menu_like_frames": 0,
+        "bytes": 763067
+      },
+      {
+        "id": "view15",
+        "decoded_frames": 383,
+        "expected_frames": 383,
+        "replay_menu_like_frames": 0,
+        "bytes": 866766
+      },
+      {
+        "id": "view16",
+        "decoded_frames": 390,
+        "expected_frames": 390,
+        "replay_menu_like_frames": 0,
+        "bytes": 876611
+      },
+      {
+        "id": "view17",
+        "decoded_frames": 317,
+        "expected_frames": 317,
+        "replay_menu_like_frames": 0,
+        "bytes": 833898
+      },
+      {
+        "id": "view18",
+        "decoded_frames": 209,
+        "expected_frames": 209,
+        "replay_menu_like_frames": 0,
+        "bytes": 292836
+      },
+      {
+        "id": "view19",
+        "decoded_frames": 347,
+        "expected_frames": 347,
+        "replay_menu_like_frames": 0,
+        "bytes": 888787
+      },
+      {
+        "id": "view20",
+        "decoded_frames": 347,
+        "expected_frames": 347,
+        "replay_menu_like_frames": 0,
+        "bytes": 947963
+      }
+    ],
+    "all_decoded": true,
+    "total_bytes": 17931230,
+    "total_frames": 7133,
+    "menu_like_frames": 0
+  },
+  "candidates": [
+    {
+      "id": "view01",
+      "source_start_seconds": 7.85,
+      "source_end_seconds": 13.649999999999999,
+      "frames": 348,
+      "duration_seconds": 5.8,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 1087,
+          "median": 0.0,
+          "p90": 0.0,
+          "consistent": true
+        },
+        {
+          "matches": 1016,
+          "median": 0.00023291530643423076,
+          "p90": 0.13473329294436667,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view02",
+      "source_start_seconds": 38.550000000000004,
+      "source_end_seconds": 45.03333333333334,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 915,
+          "median": 0.009650988067928279,
+          "p90": 0.2222304375272294,
+          "consistent": true
+        },
+        {
+          "matches": 910,
+          "median": 0.004127950709219865,
+          "p90": 0.1966544222024062,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view03",
+      "source_start_seconds": 82.44999999999999,
+      "source_end_seconds": 88.94999999999999,
+      "frames": 390,
+      "duration_seconds": 6.5,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 1075,
+          "median": 0.006608165621302977,
+          "p90": 0.18753723523398627,
+          "consistent": true
+        },
+        {
+          "matches": 1097,
+          "median": 0.004487744497635724,
+          "p90": 0.1678488018317935,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view04",
+      "source_start_seconds": 118.55,
+      "source_end_seconds": 124.45,
+      "frames": 354,
+      "duration_seconds": 5.9,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 942,
+          "median": 0.0,
+          "p90": 0.029881062581117696,
+          "consistent": true
+        },
+        {
+          "matches": 865,
+          "median": 0.001976881977693712,
+          "p90": 0.14544192895133318,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view05",
+      "source_start_seconds": 158.15,
+      "source_end_seconds": 162.15,
+      "frames": 240,
+      "duration_seconds": 4.0,
+      "sampled_fixed_consistency": false,
+      "stability_checks": [
+        {
+          "matches": 372,
+          "median": 0.42777550774122186,
+          "p90": 0.9162348811057752,
+          "consistent": true
+        },
+        {
+          "matches": 170,
+          "median": 113.62130272774212,
+          "p90": 179.11799186047983,
+          "consistent": false
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "AUTO"
+    },
+    {
+      "id": "view06",
+      "source_start_seconds": 170.35,
+      "source_end_seconds": 176.25,
+      "frames": 354,
+      "duration_seconds": 5.9,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 597,
+          "median": 0.01122789768144956,
+          "p90": 0.20678720490619498,
+          "consistent": true
+        },
+        {
+          "matches": 522,
+          "median": 0.11177013131354871,
+          "p90": 0.42816093870673044,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view07",
+      "source_start_seconds": 206.75,
+      "source_end_seconds": 212.83333333333334,
+      "frames": 365,
+      "duration_seconds": 6.083333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 389,
+          "median": 0.11207355369761977,
+          "p90": 0.4348548400143807,
+          "consistent": true
+        },
+        {
+          "matches": 375,
+          "median": 0.11410564494967418,
+          "p90": 0.41586455003740436,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view08",
+      "source_start_seconds": 242.95,
+      "source_end_seconds": 248.85,
+      "frames": 354,
+      "duration_seconds": 5.9,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 636,
+          "median": 0.06530700396828076,
+          "p90": 0.3509505363095615,
+          "consistent": true
+        },
+        {
+          "matches": 617,
+          "median": 0.06494858529987681,
+          "p90": 0.3410322540342111,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view09",
+      "source_start_seconds": 275.55,
+      "source_end_seconds": 282.03333333333336,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 882,
+          "median": 0.0006142451203298041,
+          "p90": 0.09744724651324511,
+          "consistent": true
+        },
+        {
+          "matches": 873,
+          "median": 0.00017859954697753335,
+          "p90": 0.10164760394286816,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view10",
+      "source_start_seconds": 302.95000000000005,
+      "source_end_seconds": 309.4333333333334,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 936,
+          "median": 0.011681700690870794,
+          "p90": 0.14944918556411596,
+          "consistent": true
+        },
+        {
+          "matches": 952,
+          "median": 0.004669156479478052,
+          "p90": 0.15081480675667586,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view11",
+      "source_start_seconds": 327.05,
+      "source_end_seconds": 333.53333333333336,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 858,
+          "median": 0.0,
+          "p90": 0.03186017752549052,
+          "consistent": true
+        },
+        {
+          "matches": 836,
+          "median": 0.00818747435267268,
+          "p90": 0.1194893803069916,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view12",
+      "source_start_seconds": 353.55,
+      "source_end_seconds": 360.03333333333336,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 697,
+          "median": 3.0517578125e-05,
+          "p90": 0.07465377781777911,
+          "consistent": true
+        },
+        {
+          "matches": 714,
+          "median": 0.0,
+          "p90": 0.04098956498733035,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view13",
+      "source_start_seconds": 375.45000000000005,
+      "source_end_seconds": 382.1333333333334,
+      "frames": 401,
+      "duration_seconds": 6.683333333333334,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 632,
+          "median": 0.009198732515203855,
+          "p90": 0.12588963986721624,
+          "consistent": true
+        },
+        {
+          "matches": 659,
+          "median": 0.0,
+          "p90": 0.0739653928594754,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view14",
+      "source_start_seconds": 397.55,
+      "source_end_seconds": 404.03333333333336,
+      "frames": 389,
+      "duration_seconds": 6.483333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 716,
+          "median": 0.001940738436326804,
+          "p90": 0.10450685502483226,
+          "consistent": true
+        },
+        {
+          "matches": 724,
+          "median": 0.0,
+          "p90": 0.029674158657148304,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view15",
+      "source_start_seconds": 426.75,
+      "source_end_seconds": 433.1333333333333,
+      "frames": 383,
+      "duration_seconds": 6.383333333333334,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 918,
+          "median": 0.008746171953112558,
+          "p90": 0.10659719615165729,
+          "consistent": true
+        },
+        {
+          "matches": 923,
+          "median": 0.00503872848113416,
+          "p90": 0.10920882332771034,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view16",
+      "source_start_seconds": 459.75,
+      "source_end_seconds": 466.25,
+      "frames": 390,
+      "duration_seconds": 6.5,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 1086,
+          "median": 0.0,
+          "p90": 0.008052218369090574,
+          "consistent": true
+        },
+        {
+          "matches": 1029,
+          "median": 0.0018374015165393517,
+          "p90": 0.1494009107211856,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view17",
+      "source_start_seconds": 482.25,
+      "source_end_seconds": 487.53333333333336,
+      "frames": 317,
+      "duration_seconds": 5.283333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 965,
+          "median": 0.00042724609375,
+          "p90": 0.13075954509148688,
+          "consistent": true
+        },
+        {
+          "matches": 993,
+          "median": 3.814697265625e-06,
+          "p90": 0.09309110316186074,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view18",
+      "source_start_seconds": 507.85,
+      "source_end_seconds": 511.33333333333337,
+      "frames": 209,
+      "duration_seconds": 3.4833333333333334,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 919,
+          "median": 0.0,
+          "p90": 0.0,
+          "consistent": true
+        },
+        {
+          "matches": 919,
+          "median": 0.0,
+          "p90": 0.0,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view19",
+      "source_start_seconds": 518.15,
+      "source_end_seconds": 523.9333333333333,
+      "frames": 347,
+      "duration_seconds": 5.783333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 787,
+          "median": 0.08064091589333233,
+          "p90": 0.36257901372108287,
+          "consistent": true
+        },
+        {
+          "matches": 898,
+          "median": 0.0,
+          "p90": 0.09692179192541539,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": "view18",
+      "preceding_camera_mode_visual_review": "FIXED"
+    },
+    {
+      "id": "view20",
+      "source_start_seconds": 556.15,
+      "source_end_seconds": 561.9333333333333,
+      "frames": 347,
+      "duration_seconds": 5.783333333333333,
+      "sampled_fixed_consistency": true,
+      "stability_checks": [
+        {
+          "matches": 654,
+          "median": 0.08782138440401657,
+          "p90": 0.41626980511207445,
+          "consistent": true
+        },
+        {
+          "matches": 719,
+          "median": 0.00023834990466023724,
+          "p90": 0.12004588856694592,
+          "consistent": true
+        }
+      ],
+      "duplicate_of": null,
+      "preceding_camera_mode_visual_review": "FIXED"
+    }
+  ]
+}
