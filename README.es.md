@@ -8,7 +8,9 @@
 
 ¿Puede una única repetición guardada de un truco de skate, grabada desde varios puntos de vista móviles, convertirse en una representación 3D dinámica que permita generar vistas nuevas?
 
-Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). La tarea de visión estima cámaras y estructura a partir de imágenes; generar vistas nuevas es la etapa directa de síntesis. **Etapa actual: poses estimadas para las 2725 imágenes de entrenamiento. Todavía no se ha entrenado la reconstrucción dinámica.**
+Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con grabaciones de True Skate y la [implementación oficial de 4DGaussians](https://github.com/hustvl/4DGaussians). La tarea de visión estima cámaras y estructura a partir de imágenes; generar vistas nuevas es la etapa directa de síntesis. **Etapa actual: se completó la primera prueba GPU de entrenamiento/renderizado con vistas fijas de True Skate, pero la tabla no se reconstruye de forma reconocible. El conjunto anterior con cámaras móviles tiene 2725 poses de entrenamiento estimadas; la referencia DyNeRF dispone de modelo entrenado y visor.**
+
+**24 de noviembre — primer intento dinámico de True Skate:** [resultados, análisis del fallo y reproducción](docs/progress/fixed-dynamic-pilot.es.md): 8 vistas de entrenamiento, una reservada y 13 instantes en 0,4 segundos. Entrenamiento: 200 pasos coarse + 2000 fine en 85,92 s. Fondo borroso y tabla no recuperada; el control con tiempo fijo es ligeramente mejor en imágenes completas de la vista reservada. [Animación de entrada/modelo](docs/assets/fixed-pilot-comparison.gif).
 
 **24 de noviembre — prueba de geometría fija:** [12/12 vistas de entrenamiento registradas](docs/progress/fixed-geometry.es.md), 1.355 puntos dispersos, error medio de 0,562 px; cam13 reservada antes de la reconstrucción. Prueba del fondo estático; falta reconstruir la tabla y entrenar True Skate.
 
@@ -16,7 +18,7 @@ Este es el **proyecto final de Computer Vision**. Estudia esa pregunta con graba
 
 ## Para revisar el proyecto
 
-**Ver la escena 4D:** [visor local y dos demostraciones](docs/progress/4d-demonstration.es.md). [Animar tiempo con cámara fija](docs/assets/4d-demo-time.mp4) o [congelar tiempo y mover cámara](docs/assets/4d-demo-view.mp4). El visor calcula vistas/tiempos independientes con el modelo GPU. Reconstrucción frontal parcial de aproximadamente un segundo.
+**Ver la escena 4D de referencia DyNeRF:** [visor local y dos demostraciones](docs/progress/4d-demonstration.es.md). [Animar tiempo con cámara fija](docs/assets/4d-demo-time.mp4) o [congelar tiempo y mover cámara](docs/assets/4d-demo-view.mp4). El visor calcula vistas/tiempos independientes con el modelo GPU. Reconstrucción frontal parcial de aproximadamente un segundo.
 
 **Recorrido grabado aportado por el responsable — 27 segundos:** [ver/descargar el MP4](docs/assets/4d-viewer-recording.mp4). Se ven la interfaz, el tiempo animado y los cambios manuales del punto de vista virtual. Puede consultarse sin instalar el entorno GPU.
 

@@ -8,7 +8,9 @@
 
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
-This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: all 2725 training frames have estimated camera poses. True Skate dynamic reconstruction has not been trained yet; a reduced DyNeRF GPU execution test has passed.**
+This is the **final project for Computer Vision**. It studies that question using True Skate footage and the official [4DGaussians implementation](https://github.com/hustvl/4DGaussians). The vision task estimates cameras and scene structure from images; novel-view rendering is the forward image-synthesis stage. **Current stage: the first fixed-view True Skate GPU training/rendering pilot is complete, but the skateboard is not reconstructed recognizably. The earlier moving-view dataset has 2725 estimated training poses; the separate DyNeRF reference has a trained model and viewer.**
+
+**24 November — first True Skate dynamic attempt:** [results, failure analysis and reproduction](docs/progress/fixed-dynamic-pilot.en.md): 8 training views, one reserved view, 13 instants spanning 0.4 seconds. Training: 200 coarse + 2000 fine steps in 85.92 s. Background blurred, moving board not recovered; the frozen-time control is slightly better on full reserved images. [Input/model animation](docs/assets/fixed-pilot-comparison.gif).
 
 **24 November - fixed-view geometry pilot:** [12/12 training cameras registered](docs/progress/fixed-geometry.en.md), 1,355 sparse points, mean reprojection error 0.562 px; cam13 reserved before mapping. Static-background feasibility only; board reconstruction and True Skate dynamic training remain pending.
 
@@ -16,7 +18,7 @@ This is the **final project for Computer Vision**. It studies that question usin
 
 ## Start here — project review
 
-**See the 4D scene:** [interactive local viewer and two demonstrations](docs/progress/4d-demonstration.en.md). [Animate time with fixed camera](docs/assets/4d-demo-time.mp4) or [freeze time and move the camera](docs/assets/4d-demo-view.mp4). The live viewer independently controls time/viewpoint using the trained GPU model. This remains a partial frontal reconstruction of approximately one second.
+**See the 4D scene from the DyNeRF reference:** [interactive local viewer and two demonstrations](docs/progress/4d-demonstration.en.md). [Animate time with fixed camera](docs/assets/4d-demo-time.mp4) or [freeze time and move the camera](docs/assets/4d-demo-view.mp4). The live viewer independently controls time/viewpoint using the trained GPU model. This remains a partial frontal reconstruction of approximately one second.
 
 **Recorded walkthrough supplied by the project owner — 27 seconds:** [watch/download the MP4](docs/assets/4d-viewer-recording.mp4). The recording shows the viewer interface, animated time and manual changes to the virtual viewpoint. It can be viewed without installing the GPU environment.
 

@@ -1,0 +1,358 @@
+{
+  "date": "2026-11-24",
+  "status": "GPU execution completed; skateboard reconstruction quality failed visual review",
+  "source_sha256": "cb97b69ec195640dd187fc74c42853a077b71062a7f75e25b51756acfeae6e30",
+  "preparation": {
+    "training_cameras": [
+      "cam01",
+      "cam02",
+      "cam03",
+      "cam06",
+      "cam07",
+      "cam08",
+      "cam10",
+      "cam12"
+    ],
+    "heldout_camera": "cam13",
+    "image_resolution": [
+      563,
+      400
+    ],
+    "intrinsics": [
+      423.30036853500053,
+      281.5,
+      200.0
+    ],
+    "crop_xywh": [
+      0,
+      818,
+      1126,
+      800
+    ],
+    "source_frame_indices_before_offsets": [
+      522,
+      524,
+      526,
+      528,
+      530,
+      532,
+      534,
+      536,
+      538,
+      540,
+      542,
+      544,
+      546
+    ],
+    "source_fps": 60,
+    "sample_fps": 30,
+    "first_last_aligned_seconds": [
+      8.7,
+      9.1
+    ],
+    "physical_time_span_seconds": 0.4,
+    "normalized_time_rule": "sample index / 12; physical replay span 0.4 seconds",
+    "source_frame_offsets": {
+      "cam01": -1,
+      "cam02": 0,
+      "cam03": 0,
+      "cam04": 0,
+      "cam05": 1,
+      "cam06": 1,
+      "cam07": 1,
+      "cam08": -1,
+      "cam09": 0,
+      "cam10": 0,
+      "cam11": 0,
+      "cam12": 0,
+      "cam13": 1
+    },
+    "initialization_points": 1115,
+    "initialization": "Training-only background map, track length >=3 and point error <=2 pixels; no board-specific seeds",
+    "world_normalization": {
+      "origin": [
+        0.8506563822725652,
+        -0.19962535545113236,
+        -1.019233652044659
+      ],
+      "scale": 10.98245919054309
+    },
+    "limitations": "UI-event-based alignment, not proven simulation synchronization. Shortened to avoid bottom HUD. Shared estimated lens calibration. No board mask/segmentation in training."
+  },
+  "synchronization": {
+    "method": "Template intersection-over-union >=0.65; onset detected now and in >=3 of the next 5 frames including now",
+    "raw_event_spread_frames": {
+      "manual22": 2,
+      "manual9": 2,
+      "hardflip87": 2
+    },
+    "corrected_event_spread_frames": {
+      "manual22": 1,
+      "manual9": 0,
+      "hardflip87": 1
+    },
+    "cameras": [
+      {
+        "camera_id": "cam01",
+        "event_onsets_frames": {
+          "manual22": 242,
+          "manual9": 470,
+          "hardflip87": 561
+        },
+        "suggested_source_frame_offset": -1,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam02",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam03",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam04",
+        "event_onsets_frames": {
+          "manual22": 244,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 1
+      },
+      {
+        "camera_id": "cam05",
+        "event_onsets_frames": {
+          "manual22": 244,
+          "manual9": 472,
+          "hardflip87": 563
+        },
+        "suggested_source_frame_offset": 1,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam06",
+        "event_onsets_frames": {
+          "manual22": 244,
+          "manual9": 472,
+          "hardflip87": 563
+        },
+        "suggested_source_frame_offset": 1,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam07",
+        "event_onsets_frames": {
+          "manual22": 244,
+          "manual9": 472,
+          "hardflip87": 563
+        },
+        "suggested_source_frame_offset": 1,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam08",
+        "event_onsets_frames": {
+          "manual22": 242,
+          "manual9": 470,
+          "hardflip87": 561
+        },
+        "suggested_source_frame_offset": -1,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam09",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam10",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam11",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam12",
+        "event_onsets_frames": {
+          "manual22": 243,
+          "manual9": 471,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 0,
+        "offset_disagreement_frames": 0
+      },
+      {
+        "camera_id": "cam13",
+        "event_onsets_frames": {
+          "manual22": 244,
+          "manual9": 472,
+          "hardflip87": 562
+        },
+        "suggested_source_frame_offset": 1,
+        "offset_disagreement_frames": 1
+      }
+    ],
+    "caution": "Three UI event checks, not proof of frame-perfect simulation alignment. Suggested offsets are constant integer-frame shifts; no time warping.",
+    "detector_refinement": "Strict consecutive-frame detector produced a false late manual9 onset in cam13 because text antialiasing changed its IoU; inspected frames and used 3-of-5 temporal confirmation for all views."
+  },
+  "holdout_localization": {
+    "camera_id": "cam13",
+    "world_to_camera": [
+      [
+        0.9963322330523597,
+        0.03629384014995603,
+        0.07749089332345908,
+        2.0922127262582917
+      ],
+      [
+        -0.020160249756149166,
+        0.9796640497502693,
+        -0.19962944160787388,
+        -0.22469663208119883
+      ],
+      [
+        -0.0831603614149672,
+        0.1973350115769406,
+        0.9768025632108368,
+        1.5145903650758605
+      ]
+    ],
+    "intrinsics": [
+      846.6007370700011,
+      563.0,
+      1218.0
+    ],
+    "quality": {
+      "correspondences": 146,
+      "inliers": 77,
+      "inlier_ratio": 0.5273972602739726,
+      "median_error_px": 0.9917242367338358,
+      "mean_error_px": 1.4839370439806279,
+      "p95_error_px": 3.4574248489863884,
+      "positive_depth_ratio": 1.0
+    },
+    "accepted": true,
+    "map_sha256": {
+      "cameras.bin": "0e00322f59158eca31fa9c456b4788e47f24e59f27f15ce62a4d63ec2559bed4",
+      "frames.bin": "e8cdcae852e22f44b7f57fbfbe3e4911acbbe76d93f836d18424f7de9c661b0d",
+      "images.bin": "54dd8597f199d36f80e72461e8f2724f03948a671e6865c9c9dfd57b0b3baf24",
+      "points3D.bin": "befcfe82b0b32813197c9ab0dee1c31407a66158c2fdfc89f9af6e0255f194ab",
+      "rigs.bin": "73e4d5f0da0a84a5711b46ae716a149f1532832f95bb09b4b01e73cf2c5afbe9"
+    },
+    "split": "Query pixels used only for localization against frozen training map, not map/4D optimization",
+    "limitations": "Shared estimated intrinsics; no independent ground-truth camera calibration. Query overlaps closely with cam01."
+  },
+  "run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 11.136846214000016,
+      "train": 85.91669635800002,
+      "render": 33.44985130399999
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 2000,
+    "config_sha256": "45b98cc34a8f651a92a4a5218446b853a38949273114254bf8136b2dbab210cd",
+    "loader": {
+      "training_samples": 104,
+      "test_samples": 13,
+      "initial_points": 1115,
+      "image_resolution": [
+        563,
+        400
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 2.650795153913421e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "evaluation": {
+      "iteration": 2000,
+      "active_sh_degree": 2,
+      "gaussian_count": 2623,
+      "metrics": {
+        "test-cam13": {
+          "render": {
+            "mean_psnr_db": 15.056581497192383,
+            "mean_ssim": 0.6347202108456538,
+            "temporal_change_region_mean_psnr_db": 10.807306289672852,
+            "temporal_change_region_mae": 0.23551620543003082
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 15.213335037231445,
+            "mean_ssim": 0.6402084414775555,
+            "temporal_change_region_mean_psnr_db": 10.789499282836914,
+            "temporal_change_region_mae": 0.23653770983219147
+          },
+          "temporal_change_region_pixels": 3652,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001568652456626296,
+          "render_interframe_mae": 0.005198212806135416
+        },
+        "train-cam08": {
+          "render": {
+            "mean_psnr_db": 18.869003295898438,
+            "mean_ssim": 0.7406565638688895,
+            "temporal_change_region_mean_psnr_db": 14.70299243927002,
+            "temporal_change_region_mae": 0.1400831788778305
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 18.882413864135742,
+            "mean_ssim": 0.7412407168975244,
+            "temporal_change_region_mean_psnr_db": 14.539969444274902,
+            "temporal_change_region_mae": 0.14226099848747253
+          },
+          "temporal_change_region_pixels": 4989,
+          "total_pixels": 225200,
+          "target_interframe_mae": 0.001224880339577794,
+          "render_interframe_mae": 0.0037310970947146416
+        }
+      },
+      "caution": "Short execution/quality pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. cam13 is held out from optimization but closely overlaps cam01."
+    }
+  },
+  "artifact_bytes": 24106518,
+  "input_bytes": 38479129,
+  "diagnosis": "No recognizable board in inspected train/test renders. Dynamic output does not outperform frozen-time baseline on full heldout images. Background-only sparse initialization and small moving-image region are hypotheses for the failure; no isolated ablation yet.",
+  "verification": {
+    "existing_helper_tests_passed": 25,
+    "input_pngs_decoded": 117,
+    "render_target_control_pngs_decoded": 78,
+    "published_gif_frames": 13,
+    "original_to_export_projection_max_error_pixels": 5.820766091346741e-10,
+    "frozen_map_hashes_unchanged": true,
+    "config_hash_matches_run": true,
+    "relative_review_links_checked": 37
+  }
+}
