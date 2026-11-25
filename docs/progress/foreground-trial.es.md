@@ -2,6 +2,8 @@
 
 [English](foreground-trial.en.md) · [Referencia anterior](clean-pilot.es.md)
 
+**Continuación completada:** la [prueba estática de un instante](static-board.es.md) recupera una tabla reconocible en vistas de entrenamiento inspeccionadas; la reconstrucción reservada sigue sin resolverse.
+
 **Resultado: el modelo ajusta los píxeles de entrenamiento seleccionados, pero genera una mancha oscura amplia; la tabla no es reconocible.** Este control no valida una reconstrucción 4D de la tabla. [Evidencia medida](../evidence/foreground-trial-2026-11-24.json).
 
 ![Grabación / referencia / modelo ponderado, vista reservada view20](../assets/foreground-trial-validation.gif)

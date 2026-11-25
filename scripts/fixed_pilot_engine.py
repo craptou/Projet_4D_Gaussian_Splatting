@@ -62,11 +62,11 @@ def probe(source, output, config):
     assert max_error<.001
     width,height=manifest["image_resolution"]
     assert train[0].original_image.shape == (3,height,width)
-    assert test[0].time==0 and test[len(test)-1].time==1
+    assert [camera.time for camera in test]==[r['time'] for r in test_records]
     expected_points=manifest["initialization_points"]
     assert gaussians.get_xyz.shape[0]==expected_points
     result=dict(training_samples=len(train),test_samples=len(test),initial_points=expected_points,
-        image_resolution=manifest["image_resolution"],last_normalized_time=test[12].time,
+        image_resolution=manifest["image_resolution"],last_normalized_time=test[len(test)-1].time,
         renderer_projection_max_error_pixels=max_error,gpu=torch.cuda.get_device_name(),
         status="Actual runtime loader and renderer projection checks passed")
     (output/"loader.json").write_text(json.dumps(result,indent=2)+"\n")
@@ -87,6 +87,11 @@ def render(source, output, config, iteration):
     training_view=manifest.get("evaluation_training_camera","cam08")
     groups={"test-"+manifest["heldout_camera"]:list(scene.getTestCameras()),
         "train-"+training_view:[train[i] for i,r in enumerate(train_records) if r["camera_id"]==training_view]}
+    static=bool(manifest.get('static_scene'))
+    if static:
+        groups.update({'train-'+name:[train[i] for i,r in enumerate(train_records) if r['camera_id']==name]
+            for name in manifest['training_cameras']})
+    render_options={'stage':'coarse'} if static else {}
     background=torch.tensor([0,0,0],dtype=torch.float32,device="cuda")
     result={}
     with torch.no_grad():
@@ -95,10 +100,10 @@ def render(source, output, config, iteration):
             for sub in ["gt","renders","frozen-time"]: (folder/sub).mkdir(parents=True,exist_ok=True)
             targets=[];renders=[];frozen=[]
             for j,camera in enumerate(cameras):
-                image=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type)["render"].clamp(0,1)
+                image=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type,**render_options)["render"].clamp(0,1)
                 original=camera.time
                 camera.time=.5
-                fixed=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type)["render"].clamp(0,1)
+                fixed=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type,**render_options)["render"].clamp(0,1)
                 camera.time=original
                 gt=camera.original_image.cuda()
                 targets.append(gt.cpu());renders.append(image.cpu());frozen.append(fixed.cpu())
@@ -108,30 +113,38 @@ def render(source, output, config, iteration):
             target=torch.stack(targets);pred=torch.stack(renders);fixed=torch.stack(frozen)
             # A temporal-change region is diagnostic, not a board segmentation.
             change=(target.max(0).values-target.min(0).values).max(0).values>45/255
+            region_key='temporal_change_region'
+            if static:
+                record=next(r for r in manifest['frames'] if r['camera_id']==name.split('-',1)[1])
+                with Image.open(source/record['evaluation_mask_path']) as image:change=torch.from_numpy(np.array(image.convert('L'))>0)
+                region_key='candidate_foreground_region'
             assert int(change.sum())>20
-            Image.fromarray((change.numpy()*255).astype(np.uint8)).save(folder/"temporal-change-mask.png")
+            Image.fromarray((change.numpy()*255).astype(np.uint8)).save(folder/("candidate-foreground-mask.png" if static else "temporal-change-mask.png"))
             def metrics(value):
                 mse=((value-target)**2).mean((1,2,3))
                 moving=((value-target)**2)[:,:,change].mean((1,2))
                 return dict(mean_psnr_db=float((-10*torch.log10(mse)).mean()),
                     mean_ssim=float(np.mean([ssim(a.unsqueeze(0),b.unsqueeze(0)).item() for a,b in zip(value,target)])),
-                    temporal_change_region_mean_psnr_db=float((-10*torch.log10(moving)).mean()),
-                    temporal_change_region_mae=float((value-target).abs()[:,:,change].mean()))
+                    **{region_key+'_mean_psnr_db':float((-10*torch.log10(moving)).mean()),
+                    region_key+'_mae':float((value-target).abs()[:,:,change].mean())})
             result[name]=dict(render=metrics(pred),frozen_time_baseline=metrics(fixed),
-                temporal_change_region_pixels=int(change.sum()),total_pixels=int(change.numel()),
-                target_interframe_mae=float((target[1:]-target[:-1]).abs().mean()),
-                render_interframe_mae=float((pred[1:]-pred[:-1]).abs().mean()))
+                **{region_key+'_pixels':int(change.sum())},total_pixels=int(change.numel()),
+                target_interframe_mae=None if static else float((target[1:]-target[:-1]).abs().mean()),
+                render_interframe_mae=None if static else float((pred[1:]-pred[:-1]).abs().mean()))
             width,height=manifest["image_resolution"]
             preview_height=round(height*400/width)
-            sheet=Image.new("RGB",(800,(preview_height+25)*3),"white");draw=ImageDraw.Draw(sheet)
-            for row,index in enumerate([0,len(cameras)//2,len(cameras)-1]):
+            examples=[0] if static else [0,len(cameras)//2,len(cameras)-1]
+            sheet=Image.new("RGB",(800,(preview_height+25)*len(examples)),"white");draw=ImageDraw.Draw(sheet)
+            for row,index in enumerate(examples):
                 for col,sub in enumerate(["gt","renders"]):
                     with Image.open(folder/sub/f"{index:03d}.png") as image: sheet.paste(image.resize((400,preview_height)),(col*400,row*(preview_height+25)+25))
                     draw.text((col*400+5,row*(preview_height+25)+5),f"{name} / frame {index} / {sub}",fill="black")
             sheet.save(folder/"comparison.jpg",quality=92)
     report=dict(iteration=iteration,active_sh_degree=gaussians.active_sh_degree,
+        static_scene=static,
         gaussian_count=int(gaussians.get_xyz.shape[0]),metrics=result,
         caution="Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately.")
+    if static:report['caution']='Static undeformed renderer, one instant, restricted 14-view training subset. Candidate foreground masks are approximate; training masks guide optimization. Reserved view excluded from initialization and optimization. No motion or full-dataset reconstruction demonstrated.'
     (output/f"evaluation-{iteration}.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(report,indent=2),flush=True)
 
@@ -151,12 +164,18 @@ if __name__=="__main__":
     else:
         sys.argv=training_arguments(UPSTREAM,args.source,args.output,args.configs,args.save_iterations,args.test_iterations)
         manifest=json.loads((args.source/"manifest.json").read_text())
-        if manifest.get("foreground_loss"):
+        if manifest.get("foreground_loss") or manifest.get('static_scene'):
             from fixed_foreground_loss import foreground_l1,instrument_training
             training_path=UPSTREAM/"train.py"
-            weight=manifest["foreground_loss"]["weight"]
-            print("Foreground L1 enabled:",json.dumps(manifest["foreground_loss"]),flush=True)
-            text=instrument_training(training_path.read_text())
+            weight=manifest.get('foreground_loss',{}).get('weight',0.)
+            text=training_path.read_text()
+            if manifest.get('foreground_loss'):
+                print("Foreground L1 enabled:",json.dumps(manifest["foreground_loss"]),flush=True)
+                text=instrument_training(text)
+            if manifest.get('static_scene'):
+                from fixed_static_scene import instrument_static_render
+                text=instrument_static_render(text)
+                print('Static scene: undeformed renderer in all training/evaluation calls',flush=True)
             namespace=dict(__name__="__main__",__file__=str(training_path),foreground_l1=foreground_l1,foreground_weight=weight)
             exec(compile(text,str(training_path),"exec"),namespace)
         else:

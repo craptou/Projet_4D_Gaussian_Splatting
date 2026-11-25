@@ -2,6 +2,8 @@
 
 [English](work-log.en.md) · Corte: 18 de noviembre de 2026
 
+**24 de noviembre de 2026 — controles estáticos de un instante:** las 17 vistas no superan coherencia de siluetas/cajas con las cámaras y el instante actuales. Los desfases no resuelven tres vistas; la calibración con focales independientes se rechaza por degeneración. Un ajuste restringido a 14 vistas y un instante, con 13 máscaras de volumen, genera una tabla reconocible en entrenamiento, pero falla en view20 reservada. El control de geometría fija/color de grado cero no lo corrige. [Evidencias, imágenes y comandos](static-board.es.md). No se afirma movimiento aprendido ni seguimiento.
+
 **24 de noviembre de 2026 — control del primer plano:** revisión de fases en 18 vistas y las 13 muestras completas de tres vistas cercanas; sincronización exacta todavía incierta. Control en RTX 4050 con entradas idénticas a la referencia, 200 pasos gruesos + 5.000 finos y pérdida adicional del primer plano solo en view19. Mejora el ajuste enmascarado de entrenamiento, pero aparece una mancha amplia y baja el PSNR completo reservado. [Resultados, comandos, comparaciones e hipótesis siguiente](foreground-trial.es.md). La cronología anterior conserva el contexto de su corte original.
 
 Estas entradas se basan en Git y en artefactos experimentales conservados. Documentan cortes reales, no una actividad semanal continua. Los commits pueden inspeccionarse con `git show <hash>` después de clonar el repositorio.

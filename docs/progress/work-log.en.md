@@ -2,6 +2,8 @@
 
 [Español](work-log.es.md) · Checkpoint: 18 November 2026
 
+**24 November 2026 — single-instant static controls:** full 17-view silhouette/box consistency fails under current cameras and nominal time. Timing offsets fail to resolve three views; independent-focal calibration is rejected as degenerate. A restricted 14-view, one-instant fit with 13 silhouette-volume masks produces a recognizable board in inspected training views, but fails on reserved view20. Fixed-geometry/degree-zero-color control does not repair it. [Evidence, before/after images and commands](static-board.en.md). No learned motion or tracking is claimed.
+
 **24 November 2026 — foreground control:** reviewed action phases across 18 views and all 13 samples of three nearby views; exact synchronization remains uncertain. Completed an RTX 4050 control with unchanged baseline inputs and 200 coarse + 5,000 fine steps, adding a view19-only foreground loss. Masked training fit improves, but broad dark spillover appears and reserved-view full-image PSNR declines. [Results, commands, comparisons and next hypothesis](foreground-trial.en.md). The earlier chronology below retains its original checkpoint context.
 
 Entries below are reconstructed from Git history and retained run artifacts. They record actual checkpoints, not continuous weekly activity. Commit hashes can be inspected with `git show <hash>` after cloning.

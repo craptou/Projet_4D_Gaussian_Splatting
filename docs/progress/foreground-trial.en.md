@@ -2,6 +2,8 @@
 
 [Español](foreground-trial.es.md) · [Previous baseline](clean-pilot.en.md)
 
+**Follow-up completed:** the [single-instant static trial](static-board.en.md) recovers recognizable board appearance in inspected training views, while reserved-view reconstruction remains unresolved.
+
 **Result: the weighted model fits selected training pixels but produces a broad dark smear, not a recognizable skateboard.** This control does not validate a 4D board reconstruction. [Measured evidence](../evidence/foreground-trial-2026-11-24.json).
 
 ![Recording / baseline / foreground-weighted model, reserved view20](../assets/foreground-trial-validation.gif)
