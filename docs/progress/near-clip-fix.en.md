@@ -2,6 +2,8 @@
 
 [Español](near-clip-fix.es.md) · [Measured evidence](../evidence/near-clip-fix-2026-11-24.json) · [Earlier static experiment](static-board.en.md)
 
+**Follow-up completed:** [two additional static instants](multi-instant.en.md) retain a recognizable board in the repeated validation view. The three fits remain separate models; joint temporal fitting has not run.
+
 **The board is now recognizable in validation view20 after a corrected static training run.** The main confirmed fault was an integration error: our world normalization put board seeds inside the CUDA rasterizer's fixed near cutoff. This revises the interpretation of the earlier failed static trial. It remains one instant, a restricted 14-view training set and one repeatedly inspected validation camera.
 
 ![Recording / earlier model / retrained with safe normalization; last row is validation view20](../assets/near-clip-board.jpg)

@@ -32,6 +32,7 @@ def prepare(source,geometry,output):
         stage(source/record['image_path'],output/record['image_path'])
         path=f'masks/{name}.png';stage(geometry/path,output/path)
         record['evaluation_mask_path']=path
+        record['evaluation_region_usable']=name not in report.get('small_mask_views',[])
         if record['split']=='train' and name in report['carving_views']:record['foreground_mask_path']=path
         with Image.open(output/record['image_path']) as image:arrays[name]=np.array(image.convert('RGB'))
         poses[name]=np.array(record['world_to_camera'])
@@ -52,7 +53,7 @@ def prepare(source,geometry,output):
         training_cameras=[r['camera_id'] for r in records if r['split']=='train'],
         initialization_points=len(xyz),initialization='Original observed background points plus sampled training-silhouette visual-hull voxels; board samples are synthetic volume hypotheses, not measured surface points',
         foreground_loss=dict(weight=.1,cameras=report['carving_views'],masked_training_images=len(report['carving_views']),
-            rule='Full-image L1 + 0.1 * candidate-foreground mean L1 on 13 masked training views; view11 remains full-image only'),
+            rule=f'Full-image L1 + 0.1 * candidate-foreground mean L1 on {len(report["carving_views"])} usable training masks; other images remain full-image only'),
         physical_time_span_seconds=0.,normalized_time_rule='All images use time zero; renderer forced to undeformed coarse branch',
         excluded_views=excluded,carving_views=report['carving_views'],sample_index=sample,
         limitations='Restricted 14-view exploratory static trial, not an ablation of the prior dynamic run. Excluded cameras remain unresolved. Candidate masks and visual hull are approximate. No motion or rotation measurement.')

@@ -125,15 +125,16 @@ def render(source, output, config, iteration):
                 record=next(r for r in manifest['frames'] if r['camera_id']==name.split('-',1)[1])
                 with Image.open(source/record['evaluation_mask_path']) as image:change=torch.from_numpy(np.array(image.convert('L'))>0)
                 region_key='candidate_foreground_region'
-            assert int(change.sum())>20
+            if not static:assert int(change.sum())>20
             Image.fromarray((change.numpy()*255).astype(np.uint8)).save(folder/("candidate-foreground-mask.png" if static else "temporal-change-mask.png"))
             def metrics(value):
                 mse=((value-target)**2).mean((1,2,3))
-                moving=((value-target)**2)[:,:,change].mean((1,2))
+                from masked_evaluation import region_metrics
+                region=region_metrics(value,target,change)
                 return dict(mean_psnr_db=float((-10*torch.log10(mse)).mean()),
                     mean_ssim=float(np.mean([ssim(a.unsqueeze(0),b.unsqueeze(0)).item() for a,b in zip(value,target)])),
-                    **{region_key+'_mean_psnr_db':float((-10*torch.log10(moving)).mean()),
-                    region_key+'_mae':float((value-target).abs()[:,:,change].mean())})
+                    **{region_key+'_mean_psnr_db':region['mean_psnr_db'],
+                    region_key+'_mae':region['mae'],region_key+'_available':region['available']})
             result[name]=dict(render=metrics(pred),frozen_time_baseline=metrics(fixed),
                 **{region_key+'_pixels':int(change.sum())},total_pixels=int(change.numel()),
                 target_interframe_mae=None if static else float((target[1:]-target[:-1]).abs().mean()),

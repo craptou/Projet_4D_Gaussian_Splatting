@@ -44,7 +44,7 @@ def triangulate_centers(centers,poses,intrinsics):
     return v[-1,:3]/v[-1,3]
 
 
-def run(source,geometry,output,sample=8,resolution=128,exclude=(),skip_carving=()):
+def run(source,geometry,output,sample=8,resolution=128,exclude=(),skip_carving=(),skip_small_masks=False):
     if output.exists():raise ValueError('Choose a fresh output')
     output.mkdir(parents=True)
     manifest=json.loads((source/'manifest.json').read_text())
@@ -67,11 +67,11 @@ def run(source,geometry,output,sample=8,resolution=128,exclude=(),skip_carving=(
         candidate=(np.abs(target.astype(np.int16)-background.astype(np.int16)).max(2)>40)&change
         candidate[:400]=False;candidate[1200:]=False
         mask=largest_component(candidate)
-        if mask.sum()<20:raise ValueError(f'Insufficient foreground in {name}')
+        if mask.sum()<=20 and not skip_small_masks:raise ValueError(f'Insufficient foreground in {name}')
         masks[name]=mask;images[name]=target
         ys,xs=np.where(mask)
-        descriptions.append(dict(camera=name,split=record['split'],pixels=int(mask.sum()),bbox=[int(xs.min()),int(ys.min()),int(xs.max()),int(ys.max())],
-            center=[float(xs.mean()),float(ys.mean())],raw_candidate_pixels=int(candidate.sum())))
+        descriptions.append(dict(camera=name,split=record['split'],pixels=int(mask.sum()),bbox=[int(xs.min()),int(ys.min()),int(xs.max()),int(ys.max())] if len(xs) else None,
+            center=[float(xs.mean()),float(ys.mean())] if len(xs) else None,raw_candidate_pixels=int(candidate.sum()),usable_region=bool(mask.sum()>20)))
         (output/'masks').mkdir(exist_ok=True)
         Image.fromarray(mask.astype(np.uint8)*255).save(output/'masks'/f'{name}.png')
     sheet=Image.new('RGB',(6*240,3*365),'white');draw=ImageDraw.Draw(sheet)
@@ -82,6 +82,9 @@ def run(source,geometry,output,sample=8,resolution=128,exclude=(),skip_carving=(
         x,y=(i%6)*240,(i//6)*365
         sheet.paste(tile,(x,y+24));draw.text((x+4,y+6),f'{name} {description["pixels"]}px {description["split"]}',fill='black')
     sheet.save(output/'mask-review.jpg',quality=94)
+    too_small={d['camera'] for d in descriptions if not d['usable_region']}
+    carving=[r for r in carving if r['camera_id'] not in too_small]
+    if len(carving)<3:raise ValueError('Fewer than three usable carving masks')
     carving_ids={r['camera_id'] for r in carving}
     poses=[np.array(r['world_to_camera']) for r in carving]
     centers=np.array([d['center'] for d in descriptions if d['camera'] in carving_ids])
@@ -111,6 +114,7 @@ def run(source,geometry,output,sample=8,resolution=128,exclude=(),skip_carving=(
         write_cloud(output/(name+'.ply'),cloud.astype(np.float32),np.tile(np.array([[60,180,230]],np.uint8),(len(cloud),1)))
     report=dict(sample_index=sample,seconds_before_score=float(training[0]['seconds_relative_to_score']),training_views=len(training),reserved_view=manifest['heldout_camera'],
         carving_views=[r['camera_id'] for r in carving],excluded_views=list(exclude),skipped_carving_views=list(skip_carving),
+        small_mask_views=sorted(too_small),small_mask_policy='Keep RGB training images; omit <=20-pixel masks from carving/loss and mark region metrics unavailable' if skip_small_masks else 'Reject <=20-pixel masks',
         masks=descriptions,center=center.tolist(),center_reprojection_error_pixels=errors.tolist(),median_center_error_pixels=float(np.median(errors)),
         candidate_cube_half_extent=half,resolution=resolution,grid_points=len(points),voxel_spacing=2*half/(resolution-1),
         tolerance_pixels=2,strict_intersection_voxels=len(strict),relaxed_intersection_voxels=len(relaxed),relaxed_min_views=len(carving)-2,max_consistent_views=int(votes.max()),
@@ -131,4 +135,5 @@ if __name__=='__main__':
     p.add_argument('--resolution',type=int,default=128)
     p.add_argument('--exclude-views',nargs='*',default=[])
     p.add_argument('--skip-carving-views',nargs='*',default=[])
-    a=p.parse_args();run(a.source,a.geometry,a.output,a.sample,a.resolution,a.exclude_views,a.skip_carving_views)
+    p.add_argument('--skip-small-masks',action='store_true')
+    a=p.parse_args();run(a.source,a.geometry,a.output,a.sample,a.resolution,a.exclude_views,a.skip_carving_views,a.skip_small_masks)

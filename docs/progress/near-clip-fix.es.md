@@ -2,6 +2,8 @@
 
 [English](near-clip-fix.en.md) · [Evidencia medida](../evidence/near-clip-fix-2026-11-24.json) · [Experimento estático anterior](static-board.es.md)
 
+**Continuación completada:** [otros dos instantes estáticos](multi-instant.es.md) conservan una tabla reconocible en la vista reservada. Siguen siendo tres modelos separados; no se ha ejecutado el ajuste temporal conjunto.
+
 **La tabla ya es reconocible en view20 de validación tras reentrenar con la escala corregida.** El fallo principal confirmado era de integración: nuestra normalización colocaba las semillas de la tabla dentro del recorte cercano fijo del rasterizador CUDA. Esto cambia la interpretación del fracaso estático anterior. Sigue siendo un instante, un subconjunto de 14 vistas y una cámara de validación examinada repetidamente.
 
 ![Grabación / modelo anterior / entrenamiento con escala segura; última fila: view20 de validación](../assets/near-clip-board.jpg)
