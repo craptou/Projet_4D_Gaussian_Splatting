@@ -2,6 +2,8 @@
 
 [Español](work-log.es.md) · Checkpoint: 18 November 2026
 
+**24 November 2026 — foreground control:** reviewed action phases across 18 views and all 13 samples of three nearby views; exact synchronization remains uncertain. Completed an RTX 4050 control with unchanged baseline inputs and 200 coarse + 5,000 fine steps, adding a view19-only foreground loss. Masked training fit improves, but broad dark spillover appears and reserved-view full-image PSNR declines. [Results, commands, comparisons and next hypothesis](foreground-trial.en.md). The earlier chronology below retains its original checkpoint context.
+
 Entries below are reconstructed from Git history and retained run artifacts. They record actual checkpoints, not continuous weekly activity. Commit hashes can be inspected with `git show <hash>` after cloning.
 
 | Date | Problem / action | Evidence and outcome | Interpretation / next step |

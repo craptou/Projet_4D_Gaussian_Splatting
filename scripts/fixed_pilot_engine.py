@@ -150,4 +150,14 @@ if __name__=="__main__":
     elif args.phase=="render": render(args.source,args.output,args.configs,args.iteration)
     else:
         sys.argv=training_arguments(UPSTREAM,args.source,args.output,args.configs,args.save_iterations,args.test_iterations)
-        runpy.run_path(str(UPSTREAM/"train.py"),run_name="__main__")
+        manifest=json.loads((args.source/"manifest.json").read_text())
+        if manifest.get("foreground_loss"):
+            from fixed_foreground_loss import foreground_l1,instrument_training
+            training_path=UPSTREAM/"train.py"
+            weight=manifest["foreground_loss"]["weight"]
+            print("Foreground L1 enabled:",json.dumps(manifest["foreground_loss"]),flush=True)
+            text=instrument_training(training_path.read_text())
+            namespace=dict(__name__="__main__",__file__=str(training_path),foreground_l1=foreground_l1,foreground_weight=weight)
+            exec(compile(text,str(training_path),"exec"),namespace)
+        else:
+            runpy.run_path(str(UPSTREAM/"train.py"),run_name="__main__")

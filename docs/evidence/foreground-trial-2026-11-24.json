@@ -1,0 +1,650 @@
+{
+  "changed": "Only add full-image L1 + 1.0 * foreground-mean L1 on view19 training samples",
+  "foreground_loss": {
+    "weight": 1.0,
+    "camera": "view19",
+    "masked_training_images": 13,
+    "rule": "full-image mean L1 + weight * candidate-foreground mean L1 on masked training images only",
+    "method": "Reference-derived max RGB difference >40/255 AND temporal range >45/255",
+    "caveat": "May include shadows/appearance changes; not semantic labels. No heldout masks used."
+  },
+  "preparation": {
+    "weight": 1.0,
+    "masked_training_images": 13,
+    "all_targets_and_initialization_identical": true,
+    "source_sha256": "1064323679ab61146e1497f992858fa2fc31a74fd9f5d4d3e3c55ced82694960",
+    "mask_pixels": [
+      2032,
+      2032,
+      1988,
+      1832,
+      382,
+      757,
+      1231,
+      2755,
+      3361,
+      1651,
+      1553,
+      3621,
+      3027
+    ],
+    "mean_mask_fraction": 0.0029414859450995912,
+    "heldout_mask_count": 0,
+    "unchanged": [
+      "camera poses",
+      "intrinsics",
+      "images",
+      "time samples",
+      "point-cloud initialization",
+      "train/test split"
+    ]
+  },
+  "synchronization_review": {
+    "reviewed_views": [
+      "view01",
+      "view02",
+      "view03",
+      "view04",
+      "view06",
+      "view07",
+      "view08",
+      "view09",
+      "view10",
+      "view11",
+      "view12",
+      "view13",
+      "view14",
+      "view15",
+      "view16",
+      "view17",
+      "view19",
+      "view20"
+    ],
+    "phase_review_sample_indices": [
+      0,
+      6,
+      12
+    ],
+    "nearby_view_sequence_review": [
+      "view03",
+      "view04",
+      "view19"
+    ],
+    "nearby_view_samples": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "foreground_review": {
+      "camera": "view19",
+      "samples": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "assessment": "Candidate mask follows board; incomplete around edge-on board/wheels, not semantic ground truth"
+    },
+    "conclusion": "Broad flip phases agree. No timing offsets changed for the foreground-loss control.",
+    "unresolved": "Some inter-view orientation differences, notably view04, may reflect viewpoint or residual timing. Visual review cannot establish frame-perfect synchronization.",
+    "capture_frame_rate": 60,
+    "training_sample_rate": 20,
+    "window_seconds": 0.6
+  },
+  "runs": {
+    "baseline": {
+      "status": "Bounded True Skate pilot completed; inspect board quality separately",
+      "timing_seconds": {
+        "probe": 19.656473529999992,
+        "train": 442.34229982899996,
+        "render-2000": 70.30002099300003,
+        "render-5000": 49.56120802999999
+      },
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "coarse_steps": 200,
+      "fine_steps": 5000,
+      "config_sha256": "869f46554bfd641b3997239d45616cff28e8d150dff874d6591840fad61d5936",
+      "loader": {
+        "training_samples": 221,
+        "test_samples": 13,
+        "initial_points": 2337,
+        "image_resolution": [
+          563,
+          1218
+        ],
+        "last_normalized_time": 1.0,
+        "renderer_projection_max_error_pixels": 9.433446410511692e-05,
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "status": "Actual runtime loader and renderer projection checks passed"
+      },
+      "evaluation": {
+        "iteration": 5000,
+        "active_sh_degree": 3,
+        "gaussian_count": 4871,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 27.04524803161621,
+              "mean_ssim": 0.9057250481385452,
+              "temporal_change_region_mean_psnr_db": 20.354595184326172,
+              "temporal_change_region_mae": 0.06829150021076202
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 26.90656280517578,
+              "mean_ssim": 0.904120880823869,
+              "temporal_change_region_mean_psnr_db": 20.363853454589844,
+              "temporal_change_region_mae": 0.06806859374046326
+            },
+            "temporal_change_region_pixels": 17113,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0010396683355793357,
+            "render_interframe_mae": 0.0019859278108924627
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 28.204936981201172,
+              "mean_ssim": 0.9024109015097985,
+              "temporal_change_region_mean_psnr_db": 19.313356399536133,
+              "temporal_change_region_mae": 0.06285381317138672
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 28.073793411254883,
+              "mean_ssim": 0.9005535795138433,
+              "temporal_change_region_mean_psnr_db": 19.30649185180664,
+              "temporal_change_region_mae": 0.06341804563999176
+            },
+            "temporal_change_region_pixels": 11621,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0007899136980995536,
+            "render_interframe_mae": 0.0025748044718056917
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      },
+      "checkpoints": [
+        2000,
+        5000
+      ],
+      "effective_configuration": {
+        "ModelParams": {
+          "white_background": false,
+          "eval": true,
+          "add_points": false
+        },
+        "OptimizationParams": {
+          "iterations": 5000,
+          "coarse_iterations": 200,
+          "batch_size": 1,
+          "dataloader": false,
+          "densify_from_iter": 200,
+          "densify_until_iter": 1300,
+          "densification_interval": 300,
+          "opacity_reset_interval": 60000,
+          "add_point": false
+        },
+        "ModelHiddenParams": {
+          "net_width": 64,
+          "multires": [
+            1,
+            2
+          ],
+          "defor_depth": 0,
+          "kplanes_config": {
+            "grid_dimensions": 2,
+            "input_coordinate_dim": 4,
+            "output_coordinate_dim": 16,
+            "resolution": [
+              32,
+              32,
+              32,
+              13
+            ]
+          },
+          "no_do": false,
+          "no_dshs": false,
+          "no_ds": false,
+          "plane_tv_weight": 0.0002,
+          "time_smoothness_weight": 0.001,
+          "l1_time_planes": 0.0001
+        }
+      },
+      "evaluations": {
+        "2000": {
+          "iteration": 2000,
+          "active_sh_degree": 2,
+          "gaussian_count": 4871,
+          "metrics": {
+            "test-view20": {
+              "render": {
+                "mean_psnr_db": 22.533029556274414,
+                "mean_ssim": 0.87216533605869,
+                "temporal_change_region_mean_psnr_db": 20.004405975341797,
+                "temporal_change_region_mae": 0.07232708483934402
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 22.58595085144043,
+                "mean_ssim": 0.8746145596871009,
+                "temporal_change_region_mean_psnr_db": 20.014183044433594,
+                "temporal_change_region_mae": 0.07249008119106293
+              },
+              "temporal_change_region_pixels": 17113,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0010396683355793357,
+              "render_interframe_mae": 0.0035658979322761297
+            },
+            "train-view19": {
+              "render": {
+                "mean_psnr_db": 21.957378387451172,
+                "mean_ssim": 0.8678817107127264,
+                "temporal_change_region_mean_psnr_db": 18.19659423828125,
+                "temporal_change_region_mae": 0.09254992753267288
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 22.52292823791504,
+                "mean_ssim": 0.8759665076549237,
+                "temporal_change_region_mean_psnr_db": 18.34490966796875,
+                "temporal_change_region_mae": 0.08918996900320053
+              },
+              "temporal_change_region_pixels": 11621,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0007899136980995536,
+              "render_interframe_mae": 0.007265043444931507
+            }
+          },
+          "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+        },
+        "5000": {
+          "iteration": 5000,
+          "active_sh_degree": 3,
+          "gaussian_count": 4871,
+          "metrics": {
+            "test-view20": {
+              "render": {
+                "mean_psnr_db": 27.04524803161621,
+                "mean_ssim": 0.9057250481385452,
+                "temporal_change_region_mean_psnr_db": 20.354595184326172,
+                "temporal_change_region_mae": 0.06829150021076202
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 26.90656280517578,
+                "mean_ssim": 0.904120880823869,
+                "temporal_change_region_mean_psnr_db": 20.363853454589844,
+                "temporal_change_region_mae": 0.06806859374046326
+              },
+              "temporal_change_region_pixels": 17113,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0010396683355793357,
+              "render_interframe_mae": 0.0019859278108924627
+            },
+            "train-view19": {
+              "render": {
+                "mean_psnr_db": 28.204936981201172,
+                "mean_ssim": 0.9024109015097985,
+                "temporal_change_region_mean_psnr_db": 19.313356399536133,
+                "temporal_change_region_mae": 0.06285381317138672
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 28.073793411254883,
+                "mean_ssim": 0.9005535795138433,
+                "temporal_change_region_mean_psnr_db": 19.30649185180664,
+                "temporal_change_region_mae": 0.06341804563999176
+              },
+              "temporal_change_region_pixels": 11621,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0007899136980995536,
+              "render_interframe_mae": 0.0025748044718056917
+            }
+          },
+          "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+        }
+      }
+    },
+    "weighted": {
+      "status": "Bounded True Skate pilot completed; inspect board quality separately",
+      "timing_seconds": {
+        "probe": 17.788597833000004,
+        "train": 253.729381703,
+        "render-2000": 55.855082014000004,
+        "render-5000": 50.194562340000004
+      },
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "coarse_steps": 200,
+      "fine_steps": 5000,
+      "config_sha256": "869f46554bfd641b3997239d45616cff28e8d150dff874d6591840fad61d5936",
+      "loader": {
+        "training_samples": 221,
+        "test_samples": 13,
+        "initial_points": 2337,
+        "image_resolution": [
+          563,
+          1218
+        ],
+        "last_normalized_time": 1.0,
+        "renderer_projection_max_error_pixels": 9.433446410511692e-05,
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "status": "Actual runtime loader and renderer projection checks passed"
+      },
+      "evaluation": {
+        "iteration": 5000,
+        "active_sh_degree": 3,
+        "gaussian_count": 5101,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 25.704795837402344,
+              "mean_ssim": 0.9052877976344182,
+              "temporal_change_region_mean_psnr_db": 20.66267967224121,
+              "temporal_change_region_mae": 0.06409219652414322
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 25.564359664916992,
+              "mean_ssim": 0.9056471769626324,
+              "temporal_change_region_mean_psnr_db": 20.56131935119629,
+              "temporal_change_region_mae": 0.06521552056074142
+            },
+            "temporal_change_region_pixels": 17113,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0010396683355793357,
+            "render_interframe_mae": 0.0032839684281498194
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 27.692338943481445,
+              "mean_ssim": 0.9087752654002264,
+              "temporal_change_region_mean_psnr_db": 14.239689826965332,
+              "temporal_change_region_mae": 0.16288746893405914
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 27.183204650878906,
+              "mean_ssim": 0.9075353970894446,
+              "temporal_change_region_mean_psnr_db": 13.64622688293457,
+              "temporal_change_region_mae": 0.1781827062368393
+            },
+            "temporal_change_region_pixels": 11621,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0007899136980995536,
+            "render_interframe_mae": 0.003091368591412902
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      },
+      "checkpoints": [
+        2000,
+        5000
+      ],
+      "effective_configuration": {
+        "ModelParams": {
+          "white_background": false,
+          "eval": true,
+          "add_points": false
+        },
+        "OptimizationParams": {
+          "iterations": 5000,
+          "coarse_iterations": 200,
+          "batch_size": 1,
+          "dataloader": false,
+          "densify_from_iter": 200,
+          "densify_until_iter": 1300,
+          "densification_interval": 300,
+          "opacity_reset_interval": 60000,
+          "add_point": false
+        },
+        "ModelHiddenParams": {
+          "net_width": 64,
+          "multires": [
+            1,
+            2
+          ],
+          "defor_depth": 0,
+          "kplanes_config": {
+            "grid_dimensions": 2,
+            "input_coordinate_dim": 4,
+            "output_coordinate_dim": 16,
+            "resolution": [
+              32,
+              32,
+              32,
+              13
+            ]
+          },
+          "no_do": false,
+          "no_dshs": false,
+          "no_ds": false,
+          "plane_tv_weight": 0.0002,
+          "time_smoothness_weight": 0.001,
+          "l1_time_planes": 0.0001
+        }
+      },
+      "evaluations": {
+        "2000": {
+          "iteration": 2000,
+          "active_sh_degree": 2,
+          "gaussian_count": 5101,
+          "metrics": {
+            "test-view20": {
+              "render": {
+                "mean_psnr_db": 21.155860900878906,
+                "mean_ssim": 0.8716650421802814,
+                "temporal_change_region_mean_psnr_db": 20.05308723449707,
+                "temporal_change_region_mae": 0.07440591603517532
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 20.901926040649414,
+                "mean_ssim": 0.8702395971004779,
+                "temporal_change_region_mean_psnr_db": 20.043657302856445,
+                "temporal_change_region_mae": 0.07523250579833984
+              },
+              "temporal_change_region_pixels": 17113,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0010396683355793357,
+              "render_interframe_mae": 0.005044650752097368
+            },
+            "train-view19": {
+              "render": {
+                "mean_psnr_db": 22.00016212463379,
+                "mean_ssim": 0.8715437834079449,
+                "temporal_change_region_mean_psnr_db": 14.901071548461914,
+                "temporal_change_region_mae": 0.15940909087657928
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 21.979337692260742,
+                "mean_ssim": 0.8722593371684735,
+                "temporal_change_region_mean_psnr_db": 14.315523147583008,
+                "temporal_change_region_mae": 0.17270606756210327
+              },
+              "temporal_change_region_pixels": 11621,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0007899136980995536,
+              "render_interframe_mae": 0.00424704747274518
+            }
+          },
+          "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+        },
+        "5000": {
+          "iteration": 5000,
+          "active_sh_degree": 3,
+          "gaussian_count": 5101,
+          "metrics": {
+            "test-view20": {
+              "render": {
+                "mean_psnr_db": 25.704795837402344,
+                "mean_ssim": 0.9052877976344182,
+                "temporal_change_region_mean_psnr_db": 20.66267967224121,
+                "temporal_change_region_mae": 0.06409219652414322
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 25.564359664916992,
+                "mean_ssim": 0.9056471769626324,
+                "temporal_change_region_mean_psnr_db": 20.56131935119629,
+                "temporal_change_region_mae": 0.06521552056074142
+              },
+              "temporal_change_region_pixels": 17113,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0010396683355793357,
+              "render_interframe_mae": 0.0032839684281498194
+            },
+            "train-view19": {
+              "render": {
+                "mean_psnr_db": 27.692338943481445,
+                "mean_ssim": 0.9087752654002264,
+                "temporal_change_region_mean_psnr_db": 14.239689826965332,
+                "temporal_change_region_mae": 0.16288746893405914
+              },
+              "frozen_time_baseline": {
+                "mean_psnr_db": 27.183204650878906,
+                "mean_ssim": 0.9075353970894446,
+                "temporal_change_region_mean_psnr_db": 13.64622688293457,
+                "temporal_change_region_mae": 0.1781827062368393
+              },
+              "temporal_change_region_pixels": 11621,
+              "total_pixels": 685734,
+              "target_interframe_mae": 0.0007899136980995536,
+              "render_interframe_mae": 0.003091368591412902
+            }
+          },
+          "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+        }
+      }
+    }
+  },
+  "evaluation_target_pairs_verified": 52,
+  "limitation": "One run per setting; shared seed 0 in upstream, CUDA determinism not guaranteed. Training-mask scores measure fit, not independent object reconstruction.",
+  "baseline_foreground": {
+    "background_plate_baseline": {
+      "mean_psnr_db": 11.56322942240247,
+      "mean_absolute_error": 0.25137561559677124
+    },
+    "checkpoints": {
+      "2000": {
+        "renders": {
+          "mean_psnr_db": 12.437252237135407,
+          "mean_absolute_error": 0.20929500460624695
+        },
+        "frozen-time": {
+          "mean_psnr_db": 12.171337586522286,
+          "mean_absolute_error": 0.219191774725914
+        }
+      },
+      "5000": {
+        "renders": {
+          "mean_psnr_db": 11.794976276581927,
+          "mean_absolute_error": 0.24459561705589294
+        },
+        "frozen-time": {
+          "mean_psnr_db": 11.861054767455503,
+          "mean_absolute_error": 0.24305549263954163
+        }
+      }
+    },
+    "mask_pixels_per_frame": [
+      2032,
+      2032,
+      1988,
+      1832,
+      382,
+      757,
+      1231,
+      2755,
+      3361,
+      1651,
+      1553,
+      3621,
+      3027
+    ],
+    "method": "abs RGB target-empty-background max>40/255 AND target temporal range>45/255, view19 only; per-frame mask",
+    "caution": "Reference-derived candidate foreground, may include shadows/appearance effects. Not semantic labels or independent object geometry validation. Masks not used in this training."
+  },
+  "weighted_foreground": {
+    "background_plate_baseline": {
+      "mean_psnr_db": 11.56322942240247,
+      "mean_absolute_error": 0.25137561559677124
+    },
+    "checkpoints": {
+      "2000": {
+        "renders": {
+          "mean_psnr_db": 21.198029271671302,
+          "mean_absolute_error": 0.0686226412653923
+        },
+        "frozen-time": {
+          "mean_psnr_db": 20.276643872834867,
+          "mean_absolute_error": 0.07595688104629517
+        }
+      },
+      "5000": {
+        "renders": {
+          "mean_psnr_db": 25.178646282924618,
+          "mean_absolute_error": 0.03583761677145958
+        },
+        "frozen-time": {
+          "mean_psnr_db": 20.19289345619685,
+          "mean_absolute_error": 0.07459501922130585
+        }
+      }
+    },
+    "mask_pixels_per_frame": [
+      2032,
+      2032,
+      1988,
+      1832,
+      382,
+      757,
+      1231,
+      2755,
+      3361,
+      1651,
+      1553,
+      3621,
+      3027
+    ],
+    "method": "abs RGB target-empty-background max>40/255 AND target temporal range>45/255, view19 only; per-frame mask",
+    "masks_used_in_training": true,
+    "caution": "Reference-derived candidate foreground, may include shadows/appearance effects. Not semantic labels or independent object geometry validation. Masks used for training: these are training-fit metrics, not independent foreground validation."
+  },
+  "spillover_diagnostic": {
+    "region": "Target temporal-change union minus current-frame reference-derived candidate foreground, view19 training only",
+    "mean_pixels": 9602.076923076924,
+    "baseline": {
+      "mean_psnr_db": 29.059291476702757,
+      "mean_absolute_error": 0.02248162217438221
+    },
+    "weighted": {
+      "mean_psnr_db": 13.48816992734475,
+      "mean_absolute_error": 0.18983188271522522
+    }
+  },
+  "checkpoint_date": "2026-11-24",
+  "verification": {
+    "windows_tests_run": 35,
+    "windows_tests_passed": 32,
+    "windows_tests_skipped_for_missing_gpu_dependencies": 3,
+    "wsl_tests_passed": 4,
+    "distinct_tests_passed_across_environments": 35,
+    "upstream_files_modified": false
+  },
+  "implementation_sha256": {
+    "scripts\\fixed_foreground_loss.py": "90ac2bc1c4119acf92b7aea04c9174391c10cd375a7cb9246803fac4db34998e",
+    "scripts\\fixed_dataset_adapter.py": "61ad02c1fba2d3a9645341a60e55f754b658a52042b2ba63d51355e50067ce24",
+    "scripts\\fixed_pilot_engine.py": "04742849c16f0798fd8f43a4d65d8c5799ccfd92b8035515ade99883e6a6f0f3"
+  },
+  "verdict": "Masked training pixels fit better but a broad dark smear replaces the board. Reserved full-image quality worsens. Not successful board geometry or physical tracking.",
+  "next_proposed_gate": "Single-instant multiview board masks and geometry check, then object-specific initialization before returning to full motion. Residual synchronization remains uncertain."
+}

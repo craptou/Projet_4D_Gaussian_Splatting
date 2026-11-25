@@ -28,10 +28,17 @@ def install():
                     raise ValueError("Image dimensions differ from calibration")
                 tensor = torch.from_numpy(np.array(image.convert("RGB"),dtype=np.float32)/255).permute(2,0,1)
             pose = np.array(record["world_to_camera"],dtype=np.float64)
+            mask=None
+            if record.get("foreground_mask_path"):
+                if record["split"]!="train":raise ValueError("Heldout image cannot supply a training foreground mask")
+                with Image.open(path/record["foreground_mask_path"]) as mask_image:
+                    if mask_image.size!=(width,height):raise ValueError("Foreground mask dimensions differ")
+                    mask=torch.from_numpy(np.array(mask_image.convert("L"))>0)
+                if not mask.any():raise ValueError("Empty foreground mask")
             info = CameraInfo(uid=index, R=pose[:,:3].T, T=pose[:,3], FovX=focal2fov(focal,width),
                 FovY=focal2fov(focal,height), image=tensor, image_path=str(path/record["image_path"]),
                 image_name=f"{record['camera_id']}-{index}", width=width, height=height,
-                time=record["time"], mask=None)
+                time=record["time"], mask=mask)
             if record["split"] == "train":
                 train.append(info); train_ids.add(record["camera_id"])
             elif record["split"] == "test":

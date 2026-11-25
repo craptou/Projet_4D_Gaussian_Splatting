@@ -2,6 +2,8 @@
 
 [English](work-log.en.md) · Corte: 18 de noviembre de 2026
 
+**24 de noviembre de 2026 — control del primer plano:** revisión de fases en 18 vistas y las 13 muestras completas de tres vistas cercanas; sincronización exacta todavía incierta. Control en RTX 4050 con entradas idénticas a la referencia, 200 pasos gruesos + 5.000 finos y pérdida adicional del primer plano solo en view19. Mejora el ajuste enmascarado de entrenamiento, pero aparece una mancha amplia y baja el PSNR completo reservado. [Resultados, comandos, comparaciones e hipótesis siguiente](foreground-trial.es.md). La cronología anterior conserva el contexto de su corte original.
+
 Estas entradas se basan en Git y en artefactos experimentales conservados. Documentan cortes reales, no una actividad semanal continua. Los commits pueden inspeccionarse con `git show <hash>` después de clonar el repositorio.
 
 | Fecha | Problema / acción | Evidencia y resultado | Interpretación / siguiente paso |

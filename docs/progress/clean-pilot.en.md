@@ -2,6 +2,8 @@
 
 [Español](clean-pilot.es.md) · [Measured evidence](../evidence/clean-pilot-2026-11-24.json) · [Capture recovery](clean-capture.en.md)
 
+**Follow-up completed:** the [foreground-weighting control](foreground-trial.en.md) keeps these data and initialization unchanged. It improves masked training pixels but produces a broad smear; board reconstruction remains unresolved.
+
 The new recording now passes camera reconstruction, dataset loading, GPU training and rendering. The background becomes more recognizable, but **the skateboard remains unrecognizable in the inspected model renders**. Better inputs alone have not resolved the project’s main difficulty.
 
 ![Recording / 2,000 steps / 5,000 steps, reserved view20](../assets/clean-pilot-comparison.gif)

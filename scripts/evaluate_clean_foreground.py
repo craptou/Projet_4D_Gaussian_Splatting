@@ -29,9 +29,12 @@ def evaluate(source,run,output,checkpoints):
                 with Image.open(run/f"renders-{iteration}/train-view19/{kind}/{i:03d}.png") as image:images.append(np.array(image.convert("RGB"),dtype=np.float32)/255)
             metrics[kind]=measure(images)
         results["checkpoints"][str(iteration)]=metrics
+    manifest=json.loads((source/"manifest.json").read_text())
+    used=bool(manifest.get("foreground_loss"))
     results.update(mask_pixels_per_frame=[int(mask.sum()) for mask in masks],
         method="abs RGB target-empty-background max>40/255 AND target temporal range>45/255, view19 only; per-frame mask",
-        caution="Reference-derived candidate foreground, may include shadows/appearance effects. Not semantic labels or independent object geometry validation. Masks not used in this training.")
+        masks_used_in_training=used,
+        caution="Reference-derived candidate foreground, may include shadows/appearance effects. Not semantic labels or independent object geometry validation. "+("Masks used for training: these are training-fit metrics, not independent foreground validation." if used else "Masks not used in this training."))
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(results,indent=2)+"\n")
     sheet=Image.new("RGB",(900,1368),"white");draw=ImageDraw.Draw(sheet)

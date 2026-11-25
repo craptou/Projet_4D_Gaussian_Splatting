@@ -2,6 +2,8 @@
 
 [English](clean-pilot.en.md) · [Evidencia medida](../evidence/clean-pilot-2026-11-24.json) · [Recuperación de la captura](clean-capture.es.md)
 
+**Continuación completada:** el [control de ponderación del primer plano](foreground-trial.es.md) conserva estos datos e inicialización. Mejora los píxeles enmascarados de entrenamiento, pero produce una mancha amplia; la reconstrucción de la tabla sigue sin resolverse.
+
 La nueva grabación supera reconstrucción de cámaras, carga de datos, entrenamiento GPU y renderizado. El fondo resulta más reconocible, pero **la tabla sigue sin reconocerse en los renders inspeccionados**. Mejorar las entradas por sí solo no ha resuelto la dificultad principal del proyecto.
 
 ![Grabación / 2.000 pasos / 5.000 pasos, vista reservada view20](../assets/clean-pilot-comparison.gif)
