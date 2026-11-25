@@ -2,6 +2,8 @@
 
 [Español](static-board.es.md) · [Measured evidence](../evidence/static-board-2026-11-24.json) · [Previous foreground trial](foreground-trial.en.md)
 
+**Subsequent correction:** the [near-clip audit and safe-scale retraining](near-clip-fix.en.md) found that this experiment clipped most board seeds in several views. The corrected run renders a recognizable board in view20. The measurements below are retained as history, but are not a clean test of reconstruction capability. The current launcher intentionally rejects the unsafe dataset in the historical commands; use the new safe-scale recipe.
+
 **The board is now recognizable in inspected training views, but the reserved view remains poor.** This is a restricted static feasibility result. It does not demonstrate reliable novel-view reconstruction, motion or board tracking.
 
 ![Recording / static fit / fixed-geometry control; two training views and reserved view20](../assets/static-board-detail.jpg)

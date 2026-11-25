@@ -2,6 +2,8 @@
 
 [English](static-board.en.md) · [Evidencia medida](../evidence/static-board-2026-11-24.json) · [Prueba anterior de primer plano](foreground-trial.es.md)
 
+**Corrección posterior:** la [auditoría del recorte cercano y el entrenamiento con escala segura](near-clip-fix.es.md) detectaron que este experimento recortaba la mayoría de semillas de la tabla en varias vistas. La ejecución corregida muestra una tabla reconocible en view20. Se conservan las mediciones históricas, pero no son una prueba limpia de capacidad de reconstrucción. El ejecutor actual rechaza el conjunto inseguro de los comandos históricos; usar el nuevo procedimiento de escala segura.
+
 **La tabla ya es reconocible en vistas de entrenamiento inspeccionadas, pero la vista reservada sigue siendo mala.** Es un resultado estático de viabilidad sobre un subconjunto. No demuestra reconstrucción fiable desde vistas nuevas, movimiento ni seguimiento de la tabla.
 
 ![Grabación / ajuste estático / geometría fija; dos vistas de entrenamiento y view20 reservada](../assets/static-board-detail.jpg)

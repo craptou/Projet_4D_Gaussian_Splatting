@@ -65,9 +65,16 @@ def probe(source, output, config):
     assert [camera.time for camera in test]==[r['time'] for r in test_records]
     expected_points=manifest["initialization_points"]
     assert gaussians.get_xyz.shape[0]==expected_points
+    board_visibility=None
+    if manifest.get('static_scene'):
+        from static_world_scale import require_board_visibility
+        preparation=json.loads((source/'preparation.json').read_text())
+        start=preparation['background_points']
+        board_visibility=require_board_visibility(points[start:start+preparation['board_seed_points']],manifest['frames'])
     result=dict(training_samples=len(train),test_samples=len(test),initial_points=expected_points,
         image_resolution=manifest["image_resolution"],last_normalized_time=test[len(test)-1].time,
         renderer_projection_max_error_pixels=max_error,gpu=torch.cuda.get_device_name(),
+        static_board_visibility=board_visibility,
         status="Actual runtime loader and renderer projection checks passed")
     (output/"loader.json").write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps(result,indent=2),flush=True)
