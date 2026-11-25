@@ -1,5 +1,7 @@
 # Work log and evidence
 
+**24 November 2026 — time-invariant background:** same three times, byte-identical inputs and 200+6,000 steps; only hull-seed descendants receive time deformation. GPU training 305.34 s; saved role labels survive densification and all five background attributes are time-invariant in the checkpoint audit. Target-stable variation in view20 falls about 13×, but observed/intermediate change-region PSNR worsens and the airborne board remains incorrect. [Comparisons, controls, tests and proposed denser-time experiment](actor-only.en.md). No faithful flip or physical tracking claimed.
+
 [Español](work-log.es.md) · Checkpoint: 18 November 2026
 
 **24 November 2026 — first joint temporal model:** assembled 42 training /3 validation images at normalized times0,5/9,1 from safe static datasets, with canonical first-instant seeds and37 available training masks. Ran a3k pilot and separate6k duration control; evaluated same-run3k/6k checkpoints at3 supervised and7 intermediate timestamps against frozen time. Longer fitting improves observed targets, but middle-board shape, interpolation and background stability remain poor. [Recorded comparisons, metrics, limitations and next tests](joint-temporal.en.md). No faithful flip or physical tracking claim.

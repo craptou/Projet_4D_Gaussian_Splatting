@@ -1,5 +1,7 @@
 # One temporal model for three replay instants — 24 November 2026
 
+Follow-up completed: [time-invariant background control](actor-only.en.md) reduces background variation but does not recover faithful board motion. This page preserves the preceding experiment.
+
 [Español](joint-temporal.es.md) · [Previous independent static fits](multi-instant.en.md)
 
 **One shared temporal model is trained, but a faithful reconstruction of the flip is not established.** Longer fitting improves observed images, while the middle board remains badly distorted and intermediate-time quality is barely better than frozen time. [Measured evidence](../evidence/joint-temporal-2026-11-24.json).

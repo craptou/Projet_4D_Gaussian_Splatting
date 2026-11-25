@@ -1,0 +1,1314 @@
+{
+  "global_run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 10.222865915,
+      "train": 307.90274948900003,
+      "render-3000": 17.449145747999978,
+      "render-6000": 16.546617366999953
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 6000,
+    "config_sha256": "190cb8030816e9abd6094187d9e180c8ea1565baf1de4e3bb869ca433359dafe",
+    "loader": {
+      "training_samples": 42,
+      "test_samples": 3,
+      "initial_points": 5337,
+      "image_resolution": [
+        563,
+        1218
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 3.544820959966444e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "static_board_visibility": {
+        "view01": {
+          "min_depth": 1.4555077905791909,
+          "median_depth": 1.5161486721396193,
+          "max_depth": 1.5821559764470314,
+          "fraction_above_near": 1.0
+        },
+        "view02": {
+          "min_depth": 1.3729519384283009,
+          "median_depth": 1.4477048125646204,
+          "max_depth": 1.524244678260136,
+          "fraction_above_near": 1.0
+        },
+        "view03": {
+          "min_depth": 0.6863825708000515,
+          "median_depth": 0.7588713256864552,
+          "max_depth": 0.8345044448951567,
+          "fraction_above_near": 1.0
+        },
+        "view04": {
+          "min_depth": 0.33982012571564746,
+          "median_depth": 0.41971536296741685,
+          "max_depth": 0.5012451211307585,
+          "fraction_above_near": 1.0
+        },
+        "view06": {
+          "min_depth": 0.5700752322920474,
+          "median_depth": 0.6441194808544005,
+          "max_depth": 0.7183321907113014,
+          "fraction_above_near": 1.0
+        },
+        "view10": {
+          "min_depth": 1.5500836364431299,
+          "median_depth": 1.6304536089117045,
+          "max_depth": 1.711228590972048,
+          "fraction_above_near": 1.0
+        },
+        "view11": {
+          "min_depth": 1.3773777431964045,
+          "median_depth": 1.4493836129854785,
+          "max_depth": 1.5200563733350976,
+          "fraction_above_near": 1.0
+        },
+        "view12": {
+          "min_depth": 1.4575475232566129,
+          "median_depth": 1.5152959766564085,
+          "max_depth": 1.568216691607284,
+          "fraction_above_near": 1.0
+        },
+        "view13": {
+          "min_depth": 1.7114478860985325,
+          "median_depth": 1.7558307289739297,
+          "max_depth": 1.7973615289135145,
+          "fraction_above_near": 1.0
+        },
+        "view14": {
+          "min_depth": 1.7646241696947427,
+          "median_depth": 1.8186675411118065,
+          "max_depth": 1.8740288292220457,
+          "fraction_above_near": 1.0
+        },
+        "view15": {
+          "min_depth": 1.4702062970307677,
+          "median_depth": 1.5307443864158052,
+          "max_depth": 1.593690894360686,
+          "fraction_above_near": 1.0
+        },
+        "view16": {
+          "min_depth": 1.274349413367831,
+          "median_depth": 1.3361689792338054,
+          "max_depth": 1.4037723915438818,
+          "fraction_above_near": 1.0
+        },
+        "view17": {
+          "min_depth": 1.3048074395440676,
+          "median_depth": 1.3764418767147064,
+          "max_depth": 1.4494689139260684,
+          "fraction_above_near": 1.0
+        },
+        "view19": {
+          "min_depth": 0.9271615208847128,
+          "median_depth": 1.0063697157521365,
+          "max_depth": 1.0872770718380922,
+          "fraction_above_near": 1.0
+        },
+        "view20": {
+          "min_depth": 0.5977312930146937,
+          "median_depth": 0.6790027802496021,
+          "max_depth": 0.7616598890307043,
+          "fraction_above_near": 1.0
+        }
+      },
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "evaluation": {
+      "iteration": 6000,
+      "active_sh_degree": 3,
+      "static_scene": false,
+      "temporal_scene": true,
+      "frozen_control_time": 0.5555555555555556,
+      "gaussian_count": 10079,
+      "metrics": {
+        "test-view20": {
+          "render": {
+            "mean_psnr_db": 26.31507110595703,
+            "mean_ssim": 0.9168030023574829,
+            "temporal_change_region_mean_psnr_db": 22.3638858795166,
+            "temporal_change_region_mae": 0.043822530657052994,
+            "temporal_change_region_available": true
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 25.40004539489746,
+            "mean_ssim": 0.9140559037526449,
+            "temporal_change_region_mean_psnr_db": 18.366931915283203,
+            "temporal_change_region_mae": 0.08890442550182343,
+            "temporal_change_region_available": true
+          },
+          "temporal_change_region_pixels": 9812,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.002721835160627961,
+          "render_interframe_mae": 0.014012069441378117
+        },
+        "train-view19": {
+          "render": {
+            "mean_psnr_db": 27.76241111755371,
+            "mean_ssim": 0.9273846944173177,
+            "temporal_change_region_mean_psnr_db": 22.90235710144043,
+            "temporal_change_region_mae": 0.040273018181324005,
+            "temporal_change_region_available": true
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 24.941511154174805,
+            "mean_ssim": 0.9231569766998291,
+            "temporal_change_region_mean_psnr_db": 14.962803840637207,
+            "temporal_change_region_mae": 0.13951149582862854,
+            "temporal_change_region_available": true
+          },
+          "temporal_change_region_pixels": 6689,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.0019569823052734137,
+          "render_interframe_mae": 0.009578665718436241
+        }
+      },
+      "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+    },
+    "checkpoints": [
+      3000,
+      6000
+    ],
+    "effective_configuration": {
+      "ModelParams": {
+        "white_background": false,
+        "eval": true,
+        "add_points": false
+      },
+      "OptimizationParams": {
+        "iterations": 6000,
+        "coarse_iterations": 200,
+        "batch_size": 1,
+        "dataloader": false,
+        "densify_from_iter": 200,
+        "densify_until_iter": 1300,
+        "densification_interval": 300,
+        "opacity_reset_interval": 60000,
+        "add_point": false
+      },
+      "ModelHiddenParams": {
+        "net_width": 64,
+        "multires": [
+          1,
+          2
+        ],
+        "defor_depth": 0,
+        "kplanes_config": {
+          "grid_dimensions": 2,
+          "input_coordinate_dim": 4,
+          "output_coordinate_dim": 16,
+          "resolution": [
+            32,
+            32,
+            32,
+            13
+          ]
+        },
+        "no_do": false,
+        "no_dshs": false,
+        "no_ds": false,
+        "plane_tv_weight": 0.0002,
+        "time_smoothness_weight": 0.001,
+        "l1_time_planes": 0.0001
+      }
+    },
+    "evaluations": {
+      "3000": {
+        "iteration": 3000,
+        "active_sh_degree": 3,
+        "static_scene": false,
+        "temporal_scene": true,
+        "frozen_control_time": 0.5555555555555556,
+        "gaussian_count": 10079,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 22.747703552246094,
+              "mean_ssim": 0.8978044191996256,
+              "temporal_change_region_mean_psnr_db": 19.222450256347656,
+              "temporal_change_region_mae": 0.08265941590070724,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 22.422319412231445,
+              "mean_ssim": 0.8967874844868978,
+              "temporal_change_region_mean_psnr_db": 16.440717697143555,
+              "temporal_change_region_mae": 0.11645607650279999,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 9812,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.002721835160627961,
+            "render_interframe_mae": 0.014625965617597103
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 23.17513084411621,
+              "mean_ssim": 0.9036833445231119,
+              "temporal_change_region_mean_psnr_db": 18.860504150390625,
+              "temporal_change_region_mae": 0.08114056289196014,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 22.1618709564209,
+              "mean_ssim": 0.9010989864667257,
+              "temporal_change_region_mean_psnr_db": 14.411048889160156,
+              "temporal_change_region_mae": 0.1596250832080841,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 6689,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0019569823052734137,
+            "render_interframe_mae": 0.01156372670084238
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      },
+      "6000": {
+        "iteration": 6000,
+        "active_sh_degree": 3,
+        "static_scene": false,
+        "temporal_scene": true,
+        "frozen_control_time": 0.5555555555555556,
+        "gaussian_count": 10079,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 26.31507110595703,
+              "mean_ssim": 0.9168030023574829,
+              "temporal_change_region_mean_psnr_db": 22.3638858795166,
+              "temporal_change_region_mae": 0.043822530657052994,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 25.40004539489746,
+              "mean_ssim": 0.9140559037526449,
+              "temporal_change_region_mean_psnr_db": 18.366931915283203,
+              "temporal_change_region_mae": 0.08890442550182343,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 9812,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.002721835160627961,
+            "render_interframe_mae": 0.014012069441378117
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 27.76241111755371,
+              "mean_ssim": 0.9273846944173177,
+              "temporal_change_region_mean_psnr_db": 22.90235710144043,
+              "temporal_change_region_mae": 0.040273018181324005,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 24.941511154174805,
+              "mean_ssim": 0.9231569766998291,
+              "temporal_change_region_mean_psnr_db": 14.962803840637207,
+              "temporal_change_region_mae": 0.13951149582862854,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 6689,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0019569823052734137,
+            "render_interframe_mae": 0.009578665718436241
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      }
+    }
+  },
+  "actor_run": {
+    "status": "Bounded True Skate pilot completed; inspect board quality separately",
+    "timing_seconds": {
+      "probe": 10.942790124,
+      "train": 305.33816120499995,
+      "render-3000": 18.406633640000052,
+      "render-6000": 18.15416862699999
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "coarse_steps": 200,
+    "fine_steps": 6000,
+    "config_sha256": "190cb8030816e9abd6094187d9e180c8ea1565baf1de4e3bb869ca433359dafe",
+    "loader": {
+      "actor_partition": {
+        "background_descendants": 2337,
+        "actor_descendants": 3000,
+        "times": [
+          0.0,
+          0.5555555555555556,
+          1.0
+        ],
+        "max_background_absolute_delta": {
+          "xyz": 0.0,
+          "scale": 0.0,
+          "rotation": 0.0,
+          "opacity": 0.0,
+          "sh": 0.0
+        },
+        "note": "Seed ancestry, not semantic segmentation; actor occlusion can still change background pixels."
+      },
+      "training_samples": 42,
+      "test_samples": 3,
+      "initial_points": 5337,
+      "image_resolution": [
+        563,
+        1218
+      ],
+      "last_normalized_time": 1.0,
+      "renderer_projection_max_error_pixels": 3.544820959966444e-05,
+      "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "static_board_visibility": {
+        "view01": {
+          "min_depth": 1.4555077905791909,
+          "median_depth": 1.5161486721396193,
+          "max_depth": 1.5821559764470314,
+          "fraction_above_near": 1.0
+        },
+        "view02": {
+          "min_depth": 1.3729519384283009,
+          "median_depth": 1.4477048125646204,
+          "max_depth": 1.524244678260136,
+          "fraction_above_near": 1.0
+        },
+        "view03": {
+          "min_depth": 0.6863825708000515,
+          "median_depth": 0.7588713256864552,
+          "max_depth": 0.8345044448951567,
+          "fraction_above_near": 1.0
+        },
+        "view04": {
+          "min_depth": 0.33982012571564746,
+          "median_depth": 0.41971536296741685,
+          "max_depth": 0.5012451211307585,
+          "fraction_above_near": 1.0
+        },
+        "view06": {
+          "min_depth": 0.5700752322920474,
+          "median_depth": 0.6441194808544005,
+          "max_depth": 0.7183321907113014,
+          "fraction_above_near": 1.0
+        },
+        "view10": {
+          "min_depth": 1.5500836364431299,
+          "median_depth": 1.6304536089117045,
+          "max_depth": 1.711228590972048,
+          "fraction_above_near": 1.0
+        },
+        "view11": {
+          "min_depth": 1.3773777431964045,
+          "median_depth": 1.4493836129854785,
+          "max_depth": 1.5200563733350976,
+          "fraction_above_near": 1.0
+        },
+        "view12": {
+          "min_depth": 1.4575475232566129,
+          "median_depth": 1.5152959766564085,
+          "max_depth": 1.568216691607284,
+          "fraction_above_near": 1.0
+        },
+        "view13": {
+          "min_depth": 1.7114478860985325,
+          "median_depth": 1.7558307289739297,
+          "max_depth": 1.7973615289135145,
+          "fraction_above_near": 1.0
+        },
+        "view14": {
+          "min_depth": 1.7646241696947427,
+          "median_depth": 1.8186675411118065,
+          "max_depth": 1.8740288292220457,
+          "fraction_above_near": 1.0
+        },
+        "view15": {
+          "min_depth": 1.4702062970307677,
+          "median_depth": 1.5307443864158052,
+          "max_depth": 1.593690894360686,
+          "fraction_above_near": 1.0
+        },
+        "view16": {
+          "min_depth": 1.274349413367831,
+          "median_depth": 1.3361689792338054,
+          "max_depth": 1.4037723915438818,
+          "fraction_above_near": 1.0
+        },
+        "view17": {
+          "min_depth": 1.3048074395440676,
+          "median_depth": 1.3764418767147064,
+          "max_depth": 1.4494689139260684,
+          "fraction_above_near": 1.0
+        },
+        "view19": {
+          "min_depth": 0.9271615208847128,
+          "median_depth": 1.0063697157521365,
+          "max_depth": 1.0872770718380922,
+          "fraction_above_near": 1.0
+        },
+        "view20": {
+          "min_depth": 0.5977312930146937,
+          "median_depth": 0.6790027802496021,
+          "max_depth": 0.7616598890307043,
+          "fraction_above_near": 1.0
+        }
+      },
+      "status": "Actual runtime loader and renderer projection checks passed"
+    },
+    "evaluation": {
+      "actor_partition": {
+        "background_descendants": 5518,
+        "actor_descendants": 3134,
+        "times": [
+          0.0,
+          0.5555555555555556,
+          1.0
+        ],
+        "max_background_absolute_delta": {
+          "xyz": 0.0,
+          "scale": 0.0,
+          "rotation": 0.0,
+          "opacity": 0.0,
+          "sh": 0.0
+        },
+        "note": "Seed ancestry, not semantic segmentation; actor occlusion can still change background pixels."
+      },
+      "iteration": 6000,
+      "active_sh_degree": 3,
+      "static_scene": false,
+      "temporal_scene": true,
+      "frozen_control_time": 0.5555555555555556,
+      "gaussian_count": 8652,
+      "metrics": {
+        "test-view20": {
+          "render": {
+            "mean_psnr_db": 28.766929626464844,
+            "mean_ssim": 0.922995924949646,
+            "temporal_change_region_mean_psnr_db": 19.791139602661133,
+            "temporal_change_region_mae": 0.06006751209497452,
+            "temporal_change_region_available": true
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 28.422746658325195,
+            "mean_ssim": 0.9220115741093954,
+            "temporal_change_region_mean_psnr_db": 18.36905860900879,
+            "temporal_change_region_mae": 0.09249592572450638,
+            "temporal_change_region_available": true
+          },
+          "temporal_change_region_pixels": 9812,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.002721835160627961,
+          "render_interframe_mae": 0.001765538938343525
+        },
+        "train-view19": {
+          "render": {
+            "mean_psnr_db": 30.8090763092041,
+            "mean_ssim": 0.9369738896687826,
+            "temporal_change_region_mean_psnr_db": 14.750130653381348,
+            "temporal_change_region_mae": 0.131789430975914,
+            "temporal_change_region_available": true
+          },
+          "frozen_time_baseline": {
+            "mean_psnr_db": 30.675886154174805,
+            "mean_ssim": 0.9366209705670675,
+            "temporal_change_region_mean_psnr_db": 14.515740394592285,
+            "temporal_change_region_mae": 0.1492619514465332,
+            "temporal_change_region_available": true
+          },
+          "temporal_change_region_pixels": 6689,
+          "total_pixels": 685734,
+          "target_interframe_mae": 0.0019569823052734137,
+          "render_interframe_mae": 0.000504280673339963
+        }
+      },
+      "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+    },
+    "checkpoints": [
+      3000,
+      6000
+    ],
+    "effective_configuration": {
+      "ModelParams": {
+        "white_background": false,
+        "eval": true,
+        "add_points": false
+      },
+      "OptimizationParams": {
+        "iterations": 6000,
+        "coarse_iterations": 200,
+        "batch_size": 1,
+        "dataloader": false,
+        "densify_from_iter": 200,
+        "densify_until_iter": 1300,
+        "densification_interval": 300,
+        "opacity_reset_interval": 60000,
+        "add_point": false
+      },
+      "ModelHiddenParams": {
+        "net_width": 64,
+        "multires": [
+          1,
+          2
+        ],
+        "defor_depth": 0,
+        "kplanes_config": {
+          "grid_dimensions": 2,
+          "input_coordinate_dim": 4,
+          "output_coordinate_dim": 16,
+          "resolution": [
+            32,
+            32,
+            32,
+            13
+          ]
+        },
+        "no_do": false,
+        "no_dshs": false,
+        "no_ds": false,
+        "plane_tv_weight": 0.0002,
+        "time_smoothness_weight": 0.001,
+        "l1_time_planes": 0.0001
+      }
+    },
+    "evaluations": {
+      "3000": {
+        "actor_partition": {
+          "background_descendants": 5518,
+          "actor_descendants": 3134,
+          "times": [
+            0.0,
+            0.5555555555555556,
+            1.0
+          ],
+          "max_background_absolute_delta": {
+            "xyz": 0.0,
+            "scale": 0.0,
+            "rotation": 0.0,
+            "opacity": 0.0,
+            "sh": 0.0
+          },
+          "note": "Seed ancestry, not semantic segmentation; actor occlusion can still change background pixels."
+        },
+        "iteration": 3000,
+        "active_sh_degree": 3,
+        "static_scene": false,
+        "temporal_scene": true,
+        "frozen_control_time": 0.5555555555555556,
+        "gaussian_count": 8652,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 27.42549705505371,
+              "mean_ssim": 0.9181680281956991,
+              "temporal_change_region_mean_psnr_db": 19.836095809936523,
+              "temporal_change_region_mae": 0.06276129931211472,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 27.146804809570312,
+              "mean_ssim": 0.9175718029340109,
+              "temporal_change_region_mean_psnr_db": 18.29146957397461,
+              "temporal_change_region_mae": 0.09694938361644745,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 9812,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.002721835160627961,
+            "render_interframe_mae": 0.002105011837556958
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 29.784873962402344,
+              "mean_ssim": 0.9299498399098715,
+              "temporal_change_region_mean_psnr_db": 14.592297554016113,
+              "temporal_change_region_mae": 0.14041943848133087,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 29.681175231933594,
+              "mean_ssim": 0.9300340414047241,
+              "temporal_change_region_mean_psnr_db": 14.372797966003418,
+              "temporal_change_region_mae": 0.15360160171985626,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 6689,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0019569823052734137,
+            "render_interframe_mae": 0.0005680085741914809
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      },
+      "6000": {
+        "actor_partition": {
+          "background_descendants": 5518,
+          "actor_descendants": 3134,
+          "times": [
+            0.0,
+            0.5555555555555556,
+            1.0
+          ],
+          "max_background_absolute_delta": {
+            "xyz": 0.0,
+            "scale": 0.0,
+            "rotation": 0.0,
+            "opacity": 0.0,
+            "sh": 0.0
+          },
+          "note": "Seed ancestry, not semantic segmentation; actor occlusion can still change background pixels."
+        },
+        "iteration": 6000,
+        "active_sh_degree": 3,
+        "static_scene": false,
+        "temporal_scene": true,
+        "frozen_control_time": 0.5555555555555556,
+        "gaussian_count": 8652,
+        "metrics": {
+          "test-view20": {
+            "render": {
+              "mean_psnr_db": 28.766929626464844,
+              "mean_ssim": 0.922995924949646,
+              "temporal_change_region_mean_psnr_db": 19.791139602661133,
+              "temporal_change_region_mae": 0.06006751209497452,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 28.422746658325195,
+              "mean_ssim": 0.9220115741093954,
+              "temporal_change_region_mean_psnr_db": 18.36905860900879,
+              "temporal_change_region_mae": 0.09249592572450638,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 9812,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.002721835160627961,
+            "render_interframe_mae": 0.001765538938343525
+          },
+          "train-view19": {
+            "render": {
+              "mean_psnr_db": 30.8090763092041,
+              "mean_ssim": 0.9369738896687826,
+              "temporal_change_region_mean_psnr_db": 14.750130653381348,
+              "temporal_change_region_mae": 0.131789430975914,
+              "temporal_change_region_available": true
+            },
+            "frozen_time_baseline": {
+              "mean_psnr_db": 30.675886154174805,
+              "mean_ssim": 0.9366209705670675,
+              "temporal_change_region_mean_psnr_db": 14.515740394592285,
+              "temporal_change_region_mae": 0.1492619514465332,
+              "temporal_change_region_available": true
+            },
+            "temporal_change_region_pixels": 6689,
+            "total_pixels": 685734,
+            "target_interframe_mae": 0.0019569823052734137,
+            "render_interframe_mae": 0.000504280673339963
+          }
+        },
+        "caution": "Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately."
+      }
+    }
+  },
+  "global_timeline": {
+    "iteration": 6000,
+    "observed_indices": [
+      3,
+      8,
+      12
+    ],
+    "unseen_time_indices": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "frozen_time": 0.5555555555555556,
+    "metrics": {
+      "view20": {
+        "groups": {
+          "observed": {
+            "dynamic": {
+              "mean_full_psnr_db": 26.31507110595703,
+              "mean_ssim": 0.9168030619621277,
+              "changing_union_psnr_db": 23.10124397277832
+            },
+            "frozen": {
+              "mean_full_psnr_db": 25.40004539489746,
+              "mean_ssim": 0.9140559832255045,
+              "changing_union_psnr_db": 19.333555221557617
+            }
+          },
+          "unseen_time": {
+            "dynamic": {
+              "mean_full_psnr_db": 25.703369140625,
+              "mean_ssim": 0.9126869525228228,
+              "changing_union_psnr_db": 20.515975952148438
+            },
+            "frozen": {
+              "mean_full_psnr_db": 25.588016510009766,
+              "mean_ssim": 0.9151455334254673,
+              "changing_union_psnr_db": 20.46917152404785
+            }
+          }
+        },
+        "deck": {
+          "3": {
+            "dynamic": {
+              "psnr_db": 26.1533203125,
+              "mae": 0.027133123949170113
+            },
+            "frozen": {
+              "psnr_db": 13.673115730285645,
+              "mae": 0.20130819082260132
+            }
+          },
+          "8": {
+            "dynamic": {
+              "psnr_db": 15.667943000793457,
+              "mae": 0.09937609732151031
+            },
+            "frozen": {
+              "psnr_db": 15.667943000793457,
+              "mae": 0.09937609732151031
+            }
+          },
+          "12": {
+            "dynamic": {
+              "psnr_db": 21.991817474365234,
+              "mae": 0.049001362174749374
+            },
+            "frozen": {
+              "psnr_db": 20.80265998840332,
+              "mae": 0.0669991746544838
+            }
+          }
+        },
+        "changing_union_pixels": 15648,
+        "target_stable_background_interframe_mae": 0.0003810271737165749,
+        "predicted_stable_background_interframe_mae": 0.005693878047168255,
+        "near_clip_spatial_probe": [
+          {
+            "sample": 3,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3663244843482971
+          },
+          {
+            "sample": 4,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3672400414943695
+          },
+          {
+            "sample": 5,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.36851489543914795
+          },
+          {
+            "sample": 6,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3698071241378784
+          },
+          {
+            "sample": 7,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3702021539211273
+          },
+          {
+            "sample": 8,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3701012134552002
+          },
+          {
+            "sample": 9,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.36942335963249207
+          },
+          {
+            "sample": 10,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.36801856756210327
+          },
+          {
+            "sample": 11,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.36683303117752075
+          },
+          {
+            "sample": 12,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.3660189211368561
+          }
+        ]
+      },
+      "view19": {
+        "groups": {
+          "observed": {
+            "dynamic": {
+              "mean_full_psnr_db": 27.76241111755371,
+              "mean_ssim": 0.9273847341537476,
+              "changing_union_psnr_db": 21.334381103515625
+            },
+            "frozen": {
+              "mean_full_psnr_db": 24.941511154174805,
+              "mean_ssim": 0.9231569369633993,
+              "changing_union_psnr_db": 14.188121795654297
+            }
+          },
+          "unseen_time": {
+            "dynamic": {
+              "mean_full_psnr_db": 26.0517578125,
+              "mean_ssim": 0.9221905044146946,
+              "changing_union_psnr_db": 16.10565185546875
+            },
+            "frozen": {
+              "mean_full_psnr_db": 24.857421875,
+              "mean_ssim": 0.9229582803589957,
+              "changing_union_psnr_db": 13.59861946105957
+            }
+          }
+        },
+        "deck": {
+          "3": {
+            "dynamic": {
+              "psnr_db": 28.21086883544922,
+              "mae": 0.01962338574230671
+            },
+            "frozen": {
+              "psnr_db": 12.906181335449219,
+              "mae": 0.21973195672035217
+            }
+          },
+          "8": {
+            "dynamic": {
+              "psnr_db": 18.029617309570312,
+              "mae": 0.06751321256160736
+            },
+            "frozen": {
+              "psnr_db": 18.029617309570312,
+              "mae": 0.06751321256160736
+            }
+          },
+          "12": {
+            "dynamic": {
+              "psnr_db": 20.089645385742188,
+              "mae": 0.03605088219046593
+            },
+            "frozen": {
+              "psnr_db": 14.86489200592041,
+              "mae": 0.11092452704906464
+            }
+          }
+        },
+        "changing_union_pixels": 11239,
+        "target_stable_background_interframe_mae": 9.344348654849455e-05,
+        "predicted_stable_background_interframe_mae": 0.002592099364846945,
+        "near_clip_spatial_probe": [
+          {
+            "sample": 3,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6896811723709106
+          },
+          {
+            "sample": 4,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6905651688575745
+          },
+          {
+            "sample": 5,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6918173432350159
+          },
+          {
+            "sample": 6,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6930184364318848
+          },
+          {
+            "sample": 7,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6930616497993469
+          },
+          {
+            "sample": 8,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6927365064620972
+          },
+          {
+            "sample": 9,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6920077800750732
+          },
+          {
+            "sample": 10,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6907451152801514
+          },
+          {
+            "sample": 11,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.6896506547927856
+          },
+          {
+            "sample": 12,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.688896894454956
+          }
+        ]
+      }
+    },
+    "spatial_probe_points": 3239,
+    "caveat": "Only3 training times. Intermediate targets are evaluation-only for this model, at a repeatedly inspected camera. Spatial near-clip probe is not semantic point tracking.",
+    "animation_note": "10 timestamps at250ms/frame, roughly5x slower than capture time;3 observed training times and7 evaluation-only intermediate times."
+  },
+  "actor_timeline": {
+    "iteration": 6000,
+    "observed_indices": [
+      3,
+      8,
+      12
+    ],
+    "unseen_time_indices": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "frozen_time": 0.5555555555555556,
+    "metrics": {
+      "view20": {
+        "groups": {
+          "observed": {
+            "dynamic": {
+              "mean_full_psnr_db": 28.766929626464844,
+              "mean_ssim": 0.922995924949646,
+              "changing_union_psnr_db": 20.815664291381836
+            },
+            "frozen": {
+              "mean_full_psnr_db": 28.422746658325195,
+              "mean_ssim": 0.9220115542411804,
+              "changing_union_psnr_db": 19.65678596496582
+            }
+          },
+          "unseen_time": {
+            "dynamic": {
+              "mean_full_psnr_db": 28.25132942199707,
+              "mean_ssim": 0.9199255193982806,
+              "changing_union_psnr_db": 19.024187088012695
+            },
+            "frozen": {
+              "mean_full_psnr_db": 28.501298904418945,
+              "mean_ssim": 0.9216298631259373,
+              "changing_union_psnr_db": 19.434412002563477
+            }
+          }
+        },
+        "deck": {
+          "3": {
+            "dynamic": {
+              "psnr_db": 24.988788604736328,
+              "mae": 0.0315505713224411
+            },
+            "frozen": {
+              "psnr_db": 14.268279075622559,
+              "mae": 0.18749448657035828
+            }
+          },
+          "8": {
+            "dynamic": {
+              "psnr_db": 15.736846923828125,
+              "mae": 0.08410601317882538
+            },
+            "frozen": {
+              "psnr_db": 15.736846923828125,
+              "mae": 0.08410601317882538
+            }
+          },
+          "12": {
+            "dynamic": {
+              "psnr_db": 25.99735450744629,
+              "mae": 0.033563390374183655
+            },
+            "frozen": {
+              "psnr_db": 25.99735450744629,
+              "mae": 0.033563390374183655
+            }
+          }
+        },
+        "changing_union_pixels": 15648,
+        "target_stable_background_interframe_mae": 0.0003810271737165749,
+        "predicted_stable_background_interframe_mae": 0.0004453633155208081,
+        "near_clip_spatial_probe": [
+          {
+            "sample": 3,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.4723658561706543
+          },
+          {
+            "sample": 4,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.4726630449295044
+          },
+          {
+            "sample": 5,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.4724695086479187
+          },
+          {
+            "sample": 6,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.4717535376548767
+          },
+          {
+            "sample": 7,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.4703112244606018
+          },
+          {
+            "sample": 8,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.45966023206710815
+          },
+          {
+            "sample": 9,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.44401657581329346
+          },
+          {
+            "sample": 10,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.44604992866516113
+          },
+          {
+            "sample": 11,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.44979506731033325
+          },
+          {
+            "sample": 12,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.45438727736473083
+          }
+        ]
+      },
+      "view19": {
+        "groups": {
+          "observed": {
+            "dynamic": {
+              "mean_full_psnr_db": 30.8090763092041,
+              "mean_ssim": 0.9369738896687826,
+              "changing_union_psnr_db": 16.328929901123047
+            },
+            "frozen": {
+              "mean_full_psnr_db": 30.675886154174805,
+              "mean_ssim": 0.9366209904352824,
+              "changing_union_psnr_db": 16.12004280090332
+            }
+          },
+          "unseen_time": {
+            "dynamic": {
+              "mean_full_psnr_db": 29.807931900024414,
+              "mean_ssim": 0.9348764845303127,
+              "changing_union_psnr_db": 14.412221908569336
+            },
+            "frozen": {
+              "mean_full_psnr_db": 29.886524200439453,
+              "mean_ssim": 0.9353922264916557,
+              "changing_union_psnr_db": 14.486598014831543
+            }
+          }
+        },
+        "deck": {
+          "3": {
+            "dynamic": {
+              "psnr_db": 26.457809448242188,
+              "mae": 0.023676592856645584
+            },
+            "frozen": {
+              "psnr_db": 13.108358383178711,
+              "mae": 0.21468497812747955
+            }
+          },
+          "8": {
+            "dynamic": {
+              "psnr_db": 18.3275203704834,
+              "mae": 0.06421129405498505
+            },
+            "frozen": {
+              "psnr_db": 18.3275203704834,
+              "mae": 0.06421129405498505
+            }
+          },
+          "12": {
+            "dynamic": {
+              "psnr_db": 21.973447799682617,
+              "mae": 0.041523270308971405
+            },
+            "frozen": {
+              "psnr_db": 21.973447799682617,
+              "mae": 0.041523270308971405
+            }
+          }
+        },
+        "changing_union_pixels": 11239,
+        "target_stable_background_interframe_mae": 9.344348654849455e-05,
+        "predicted_stable_background_interframe_mae": 8.68625138537027e-05,
+        "near_clip_spatial_probe": [
+          {
+            "sample": 3,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7881836891174316
+          },
+          {
+            "sample": 4,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7876969575881958
+          },
+          {
+            "sample": 5,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7870270013809204
+          },
+          {
+            "sample": 6,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7856888771057129
+          },
+          {
+            "sample": 7,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.784060001373291
+          },
+          {
+            "sample": 8,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7701947689056396
+          },
+          {
+            "sample": 9,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.753826379776001
+          },
+          {
+            "sample": 10,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7561323642730713
+          },
+          {
+            "sample": 11,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.760299801826477
+          },
+          {
+            "sample": 12,
+            "near_cut_fraction": 0.0,
+            "min_depth": 0.7652674913406372
+          }
+        ]
+      }
+    },
+    "spatial_probe_points": 3127,
+    "caveat": "Only3 training times. Intermediate targets are evaluation-only for this model, at a repeatedly inspected camera. Spatial near-clip probe is not semantic point tracking.",
+    "animation_note": "10 timestamps at250ms/frame, roughly5x slower than capture time;3 observed training times and7 evaluation-only intermediate times."
+  },
+  "identical_configuration": true,
+  "identical_input_file_count": 91,
+  "input_hashes": {
+    "images/view01/003.png": "cda5d4c909ebf6eeb2f10d7ebf010e415f8a2b4dbd3affa78ec23a92034a25e4",
+    "images/view01/008.png": "fbd94802c0a4e134ee80f91711e190ba691964d2401cd9149d4d885f2b9f8246",
+    "images/view01/012.png": "1691728a1db39a454aa847f368392031ab8ca2e8c2a3a1c3b3763a60e9d0fc65",
+    "images/view02/003.png": "2bbaf30a9bf6df3d48fa6b568b1080aad9a521ca625badb83448852ce97783cd",
+    "images/view02/008.png": "96e59e38f6725a294b8924f075952785b4a590873f3208823ca0d046e8f68bad",
+    "images/view02/012.png": "35a327d5d4ce0c5ec3caa7b4ac75494aaff8ab8f1bba322a1327310cba363ce8",
+    "images/view03/003.png": "af6849a255f7b18a270e6a0ef9c5b5b21ce784338194399151e3056ce002dc29",
+    "images/view03/008.png": "30fcf5f57d585a0235ef3d9ca2929520a00d3178a16abc8cf325b1363d2f3923",
+    "images/view03/012.png": "abb20c484751e19b455e907911f8dd14cdca7f58ecbc9f9a86160245a77e799d",
+    "images/view04/003.png": "15ec56295ca304130f22eaf5b8abd7331badad80bac5903d045a19006d9629cd",
+    "images/view04/008.png": "22f746f8fc1df7ba26893ce56ce637bba2958c76a16300faab6a54b703f70414",
+    "images/view04/012.png": "2a448c2ef57285ef5b61d60c03fc615390c60ce8c47d478e1d0553cdad9fb709",
+    "images/view06/003.png": "3defae08a493f1f178c6c43835ba550fe43b6e9e5b58a4b73a464d642ec14334",
+    "images/view06/008.png": "88d76cf7dde8b5ae0eaf261dcd851e7b1a344b5310464886d340b039e29dd456",
+    "images/view06/012.png": "f14365c325a33843471bbcfa35f0d1da6bd9e31745d8b477fd29ebefc84ed0b2",
+    "images/view10/003.png": "6c0fe89036bc0d78e7f6de3cc8b6bb11294c45d6e4354fc64130c2ddf3c07bf9",
+    "images/view10/008.png": "a11a0ee3eafcada362aa35a54dbe51304eebfda4b5f424855e97526ed8cd125d",
+    "images/view10/012.png": "599f60b6d394f3c64b5bc98bd78a86d1f578cae26ef263c5f3c5505c1bf7a8bc",
+    "images/view11/003.png": "bfbaaca61194f63f61cd5c71af56ec6cdbee5d697bf95f5678fd1688a73aa7f2",
+    "images/view11/008.png": "141dbff82c954b1c011e07ea81d5283e207d7543bd3a494a10aa06e7ae3a0db0",
+    "images/view11/012.png": "0d737eb5e1e0f1041a457274589ca01b01fc5e2f8fabcfbfe113e8e0ea89b57d",
+    "images/view12/003.png": "948d0bd297e22c94711a3f136c81b423c9315a5c73e6db432ada52b6fa5f3dce",
+    "images/view12/008.png": "dd843a6177dfe1103ffad458e1b9675552a396d710ce173a5392ec35d865d958",
+    "images/view12/012.png": "12700026e9f7431bbd48b2f5cd150cdcf20ef050c4f1923ee776478dfd5cbbad",
+    "images/view13/003.png": "c7b289fa65d8123db3d98995a2983b39755e518ce55a11d7cd76bc8f4fb98d25",
+    "images/view13/008.png": "53b8e4665e3b6dbd28810dd18e898319576b3af09e3a9d9acb499f0c31ce627d",
+    "images/view13/012.png": "ad68b86b9c84021c6cc3ce887900b8fe6fe8d2af9b8fadb534643716c153650f",
+    "images/view14/003.png": "859e5872fdba0afbcc47c31fec5b08124eaf0b17d1255db8152410f87ae03f7b",
+    "images/view14/008.png": "696419a025b86470ba98446c927d076c7cb661a1b18475731ec444f7807e1a82",
+    "images/view14/012.png": "6d437c87f016a41912e62f3d2632281c12a5667063324d54d6d92f18cd462ec5",
+    "images/view15/003.png": "f5c9dd8ab89ac70abe7eda71c42d3a07a89f51e9617e9fc4bd7a56800034689a",
+    "images/view15/008.png": "e16c228435fdee3b301b81faba8b83739e071a9f19d0da5c3014a48e3d7b0d28",
+    "images/view15/012.png": "e6c3ace4192a7656843cac84ad831aecf348ee2fb9e8f23046ca1cb84ea1a078",
+    "images/view16/003.png": "288cb5f631d022646102c40e8999c835cc208feff0068ba2a879c9b473ead7a4",
+    "images/view16/008.png": "423fbef73011504dffef917352dc65fe0b574f8559708780d361e4cbff2ed5bd",
+    "images/view16/012.png": "fdd34fdae6943d3c9c1e9286cb1fb1c316304b7becad73615c85a951ec5eb72c",
+    "images/view17/003.png": "af16e2070f02584429fbe430bdd4105047ffe53b42f97b72bb830219f712961f",
+    "images/view17/008.png": "6690640f74d948a9a92eb6e439ddc1ece3b38d6088ba05bf8edf781eefae1c5b",
+    "images/view17/012.png": "436e003c0496125f2f30ba64f238084d6737797a783de400f3f9a462f29ec66d",
+    "images/view19/003.png": "ba2e38c47df4175936fbc70e543d0146a65b167384abe6d7b8f868d916cf4b45",
+    "images/view19/008.png": "bcdbd81385b211088da5959ae1d663ba3e52830400ac74747b470464f1688b55",
+    "images/view19/012.png": "897ab32a230371abd27bbbca0e4038fd63405980853a2d30bbb8969464ba0096",
+    "images/view20/003.png": "b29992f767673d82ffe891668af6cd009fbce99f640bf449079f5d8aa70d94db",
+    "images/view20/008.png": "dac561566b97a4ac09752bf78b66058215441eb9f785545e8e93cc07508e0c0f",
+    "images/view20/012.png": "e41ae500d71276d84a87cbd18cd25961b90cf76c4a4e845ac3463f0ee4af2818",
+    "masks/view01/003.png": "da30593b7066fe7c0f2dea97404de51150f4ae219d0986c3aa537d3e0bf9b8a6",
+    "masks/view01/008.png": "7bcc829ab6e03709e5b248e58ae53ba3aacb2aa95e4726be8496bb1baeeb6969",
+    "masks/view01/012.png": "d77ca1878951c8f60fbe9daad3f79a88227073e2f47aaf150aaf22169a506b4e",
+    "masks/view02/003.png": "a19409aad3f355319f3f573f6a457487c10838faaaaa04619918c76ed24aef88",
+    "masks/view02/008.png": "25769bdd457f7ec43a000da30ac585e0d35d08712b29698fe658b5584cf530bd",
+    "masks/view02/012.png": "7ab88a37e772c4a78326b1c746fc88ec4d78f9f488519bd81b8b79c4d2f7f19e",
+    "masks/view03/003.png": "e162a56300d9e743d79c2100531cfec81fb13abd14e20d6f32dbbb5ba6080f61",
+    "masks/view03/008.png": "d531a0995f763a78b1f59bc7c82a6c9cb97d77d7230f9399a4ef0fabc239f372",
+    "masks/view03/012.png": "301076eb06952a9e964eea0f8b294ef04f810f051c2a2ced79e5d8389d7b20d2",
+    "masks/view04/003.png": "7317d45d10bf04d24e7427c4aa150d194e0393377f7dbed87e3b58c6ab5ad580",
+    "masks/view04/008.png": "278e1443b31bec099398ab353963f4aa831c19dcacbcb04b6c0ecf55bf799f5c",
+    "masks/view04/012.png": "17979a762fa67de260b3f7e3a6fb7b0f0db9379f56dadcdff8a2449ebfd2c97f",
+    "masks/view06/003.png": "1ce2cc80af7c172ce8db192bae6f67a0a9b87aa4e24be6e95312d5b42958ef24",
+    "masks/view06/008.png": "0c2f9a69c63e221940dd9bb3fb88df35ed06605c7829baae3408d60acda1678d",
+    "masks/view06/012.png": "40ea7a03df58d9562078bdd7eb8b1802729b8e5631fd87542c97f2c24b10802c",
+    "masks/view10/003.png": "38c452d66d94a20f729cd149c9f962797cccc2f893df39cd2c6ed39aae2eb789",
+    "masks/view10/008.png": "30ed050b14bd38eb003d21d745dbe4a25e476d491e8a84387fede3a20071d392",
+    "masks/view10/012.png": "f0b49c2a63f1d8966aa9e60834661373275bab76ae07f0473f2ec6151409cde6",
+    "masks/view11/003.png": "dfc9d6959aa7356ade619ada8fbbc582324332a4fd111d508a720be0aac15196",
+    "masks/view11/008.png": "e8e99c9bce2b3a98aefbc216ecc3a6eddcfda3bad5a19c57bc322fd11e8cdab7",
+    "masks/view11/012.png": "4466ffd4b87b8f9a694bbc983f34e6bfaea55817a08f905d73b9a3491e33b8ee",
+    "masks/view12/003.png": "705fd3bf7b3bfb9a95d6f2bd2c0dacba15fde7d986a0ea8b3a425e901bc3e461",
+    "masks/view12/008.png": "f1ef95f80a3cfea629aa669670e25d6bd0ddc7ac59d41e8957c12613feb065dc",
+    "masks/view12/012.png": "b9eaa3bdae5ffdb4544d5161547469b3f05f28ff076dfdf22e6ccd4f55db0507",
+    "masks/view13/003.png": "4521f6a4614d9e3d5c43141875ca755d6dffd92b8e0341a595b070edf5222cc8",
+    "masks/view13/008.png": "abfebd48ce73efd4f254d9e021aaee35cb178bb9706f64ee1ddfcbcdb44af7e1",
+    "masks/view13/012.png": "fb1af567f9b84416d320aedf529a6b314cbd34c8ad878388d3db173712a95466",
+    "masks/view14/003.png": "d80f0ea740cfb0824f8caf6617ed8afe54c0b60ecd4335c6acb720277ff464e7",
+    "masks/view14/008.png": "c056cddcea897deef414b42388dbd5fbda9e9484ea4bd8c677f992c0814d0b39",
+    "masks/view14/012.png": "3c1ef6fc3db82899ef28e0ccc1fbb9ce104f48a8b4dc192f691aec85c96f5363",
+    "masks/view15/003.png": "ecb597eb7fc8cd8405f16875e2bc360cf4877489955f521b3a1a5cfe038b02c5",
+    "masks/view15/008.png": "d86ea8f1f0fc12ea5f67a4f54420840a28bd12a23ad923f04bdf3c47a4402cb8",
+    "masks/view15/012.png": "e9e36cbe93aa92bebfdb85fe54044015c8104d6c7628f99c69db277975d0ef8f",
+    "masks/view16/003.png": "0d2fc4ebe553bfc8e66375fe748bd9148f623e9fc98657d9d37c2d8d0c137997",
+    "masks/view16/008.png": "0272b4650879e960c969870cedb4c468310e6a3c7a29cb0f8d85b74926080ad3",
+    "masks/view16/012.png": "cea8cf18fbd21ee717b47fcb440d114b773835d58628ed8bf53910cb2bc547c5",
+    "masks/view17/003.png": "d1de3f73b4c8981b4b8efc2e306f0b7e2d35bee904b078acb35f758b8bf28a59",
+    "masks/view17/008.png": "242925b1fc798e00e96f1d767c08f0460f90648c7e3ec8db08fb2889cefdcf64",
+    "masks/view17/012.png": "b9566a8ef405e5de0e78c9d9667a6482276c8200c05ab97fa416d610b13c1bcc",
+    "masks/view19/003.png": "8715fbc2022ee6042d539e16cf80b8ed7457f320ccba19c819a0071c5a7683e3",
+    "masks/view19/008.png": "a5d528d41f3a5729fd89c1b268603d6671b1eaa63c0396e6125cd1c5a8ba4b3f",
+    "masks/view19/012.png": "66b51993f0e4a9392549c0ab7d7d8f59426ef10bbf0ce31868e64c4f3d6845f0",
+    "masks/view20/003.png": "8d1ff58dcd5584b90a1f40d493c29a49e99bff74e1fc4f2db506b6e9f649b876",
+    "masks/view20/008.png": "f601d4660aea73a43e1f459569d97f85b950f873f7ba5da6e440d5b2510911ea",
+    "masks/view20/012.png": "e75844d2cc8895dd3ec2af7e2a9cbccf75001472b8535184d9821a955a832366",
+    "points3D_multipleview.ply": "5150f63f754fae27c155a971a38da8456dc9c1897c3fd49a823426c36428d73f"
+  },
+  "verified_target_images": 40,
+  "frozen_actor_control_identical": true,
+  "caution": "One run per treatment, CUDA trajectory not deterministic. Seed ancestry is approximate, not semantic labels or physical tracking. Same repeatedly used validation camera; no fresh test set. Seven intermediate targets excluded from optimization, not all preprocessing."
+}

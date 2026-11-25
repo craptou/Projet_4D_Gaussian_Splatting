@@ -1,5 +1,7 @@
 # Un modelo temporal para tres instantes del replay — 24 de noviembre de 2026
 
+Prueba posterior completada: [control de fondo invariable en el tiempo](actor-only.es.md) reduce la variación del fondo, pero no recupera fielmente el movimiento de la tabla. Esta página conserva el experimento anterior.
+
 [English](joint-temporal.en.md) · [Ajustes estáticos independientes anteriores](multi-instant.es.md)
 
 **Se entrenó un modelo temporal compartido, pero no se demuestra una reconstrucción fiel del truco.** Más entrenamiento mejora las referencias observadas, mientras la tabla intermedia sigue deformada y los tiempos intermedios apenas superan al control congelado. [Evidencia medida](../evidence/joint-temporal-2026-11-24.json).

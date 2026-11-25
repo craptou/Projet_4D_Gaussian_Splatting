@@ -1,5 +1,7 @@
 # Bitácora y evidencias
 
+**24 de noviembre de 2026 — fondo invariable en el tiempo:** mismos tres instantes, entradas idénticas byte a byte y 200+6.000 pasos; solo los descendientes del volumen de siluetas reciben deformación temporal. Entrenamiento GPU 305,34 s; las funciones sobreviven a la densificación y los cinco atributos del fondo son invariantes en la auditoría del checkpoint. La variación estable en view20 baja unas 13 veces, pero empeora el PSNR de regiones cambiantes y la tabla aérea sigue incorrecta. [Comparaciones, controles, pruebas y propuesta con más instantes](actor-only.es.md). Sin afirmar flip fiel ni seguimiento físico.
+
 [English](work-log.en.md) · Corte: 18 de noviembre de 2026
 
 **24 de noviembre de 2026 — primer modelo temporal conjunto:** 42 imágenes de entrenamiento /3 de validación a tiempos0,5/9,1, con semillas canónicas del primer instante y37 máscaras de entrenamiento. Piloto3k y control separado6k; evaluación de checkpoints3k/6k de la misma trayectoria en3 tiempos supervisados y7 intermedios frente a tiempo congelado. Más duración mejora referencias observadas, pero forma central, interpolación y estabilidad del fondo siguen siendo deficientes. [Comparaciones, métricas, límites y siguientes pruebas](joint-temporal.es.md). Sin afirmar reconstrucción fiel ni seguimiento físico.

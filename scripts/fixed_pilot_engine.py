@@ -14,6 +14,8 @@ install()
 
 
 def load(source, output, config, iteration=None):
+    from fixed_actor_deformation import configure_from_source
+    configure_from_source(source)
     import mmcv
     from arguments import ModelParams, ModelHiddenParams, PipelineParams
     from utils.params_utils import merge_hparams
@@ -71,7 +73,8 @@ def probe(source, output, config):
         preparation=json.loads((source/'preparation.json').read_text())
         start=preparation['background_points']
         board_visibility=require_board_visibility(points[start:start+preparation['board_seed_points']],manifest['frames'])
-    result=dict(training_samples=len(train),test_samples=len(test),initial_points=expected_points,
+    from fixed_actor_deformation import audit_partition
+    result=dict(actor_partition=audit_partition(gaussians),training_samples=len(train),test_samples=len(test),initial_points=expected_points,
         image_resolution=manifest["image_resolution"],last_normalized_time=test[len(test)-1].time,
         renderer_projection_max_error_pixels=max_error,gpu=torch.cuda.get_device_name(),
         static_board_visibility=board_visibility,
@@ -148,7 +151,8 @@ def render(source, output, config, iteration):
                     with Image.open(folder/sub/f"{index:03d}.png") as image: sheet.paste(image.resize((400,preview_height)),(col*400,row*(preview_height+25)+25))
                     draw.text((col*400+5,row*(preview_height+25)+5),f"{name} / frame {index} / {sub}",fill="black")
             sheet.save(folder/"comparison.jpg",quality=92)
-    report=dict(iteration=iteration,active_sh_degree=gaussians.active_sh_degree,
+    from fixed_actor_deformation import audit_partition
+    report=dict(actor_partition=audit_partition(gaussians),iteration=iteration,active_sh_degree=gaussians.active_sh_degree,
         static_scene=static,
         temporal_scene=bool(manifest.get('temporal_scene')),frozen_control_time=manifest.get('frozen_control_time',.5),
         gaussian_count=int(gaussians.get_xyz.shape[0]),metrics=result,
@@ -171,6 +175,8 @@ if __name__=="__main__":
     if args.phase=="probe": probe(args.source,args.output,args.configs)
     elif args.phase=="render": render(args.source,args.output,args.configs,args.iteration)
     else:
+        from fixed_actor_deformation import configure_from_source
+        configure_from_source(args.source)
         sys.argv=training_arguments(UPSTREAM,args.source,args.output,args.configs,args.save_iterations,args.test_iterations)
         manifest=json.loads((args.source/"manifest.json").read_text())
         if manifest.get("foreground_loss") or manifest.get('static_scene'):
