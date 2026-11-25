@@ -66,7 +66,7 @@ def probe(source, output, config):
     expected_points=manifest["initialization_points"]
     assert gaussians.get_xyz.shape[0]==expected_points
     board_visibility=None
-    if manifest.get('static_scene'):
+    if manifest.get('static_scene') or manifest.get('temporal_scene'):
         from static_world_scale import require_board_visibility
         preparation=json.loads((source/'preparation.json').read_text())
         start=preparation['background_points']
@@ -109,7 +109,7 @@ def render(source, output, config, iteration):
             for j,camera in enumerate(cameras):
                 image=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type,**render_options)["render"].clamp(0,1)
                 original=camera.time
-                camera.time=.5
+                camera.time=manifest.get('frozen_control_time',.5)
                 fixed=render_image(camera,gaussians,pipeline,background,cam_type=scene.dataset_type,**render_options)["render"].clamp(0,1)
                 camera.time=original
                 gt=camera.original_image.cuda()
@@ -150,6 +150,7 @@ def render(source, output, config, iteration):
             sheet.save(folder/"comparison.jpg",quality=92)
     report=dict(iteration=iteration,active_sh_degree=gaussians.active_sh_degree,
         static_scene=static,
+        temporal_scene=bool(manifest.get('temporal_scene')),frozen_control_time=manifest.get('frozen_control_time',.5),
         gaussian_count=int(gaussians.get_xyz.shape[0]),metrics=result,
         caution="Bounded pilot, no convergence claim. Temporal-change mask comes from target pixel variation, not board ground truth. Reserved camera excluded from optimization; viewpoint independence must be assessed separately.")
     if static:report['caution']='Static undeformed renderer, one instant, restricted 14-view training subset. Candidate foreground masks are approximate; training masks guide optimization. Reserved view excluded from initialization and optimization. No motion or full-dataset reconstruction demonstrated.'

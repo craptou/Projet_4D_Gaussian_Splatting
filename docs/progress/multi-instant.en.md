@@ -2,6 +2,8 @@
 
 [Español](multi-instant.es.md) · [Measured evidence](../evidence/multi-instant-2026-11-24.json) · [Near-clip correction](near-clip-fix.en.md)
 
+**Follow-up completed:** [one joint temporal model and a duration-only control](joint-temporal.en.md) have now run. The shared model varies with time, but loses static-reference quality and does not establish reliable interpolation.
+
 **The board remains recognizable in the repeated validation view at three instants of the flip.** Two new independent static fits extend the earlier successful instant. Blur, distorted edges and floating artifacts remain. This establishes a broader static feasibility check, not a shared 4D representation.
 
 ![Recorded images and independent static reconstructions in validation view20](../assets/multi-instant-validation.jpg)

@@ -2,6 +2,8 @@
 
 [English](multi-instant.en.md) · [Evidencia medida](../evidence/multi-instant-2026-11-24.json) · [Corrección del recorte cercano](near-clip-fix.es.md)
 
+**Continuación completada:** se ejecutaron [un modelo temporal conjunto y un control de duración](joint-temporal.es.md). El modelo varía con el tiempo, pero pierde calidad respecto a las referencias estáticas y no demuestra interpolación fiable.
+
 **La tabla sigue siendo reconocible en la vista de validación en tres instantes del truco.** Dos ajustes estáticos independientes amplían el instante anterior. Persisten desenfoque, bordes deformados y artefactos flotantes. Es una comprobación estática más amplia, no una representación 4D compartida.
 
 ![Grabaciones y reconstrucciones estáticas independientes en view20 de validación](../assets/multi-instant-validation.jpg)
