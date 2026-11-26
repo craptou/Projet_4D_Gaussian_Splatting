@@ -63,7 +63,7 @@ View20 a déjà été regardée plusieurs fois pour prendre des décisions : c'e
 
 **Peux-tu déjà mesurer les rotations du skateboard ?** Pas de façon validée. Une Gaussienne qui possède une rotation n'est pas automatiquement un point matériel correctement suivi. Il faut d'abord valider la reconstruction et le suivi.
 
-**Quelles notions du cours ont été utilisées ?** Transformations et géométrie projective, viewing/perspective, clipping/visibilité, échantillonnage et rasterisation. Les pages précises sont indiquées dans le support. Ne revendique pas une implémentation de Fourier, de ray tracing ou de SLERP dans ce projet.
+**Quelles notions du cours ont été utilisées ?** Transformations et géométrie projective, viewing/perspective, clipping/visibilité, échantillonnage et rasterisation. Ces notions sont reliées aux étapes du projet dans le support. Ne revendique pas une implémentation de Fourier, de ray tracing ou de SLERP dans ce projet.
 
 ## Répétition conseillée
 

@@ -32,9 +32,6 @@
         "Keep image size and camera parameters consistent."
       ],
       "notes": "The first step is to turn the videos into image sequences. At each training instant, the views should show the same state of the scene. Otherwise, the model receives conflicting observations. Image resizing must also be reflected in the camera parameters. In the project, FFmpeg extracts the frames and Python prepares the dataset. This uses the course concepts of sampling and image coordinates. Later, I will explain how I acquired the actual recordings.",
-      "course_pages": [
-        "5-6, 21-22"
-      ],
       "sources": [
         "scripts/sync_clean_replays.py",
         "scripts/prepare_dense_replay.py",
@@ -52,9 +49,6 @@
         "Check that the points project back to the right pixels."
       ],
       "notes": "The reconstruction needs the position and orientation of each camera, as well as its projection parameters. If these are not supplied, COLMAP estimates them from matching details in the static background. It estimates camera poses and triangulates sparse 3D points, then refines them together. Reprojection checks compare predicted pixels with observed pixels. This applies the course topics of coordinate transformations and perspective. For the kitchen dataset, calibrated cameras are supplied; for True Skate, I estimate them.",
-      "course_pages": [
-        "3-4, 12-15"
-      ],
       "sources": [
         "scripts/prepare_clean_geometry.py",
         "scripts/localize_fixed_holdout.py",
@@ -73,9 +67,6 @@
         "Compare with the target and update the scene."
       ],
       "notes": "The scene is represented by many small 3D Gaussian elements, rather than a triangle mesh. Each element has a position, size, orientation, opacity and appearance. Starting from the initial points, the renderer projects and combines their contributions into pixels. Training compares this image with the recorded target and uses gradients to update the scene. Density control can add or remove elements. This connects perspective, visibility and rasterization. I reuse the authors' implementation and provide project scripts for preparation and validation.",
-      "course_pages": [
-        "12-18"
-      ],
       "sources": [
         "third_party/4DGaussians/scene/gaussian_model.py",
         "third_party/4DGaussians/gaussian_renderer/__init__.py",
@@ -93,9 +84,6 @@
         "Render the scene and compare it with a reserved camera view."
       ],
       "notes": "To represent motion, the scene must change with time. Four-D Gaussians uses a shared deformation network. Dynamic Three-D Gaussians instead fits successive states with local motion constraints. Both receive calibrated cameras as input. After training, I request a time and viewpoint and compare the rendered image with a reserved camera view. The latest ten-time pilot uses all ten times for supervision, so it tests a reserved viewpoint, not unseen-time interpolation. Reliable rendering also does not automatically validate physical tracking.",
-      "course_pages": [
-        "4, 15-18, 21-22"
-      ],
       "sources": [
         "https://arxiv.org/html/2310.08528v3",
         "https://dynamic3dgaussians.github.io/",

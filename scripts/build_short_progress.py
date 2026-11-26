@@ -72,26 +72,26 @@ def render_body(p,item):
                 x=230+col*220;color=TEAL if col==1 else WHITE
                 p.rect(x,y,185,60,color);p.text(time,x+69,y+17,80,23,WHITE if col==1 else INK,True)
         p.text('One training instant = matching scene states across views',52,458,856,21)
-        p.text('Course: image coordinates and sampling · PDF pp. 5–6, 21–22',52,490,856,11,MUTED)
+        p.text('Course: image coordinates and sampling',52,490,856,11,MUTED)
     elif key=='step-cameras':
         flow(p,['Match background details','Estimate camera poses','Triangulate 3D points'])
         lines(p,['COLMAP jointly refines cameras and sparse points.','Camera pose: position and orientation.','Check: do 3D points return to the observed pixels?'],52,252,850,22,22)
         p.rect(52,425,856,50,TEAL);p.text('World coordinates → camera coordinates → image pixels',70,438,820,21,WHITE,True)
-        p.text('Course: transformations and perspective · PDF pp. 3–4, 12–15',52,490,856,11,MUTED)
+        p.text('Course: transformations and perspective',52,490,856,11,MUTED)
     elif key=='step-gaussians':
         flow(p,['3D Gaussians','Render an image','Compare target','Update parameters'])
         ellipse(p,104,286,170,60,-25);ellipse(p,187,264,80,130,20);ellipse(p,226,306,150,55,25)
         p.text('Soft projected contributions',65,405,350,17,MUTED)
         p.text('(schematic)',65,432,350,14,MUTED)
         lines(p,['Position, size and rotation','Opacity and appearance','Gradients improve the rendered image'],470,260,438,21,20)
-        p.text('Course: perspective, visibility and rasterization · PDF pp. 12–18',52,490,856,11,MUTED)
+        p.text('Course: perspective, visibility and rasterization',52,490,856,11,MUTED)
     elif key=='step-time':
         for x,title,body in [(52,'4DGaussians','One reference scene + a network predicting changes with time.'),
             (490,'Dynamic 3D Gaussians','Successive scene states + constraints on local motion.')]:
             p.rect(x,150,418,202,WHITE);p.text(title,x+18,171,382,23,TEAL,True);p.text(body,x+18,228,382,22)
         p.text('Choose time + camera → render → compare with a reserved view',52,389,856,23,INK,True)
         p.text('A rendered animation does not by itself prove physical tracking.',52,463,856,18,MUTED)
-        p.text('Course: rotation, time sampling and rendering · PDF pp. 4, 15–18, 21–22',52,490,856,11,MUTED)
+        p.text('Course: rotation, time sampling and rendering',52,490,856,11,MUTED)
     elif key=='acquisition':
         for x,title,asset,items in [(52,'Downloaded: kitchen scene','kitchen-input.jpg',['Synchronized multi-camera videos','Supplied camera calibration']),
             (490,'Recorded: True Skate','view04.jpg',['Following cameras → fixed views','Estimated poses; approximate alignment'])]:
@@ -132,7 +132,7 @@ def build():
     outline=['# Project progress — 26 November 2026',
         'English · 8 main slides (about 6 minutes) + 2 optional code slides.',
         f'[PDF]({NAME}.pdf) · [PowerPoint with speaker notes]({NAME}.pptx) · [Editable content]({NAME}.json)',
-        'Course page numbers refer to the supplied 46-page notes, including the title page. No course PDF is redistributed.']
+        'Course concepts are linked to the project steps. No course PDF is redistributed.']
     layouts=[]
     for index,item in enumerate(spec['slides'],1):
         slide=prs.slides.add_slide(prs.slide_layouts[6]);p=Page(pdf,slide)
