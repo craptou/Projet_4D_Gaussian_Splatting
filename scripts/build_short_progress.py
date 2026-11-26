@@ -68,23 +68,19 @@ def render_body(p,item):
                 x=230+col*220;color=TEAL if col==1 else WHITE
                 p.rect(x,y,185,46,color);p.text(time,x+69,y+9,80,22,WHITE if col==1 else INK,True)
         p.text('One training instant = matching scene states across views',52,386,856,20)
-        p.text('Course: image coordinates and sampling',52,414,856,11,MUTED)
     elif key=='step-cameras':
         flow(p,['Match background details','Estimate camera poses','Triangulate 3D points'],y=137)
         lines(p,['Use static background features to estimate the cameras.','Jointly refine camera poses and sparse 3D points.','Check that reconstructed points return to observed pixels.'],52,230,850,21,17)
-        p.text('Course: transformations, perspective and geometric consistency',52,414,856,11,MUTED)
     elif key=='step-projection':
         flow(p,['World coordinates','Camera coordinates','Image pixels'],y=137)
         p.text('Xcamera = R × Xworld + t',74,239,800,27,TEAL,True)
         p.text('u = f × x / z + cx        v = f × y / z + cy',74,296,800,25,INK,True)
         p.text('Points must also be visible: our near-plane check catches clipped seeds.',52,366,856,19)
-        p.text('Course: coordinate systems, perspective and clipping',52,414,856,11,MUTED)
     elif key=='step-gaussians':
         ellipse(p,91,212,192,69,-25);ellipse(p,179,184,83,149,20);ellipse(p,220,245,162,58,25)
         p.text('Projected soft footprints',65,355,360,18,MUTED)
         p.text('(schematic, not reconstructed data)',65,384,360,13,MUTED)
         lines(p,['Center = location in 3D','Size + rotation = ellipsoid shape','Opacity + appearance = pixel contribution'],463,167,445,21,24)
-        p.text('Course: geometric representation and visibility',52,414,856,11,MUTED)
     elif key=='step-learning':
         flow(p,['Project Gaussians','Blend by depth','Compare target','Update parameters'],y=137)
         p.text('Rendering',52,235,200,22,TEAL,True)
@@ -92,13 +88,11 @@ def render_body(p,item):
         p.text('Training',52,297,200,22,TEAL,True)
         p.text('Image error → gradients → improved scene parameters.',270,297,625,22)
         p.text('Each pixel combines several contributions using depth and opacity.',52,369,856,18)
-        p.text('Course: perspective, visibility and rasterization',52,414,856,11,MUTED)
     elif key=='step-time':
         for x,title,body in [(52,'4DGaussians','One reference scene + a network predicting changes with time.'),
             (490,'Dynamic 3D Gaussians','Successive scene states + constraints on local motion.')]:
             p.rect(x,145,418,184,WHITE);p.text(title,x+18,165,382,23,TEAL,True);p.text(body,x+18,218,382,21)
         p.text('Both methods need calibrated cameras as inputs.',52,363,856,22,INK,True)
-        p.text('Course: rotations, time sampling and rendering',52,414,856,11,MUTED)
     elif key=='step-evaluation':
         for x,title,body in [(52,'Training views','Optimize the scene from the selected input cameras.'),(490,'Reserved view20','Compare against images excluded from scene optimization.')]:
             p.rect(x,145,418,161,WHITE);p.text(title,x+18,166,382,23,TEAL,True);p.text(body,x+18,214,382,21)
@@ -188,7 +182,7 @@ def build():
     outline=['# Project progress — 26 November 2026',
         f'English · {len(spec["slides"])} slides (about 10 minutes). Function references appear alongside the relevant concepts; no code appendix.',
         f'[Slide PDF]({NAME}.pdf) · [PowerPoint with speaker notes]({NAME}.pptx) · [Oral-script PDF](progress-2026-11-26.script.en.pdf) · [Editable content]({NAME}.json)',
-        'Course concepts are linked to the project steps. No course PDF is redistributed.']
+        'Project concepts are explained step by step, with function links.']
     layouts=[]
     for index,item in enumerate(spec['slides'],1):
         slide=prs.slides.add_slide(prs.slide_layouts[6]);p=Page(pdf,slide)
