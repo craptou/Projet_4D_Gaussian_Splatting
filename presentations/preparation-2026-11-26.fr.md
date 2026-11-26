@@ -1,5 +1,7 @@
 # Préparer l'oral de 5 à 7 minutes
 
+Pour comprendre les méthodes avant la répétition : [parcours détaillé, exemples et questions](understand-the-project.fr.md).
+
 Support : [PowerPoint en anglais](progress-2026-11-26.en.pptx) · [PDF](progress-2026-11-26.en.pdf) · [Texte anglais et notes orales](progress-2026-11-26.en.md).
 
 Les huit premières diapositives constituent l'exposé, pour environ six minutes. Les deux suivantes servent à discuter du code après l'exposé ou pendant les questions. Les notes en anglais sont aussi intégrées au PowerPoint. Lis-les à voix haute et reformule les phrases qui ne te ressemblent pas.
