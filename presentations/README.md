@@ -2,13 +2,13 @@
 
 ## Latest English talk — 26 November 2026
 
-**5–7 minutes: eight main slides + two optional code slides.** Simple course links, actual before/after images, current method comparison, limitations and next steps. Speaker notes are embedded in the editable PowerPoint.
+**5–7 minutes: eight main slides + two optional code slides.** Part1 explains each reconstruction step. Part2 covers acquisition and contrasts the recognizable kitchen reference with the weaker True Skate results. Course concepts appear alongside the steps that use them. The PowerPoint embeds the three-second kitchen-model video and English speaker notes; the PDF includes a poster and video link.
 
 [French learning guide: cameras, Gaussian methods, course concepts and exercises](understand-the-project.fr.md). A read-only projection exercise runs with `python scripts/learn_camera_projection.py`; add `--real` to inspect the existing local camera dataset.
 
 [PowerPoint](progress-2026-11-26.en.pptx) · [PDF](progress-2026-11-26.en.pdf) · [English script and sources](progress-2026-11-26.en.md) · [French preparation guide](preparation-2026-11-26.fr.md) · [Editable slide content](progress-2026-11-26.en.json).
 
-Build with `python scripts/build_short_progress.py`; validate and render the review pages with `python scripts/validate_short_progress.py`. The authoring script requires the local experiment images; exported slides embed all their figures. The historical bilingual deck below remains the 18 November checkpoint.
+Build with `python scripts/build_short_progress.py`; validate and render the review pages with `python scripts/validate_short_progress.py`. The authoring script uses tracked evidence images and the existing reference clip; no GPU checkpoints or raw captures are required. Exported slides embed their figures and the reference video. The historical bilingual deck below remains the 18 November checkpoint.
 
 ## Archived bilingual presentation — 18 November 2026
 

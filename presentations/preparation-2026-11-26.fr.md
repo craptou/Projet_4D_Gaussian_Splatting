@@ -6,14 +6,18 @@ Support : [PowerPoint en anglais](progress-2026-11-26.en.pptx) · [PDF](progress
 
 Les huit premières diapositives constituent l'exposé, pour environ six minutes. Les deux suivantes servent à discuter du code après l'exposé ou pendant les questions. Les notes en anglais sont aussi intégrées au PowerPoint. Lis-les à voix haute et reformule les phrases qui ne te ressemblent pas.
 
+Le nouveau plan présente **d'abord le fonctionnement, puis l'acquisition et les résultats**. Diapositive7 : cliquer sur l'image du modèle dans PowerPoint pour lancer la vidéo intégrée de trois secondes. Dans le PDF, l'image reste fixe et le lien « 3-second model clip » ouvre la vidéo publiée.
+
 ## Ce que tu dois savoir expliquer
 
-1. **Le but.** Plusieurs enregistrements d'un même replay doivent permettre de reconstruire une scène 3D qui évolue dans le temps. « 4D » signifie ici trois dimensions spatiales et le temps. L'objectif final n'est pas encore entièrement atteint.
-2. **Les données.** Il s'agit d'un replay rejoué depuis plusieurs points de vue, pas de caméras physiques filmant simultanément. L'alignement par événement de score est approximatif. Le dernier comparatif emploie onze caméras d'entraînement et dix instants ; view20 est réservée à la validation.
-3. **Les notions du cours.** Les matrices changent de repère ; la perspective transforme la 3D en pixels ; le clipping retire ce qui est hors du volume visible ; l'échantillonnage choisit des images à des instants donnés. Le moteur de splatting projette puis combine les contributions des Gaussiennes. Tu n'as pas réimplémenté tous ces algorithmes depuis zéro.
-4. **Le problème de clipping.** Des points de la planche se trouvaient trop près des caméras dans nos unités normalisées pour le seuil CUDA. Multiplier les points et les translations des caméras par le même facteur conserve la projection en pixels et change les profondeurs par rapport à ce seuil. Cela a réparé un problème statique, pas tout le mouvement.
-5. **Les résultats.** La référence DyNeRF fonctionne sur un petit extrait. Trois reconstructions statiques de la planche sont reconnaissables. Trois modèles statiques affichés en séquence ne constituent pas un suivi temporel appris.
-6. **Le comparatif temporel.** Les deux méthodes ont les mêmes images et graines initiales, mais des pertes et procédures d'entraînement différentes. Les dix instants sont supervisés : ce test ne démontre pas une interpolation vers des instants non appris. La qualité doit être examinée sur la planche, pas seulement sur le décor.
+1. **Le but et le plan.** Reconstruire une scène évoluant dans le temps pour choisir une nouvelle vue. Annoncer les deux parties : fonctionnement, puis acquisition et résultats.
+2. **Préparer les images.** Extraire des images, aligner les instants, conserver la cohérence entre résolution et paramètres caméra. Cela met en pratique les notions d'échantillonnage et de coordonnées image.
+3. **Retrouver les caméras.** COLMAP associe des détails du décor, estime les poses et triangule des points ; il affine ensuite la reconstruction. Les intrinsèques décrivent la projection, la pose décrit la position et l'orientation. Les caméras de la référence sont fournies ; celles de True Skate sont estimées.
+4. **Apprendre la scène.** Des Gaussiennes possèdent des paramètres de position, taille, orientation, opacité et apparence. On rend une image, on la compare à l'image cible, puis on modifie les paramètres grâce aux gradients. Les projections, la visibilité et la rasterisation interviennent ici.
+5. **Ajouter le temps et vérifier.** 4DGS apprend un réseau de déformation ; Dynamic ajuste des états successifs avec des contraintes locales. On vérifie les rendus depuis une vue réservée. Rendu temporel et suivi matériel validé sont deux affirmations différentes.
+6. **Acquérir les données.** Cuisine : base téléchargée, caméras calibrées et vidéos synchronisées. True Skate : même replay rejoué depuis des points de vue successifs ; passage de caméras suivies à des vues fixes ; découpage et alignement approximatif par événement de score.
+7. **Montrer la référence.** La vidéo intégrée montre un véritable rendu du modèle sur le petit extrait DyNeRF. La scène et le mouvement sont reconnaissables ; des erreurs de couleur et du flou persistent. Ce n'est pas la preuve d'une reconstruction complète ou d'un suivi physique exact.
+8. **Montrer les limites des données personnelles.** Comparer la planche originale au rendu temporel dégradé. Des ajustements statiques séparés sont meilleurs. Le timing, les masques et les surfaces initialement cachées sont des pistes à vérifier ; les résultats ne prouvent pas que la seule qualité des données explique toutes les différences entre les expériences.
 
 ## Code 1 : passer de la 3D aux pixels
 

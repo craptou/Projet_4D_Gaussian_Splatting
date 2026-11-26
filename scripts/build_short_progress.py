@@ -1,14 +1,15 @@
 """Build the simple English 5-7 minute presentation and two optional code slides."""
 import json
 from pathlib import Path
-import re
 from PIL import Image
 from pptx import Presentation
 from pptx.util import Pt
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.oxml.xmlchemy import OxmlElement
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
-from build_progress_slides import Page,register_fonts,W,H,INK,TEAL,MUTED,PAPER,WHITE,AMBER
+from build_progress_slides import Page,register_fonts,W,H,INK,TEAL,MUTED,PAPER,WHITE
 
 ROOT=Path(__file__).resolve().parents[1]
 NAME='progress-2026-11-26.en'
@@ -17,20 +18,12 @@ ASSETS=ROOT/'docs/assets/talk-2026-11-26'
 
 def make_assets():
     ASSETS.mkdir(parents=True,exist_ok=True)
-    source=ROOT/'data/processed/true-skate-dense-comparison'
-    polygons=json.loads((ROOT/'data/annotations/static-deck-2026-11-24.json').read_text())['polygons']
-    for name in ['view03','view04','view19']:
-        xs,ys=zip(*polygons[name]);cx=(min(xs)+max(xs))/2;cy=(min(ys)+max(ys))/2
-        left=max(0,min(563-450,round(cx-225)));top=round(cy-180)
-        with Image.open(source/f'images/{name}/008.png') as image:image.crop((left,top,left+450,top+360)).save(ASSETS/f'{name}.jpg',quality=94)
-    with Image.open(source/'images/view20/003.png') as image:image.crop((0,400,563,1200)).save(ASSETS/'cover.jpg',quality=94)
-    with Image.open(ROOT/'docs/assets/near-clip-board.jpg') as image:image.crop((0,810,900,1080)).save(ASSETS/'visibility.jpg',quality=95)
+    for name in ['cover.jpg','view04.jpg']:
+        if not (ASSETS/name).is_file():raise ValueError('Missing tracked presentation image: '+name)
     with Image.open(ROOT/'docs/assets/dynerf-quality-progression.jpg') as image:
-        pair=Image.new('RGB',(800,300),'white')
-        pair.paste(image.crop((0,26,400,326)),(0,0));pair.paste(image.crop((1200,26,1600,326)),(400,0))
-        pair.save(ASSETS/'reference.jpg',quality=94)
-    with Image.open(ROOT/'docs/assets/multi-instant-validation.jpg') as image:image.crop((0,300,600,520)).save(ASSETS/'static-board.jpg',quality=94)
-    with Image.open(ROOT/'outputs/dynamic-comparison/review/view20-board.jpg') as image:image.crop((0,270,900,540)).save(ASSETS/'comparison.jpg',quality=95)
+        image.crop((0,26,400,326)).save(ASSETS/'kitchen-input.jpg',quality=94)
+    with Image.open(ROOT/'docs/assets/4d-demo-time.gif') as image:image.convert('RGB').save(ASSETS/'kitchen-model.jpg',quality=94)
+    with Image.open(ROOT/'docs/assets/dynamic-comparison-validation.jpg') as image:image.crop((0,326,600,535)).save(ASSETS/'skate-result.jpg',quality=95)
 
 
 def lines(page,items,x,y,width,size=22,gap=16):
@@ -50,6 +43,82 @@ def code(page,items,x=65,y=166,size=18):
         tf.margin_left=tf.margin_right=tf.margin_top=tf.margin_bottom=0
         p=tf.paragraphs[0];p.text=line;p.font.name='Consolas';p.font.size=Pt(size);p.font.color.rgb=RGBColor(255,255,255)
         page.elements.append(dict(text=line,x=x,y=top,w=824,h=size*1.4))
+
+
+def ellipse(page,x,y,w,h,angle):
+    """Editable schematic of overlapping Gaussian footprints; not reconstructed data."""
+    page.pdf.saveState();page.pdf.setFillColor('#'+TEAL);page.pdf.setFillAlpha(.35)
+    page.pdf.translate(x+w/2,H-y-h/2);page.pdf.rotate(-angle)
+    page.pdf.ellipse(-w/2,-h/2,w/2,h/2,fill=1,stroke=0);page.pdf.restoreState()
+    shape=page.slide.shapes.add_shape(MSO_SHAPE.OVAL,Pt(x),Pt(y),Pt(w),Pt(h));shape.rotation=angle
+    shape.fill.solid();shape.fill.fore_color.rgb=RGBColor.from_string(TEAL);shape.line.fill.background()
+    alpha=OxmlElement('a:alpha');alpha.set('val','35000');shape._element.xpath('.//a:srgbClr')[0].append(alpha)
+
+
+def flow(page,labels,y=145):
+    width=(856-28*(len(labels)-1))/len(labels)
+    for i,label in enumerate(labels):
+        x=52+i*(width+28);page.rect(x,y,width,65,WHITE);page.text(label,x+12,y+19,width-24,18,TEAL,True)
+        if i<len(labels)-1:page.text('→',x+width+5,y+19,24,20,TEAL)
+
+
+def render_body(p,item):
+    key=item['id']
+    if key=='step-images':
+        p.text('Videos → extract frames → align time → consistent image size',52,137,856,21,TEAL,True)
+        for row,label in enumerate(['View A','View B','View C']):
+            y=210+row*78;p.text(label,65,y+19,130,21)
+            for col,time in enumerate(['t0','t1','t2']):
+                x=230+col*220;color=TEAL if col==1 else WHITE
+                p.rect(x,y,185,60,color);p.text(time,x+69,y+17,80,23,WHITE if col==1 else INK,True)
+        p.text('One training instant = matching scene states across views',52,458,856,21)
+        p.text('Course: image coordinates and sampling · PDF pp. 5–6, 21–22',52,490,856,11,MUTED)
+    elif key=='step-cameras':
+        flow(p,['Match background details','Estimate camera poses','Triangulate 3D points'])
+        lines(p,['COLMAP jointly refines cameras and sparse points.','Camera pose: position and orientation.','Check: do 3D points return to the observed pixels?'],52,252,850,22,22)
+        p.rect(52,425,856,50,TEAL);p.text('World coordinates → camera coordinates → image pixels',70,438,820,21,WHITE,True)
+        p.text('Course: transformations and perspective · PDF pp. 3–4, 12–15',52,490,856,11,MUTED)
+    elif key=='step-gaussians':
+        flow(p,['3D Gaussians','Render an image','Compare target','Update parameters'])
+        ellipse(p,104,286,170,60,-25);ellipse(p,187,264,80,130,20);ellipse(p,226,306,150,55,25)
+        p.text('Soft projected contributions',65,405,350,17,MUTED)
+        p.text('(schematic)',65,432,350,14,MUTED)
+        lines(p,['Position, size and rotation','Opacity and appearance','Gradients improve the rendered image'],470,260,438,21,20)
+        p.text('Course: perspective, visibility and rasterization · PDF pp. 12–18',52,490,856,11,MUTED)
+    elif key=='step-time':
+        for x,title,body in [(52,'4DGaussians','One reference scene + a network predicting changes with time.'),
+            (490,'Dynamic 3D Gaussians','Successive scene states + constraints on local motion.')]:
+            p.rect(x,150,418,202,WHITE);p.text(title,x+18,171,382,23,TEAL,True);p.text(body,x+18,228,382,22)
+        p.text('Choose time + camera → render → compare with a reserved view',52,389,856,23,INK,True)
+        p.text('A rendered animation does not by itself prove physical tracking.',52,463,856,18,MUTED)
+        p.text('Course: rotation, time sampling and rendering · PDF pp. 4, 15–18, 21–22',52,490,856,11,MUTED)
+    elif key=='acquisition':
+        for x,title,asset,items in [(52,'Downloaded: kitchen scene','kitchen-input.jpg',['Synchronized multi-camera videos','Supplied camera calibration']),
+            (490,'Recorded: True Skate','view04.jpg',['Following cameras → fixed views','Estimated poses; approximate alignment'])]:
+            p.rect(x,145,418,305,WHITE);p.text(title,x+16,161,386,22,TEAL,True)
+            p.image(ASSETS/asset,x+16,203,386,151);lines(p,items,x+16,374,386,17,9)
+        p.text('Reference: controlled capture. Own data: repeated replay recordings.',52,474,856,18,INK,True)
+    elif key=='kitchen-result':
+        for x,label,asset in [(52,'Input image','kitchen-input.jpg'),(490,'Actual trained model','kitchen-model.jpg')]:
+            p.text(label,x,137,418,22,TEAL,True);p.image(ASSETS/asset,x,177,418,285)
+        # Embed the existing 3-second render directly; PDF retains the same poster.
+        p.slide.shapes.add_movie(str(ROOT/'docs/assets/4d-demo-time.mp4'),Pt(509),Pt(177),Pt(380),Pt(285),
+            poster_frame_image=str(ASSETS/'kitchen-model.jpg'),mime_type='video/mp4')
+        p.text('Recognizable scene and motion; residual blur and color errors.',52,465,856,19,INK,True)
+        p.text('DyNeRF / Li et al., CVPR 2022 / CC BY-NC 4.0 · Small pilot (~1 s of scene time)',52,491,710,10,MUTED)
+        p.text('3-second model clip',753,491,170,10,TEAL)
+        url='https://github.com/craptou/Projet_4D_Gaussian_Splatting/raw/refs/heads/main/docs/assets/4d-demo-time.mp4'
+        p.pdf.linkURL(url,(753,H-506,925,H-488),relative=0,thickness=0)
+        p.slide.shapes[-1].click_action.hyperlink.address=url
+    elif key=='skate-result':
+        p.text('Recorded frame',121,139,340,22,TEAL,True);p.text('4DGS reconstruction',510,139,370,22,TEAL,True)
+        p.image(ASSETS/'skate-result.jpg',52,175,856,250)
+        p.text('The background is recognizable; board motion is unreliable.',52,439,856,21,INK,True)
+        p.text('Next: check timing, masks and initially visible surfaces.',52,471,856,19,TEAL)
+        p.text('Different scenes and training settings: this comparison does not isolate data quality alone.',52,494,856,10,MUTED)
+    else:
+        code(p,item['code'],size=17);lines(p,item['bullets'],52,347,856,19,13)
+        p.text('Source: '+item['sources'][0],52,480,856,12,TEAL)
 
 
 def build():
@@ -77,52 +146,7 @@ def build():
             p.text('Raphael Landry · Computer Vision final project',52,475,850,15,MUTED)
         else:
             if p.text(item['title'],52,65,860,30,INK,True)>76:raise ValueError('Title too tall')
-            key=item['id']
-            if key=='data':
-                for i,label in enumerate(['Replay clips','Camera poses','Gaussian scene','Validation']):
-                    x=52+i*218;p.rect(x,132,200,57,WHITE);p.text(label,x+12,149,182,18,TEAL,True)
-                p.text('One replay · fixed viewpoints · approximate event alignment',52,205,856,18)
-                for i,name in enumerate(['view03','view04','view19']):
-                    p.image(ASSETS/f'{name}.jpg',52+i*290,246,276,220)
-                    p.text(name+' / same nominal instant',56+i*290,477,272,13,MUTED)
-            elif key=='course':
-                cards=[('Coordinates','World points → camera coordinates','3–4, 13–15'),('Projection + visibility','Perspective and near-plane clipping','12–18'),
-                    ('Sampling','Video frames and temporal alignment','21–22'),('Rasterization','Gaussian elements → image pixels','15–18')]
-                for i,(title,body,pages) in enumerate(cards):
-                    x=52+(i%2)*438;y=140+(i//2)*176
-                    p.rect(x,y,418,151,WHITE);p.rect(x,y,5,151,TEAL)
-                    p.text(title,x+20,y+16,374,23,TEAL,True)
-                    p.text(body,x+20,y+56,374,20)
-                    p.text('Course notes, PDF pp. '+pages,x+20,y+124,374,12,MUTED)
-            elif key=='geometry':
-                p.image(ASSETS/'visibility.jpg',52,139,856,257)
-                p.text('Same image projections. Corrected point visibility.',52,416,856,23,TEAL,True)
-                p.text('Reserved view20 · one static instant · course: camera transforms and clipping, pp. 12–18',52,474,856,12,MUTED)
-            elif key=='progress':
-                for x,title,asset,caption in [(52,'Calibrated reference','reference.jpg','DyNeRF: original / trained model'),(490,'Our skate replay','static-board.jpg','True Skate: original / independent static fit')]:
-                    p.rect(x,142,418,296,WHITE);p.text(title,x+16,158,386,22,TEAL,True)
-                    p.image(ASSETS/asset,x+12,208,394,171);p.text(caption,x+16,397,386,14,MUTED)
-                p.text('Three static instants work; a faithful flip is still the challenge.',52,459,856,21,INK,True)
-                p.text('DyNeRF imagery: Li et al., CVPR 2022 / CC BY-NC 4.0. True Skate: project recording.',52,490,856,10,MUTED)
-            elif key=='comparison':
-                p.text('Same inputs: 11 training views × 10 instants; view20 reserved',52,132,856,19,TEAL,True)
-                p.image(ASSETS/'comparison.jpg',52,182,856,257)
-                p.text('Middle of the flip · actual saved models · adapted, short-budget trials',52,453,856,16,MUTED)
-                p.text('Neither method reconstructs the airborne board reliably.',52,483,856,17,INK,True)
-            elif key=='contribution':
-                for x,title,items in [(52,'Project scripts',['Clip extraction and frame alignment','Dataset conversion and GPU launchers','Projection checks and evaluation']),
-                    (490,'Reused implementations',['COLMAP: camera estimation','4DGaussians: temporal rendering','Dynamic3DGaussians: sequential fitting'])]:
-                    p.rect(x,145,418,272,WHITE);p.text(title,x+18,165,382,24,TEAL,True);lines(p,items,x+18,220,382,21,19)
-                p.text('AI-assisted development; existing algorithms are credited.',52,455,856,19,MUTED)
-                p.text('Two short code examples follow the main talk.',52,483,856,18,TEAL,True)
-            elif key=='next':
-                lines(p,item['bullets'],52,160,850,25,28)
-                p.rect(52,419,856,70,TEAL);p.text('Reliable geometry first. Reliable motion next.',72,438,815,25,WHITE,True)
-            else:
-                code(p,item['code'],size=17)
-                lines(p,item['bullets'],52,347,856,19,13)
-                path=item['sources'][0]
-                p.text('Source: '+path,52,480,856,12,TEAL)
+            render_body(p,item)
         p.rect(52,510,856,1,'D7E1E4')
         p.text('Computer Vision / final project progress',52,520,700,9,MUTED)
         p.text(f'{index:02d} / 08' if index<=8 else 'CODE '+str(index-8),838,520,90,9,MUTED)
