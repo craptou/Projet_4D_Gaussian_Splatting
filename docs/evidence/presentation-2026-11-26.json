@@ -1,0 +1,10 @@
+{
+  "main_slides": 8,
+  "code_appendix_slides": 2,
+  "nominal_speaking_seconds": 350,
+  "pages_rendered": 10,
+  "pptx_shape_bounds_checked": true,
+  "speaker_notes_verified": true,
+  "code_examples_checked": true,
+  "caveat": "PDF pages rendered for visual review. Native PowerPoint rendering and rehearsal by the presenter remain outside this automated check."
+}

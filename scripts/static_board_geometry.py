@@ -30,7 +30,8 @@ def largest_component(mask):
 def project(points,pose,intrinsics):
     camera=points@pose[:,:3].T+pose[:,3]
     f,cx,cy=intrinsics
-    return camera[:,:2]/camera[:,2,None]*f+[cx,cy],camera[:,2]
+    pixels=camera[:,:2]/camera[:,2,None]
+    return pixels*f+[cx,cy],camera[:,2]
 
 
 def triangulate_centers(centers,poses,intrinsics):

@@ -1,5 +1,15 @@
 # Progress presentation / Presentación de avance
 
+## Latest English talk — 26 November 2026
+
+**5–7 minutes: eight main slides + two optional code slides.** Simple course links, actual before/after images, current method comparison, limitations and next steps. Speaker notes are embedded in the editable PowerPoint.
+
+[PowerPoint](progress-2026-11-26.en.pptx) · [PDF](progress-2026-11-26.en.pdf) · [English script and sources](progress-2026-11-26.en.md) · [French preparation guide](preparation-2026-11-26.fr.md) · [Editable slide content](progress-2026-11-26.en.json).
+
+Build with `python scripts/build_short_progress.py`; validate and render the review pages with `python scripts/validate_short_progress.py`. The authoring script requires the local experiment images; exported slides embed all their figures. The historical bilingual deck below remains the 18 November checkpoint.
+
+## Archived bilingual presentation — 18 November 2026
+
 Checkpoint / corte: **2026-11-18** · **12 slides per language / 12 diapositivas por idioma**
 
 **Computer Vision · Final course project / Proyecto final del curso.** Slide 2 maps the supplied course topics to the project, with PDF page references. / La diapositiva 2 vincula los temas del curso con el proyecto e indica páginas del PDF.

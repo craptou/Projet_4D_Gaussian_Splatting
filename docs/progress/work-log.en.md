@@ -1,5 +1,7 @@
 # Work log and evidence
 
+**26 November2026 — comparison and presentation:** reviewed the three-time appearance-persistence control, then compared adapted Dynamic3DGaussians and4DGS on110 identical optimization images, ten times, shared untrained seeds and reserved view20. Dynamic fits the initial board but loses it later; neither establishes reliable motion. [Results, pinned code, resource measurements and commands](dynamic-comparison.en.md). Prepared a simple [5–7minute English presentation](../../presentations/progress-2026-11-26.en.pdf), editable PowerPoint, speaker notes and two code examples; mapped actual project operations to the supplied course pages. No rotation/tracking claim.
+
 **24 November 2026 — time-invariant background:** same three times, byte-identical inputs and 200+6,000 steps; only hull-seed descendants receive time deformation. GPU training 305.34 s; saved role labels survive densification and all five background attributes are time-invariant in the checkpoint audit. Target-stable variation in view20 falls about 13×, but observed/intermediate change-region PSNR worsens and the airborne board remains incorrect. [Comparisons, controls, tests and proposed denser-time experiment](actor-only.en.md). No faithful flip or physical tracking claimed.
 
 [Español](work-log.es.md) · Checkpoint: 18 November 2026

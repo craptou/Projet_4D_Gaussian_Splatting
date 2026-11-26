@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-26",
+  "language": "English",
+  "duration_minutes": "5-7",
+  "main_slides": 8,
+  "author": "Raphael Landry",
+  "slides": [
+    {
+      "id": "goal", "title": "One skate replay. A 3D scene over time.", "section": "The goal", "seconds": 30,
+      "bullets": ["Record the same trick from several viewpoints.", "Reconstruct the scene and choose a new camera.", "Long-term goal: describe the board's motion."],
+      "notes": "My project asks whether several recordings of the same skate replay can become a 3D scene that changes over time. The idea is to choose both a camera viewpoint and an instant in the replay. I use True Skate footage. This is a progress presentation: reliable reconstruction of the complete flip is still an open problem.",
+      "sources": ["docs/progress/clean-capture.en.md", "docs/progress/actor-only.en.md"]
+    },
+    {
+      "id": "data", "title": "From replay videos to a reconstruction", "section": "Data and method", "seconds": 45,
+      "bullets": ["Extract fixed-view clips from one screen recording.", "Align frames using the trick's score event.", "Estimate cameras, train the scene, compare images."],
+      "notes": "The screen recording contains repeated views of one saved replay. I extracted the clips and switched to fixed viewpoints to simplify the camera model. A score event provides a common time reference, although exact synchronization is not guaranteed. The latest comparison uses eleven training cameras and ten instants. View20 is reserved from model optimization. The scene is represented by small, colored 3D Gaussian elements.",
+      "sources": ["scripts/prepare_dense_replay.py", "docs/evidence/dynamic-comparison-2026-11-26.json"]
+    },
+    {
+      "id": "course", "title": "Four course concepts used in practice", "section": "Computer Vision course", "seconds": 50,
+      "bullets": ["Coordinates and transformations: world to camera.", "Perspective and visibility: 3D points to image pixels.", "Sampling: choose and align video frames.", "Rasterization: turn the scene into an image."],
+      "notes": "The project uses four ideas from the supplied course notes. Linear algebra expresses points in camera coordinates. Perspective projection maps them into pixels, and visibility determines what can be rendered. Sampling is important because the videos must represent the same moments. Finally, rasterization produces an image from the reconstructed scene. Gaussian splatting and camera estimation use existing research implementations; they are additional project methods built on these course concepts.",
+      "course_pages": ["3-4, 13-15", "12-18", "21-22", "15-18"],
+      "sources": ["docs/evidence/course-context.json"]
+    },
+    {
+      "id": "geometry", "title": "A visibility error hid the board", "section": "A concrete problem solved", "seconds": 45,
+      "bullets": ["The renderer discarded board points that were too near.", "Scaling points and camera translations preserved projection.", "After the correction, the static board became recognizable."],
+      "notes": "One useful debugging result came from the connection between camera geometry and visibility. Many initial board points were closer than the CUDA renderer's near cutoff. I corrected the scene scale consistently for points and camera translations. This preserved their image projections while restoring visibility. The board then became recognizable in the reserved view at a fixed instant. This solves a static integration problem, not the complete motion problem.",
+      "sources": ["docs/progress/near-clip-fix.en.md", "docs/assets/near-clip-board.jpg"],
+      "course_pages": ["3-4, 12-18"]
+    },
+    {
+      "id": "progress", "title": "What already works", "section": "Measured progress", "seconds": 45,
+      "bullets": ["DyNeRF reference: recognizable dynamic reconstruction.", "True Skate: recognizable board at three separate instants.", "A sequence of static models is not one tracked 4D model."],
+      "notes": "I first tested the GPU pipeline on a calibrated reference dataset called DyNeRF. It produces a recognizable dynamic scene, with remaining blur and color errors. For True Skate, independent static reconstructions recover a recognizable board at three instants. This suggests that the images contain useful reconstruction information. However, the three fits use separate models and initializations. Playing them in sequence does not demonstrate learned interpolation or persistent point tracking.",
+      "sources": ["docs/progress/quality-pilot.en.md", "docs/progress/multi-instant.en.md"]
+    },
+    {
+      "id": "comparison", "title": "Testing two ways to model motion", "section": "Latest experiment", "seconds": 60,
+      "bullets": ["4DGaussians predicts deformation from time.", "Dynamic 3D Gaussians fits successive frames with rigidity constraints.", "Same images and initial cloud; different training procedures."],
+      "notes": "The joint temporal model has been harder to fit than the independent static models. I compared two approaches on the same eleven cameras, ten instants, initialization and reserved view. Four-D Gaussians learns deformation from time. Dynamic Three-D Gaussians fits consecutive instants with local motion constraints. Dynamic fits the first board better, but loses it later. Neither reconstructs the airborne board reliably. Their losses and schedules differ, so this is a practical pilot, not a reproduction of the published benchmarks.",
+      "sources": ["docs/evidence/dynamic-comparison-2026-11-26.json", "https://arxiv.org/abs/2310.08528", "https://dynamic3dgaussians.github.io/"]
+    },
+    {
+      "id": "contribution", "title": "Project scripts and reused research code", "section": "Implementation", "seconds": 40,
+      "bullets": ["Project scripts: extraction, alignment and dataset conversion.", "Project checks: camera projection, visibility and validation split.", "Reused tools: COLMAP and the authors' Gaussian renderers."],
+      "notes": "I use existing implementations for camera estimation and Gaussian rendering. The project scripts prepare the recordings, convert the datasets, check coordinate conventions, and compare the results. AI tools assisted script development, so I distinguish this integration work from implementing the research algorithms from scratch. I have included two short code examples after the main talk: projecting points into an image and preventing validation masks from entering training.",
+      "sources": ["scripts/static_board_geometry.py", "scripts/fixed_dataset_adapter.py", "scripts/dynamic_replay_engine.py"]
+    },
+    {
+      "id": "next", "title": "Next: make the board motion reliable", "section": "Next steps", "seconds": 35,
+      "bullets": ["Check masks and timing where the board is edge-on.", "Evaluate the board separately from the background.", "Validate motion before claiming rotation measurements."],
+      "notes": "My next priority is reliable board motion. I need to inspect masks and timing around the fast parts of the flip, and evaluate the board separately from the much larger background. A higher whole-image score does not necessarily mean a better skateboard. Position and rotation measurements will require additional validation. The main lesson so far is that camera geometry and data preparation are essential, even when using an existing reconstruction method.",
+      "sources": ["docs/progress/actor-only.en.md", "docs/progress/dynamic-comparison.en.md"]
+    },
+    {
+      "id": "code-projection", "title": "Code example: project 3D points into pixels", "section": "Optional code discussion", "seconds": 0,
+      "bullets": ["1. Transform world points into the camera frame.", "2. Divide by depth to apply perspective.", "3. Convert the result to pixel coordinates."],
+      "notes": "This is the project function, with spacing expanded for readability. Points contains 3D coordinates. Pose contains the camera rotation and translation. Multiplication and translation produce camera coordinates. Dividing the first two coordinates by depth applies perspective. The focal length scales the result and the principal point offsets it into the image. The function also returns depth for visibility checks.",
+      "code": ["def project(points, pose, intrinsics):", "    camera = points @ pose[:, :3].T + pose[:, 3]", "    f, cx, cy = intrinsics", "    pixels = camera[:, :2] / camera[:, 2, None]", "    return pixels * f + [cx, cy], camera[:, 2]"],
+      "sources": ["scripts/static_board_geometry.py"]
+    },
+    {
+      "id": "code-validation", "title": "Code example: protect the validation images", "section": "Optional code discussion", "seconds": 0,
+      "bullets": ["A foreground mask can guide training.", "A validation mask must only evaluate the result.", "This check rejects an accidental data leak."],
+      "notes": "This is an excerpt of the dataset adapter, reformatted across lines. The mask tells training which pixels are likely to belong to the moving object. If an image is reserved for validation, its mask must not influence optimization. The exception makes this error visible immediately. The check does not make view20 a fresh test set: it has already been inspected repeatedly, so it remains a validation camera.",
+      "code": ["if record.get(\"foreground_mask_path\"):", "    if record[\"split\"] != \"train\":", "        raise ValueError(", "            \"Heldout image cannot supply a training foreground mask\"", "        )"],
+      "sources": ["scripts/fixed_dataset_adapter.py"]
+    }
+  ]
+}

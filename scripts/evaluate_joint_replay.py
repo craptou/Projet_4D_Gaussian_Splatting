@@ -5,6 +5,12 @@ import json
 from pathlib import Path
 
 
+def evaluation_groups(samples,observed):
+    groups={'observed':[i for i,sample in enumerate(samples) if sample in observed],
+        'unseen_time':[i for i,sample in enumerate(samples) if sample not in observed]}
+    return {name:indices for name,indices in groups.items() if indices}
+
+
 def evaluate(source,targets,run,config,output,iteration=3000):
     import numpy as np
     from PIL import Image,ImageDraw,ImageOps
@@ -32,7 +38,7 @@ def evaluate(source,targets,run,config,output,iteration=3000):
     observed=set(manifest['sample_indices']);frozen_time=manifest['frozen_control_time']
     black=torch.zeros(3,device='cuda');result=dict(iteration=iteration,observed_indices=sorted(observed),unseen_time_indices=[s for s in samples if s not in observed],
         frozen_time=frozen_time,metrics={},spatial_probe_points=int(near.sum()),
-        caveat='Only3 training times. Intermediate targets are evaluation-only for this model, at a repeatedly inspected camera. Spatial near-clip probe is not semantic point tracking.')
+        caveat=f'{len(observed)} training times. Any intermediate evaluation-only targets are at a repeatedly inspected camera. Spatial near-clip probe and seed-ancestry renders are not semantic point tracking.')
     for name,camera in cameras.items():
         folder=output/name;folder.mkdir()
         arrays=[];predictions=[];controls=[];deck_scores={};depth_probes=[]
@@ -42,6 +48,10 @@ def evaluate(source,targets,run,config,output,iteration=3000):
             time=(sample-first)/(last-first);camera.time=time
             with torch.no_grad():
                 prediction=render(camera,model,pipeline,black,cam_type=scene.dataset_type)['render'].clamp(0,1).cpu()
+                if manifest.get('actor_only_deformation'):
+                    from fixed_actor_labels import render_labels
+                    ancestry=render_labels(camera,model,pipeline)
+                    Image.fromarray((ancestry.cpu().numpy()*255).round().astype(np.uint8)).save(folder/f'{sample:03d}-actor.png')
                 if int(near.sum()):
                     times=torch.full((len(xyz),1),time,device='cuda')
                     moved=model._deformation(xyz,model._scaling,model._rotation,model._opacity,model.get_features,times)[0][near]
@@ -59,6 +69,7 @@ def evaluate(source,targets,run,config,output,iteration=3000):
                 with Image.open(old) as image:prior=np.array(image.convert('RGB'))
                 if np.abs(prior.astype(np.int16)-(prediction.permute(1,2,0).numpy()*255).round().astype(np.int16)).max()>1:
                     raise ValueError('Repeated checkpoint render differs')
+            if sample in polygons:
                 mask=torch.from_numpy(polygon_mask(polygons[sample][name],manifest['image_resolution']))
                 def deck(value):
                     error=(value-target)[:,mask]
@@ -72,7 +83,7 @@ def evaluate(source,targets,run,config,output,iteration=3000):
             return dict(mean_full_psnr_db=float((-10*torch.log10(mse)).mean()),
                 mean_ssim=float(np.mean([ssim(x[None],y[None]).item() for x,y in zip(a,b)])),
                 changing_union_psnr_db=float((-10*torch.log10(region)).mean()))
-        groups={'observed':[samples.index(s) for s in samples if s in observed], 'unseen_time':[samples.index(s) for s in samples if s not in observed]}
+        groups=evaluation_groups(samples,observed)
         result['metrics'][name]=dict(groups={g:dict(dynamic=measure(pred,indices),frozen=measure(fixed,indices)) for g,indices in groups.items()},
             deck=deck_scores,changing_union_pixels=int(change.sum()),
             target_stable_background_interframe_mae=float((target[1:]-target[:-1]).abs()[:,:,stable].mean()),
@@ -84,17 +95,17 @@ def evaluate(source,targets,run,config,output,iteration=3000):
             for col,label in enumerate(['gt','render','frozen']):
                 with Image.open(folder/f'{sample:03d}-{label}.png') as image:
                     frame.paste(image.crop((0,400,563,1200)).resize((300,426)),(col*300,30))
-                    if sample in observed:
+                    if sample in polygons:
                         mask=polygon_mask(polygons[sample][name],manifest['image_resolution']);ys,xs=np.where(mask)
                         crop=image.crop((int(xs.min())-20,int(ys.min())-20,int(xs.max())+21,int(ys.max())+21))
-                        tile=ImageOps.contain(crop,(290,230));row=sorted(observed).index(sample)
+                        tile=ImageOps.contain(crop,(290,230));row=sorted(polygons).index(sample)
                         sheet.paste(tile,(col*300+(300-tile.width)//2,row*270+32+(230-tile.height)//2))
                         draw.text((col*300+4,row*270+8),f'sample{sample}: {label}',fill='black')
                 fd.text((col*300+4,8),f'{-1+sample*.05:+.2f}s / {label} / '+('observed' if sample in observed else 'unseen time'),fill='black')
             frames.append(frame)
         frames[0].save(folder/'timeline.gif',save_all=True,append_images=frames[1:],duration=250,loop=0)
         sheet.save(folder/'observed-comparison.jpg',quality=95)
-    result['animation_note']='10 timestamps at250ms/frame, roughly5x slower than capture time;3 observed training times and7 evaluation-only intermediate times.'
+    result['animation_note']=f'{len(samples)} timestamps at250ms/frame, roughly5x slower than capture time;{len(observed)} observed training times and{len(samples)-len(observed)} evaluation-only intermediate times.'
     (output/'report.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(json.dumps(result,indent=2),flush=True)
 
 

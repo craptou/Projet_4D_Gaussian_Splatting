@@ -2,13 +2,17 @@
 
 ### Repetición de trucos de skate desde puntos de vista libres mediante 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Último corte: 24 de noviembre de 2026** · Diapositivas/informe archivados: 18 de noviembre.
+[English](README.md) · [Español](README.es.md) · **Último corte: 26 de noviembre de 2026**
 
 **Repositorio:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Publicado el 19 de noviembre de 2026 · Rama `main`.
 
 ¿Puede una única repetición guardada de un truco de skate, grabada desde varios puntos de vista móviles, convertirse en una representación 3D dinámica que permita generar vistas nuevas?
 
-**Último experimento — fondo invariable en el tiempo, 24 de noviembre:** [prueba controlada y resultados bilingües](docs/progress/actor-only.es.md). Mismas entradas y presupuesto de 6.000 pasos; solo los descendientes de semillas de la tabla reciben deformación temporal. Los cambios no deseados en píxeles estables de validación disminuyen unas **13 veces**, pero empeora la región cambiante en tiempos observados e intermedios. La tabla en el aire sigue siendo incorrecta pese a mejorar el PSNR completo. [Grabación / modelo anterior / modelo restringido](docs/assets/actor-only-validation.gif) · [Ampliaciones](docs/assets/actor-only-validation.jpg). Próxima prueba propuesta: más instantes de la captura existente. No hay entrenamiento en ejecución.
+**Presentación — 26 de noviembre:** [diapositivas en inglés, PDF](presentations/progress-2026-11-26.en.pdf) · [PowerPoint editable con notas](presentations/progress-2026-11-26.en.pptx) · [guion inglés](presentations/progress-2026-11-26.en.md). Ocho diapositivas simples para 5–7 minutos, más dos ejemplos de código opcionales. Se explican conceptos del curso, avances medidos, fallos y siguientes pasos. [Guía de preparación en francés](presentations/preparation-2026-11-26.fr.md).
+
+**Último experimento — comparación con entradas comunes:** [4DGS y Dynamic3DGaussians adaptado](docs/progress/dynamic-comparison.es.md) usan las mismas 110 imágenes de entrenamiento, diez instantes, semillas sin entrenar y view20 reservada. Dynamic reconstruye mejor la tabla inicial, pero la pierde después; ninguno recupera fielmente el movimiento aéreo. [Comparaciones reales](docs/assets/dynamic-comparison-validation.gif) · [Ampliaciones](docs/assets/dynamic-comparison-validation.jpg). Sin entrenamiento en ejecución; seguimiento físico y rotaciones sin validar.
+
+**Experimento anterior — fondo invariable en el tiempo, 24 de noviembre:** [prueba controlada y resultados bilingües](docs/progress/actor-only.es.md). Mismas entradas y presupuesto de 6.000 pasos; solo los descendientes de semillas de la tabla reciben deformación temporal. Los cambios no deseados en píxeles estables de validación disminuyen unas **13 veces**, pero empeora la región cambiante en tiempos observados e intermedios. La tabla en el aire sigue siendo incorrecta pese a mejorar el PSNR completo. [Grabación / modelo anterior / modelo restringido](docs/assets/actor-only-validation.gif) · [Ampliaciones](docs/assets/actor-only-validation.jpg). Próxima prueba propuesta: más instantes de la captura existente. No hay entrenamiento en ejecución.
 
 **Experimento anterior — un modelo temporal compartido, 24 de noviembre:** [piloto 4D, control de duración y evaluación](docs/progress/joint-temporal.es.md). Los tres instantes entrenan ahora un modelo. A 6.000 pasos mejora el ajuste observado, pero la tabla central está deformada; los siete tiempos intermedios apenas superan al control congelado y el fondo varía demasiado. Es un primer intento medido, no un truco reconstruido fielmente. [Referencias / modelo temporal / tiempo congelado](docs/assets/joint-three-validation.gif) · [Modelos estáticos y checkpoints conjuntos](docs/assets/joint-three-validation.jpg).
 

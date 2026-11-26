@@ -1,5 +1,7 @@
 # Course alignment — final project
 
+**26 November2026 update:** the [short English presentation](../../presentations/progress-2026-11-26.en.pdf) uses four direct links to the supplied notes: world/camera transformations (pp.3–4,13–15), perspective and visibility/clipping (pp.12–18), frame sampling and temporal alignment (pp.21–22), and rasterization (pp.15–18). The static near-clip correction is a concrete viewing/visibility example; saved GPU renders demonstrate the forward stage. The latest pilot has11 training cameras, ten supervised times,563×1218 images and reserved view20. COLMAP and Gaussian methods are reused implementations, not claimed course algorithms implemented from scratch. No FFT, SLERP or physical light-transport implementation is claimed. The detailed mapping below preserves the18November preparation-stage context and its older dataset values.
+
 **Course designation supplied by the owner:** Computer Vision. This repository documents its **final course project**, not an independent graphics exercise. [Español](course-alignment.es.md)
 
 ## Source and scope

@@ -1,5 +1,7 @@
 # Bitácora y evidencias
 
+**26 de noviembre de2026 — comparación y presentación:** se revisó el control de apariencia persistente y se compararon Dynamic3DGaussians adaptado y4DGS con110 imágenes de optimización idénticas, diez instantes, semillas sin entrenar y view20 reservada. Dynamic ajusta la tabla inicial pero la pierde después; no se demuestra movimiento fiable. [Resultados, código fijado, recursos y comandos](dynamic-comparison.es.md). Se preparó una [presentación breve en inglés](../../presentations/progress-2026-11-26.en.pdf), PowerPoint editable, notas y dos ejemplos de código, con páginas del curso. Sin afirmar seguimiento físico ni rotaciones.
+
 **24 de noviembre de 2026 — fondo invariable en el tiempo:** mismos tres instantes, entradas idénticas byte a byte y 200+6.000 pasos; solo los descendientes del volumen de siluetas reciben deformación temporal. Entrenamiento GPU 305,34 s; las funciones sobreviven a la densificación y los cinco atributos del fondo son invariantes en la auditoría del checkpoint. La variación estable en view20 baja unas 13 veces, pero empeora el PSNR de regiones cambiantes y la tabla aérea sigue incorrecta. [Comparaciones, controles, pruebas y propuesta con más instantes](actor-only.es.md). Sin afirmar flip fiel ni seguimiento físico.
 
 [English](work-log.en.md) · Corte: 18 de noviembre de 2026

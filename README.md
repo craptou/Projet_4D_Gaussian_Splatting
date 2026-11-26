@@ -2,13 +2,17 @@
 
 ### Free-Viewpoint Replay of Skate Tricks using 4D Gaussian Splatting
 
-[English](README.md) · [Español](README.es.md) · **Latest checkpoint: 24 November 2026** · Slides/report archive: 18 November.
+[English](README.md) · [Español](README.es.md) · **Latest checkpoint: 26 November 2026**
 
 **Repository:** [craptou/Projet_4D_Gaussian_Splatting](https://github.com/craptou/Projet_4D_Gaussian_Splatting) · Published 19 November 2026 · Branch `main`.
 
 Can one saved skate replay, recorded from several moving viewpoints, become a dynamic 3D representation that supports novel-view rendering?
 
-**Latest experiment — time-invariant background, 24 November:** [controlled experiment and bilingual results](docs/progress/actor-only.en.md). Same inputs and 6,000-step budget; only board-seed descendants receive temporal deformation. Unwanted changes in target-stable validation pixels fall approximately **13×**, but observed and intermediate changing-region quality declines. The airborne board remains incorrect despite improved full-image PSNR. [Recording / previous model / constrained model](docs/assets/actor-only-validation.gif) · [Board close-ups](docs/assets/actor-only-validation.jpg). Next proposed test: denser temporal supervision from the existing capture. No training is currently running.
+**Presentation — 26 November:** [English slides, PDF](presentations/progress-2026-11-26.en.pdf) · [Editable PowerPoint with notes](presentations/progress-2026-11-26.en.pptx) · [English speaking script](presentations/progress-2026-11-26.en.md). Eight simple slides for a 5–7 minute talk, plus two optional code slides. Course concepts, measured progress, failures and next steps are explicit. [French preparation guide](presentations/preparation-2026-11-26.fr.md).
+
+**Latest experiment — same-input method comparison:** [4DGS and adapted Dynamic3DGaussians](docs/progress/dynamic-comparison.en.md) use the same 110 training images, ten instants, untrained seeds and reserved view20. Dynamic reconstructs the first board better, then loses it; neither recovers faithful airborne motion. [Actual comparisons](docs/assets/dynamic-comparison-validation.gif) · [Board close-ups](docs/assets/dynamic-comparison-validation.jpg). No training is currently running; physical tracking and rotations remain unvalidated.
+
+**Previous experiment — time-invariant background, 24 November:** [controlled experiment and bilingual results](docs/progress/actor-only.en.md). Same inputs and 6,000-step budget; only board-seed descendants receive temporal deformation. Unwanted changes in target-stable validation pixels fall approximately **13×**, but observed and intermediate changing-region quality declines. The airborne board remains incorrect despite improved full-image PSNR. [Recording / previous model / constrained model](docs/assets/actor-only-validation.gif) · [Board close-ups](docs/assets/actor-only-validation.jpg). Next proposed test: denser temporal supervision from the existing capture. No training is currently running.
 
 **Previous experiment — one shared temporal model, 24 November:** [joint 4D pilot, duration control and evaluation](docs/progress/joint-temporal.en.md). The three instants now train one model. At 6,000 steps, observed-image quality improves, but the middle board is badly distorted; seven intermediate times barely beat frozen time and the background varies excessively. This is a measured first attempt, not a faithful flip reconstruction. [Recorded targets / temporal model / frozen-time control](docs/assets/joint-three-validation.gif) · [Static versus joint checkpoints](docs/assets/joint-three-validation.jpg).
 
