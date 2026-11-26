@@ -12,7 +12,7 @@ Le but est de pouvoir expliquer les entrées, les sorties, le principe, le code 
 | 2. Les caméras | Intrinsèques, pose, SfM, triangulation, PnP | Calculer une projection et expliquer la calibration |
 | 3. Le rendu statique | Gaussienne, projection, opacité, apprentissage | Expliquer une itération d'optimisation |
 | 4. Les deux méthodes temporelles | Déformation partagée ou ajustements successifs | Comparer leurs hypothèses sur la planche |
-| 5. Le cours et le code | Relier un concept à une opération réelle | Expliquer les deux extraits des annexes |
+| 5. Le cours et le code | Relier un concept à une opération réelle | Ouvrir les fonctions référencées au fil des diapositives |
 | 6. Les résultats | Distinguer reconstruction, suivi et mesure validée | Interpréter un succès statique et un échec temporel |
 
 Prendre environ 20 à 30 minutes par étape, avec reformulation orale et retour au code. Ce temps est indicatif, pas une garantie de maîtrise.

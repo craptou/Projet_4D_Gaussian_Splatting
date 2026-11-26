@@ -1,8 +1,8 @@
 {
   "date": "2026-11-26",
   "language": "English",
-  "duration_minutes": "5-7",
-  "main_slides": 8,
+  "duration_minutes": "9-10",
+  "main_slides": 12,
   "author": "Raphael Landry",
   "slides": [
     {
@@ -25,7 +25,7 @@
       "id": "step-images",
       "title": "Step 1 — prepare images of the same moment",
       "section": "Part 1 / How the project works",
-      "seconds": 40,
+      "seconds": 45,
       "bullets": [
         "Extract frames from each camera view.",
         "Align the moments represented by the frames.",
@@ -36,13 +36,29 @@
         "scripts/sync_clean_replays.py",
         "scripts/prepare_dense_replay.py",
         "docs/evidence/course-context.json"
+      ],
+      "functions": [
+        {
+          "file": "scripts/sync_clean_replays.py",
+          "qualname": "sync",
+          "label": "sync_clean_replays.sync()",
+          "role": "Align replay events",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/prepare_dense_replay.py",
+          "qualname": "prepare",
+          "label": "prepare_dense_replay.prepare()",
+          "role": "Build the shared image dataset",
+          "kind": "definition"
+        }
       ]
     },
     {
       "id": "step-cameras",
       "title": "Step 2 — recover the cameras and 3D points",
       "section": "Part 1 / How the project works",
-      "seconds": 50,
+      "seconds": 55,
       "bullets": [
         "Find the same background details in several images.",
         "Estimate camera poses and triangulate 3D points.",
@@ -54,40 +70,186 @@
         "scripts/localize_fixed_holdout.py",
         "scripts/static_board_geometry.py",
         "docs/evidence/course-context.json"
+      ],
+      "functions": [
+        {
+          "file": "scripts/prepare_clean_geometry.py",
+          "qualname": "pycolmap.extract_features",
+          "label": "pycolmap.extract_features()",
+          "role": "Detect SIFT background features",
+          "kind": "call"
+        },
+        {
+          "file": "scripts/prepare_clean_geometry.py",
+          "qualname": "pycolmap.incremental_mapping",
+          "label": "pycolmap.incremental_mapping()",
+          "role": "Estimate cameras and sparse points",
+          "kind": "call"
+        }
+      ]
+    },
+    {
+      "id": "step-projection",
+      "title": "From a 3D point to an image pixel",
+      "section": "Part 1 / Geometry in practice",
+      "seconds": 45,
+      "bullets": [
+        "Transform the point into the camera coordinate system.",
+        "Divide by depth and apply the camera intrinsics.",
+        "Check visibility before using the projected point."
+      ],
+      "notes": "The camera pose transforms a world point into camera coordinates. Perspective projection divides its horizontal and vertical coordinates by depth, then applies the focal length and image center. The function project performs this calculation and returns depth as well as pixels. Visibility must be checked separately. In our project, a near-plane mismatch initially removed board seeds. The function require_board_visibility now rejects unsafe initial seeds. This connects coordinate transformations, perspective and clipping from the course.",
+      "sources": [
+        "docs/progress/near-clip-fix.en.md",
+        "scripts/static_board_geometry.py",
+        "scripts/static_world_scale.py"
+      ],
+      "functions": [
+        {
+          "file": "scripts/static_board_geometry.py",
+          "qualname": "project",
+          "label": "static_board_geometry.project()",
+          "role": "Transform and project 3D points",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/static_world_scale.py",
+          "qualname": "require_board_visibility",
+          "label": "static_world_scale.require_board_visibility()",
+          "role": "Check canonical seed depths",
+          "kind": "definition"
+        }
       ]
     },
     {
       "id": "step-gaussians",
-      "title": "Step 3 — learn a scene made of Gaussians",
-      "section": "Part 1 / How the project works",
-      "seconds": 50,
+      "title": "What is a 3D Gaussian?",
+      "section": "Part 1 / The scene representation",
+      "seconds": 60,
       "bullets": [
-        "Start with 3D elements: position, size, rotation and opacity.",
-        "Project them into a camera to render an image.",
-        "Compare with the target and update the scene."
+        "A soft 3D ellipsoid with a center, size and orientation.",
+        "Opacity controls its contribution; appearance controls color.",
+        "Many overlapping elements represent the scene."
       ],
-      "notes": "The scene is represented by many small 3D Gaussian elements, rather than a triangle mesh. Each element has a position, size, orientation, opacity and appearance. Starting from the initial points, the renderer projects and combines their contributions into pixels. Training compares this image with the recorded target and uses gradients to update the scene. Density control can add or remove elements. This connects perspective, visibility and rasterization. I reuse the authors' implementation and provide project scripts for preparation and validation.",
+      "notes": "A three-dimensional Gaussian is a soft ellipsoid, with influence strongest near its center and decreasing away from it. Its parameters describe its position, size along several axes, orientation, opacity and appearance. The scene is represented by many overlapping elements. Their two-dimensional projected footprints look like soft ellipses; the drawing here is schematic. GaussianModel.create_from_pcd initializes these elements from a point cloud. The scene starts as an approximation: a seed is not necessarily an accurate point on the board surface. Density control can split elements to represent more detail.",
       "sources": [
-        "third_party/4DGaussians/scene/gaussian_model.py",
-        "third_party/4DGaussians/gaussian_renderer/__init__.py",
-        "docs/evidence/course-context.json"
+        "third_party/4DGaussians/scene/gaussian_model.py"
+      ],
+      "functions": [
+        {
+          "file": "third_party/4DGaussians/scene/gaussian_model.py",
+          "qualname": "GaussianModel.create_from_pcd",
+          "label": "GaussianModel.create_from_pcd()",
+          "role": "Initialize the Gaussian representation",
+          "kind": "definition"
+        },
+        {
+          "file": "third_party/4DGaussians/scene/gaussian_model.py",
+          "qualname": "GaussianModel.densify_and_split",
+          "label": "GaussianModel.densify_and_split()",
+          "role": "Add detail during optimization",
+          "kind": "definition"
+        }
+      ]
+    },
+    {
+      "id": "step-learning",
+      "title": "How do Gaussians produce and learn an image?",
+      "section": "Part 1 / Rendering and training",
+      "seconds": 65,
+      "bullets": [
+        "Project the elements and combine their contributions by depth and opacity.",
+        "Compare the rendered image with the recorded target.",
+        "Use gradients to update scene parameters, then repeat."
+      ],
+      "notes": "For a chosen camera, the renderer projects the Gaussians into the image and combines their contributions in depth order using opacity. This produces pixels. Rendering alone does not improve the model. During training, the rendered image is compared with a recorded target. The difference becomes a loss. PyTorch computes gradients through the renderer, and the optimizer changes the scene parameters to reduce that loss. The scene_reconstruction function manages this training loop and calls render. We repeat the process across views and times. This explains how a point-cloud initialization becomes an image-matching scene representation.",
+      "sources": [
+        "third_party/4DGaussians/train.py",
+        "third_party/4DGaussians/gaussian_renderer/__init__.py"
+      ],
+      "functions": [
+        {
+          "file": "third_party/4DGaussians/gaussian_renderer/__init__.py",
+          "qualname": "render",
+          "label": "gaussian_renderer.render()",
+          "role": "Project and blend Gaussian contributions",
+          "kind": "definition"
+        },
+        {
+          "file": "third_party/4DGaussians/train.py",
+          "qualname": "scene_reconstruction",
+          "label": "scene_reconstruction()",
+          "role": "Render, compute loss and update parameters",
+          "kind": "definition"
+        }
       ]
     },
     {
       "id": "step-time",
       "title": "Step 4 — model motion and check the result",
       "section": "Part 1 / How the project works",
-      "seconds": 45,
+      "seconds": 55,
       "bullets": [
         "4DGaussians predicts how the reference scene changes with time.",
         "Dynamic 3D Gaussians fits successive states with motion constraints.",
         "Render the scene and compare it with a reserved camera view."
       ],
-      "notes": "To represent motion, the scene must change with time. Four-D Gaussians uses a shared deformation network. Dynamic Three-D Gaussians instead fits successive states with local motion constraints. Both receive calibrated cameras as input. After training, I request a time and viewpoint and compare the rendered image with a reserved camera view. The latest ten-time pilot uses all ten times for supervision, so it tests a reserved viewpoint, not unseen-time interpolation. Reliable rendering also does not automatically validate physical tracking.",
+      "notes": "Four-D Gaussians uses a reference scene and a network that predicts changes from time. Its forward_dynamic function predicts deformed Gaussian parameters. Dynamic Three-D Gaussians instead fits successive scene states with local motion constraints; our train adapter runs that sequence using the authors' functions. Both methods receive calibrated camera poses. This is different from training separate static reconstructions and playing them in sequence. A time-varying render is useful, but it does not automatically prove that a physical point or board rotation is tracked correctly.",
       "sources": [
         "https://arxiv.org/html/2310.08528v3",
         "https://dynamic3dgaussians.github.io/",
-        "docs/progress/dynamic-comparison.en.md"
+        "docs/progress/dynamic-comparison.en.md",
+        "third_party/4DGaussians/scene/deformation.py",
+        "scripts/dynamic_replay_engine.py"
+      ],
+      "functions": [
+        {
+          "file": "third_party/4DGaussians/scene/deformation.py",
+          "qualname": "deform_network.forward_dynamic",
+          "label": "deform_network.forward_dynamic()",
+          "role": "Predict time-dependent parameters",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/dynamic_replay_engine.py",
+          "qualname": "train",
+          "label": "dynamic_replay_engine.train()",
+          "role": "Run sequential Dynamic3DGS fitting",
+          "kind": "definition"
+        }
+      ]
+    },
+    {
+      "id": "step-evaluation",
+      "title": "Evaluate the board, not only the background",
+      "section": "Part 1 / Validation",
+      "seconds": 45,
+      "bullets": [
+        "Keep view20 out of scene optimization.",
+        "Compare full images and the moving-board region.",
+        "Inspect actual renders; high image scores can hide a missing board."
+      ],
+      "notes": "I reserve view20 from scene optimization and use it for validation. Its camera can be localized against the frozen background map, but its target images do not train the Gaussian scene. The probe function checks the loader, camera split and projections. The evaluation function compares saved renders with targets, including changing regions and approximate board envelopes. A high whole-image score may mainly reward the much larger background. View20 has been inspected repeatedly, so it is a reused validation camera, not a fresh final test. The latest ten times are all supervised.",
+      "sources": [
+        "docs/progress/dynamic-comparison.en.md",
+        "scripts/fixed_pilot_engine.py",
+        "scripts/review_dynamic_comparison.py"
+      ],
+      "functions": [
+        {
+          "file": "scripts/fixed_pilot_engine.py",
+          "qualname": "probe",
+          "label": "fixed_pilot_engine.probe()",
+          "role": "Check loading, camera split and projections",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/review_dynamic_comparison.py",
+          "qualname": "evaluate",
+          "label": "review_dynamic_comparison.evaluate()",
+          "role": "Compare full images and object regions",
+          "kind": "definition"
+        }
       ]
     },
     {
@@ -104,7 +266,25 @@
       "sources": [
         "docs/progress/dynerf.en.md",
         "docs/progress/clean-capture.en.md",
-        "docs/progress/clean-pilot.en.md"
+        "docs/progress/clean-pilot.en.md",
+        "scripts/sync_clean_replays.py",
+        "scripts/prepare_dense_replay.py"
+      ],
+      "functions": [
+        {
+          "file": "scripts/sync_clean_replays.py",
+          "qualname": "sync",
+          "label": "sync_clean_replays.sync()",
+          "role": "Align repeated replay recordings",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/prepare_dense_replay.py",
+          "qualname": "prepare",
+          "label": "prepare_dense_replay.prepare()",
+          "role": "Select views and stage images and masks",
+          "kind": "definition"
+        }
       ]
     },
     {
@@ -122,73 +302,100 @@
         "docs/progress/quality-pilot.en.md",
         "docs/progress/4d-demonstration.en.md",
         "docs/assets/4d-demo-time.mp4",
-        "https://github.com/facebookresearch/Neural_3D_Video"
+        "https://github.com/facebookresearch/Neural_3D_Video",
+        "scripts/view_4d_reference.py"
+      ],
+      "functions": [
+        {
+          "file": "scripts/view_4d_reference.py",
+          "qualname": "ReferenceScene.frame",
+          "label": "ReferenceScene.frame()",
+          "role": "Render a chosen time and viewpoint",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/view_4d_reference.py",
+          "qualname": "export",
+          "label": "view_4d_reference.export()",
+          "role": "Export the actual model demonstration",
+          "kind": "definition"
+        }
       ]
     },
     {
       "id": "skate-result",
       "title": "My recordings: the moving board is still difficult",
       "section": "Part 2 / Own-data result and next steps",
-      "seconds": 50,
+      "seconds": 45,
       "bullets": [
-        "The background is recognizable, but board motion is unreliable.",
+        "The background is recognizable, but moving-board shape is unreliable.",
         "Separate static fits work better at selected instants.",
-        "Next: check timing, masks and initially visible surfaces."
+        "Mask-based training was tested; it did not solve the motion problem."
       ],
-      "notes": "With my own recordings, the result is much less convincing. The background can be recognizable, but the moving board is blurred or missing. Independent static fits worked better at selected instants. My Dynamic Three-D Gaussians pilot also lost the board after a good initial fit. Timing, masks, camera uncertainty and surface visibility are hypotheses to investigate, not proven individual causes. The kitchen and skate experiments also have different scenes and settings. My next priority is to improve and check the inputs before making a reliable motion or rotation claim.",
+      "notes": "My own recordings produce a much weaker result. The background can be recognizable, but the moving board is blurred or missing. Independent static fits worked better at selected instants, and Dynamic Three-D Gaussians also lost the board after an initial fit. The render and evaluate functions produce and inspect these outputs. We have already tested mask-based training, so the next slide explains that experiment. The kitchen and skate trials have different scenes and settings: this comparison does not isolate data quality as the sole cause.",
       "sources": [
         "docs/progress/dynamic-comparison.en.md",
         "docs/progress/multi-instant.en.md",
-        "docs/progress/quality-pilot.en.md"
+        "docs/progress/quality-pilot.en.md",
+        "scripts/fixed_pilot_engine.py",
+        "scripts/review_dynamic_comparison.py"
+      ],
+      "functions": [
+        {
+          "file": "scripts/fixed_pilot_engine.py",
+          "qualname": "render",
+          "label": "fixed_pilot_engine.render()",
+          "role": "Generate saved checkpoint images",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/review_dynamic_comparison.py",
+          "qualname": "evaluate",
+          "label": "review_dynamic_comparison.evaluate()",
+          "role": "Assess the reconstructed board",
+          "kind": "definition"
+        }
       ]
     },
     {
-      "id": "code-projection",
-      "title": "Code example: project 3D points into pixels",
-      "section": "Optional code discussion",
-      "seconds": 0,
+      "id": "masks-tested",
+      "title": "Masks were tested — better scores, still wrong shape",
+      "section": "Part 2 / Completed experiments and next steps",
+      "seconds": 60,
       "bullets": [
-        "1. Transform world points into the camera frame.",
-        "2. Divide by depth to apply perspective.",
-        "3. Convert the result to pixel coordinates."
+        "Candidate masks identify likely moving-object pixels.",
+        "Foreground weighting was tested and later used across multiple views.",
+        "Next: refine existing masks, timing and surface coverage."
       ],
-      "notes": "This is the project function, with spacing expanded for readability. Points contains 3D coordinates. Pose contains the camera rotation and translation. Multiplication and translation produce camera coordinates. Dividing the first two coordinates by depth applies perspective. The focal length scales the result and the principal point offsets it into the image. The function also returns depth for visibility checks.",
-      "code": [
-        "def project(points, pose, intrinsics):",
-        "    camera = points @ pose[:, :3].T + pose[:, 3]",
-        "    f, cx, cy = intrinsics",
-        "    pixels = camera[:, :2] / camera[:, 2, None]",
-        "    return pixels * f + [cx, cy], camera[:, 2]"
-      ],
+      "notes": "We have already generated, inspected and used foreground masks in training. In an earlier controlled experiment, adding a foreground loss in view19 increased masked training PSNR from 11.79 to 25.18 decibels, but produced a broad dark smear rather than a correct skateboard. This was a training-fit improvement, not reconstruction success. Later static and temporal trials used masks across multiple views, and the latest comparison has 110 masked training images. The action_masks function builds candidates and foreground_l1 weights their RGB errors. These masks are approximate. The remaining task is to refine existing masks, verify timing and surface coverage, and validate board motion.",
       "sources": [
-        "scripts/static_board_geometry.py"
-      ]
-    },
-    {
-      "id": "code-validation",
-      "title": "Code example: protect the validation images",
-      "section": "Optional code discussion",
-      "seconds": 0,
-      "bullets": [
-        "A foreground mask can guide training.",
-        "A validation mask must only evaluate the result.",
-        "This check rejects an accidental data leak."
+        "docs/progress/foreground-trial.en.md",
+        "docs/progress/dynamic-comparison.en.md",
+        "docs/assets/foreground-trial-training.jpg",
+        "scripts/prepare_dense_replay.py",
+        "scripts/fixed_foreground_loss.py"
       ],
-      "notes": "This is an excerpt of the dataset adapter, reformatted across lines. The mask tells training which pixels are likely to belong to the moving object. If an image is reserved for validation, its mask must not influence optimization. The exception makes this error visible immediately. The check does not make view20 a fresh test set: it has already been inspected repeatedly, so it remains a validation camera.",
-      "code": [
-        "if record.get(\"foreground_mask_path\"):",
-        "    if record[\"split\"] != \"train\":",
-        "        raise ValueError(",
-        "            \"Heldout image cannot supply a training foreground mask\"",
-        "        )"
-      ],
-      "sources": [
-        "scripts/fixed_dataset_adapter.py"
+      "functions": [
+        {
+          "file": "scripts/prepare_dense_replay.py",
+          "qualname": "action_masks",
+          "label": "prepare_dense_replay.action_masks()",
+          "role": "Build candidate foreground masks",
+          "kind": "definition"
+        },
+        {
+          "file": "scripts/fixed_foreground_loss.py",
+          "qualname": "foreground_l1",
+          "label": "fixed_foreground_loss.foreground_l1()",
+          "role": "Weight RGB errors inside training masks",
+          "kind": "definition"
+        }
       ]
     }
   ],
   "parts": [
     "How the project works",
     "Data acquisition and results"
-  ]
+  ],
+  "code_appendix_slides": 0
 }

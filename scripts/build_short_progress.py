@@ -1,4 +1,4 @@
-"""Build the simple English 5-7 minute presentation and two optional code slides."""
+"""Build the English presentation with contextual function links and a separate oral-script PDF."""
 import json
 from pathlib import Path
 from PIL import Image
@@ -9,7 +9,12 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.oxml.xmlchemy import OxmlElement
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,PageBreak
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.pagesizes import A4
+from xml.sax.saxutils import escape
 from build_progress_slides import Page,register_fonts,W,H,INK,TEAL,MUTED,PAPER,WHITE
+from presentation_functions import resolve
 
 ROOT=Path(__file__).resolve().parents[1]
 NAME='progress-2026-11-26.en'
@@ -24,6 +29,7 @@ def make_assets():
         image.crop((0,26,400,326)).save(ASSETS/'kitchen-input.jpg',quality=94)
     with Image.open(ROOT/'docs/assets/4d-demo-time.gif') as image:image.convert('RGB').save(ASSETS/'kitchen-model.jpg',quality=94)
     with Image.open(ROOT/'docs/assets/dynamic-comparison-validation.jpg') as image:image.crop((0,326,600,535)).save(ASSETS/'skate-result.jpg',quality=95)
+    with Image.open(ROOT/'docs/assets/foreground-trial-training.jpg') as image:image.crop((0,150,900,345)).save(ASSETS/'mask-trial.jpg',quality=95)
 
 
 def lines(page,items,x,y,width,size=22,gap=16):
@@ -33,26 +39,16 @@ def lines(page,items,x,y,width,size=22,gap=16):
     if y-gap>500:raise ValueError('Body collides with slide footer')
 
 
-def code(page,items,x=65,y=166,size=18):
-    page.rect(52,145,856,175,INK)
-    for row,line in enumerate(items):
-        if pdfmetrics.stringWidth(line,'Courier',size)>824:raise ValueError('Code line too wide')
-        top=y+row*size*1.4
-        page.pdf.setFillColor('#FFFFFF');page.pdf.setFont('Courier',size);page.pdf.drawString(x,H-top-size,line)
-        shape=page.slide.shapes.add_textbox(Pt(x),Pt(top),Pt(824),Pt(size*1.4));tf=shape.text_frame
-        tf.margin_left=tf.margin_right=tf.margin_top=tf.margin_bottom=0
-        p=tf.paragraphs[0];p.text=line;p.font.name='Consolas';p.font.size=Pt(size);p.font.color.rgb=RGBColor(255,255,255)
-        page.elements.append(dict(text=line,x=x,y=top,w=824,h=size*1.4))
-
-
 def ellipse(page,x,y,w,h,angle):
     """Editable schematic of overlapping Gaussian footprints; not reconstructed data."""
-    page.pdf.saveState();page.pdf.setFillColor('#'+TEAL);page.pdf.setFillAlpha(.35)
-    page.pdf.translate(x+w/2,H-y-h/2);page.pdf.rotate(-angle)
-    page.pdf.ellipse(-w/2,-h/2,w/2,h/2,fill=1,stroke=0);page.pdf.restoreState()
-    shape=page.slide.shapes.add_shape(MSO_SHAPE.OVAL,Pt(x),Pt(y),Pt(w),Pt(h));shape.rotation=angle
-    shape.fill.solid();shape.fill.fore_color.rgb=RGBColor.from_string(TEAL);shape.line.fill.background()
-    alpha=OxmlElement('a:alpha');alpha.set('val','35000');shape._element.xpath('.//a:srgbClr')[0].append(alpha)
+    for layer in range(8):
+        fraction=1-layer*.09;ww=w*fraction;hh=h*fraction
+        page.pdf.saveState();page.pdf.setFillColor('#'+TEAL);page.pdf.setFillAlpha(.065)
+        page.pdf.translate(x+w/2,H-y-h/2);page.pdf.rotate(-angle)
+        page.pdf.ellipse(-ww/2,-hh/2,ww/2,hh/2,fill=1,stroke=0);page.pdf.restoreState()
+        shape=page.slide.shapes.add_shape(MSO_SHAPE.OVAL,Pt(x+(w-ww)/2),Pt(y+(h-hh)/2),Pt(ww),Pt(hh));shape.rotation=angle
+        shape.fill.solid();shape.fill.fore_color.rgb=RGBColor.from_string(TEAL);shape.line.fill.background()
+        alpha=OxmlElement('a:alpha');alpha.set('val','6500');shape._element.xpath('.//a:srgbClr')[0].append(alpha)
 
 
 def flow(page,labels,y=145):
@@ -67,58 +63,118 @@ def render_body(p,item):
     if key=='step-images':
         p.text('Videos → extract frames → align time → consistent image size',52,137,856,21,TEAL,True)
         for row,label in enumerate(['View A','View B','View C']):
-            y=210+row*78;p.text(label,65,y+19,130,21)
+            y=197+row*61;p.text(label,65,y+12,130,20)
             for col,time in enumerate(['t0','t1','t2']):
                 x=230+col*220;color=TEAL if col==1 else WHITE
-                p.rect(x,y,185,60,color);p.text(time,x+69,y+17,80,23,WHITE if col==1 else INK,True)
-        p.text('One training instant = matching scene states across views',52,458,856,21)
-        p.text('Course: image coordinates and sampling',52,490,856,11,MUTED)
+                p.rect(x,y,185,46,color);p.text(time,x+69,y+9,80,22,WHITE if col==1 else INK,True)
+        p.text('One training instant = matching scene states across views',52,386,856,20)
+        p.text('Course: image coordinates and sampling',52,414,856,11,MUTED)
     elif key=='step-cameras':
-        flow(p,['Match background details','Estimate camera poses','Triangulate 3D points'])
-        lines(p,['COLMAP jointly refines cameras and sparse points.','Camera pose: position and orientation.','Check: do 3D points return to the observed pixels?'],52,252,850,22,22)
-        p.rect(52,425,856,50,TEAL);p.text('World coordinates → camera coordinates → image pixels',70,438,820,21,WHITE,True)
-        p.text('Course: transformations and perspective',52,490,856,11,MUTED)
+        flow(p,['Match background details','Estimate camera poses','Triangulate 3D points'],y=137)
+        lines(p,['Use static background features to estimate the cameras.','Jointly refine camera poses and sparse 3D points.','Check that reconstructed points return to observed pixels.'],52,230,850,21,17)
+        p.text('Course: transformations, perspective and geometric consistency',52,414,856,11,MUTED)
+    elif key=='step-projection':
+        flow(p,['World coordinates','Camera coordinates','Image pixels'],y=137)
+        p.text('Xcamera = R × Xworld + t',74,239,800,27,TEAL,True)
+        p.text('u = f × x / z + cx        v = f × y / z + cy',74,296,800,25,INK,True)
+        p.text('Points must also be visible: our near-plane check catches clipped seeds.',52,366,856,19)
+        p.text('Course: coordinate systems, perspective and clipping',52,414,856,11,MUTED)
     elif key=='step-gaussians':
-        flow(p,['3D Gaussians','Render an image','Compare target','Update parameters'])
-        ellipse(p,104,286,170,60,-25);ellipse(p,187,264,80,130,20);ellipse(p,226,306,150,55,25)
-        p.text('Soft projected contributions',65,405,350,17,MUTED)
-        p.text('(schematic)',65,432,350,14,MUTED)
-        lines(p,['Position, size and rotation','Opacity and appearance','Gradients improve the rendered image'],470,260,438,21,20)
-        p.text('Course: perspective, visibility and rasterization',52,490,856,11,MUTED)
+        ellipse(p,91,212,192,69,-25);ellipse(p,179,184,83,149,20);ellipse(p,220,245,162,58,25)
+        p.text('Projected soft footprints',65,355,360,18,MUTED)
+        p.text('(schematic, not reconstructed data)',65,384,360,13,MUTED)
+        lines(p,['Center = location in 3D','Size + rotation = ellipsoid shape','Opacity + appearance = pixel contribution'],463,167,445,21,24)
+        p.text('Course: geometric representation and visibility',52,414,856,11,MUTED)
+    elif key=='step-learning':
+        flow(p,['Project Gaussians','Blend by depth','Compare target','Update parameters'],y=137)
+        p.text('Rendering',52,235,200,22,TEAL,True)
+        p.text('A camera turns the current scene into pixels.',270,235,625,22)
+        p.text('Training',52,297,200,22,TEAL,True)
+        p.text('Image error → gradients → improved scene parameters.',270,297,625,22)
+        p.text('Each pixel combines several contributions using depth and opacity.',52,369,856,18)
+        p.text('Course: perspective, visibility and rasterization',52,414,856,11,MUTED)
     elif key=='step-time':
         for x,title,body in [(52,'4DGaussians','One reference scene + a network predicting changes with time.'),
             (490,'Dynamic 3D Gaussians','Successive scene states + constraints on local motion.')]:
-            p.rect(x,150,418,202,WHITE);p.text(title,x+18,171,382,23,TEAL,True);p.text(body,x+18,228,382,22)
-        p.text('Choose time + camera → render → compare with a reserved view',52,389,856,23,INK,True)
-        p.text('A rendered animation does not by itself prove physical tracking.',52,463,856,18,MUTED)
-        p.text('Course: rotation, time sampling and rendering',52,490,856,11,MUTED)
+            p.rect(x,145,418,184,WHITE);p.text(title,x+18,165,382,23,TEAL,True);p.text(body,x+18,218,382,21)
+        p.text('Both methods need calibrated cameras as inputs.',52,363,856,22,INK,True)
+        p.text('Course: rotations, time sampling and rendering',52,414,856,11,MUTED)
+    elif key=='step-evaluation':
+        for x,title,body in [(52,'Training views','Optimize the scene from the selected input cameras.'),(490,'Reserved view20','Compare against images excluded from scene optimization.')]:
+            p.rect(x,145,418,161,WHITE);p.text(title,x+18,166,382,23,TEAL,True);p.text(body,x+18,214,382,21)
+        p.text('Evaluate the whole image AND the board region.',52,336,856,23,INK,True)
+        p.text('All ten times in the latest comparison are supervised; this is not an unseen-time test.',52,383,856,17,MUTED)
     elif key=='acquisition':
         for x,title,asset,items in [(52,'Downloaded: kitchen scene','kitchen-input.jpg',['Synchronized multi-camera videos','Supplied camera calibration']),
             (490,'Recorded: True Skate','view04.jpg',['Following cameras → fixed views','Estimated poses; approximate alignment'])]:
-            p.rect(x,145,418,305,WHITE);p.text(title,x+16,161,386,22,TEAL,True)
-            p.image(ASSETS/asset,x+16,203,386,151);lines(p,items,x+16,374,386,17,9)
-        p.text('Reference: controlled capture. Own data: repeated replay recordings.',52,474,856,18,INK,True)
+            p.rect(x,143,418,260,WHITE);p.text(title,x+16,158,386,22,TEAL,True)
+            p.image(ASSETS/asset,x+16,199,386,121);lines(p,items,x+16,339,386,16,8)
+        p.text('Reference: controlled capture. Own data: repeated replay recordings.',52,410,856,15,MUTED)
     elif key=='kitchen-result':
         for x,label,asset in [(52,'Input image','kitchen-input.jpg'),(490,'Actual trained model','kitchen-model.jpg')]:
-            p.text(label,x,137,418,22,TEAL,True);p.image(ASSETS/asset,x,177,418,285)
-        # Embed the existing 3-second render directly; PDF retains the same poster.
-        p.slide.shapes.add_movie(str(ROOT/'docs/assets/4d-demo-time.mp4'),Pt(509),Pt(177),Pt(380),Pt(285),
+            p.text(label,x,134,418,22,TEAL,True);p.image(ASSETS/asset,x,170,418,225)
+        p.slide.shapes.add_movie(str(ROOT/'docs/assets/4d-demo-time.mp4'),Pt(549),Pt(170),Pt(300),Pt(225),
             poster_frame_image=str(ASSETS/'kitchen-model.jpg'),mime_type='video/mp4')
-        p.text('Recognizable scene and motion; residual blur and color errors.',52,465,856,19,INK,True)
-        p.text('DyNeRF / Li et al., CVPR 2022 / CC BY-NC 4.0 · Small pilot (~1 s of scene time)',52,491,710,10,MUTED)
-        p.text('3-second model clip',753,491,170,10,TEAL)
-        url='https://github.com/craptou/Projet_4D_Gaussian_Splatting/raw/refs/heads/main/docs/assets/4d-demo-time.mp4'
-        p.pdf.linkURL(url,(753,H-506,925,H-488),relative=0,thickness=0)
-        p.slide.shapes[-1].click_action.hyperlink.address=url
+        p.text('Recognizable scene and motion; residual blur and color errors.',52,400,856,18,INK,True)
+        p.text('DyNeRF / Li et al., CVPR 2022 / CC BY-NC 4.0 · Small pilot (~1 s scene time)',52,422,710,10,MUTED)
     elif key=='skate-result':
-        p.text('Recorded frame',121,139,340,22,TEAL,True);p.text('4DGS reconstruction',510,139,370,22,TEAL,True)
-        p.image(ASSETS/'skate-result.jpg',52,175,856,250)
-        p.text('The background is recognizable; board motion is unreliable.',52,439,856,21,INK,True)
-        p.text('Next: check timing, masks and initially visible surfaces.',52,471,856,19,TEAL)
-        p.text('Different scenes and training settings: this comparison does not isolate data quality alone.',52,494,856,10,MUTED)
-    else:
-        code(p,item['code'],size=17);lines(p,item['bullets'],52,347,856,19,13)
-        p.text('Source: '+item['sources'][0],52,480,856,12,TEAL)
+        p.text('Recorded frame',121,135,340,22,TEAL,True);p.text('4DGS reconstruction',510,135,370,22,TEAL,True)
+        p.image(ASSETS/'skate-result.jpg',52,174,856,205)
+        p.text('Board motion remains unreliable. Mask-based training WAS tested.',52,390,856,19,INK,True)
+        p.text('Different scenes and training settings: this comparison does not isolate data quality alone.',52,417,856,10,MUTED)
+    elif key=='masks-tested':
+        for x,label in [(52,'Recording'),(342,'Baseline'),(632,'Foreground weighting')]:p.text(label,x,136,280,18,TEAL,True)
+        p.image(ASSETS/'mask-trial.jpg',52,174,856,185)
+        p.text('Earlier view19 control: masked training PSNR 11.79 → 25.18 dB.',52,369,856,18,INK,True)
+        p.text('Better training fit, but a dark smear. Later trials used multi-view masks too.',52,397,856,17)
+        p.text('Next: refine existing masks, timing and initially visible surfaces.',52,420,856,13,TEAL)
+    else:raise ValueError('Unknown slide kind: '+key)
+
+
+def function_band(page,item):
+    references=[resolve(reference) for reference in item.get('functions',[])]
+    if not references:return
+    page.rect(52,436,856,63,WHITE)
+    for i,reference in enumerate(references):
+        text=reference['label']+' — '+reference['role'];y=443+i*27
+        if pdfmetrics.stringWidth(text,'Review',14)>830:raise ValueError('Function label too wide: '+text)
+        page.text(text,65,y,830,14,TEAL)
+        page.pdf.linkURL(reference['url'],(65,H-y-19,895,H-y),relative=0,thickness=0)
+        page.slide.shapes[-1].click_action.hyperlink.address=reference['url']
+
+
+def oral_script(spec):
+    """One portrait page per slide: spoken text separated from optional code locations."""
+    output=ROOT/'presentations'/'progress-2026-11-26.script.en.pdf'
+    styles={
+        'title':ParagraphStyle('ScriptTitle',fontName='ReviewBold',fontSize=20,leading=26,textColor='#'+TEAL,spaceAfter=14),
+        'meta':ParagraphStyle('ScriptMeta',fontName='Review',fontSize=11,leading=16,textColor='#'+MUTED,spaceAfter=16),
+        'label':ParagraphStyle('ScriptLabel',fontName='ReviewBold',fontSize=12,leading=17,textColor='#'+TEAL,spaceAfter=8),
+        'message':ParagraphStyle('ScriptMessage',fontName='ReviewBold',fontSize=13,leading=19,textColor='#'+INK,spaceAfter=18),
+        'spoken':ParagraphStyle('ScriptSpoken',fontName='Review',fontSize=14,leading=23,textColor='#'+INK,spaceAfter=18),
+        'function':ParagraphStyle('ScriptFunction',fontName='Review',fontSize=11,leading=16,textColor='#'+INK,spaceAfter=10)
+    }
+    story=[]
+    for i,item in enumerate(spec['slides'],1):
+        story.extend([Paragraph(f'Slide {i} — '+escape(item['title']),styles['title']),
+            Paragraph(escape(item['section'])+f' · Suggested time: {item["seconds"]} seconds',styles['meta']),
+            Paragraph('Main message',styles['label']),Paragraph(escape(item['bullets'][0]),styles['message']),
+            Paragraph('What to say',styles['label'])])
+        for paragraph in item['notes'].split('\n\n'):story.append(Paragraph(escape(paragraph),styles['spoken']))
+        references=[resolve(reference) for reference in item.get('functions',[])]
+        if references:
+            story.extend([Spacer(1,10),Paragraph('Functions to open — optional, not part of the spoken text',styles['label'])])
+            for reference in references:
+                body=f'<link href="{reference["url"]}" color="#{TEAL}">{escape(reference["label"])}</link><br/>'+escape(reference['role'])
+                story.append(Paragraph(body,styles['function']))
+        if i<len(spec['slides']):story.append(PageBreak())
+    def furniture(canvas,doc):
+        width,height=A4;canvas.setFont('Review',10);canvas.setFillColor('#'+MUTED)
+        canvas.drawString(48,height-30,'Oral script · English · 26 November 2026')
+        canvas.drawString(48,25,'Speak the “What to say” section; use function links for code discussion.')
+        canvas.drawRightString(width-48,25,str(doc.page))
+    SimpleDocTemplate(str(output),pagesize=A4,leftMargin=48,rightMargin=48,topMargin=56,bottomMargin=48,
+        title='English oral script — project progress',author=spec['author']).build(story,onFirstPage=furniture,onLaterPages=furniture)
 
 
 def build():
@@ -128,10 +184,10 @@ def build():
     pdf.setTitle('Computer Vision final project - progress, 26 November 2026');pdf.setAuthor(spec['author'])
     prs=Presentation();prs.slide_width=Pt(W);prs.slide_height=Pt(H)
     prs.core_properties.title='Free-viewpoint skate replay - project progress'
-    prs.core_properties.author=spec['author'];prs.core_properties.subject='5-7 minute English presentation, 26 November 2026'
+    prs.core_properties.author=spec['author'];prs.core_properties.subject='English presentation, about 10 minutes, 26 November 2026'
     outline=['# Project progress — 26 November 2026',
-        'English · 8 main slides (about 6 minutes) + 2 optional code slides.',
-        f'[PDF]({NAME}.pdf) · [PowerPoint with speaker notes]({NAME}.pptx) · [Editable content]({NAME}.json)',
+        f'English · {len(spec["slides"])} slides (about 10 minutes). Function references appear alongside the relevant concepts; no code appendix.',
+        f'[Slide PDF]({NAME}.pdf) · [PowerPoint with speaker notes]({NAME}.pptx) · [Oral-script PDF](progress-2026-11-26.script.en.pdf) · [Editable content]({NAME}.json)',
         'Course concepts are linked to the project steps. No course PDF is redistributed.']
     layouts=[]
     for index,item in enumerate(spec['slides'],1):
@@ -147,24 +203,29 @@ def build():
         else:
             if p.text(item['title'],52,65,860,30,INK,True)>76:raise ValueError('Title too tall')
             render_body(p,item)
+            function_band(p,item)
         p.rect(52,510,856,1,'D7E1E4')
         p.text('Computer Vision / final project progress',52,520,700,9,MUTED)
-        p.text(f'{index:02d} / 08' if index<=8 else 'CODE '+str(index-8),838,520,90,9,MUTED)
+        p.text(f'{index:02d} / {len(spec["slides"]):02d}',838,520,90,9,MUTED)
         sources='\n'.join(item['sources'])
-        slide.notes_slide.notes_text_frame.text=item['notes']+'\n\nSources / evidence:\n'+sources
+        references=[resolve(reference) for reference in item.get('functions',[])]
+        function_notes='\n'.join(f'{r["label"]}: {r["role"]}\n{r["file"]}:{r["line"]}\n{r["url"]}' for r in references)
+        slide.notes_slide.notes_text_frame.text=item['notes']+'\n\nFunctions to open:\n'+function_notes+'\n\nSources / evidence:\n'+sources
         layouts.append(dict(index=index,id=item['id'],elements=p.elements))
-        outline.extend([f'## {index}. {item["title"]}',('Suggested time: '+str(item['seconds'])+' seconds.') if item['seconds'] else 'Optional code discussion; outside the 5–7 minute talk.',
+        outline.extend([f'## {index}. {item["title"]}','Suggested time: '+str(item['seconds'])+' seconds.',
             '\n'.join('- '+text for text in item['bullets']),'### Speaker notes',item['notes']])
-        if item.get('code'):outline.append('```python\n'+'\n'.join(item['code'])+'\n```')
+        if references:
+            outline.extend(['### Functions to open','\n'.join(f'- [{r["label"]}]({r["url"]}) — {r["role"]}; `{r["file"]}:{r["line"]}`' for r in references)])
         links=[]
         for source in item['sources']:
             links.append('['+source+']('+('' if source.startswith('https:') else '../')+source+')')
         outline.append('Sources: '+' · '.join(links));pdf.showPage()
     pdf.save();prs.save(ROOT/'presentations'/f'{NAME}.pptx')
     (ROOT/'presentations'/f'{NAME}.md').write_text('\n\n'.join(outline)+'\n',encoding='utf-8')
+    oral_script(spec)
     out=ROOT/'outputs/presentation-review-2026-11-26';out.mkdir(parents=True,exist_ok=True)
     (out/'layout.json').write_text(json.dumps(layouts,indent=2)+'\n',encoding='utf-8')
-    print('Built 8 main slides +2 code slides in English; PDF, editable PPTX and speaker notes.')
+    print(f'Built {len(spec["slides"])} English slides with function links, PPTX, PDF and a separate oral-script PDF.')
 
 
 if __name__=='__main__':build()

@@ -1,13 +1,17 @@
 {
-  "main_slides": 8,
-  "code_appendix_slides": 2,
-  "nominal_speaking_seconds": 355,
+  "main_slides": 12,
+  "code_appendix_slides": 0,
+  "nominal_speaking_seconds": 595,
   "two_part_structure_verified": true,
   "kitchen_reference_video_embedded_and_hash_verified": true,
-  "main_speaker_note_words": 609,
-  "pages_rendered": 10,
+  "main_speaker_note_words": 975,
+  "pages_rendered": 12,
+  "oral_script_pdf_pages": 12,
+  "oral_script_text_verified": true,
+  "function_reference_occurrences_verified": 22,
+  "function_links_checked_against_source": true,
+  "mask_experiments_explicitly_documented": true,
   "pptx_shape_bounds_checked": true,
   "speaker_notes_verified": true,
-  "code_examples_checked": true,
-  "caveat": "PDF pages rendered for visual review. Native PowerPoint rendering and rehearsal by the presenter remain outside this automated check."
+  "caveat": "PDF slides and script pages rendered for visual review. Native PowerPoint rendering and presenter rehearsal remain outside this automated check."
 }
